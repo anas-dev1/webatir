@@ -50,10 +50,27 @@ const revealObserver = new IntersectionObserver(
 );
 document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
 
-// --- Formulaire (démo : à brancher sur un service d'envoi) ---
+// --- Formulaire : envoi par email via FormSubmit ---
 const form = document.getElementById('contactForm');
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  document.getElementById('formSuccess').hidden = false;
-  form.querySelector('button[type="submit"]').disabled = true;
+  const button = form.querySelector('button[type="submit"]');
+  const success = document.getElementById('formSuccess');
+  const error = document.getElementById('formError');
+  button.disabled = true;
+  error.hidden = true;
+  try {
+    const res = await fetch('https://formsubmit.co/ajax/contact@webatir.com', {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: new FormData(form),
+    });
+    const data = await res.json();
+    if (!res.ok || String(data.success) !== 'true') throw new Error(data.message);
+    success.hidden = false;
+    form.reset();
+  } catch {
+    error.hidden = false;
+    button.disabled = false;
+  }
 });

@@ -599,6 +599,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.
 }
 .form-row input:focus, .form-row textarea:focus { outline: none; border-color: var(--accent); }
 .form-success { margin-top: 16px; color: #5ec97c; font-weight: 600; text-align: center; }
+.form-error { margin-top: 16px; color: #e5736b; font-weight: 600; text-align: center; }
 
 /* ---------- Footer ---------- */
 .footer { border-top: 1px solid var(--line); padding: 56px 0; }
