@@ -162,7 +162,7 @@ const demoModel = typeof NOOR_COLLECTIONS !== 'undefined'
   && NOOR_COLLECTIONS.find((m) => m.slug === body.dataset.model);
 if (demoModel) {
   document.querySelectorAll('[data-order-link]').forEach((a) => {
-    a.href = noorCardOrderUrl(demoModel);
+    a.href = noorOrderPage(demoModel, '../../');
   });
 }
 // La barre de commande se cache quand le bloc final « Vous aimez ce modèle ? » est à l'écran

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Commander — Noor Invitations</title>
+  <meta name="description" content="Commandez votre faire-part de mariage virtuel Noor Invitations.">
+  <meta name="theme-color" content="#f5eee3">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Marcellus&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <a href="../" class="brand" aria-label="Noor Invitations — accueil">
+      <span class="brand-seal" aria-hidden="true">N</span>
+      <span class="brand-name">Noor <em>Invitations</em></span>
+    </a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a href="../collections/">Modèles</a>
+      <a href="../#formules">Formules</a>
+      <a href="../#questions">Questions</a>
+    </nav>
+    <a class="btn btn-ghost btn-small" href="../collections/">← Modèles</a>
+  </header>
+
+  <main class="section order-page">
+    <div class="section-head">
+      <p class="eyebrow">Commande</p>
+      <h1>Votre faire-part</h1>
+      <p class="section-sub">Choisissez votre formule, dites-nous l'essentiel, et réglez l'acompte en ligne. Nous vous envoyons une première version sous 5 jours.</p>
+    </div>
+
+    <form class="order" id="orderForm" novalidate>
+      <div class="order-main">
+
+        <!-- 1. Modèle -->
+        <fieldset class="order-step">
+          <legend><span>1</span> Votre modèle</legend>
+          <div class="order-model" id="orderModel">
+            <img id="orderModelImg" src="../img/modele-nuit-orientale.webp" alt="" width="600" height="750">
+            <div class="order-model-info">
+              <label for="modelSelect" class="order-label">Modèle choisi</label>
+              <select id="modelSelect" name="modele"></select>
+              <p class="model-tags" id="orderModelTags"></p>
+              <p class="order-note" id="orderModelNote" hidden></p>
+              <a class="order-link" id="orderModelDemo" href="../demo/nuit-orientale/">Revoir l'invitation →</a>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 2. Formule -->
+        <fieldset class="order-step">
+          <legend><span>2</span> Votre formule</legend>
+          <div class="order-choices" id="formulaChoices"></div>
+        </fieldset>
+
+        <!-- 3. Options -->
+        <fieldset class="order-step">
+          <legend><span>3</span> Options <em>(facultatif)</em></legend>
+          <div class="order-options" id="optionChoices"></div>
+        </fieldset>
+
+        <!-- 4. Informations -->
+        <fieldset class="order-step">
+          <legend><span>4</span> Vos informations</legend>
+          <div class="order-fields">
+            <label class="order-field">Vos deux prénoms
+              <input type="text" id="couple" name="prenoms" placeholder="Ex. : Ines & Anas" required autocomplete="off">
+            </label>
+            <label class="order-field">Date du mariage
+              <input type="date" id="weddingDate" name="date_mariage" required>
+            </label>
+            <label class="order-field">Votre e-mail
+              <input type="email" id="email" name="email" required autocomplete="email">
+            </label>
+            <label class="order-field">Votre WhatsApp
+              <input type="tel" id="phone" name="whatsapp" required autocomplete="tel" placeholder="06 XX XX XX XX">
+            </label>
+            <label class="order-field order-field-wide">Un mot sur votre mariage <em>(facultatif)</em>
+              <textarea id="message" name="message" rows="3" placeholder="Lieux, couleurs, style, langues…"></textarea>
+            </label>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- Récapitulatif -->
+      <aside class="order-summary" aria-label="Récapitulatif">
+        <h2>Récapitulatif</h2>
+        <ul class="order-lines" id="orderLines"></ul>
+        <p class="order-total"><span>Total</span><b id="orderTotal">—</b></p>
+        <p class="order-deposit"><span>À régler aujourd'hui <em>(acompte de 50 % de la formule)</em></span><b id="orderDeposit">—</b></p>
+        <p class="order-rest" id="orderRest"></p>
+        <label class="order-cgv">
+          <input type="checkbox" id="cgv" name="cgv" required>
+          <span>J'accepte les <a href="../cgv/" target="_blank" rel="noopener">conditions générales de vente</a>.</span>
+        </label>
+        <button type="submit" class="btn btn-gold order-pay" id="payButton">Payer l'acompte</button>
+        <p class="order-error" id="orderError" role="alert" hidden></p>
+        <p class="order-secure">Paiement sécurisé par Stripe · carte, Apple Pay, Google Pay</p>
+      </aside>
+
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+    </form>
+  </main>
+
+  <footer class="footer">
+    <p class="brand-name">Noor <em>Invitations</em></p>
+    <p>Faire-part de mariage virtuels · France</p>
+    <p class="footer-small"><a href="../cgv/">Conditions générales de vente</a> · © 2026 Noor Invitations</p>
+  </footer>
+
+  <script src="../collections.js"></script>
+  <script src="../commande.js"></script>
+  <script src="../script.js"></script>
+  <script src="commander.js"></script>
+</body>
+</html>

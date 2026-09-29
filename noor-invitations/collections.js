@@ -61,10 +61,9 @@ const NOOR_COLLECTIONS = [
   },
 ];
 
-/* Lien « Commander » / « Je veux ce modèle » : message WhatsApp, sans prix */
-function noorCardOrderUrl(model) {
-  const text = `Bonjour ! Je souhaite commander le modèle ${model.name} pour mon mariage.`;
-  return `https://wa.me/${NOOR_WHATSAPP}?text=${encodeURIComponent(text)}`;
+/* Page de commande d'un modèle. base = chemin vers la racine du site depuis la page courante. */
+function noorOrderPage(model, base) {
+  return `${base}commander/?modele=${encodeURIComponent(model.slug)}`;
 }
 
 /* Carte d'un modèle. base = chemin vers la racine du site depuis la page courante ('' ou '../'). */
@@ -87,7 +86,7 @@ function noorModelCard(model, base, tagsKey) {
         <p class="model-tags">${esc(tags)}</p>
         <div class="model-actions">
           ${open}
-          <a class="btn btn-outline model-order" href="${noorCardOrderUrl(model)}" target="_blank" rel="noopener">Commander</a>
+          <a class="btn btn-outline model-order" href="${noorOrderPage(model, base)}">Commander</a>
         </div>
       </div>
     </article>`;

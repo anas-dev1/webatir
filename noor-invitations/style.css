@@ -299,3 +299,76 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* ---------- Page Commander ---------- */
+.order-page { padding-top: 120px; }
+.order-page h1 { font-size: clamp(2.2rem, 6.5vw, 3.2rem); }
+.order { display: grid; gap: 24px; align-items: start; }
+@media (min-width: 960px) { .order { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 32px; } .order-summary { position: sticky; top: 96px; } }
+.order-main { display: grid; gap: 18px; min-width: 0; }
+.order-step { border: 1px solid var(--line); border-radius: 20px; background: var(--card); padding: 22px 20px 24px; min-width: 0; }
+.order-step legend { font-family: var(--caps); font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-dark); padding: 0 8px; display: flex; align-items: center; gap: 10px; }
+.order-step legend span { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--gold-gradient); color: var(--espresso); font-size: 0.8rem; letter-spacing: 0; }
+.order-step legend em { font-family: var(--serif); text-transform: none; letter-spacing: 0; color: var(--ink-soft); font-size: 0.95rem; }
+.order-model { display: grid; grid-template-columns: 96px 1fr; gap: 16px; align-items: center; }
+.order-model img { width: 96px; border-radius: 12px; aspect-ratio: 4 / 5; object-fit: cover; }
+.order-model-info { display: grid; gap: 6px; min-width: 0; }
+.order-label { font-size: 0.95rem; color: var(--ink-soft); }
+.order-note { font-size: 0.98rem; color: var(--gold-dark); font-style: italic; }
+.order-link { font-family: var(--caps); font-size: 0.76rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dark); text-decoration: none; }
+.order-link:hover { text-decoration: underline; }
+.order select, .order input[type="text"], .order input[type="email"], .order input[type="tel"], .order input[type="date"], .order textarea {
+  width: 100%; font: 400 1.1rem var(--serif); color: var(--ink); background: #fffdf9;
+  border: 1px solid var(--line); border-radius: 12px; padding: 11px 13px; min-width: 0;
+}
+.order select:focus, .order input:focus, .order textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(180, 140, 69, 0.18); }
+.order-choices, .order-options { display: grid; gap: 10px; margin-top: 6px; }
+.order-choice, .order-option { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; cursor: pointer; background: #fffdf9; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.order-choice:has(input:checked), .order-option:has(input:checked) { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(180, 140, 69, 0.2); }
+.order-choice input, .order-option input { accent-color: var(--gold-dark); width: 18px; height: 18px; }
+.order-choice-body { display: grid; gap: 2px; min-width: 0; }
+.order-choice-name { font-weight: 600; font-size: 1.15rem; }
+.order-choice-name em { font-family: var(--caps); font-style: normal; font-weight: 400; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--espresso); background: var(--gold-gradient); padding: 3px 8px; border-radius: 99px; margin-left: 6px; vertical-align: middle; white-space: nowrap; }
+.order-choice-text { font-size: 0.98rem; color: var(--ink-soft); }
+.order-choice-price, .order-option b { font-family: var(--caps); font-weight: 400; color: var(--gold-dark); white-space: nowrap; }
+.order-fields { display: grid; gap: 14px; margin-top: 6px; }
+@media (min-width: 620px) { .order-fields { grid-template-columns: 1fr 1fr; } .order-field-wide { grid-column: 1 / -1; } }
+.order-field { display: grid; gap: 6px; font-size: 1rem; color: var(--ink-soft); min-width: 0; }
+.order-field em { font-size: 0.92rem; }
+.order-summary { background: var(--espresso); color: var(--espresso-soft); border-radius: 22px; padding: 26px 22px; display: grid; gap: 12px; box-shadow: 0 24px 50px rgba(42, 32, 25, 0.28); min-width: 0; }
+.order-summary h2 { font-size: 1.6rem; color: var(--gold-light); }
+.order-lines { list-style: none; display: grid; gap: 6px; border-bottom: 1px solid rgba(230, 204, 146, 0.25); padding-bottom: 12px; }
+.order-lines li, .order-total, .order-deposit { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.order-lines b { font-weight: 400; color: var(--card); white-space: nowrap; }
+.order-total b { font-family: var(--caps); font-weight: 400; font-size: 1.3rem; color: var(--card); }
+.order-deposit { padding-top: 4px; }
+.order-deposit span { color: var(--card); }
+.order-deposit em { display: block; font-size: 0.9rem; color: var(--espresso-soft); }
+.order-deposit b { font-family: var(--caps); font-weight: 400; font-size: 1.7rem; color: var(--gold-light); white-space: nowrap; }
+.order-rest { font-size: 0.95rem; }
+.order-cgv { display: flex; gap: 10px; align-items: flex-start; font-size: 1rem; cursor: pointer; margin-top: 4px; }
+.order-cgv input { accent-color: var(--gold); width: 18px; height: 18px; margin-top: 4px; flex: none; }
+.order-cgv a { color: var(--gold-light); }
+.order-pay { width: 100%; margin-top: 4px; }
+.order-pay:disabled { opacity: 0.6; cursor: wait; transform: none; }
+.order-error { color: #f0b3a8; font-size: 1rem; }
+.order-secure { font-size: 0.88rem; text-align: center; opacity: 0.8; }
+.hp { position: absolute; left: -9999px; }
+.footer-small a { color: inherit; }
+
+/* ---------- Merci ---------- */
+.thanks { padding-top: 130px; min-height: 80vh; display: grid; justify-items: center; align-content: start; gap: 16px; text-align: center; }
+.thanks > * { margin: 0; }
+.thanks h1 .script { font-size: clamp(3.4rem, 14vw, 5rem); }
+.thanks-lead { font-size: 1.3rem; max-width: 32rem; }
+.thanks-ref { font-family: var(--caps); font-size: 0.8rem; letter-spacing: 0.12em; color: var(--gold-dark); }
+.thanks-steps { text-align: left; max-width: 30rem; display: grid; gap: 6px; color: var(--ink-soft); padding-left: 1.2em; margin: 6px 0 10px; }
+
+/* ---------- Pages légales ---------- */
+.legal { padding-top: 130px; }
+.legal > * { max-width: 720px; }
+.legal h1 { font-size: clamp(2rem, 6vw, 2.8rem); margin: 10px auto 6px; }
+.legal h2 { font-size: 1.35rem; font-weight: 600; margin: 26px auto 8px; }
+.legal p { color: var(--ink-soft); }
+.legal-date { font-style: italic; }
+.legal-back { margin-top: 30px !important; }

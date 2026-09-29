@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Merci — Noor Invitations</title>
+  <meta name="theme-color" content="#f5eee3">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Marcellus&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <header class="nav" id="nav">
+    <a href="../../" class="brand" aria-label="Noor Invitations — accueil">
+      <span class="brand-seal" aria-hidden="true">N</span>
+      <span class="brand-name">Noor <em>Invitations</em></span>
+    </a>
+  </header>
+
+  <main class="section thanks">
+    <img class="final-seal" src="../../img/cachet.webp" alt="" aria-hidden="true" width="500" height="500">
+    <p class="eyebrow">Commande confirmée</p>
+    <h1><span class="script">Merci !</span></h1>
+    <p class="thanks-lead">Votre acompte est bien reçu. Votre faire-part est entre de bonnes mains.</p>
+    <p class="thanks-ref" id="thanksRef" hidden></p>
+    <ol class="thanks-steps">
+      <li>Vous recevez le reçu de paiement par e-mail.</li>
+      <li>Nous vous écrivons sur WhatsApp pour recueillir vos informations et vos photos.</li>
+      <li>Vous recevez une première version de votre faire-part sous 5 jours.</li>
+    </ol>
+    <a class="btn btn-gold" href="https://wa.me/33633475373?text=Bonjour%20!%20Je%20viens%20de%20commander%20mon%20faire-part." target="_blank" rel="noopener">Nous écrire sur WhatsApp</a>
+    <a class="order-link" href="../../">Retour à l'accueil</a>
+  </main>
+
+  <script>
+    try {
+      const order = JSON.parse(sessionStorage.getItem('noorOrder') || 'null');
+      if (order) {
+        const ref = document.getElementById('thanksRef');
+        ref.textContent = `Commande ${order.id} · ${order.model}, formule ${order.formula}`;
+        ref.hidden = false;
+      }
+    } catch (e) { /* stockage indisponible */ }
+  </script>
+</body>
+</html>
