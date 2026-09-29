@@ -101,7 +101,7 @@ h3 { font-size: 1.35rem; font-weight: 600; }
 
 /* ---------- Ouverture ---------- */
 .hero {
-  position: relative; overflow: hidden; padding: 120px 20px 90px;
+  position: relative; overflow: hidden; padding: 104px 20px 64px;
   background:
     radial-gradient(ellipse 60% 50% at 70% 45%, rgba(230, 204, 146, 0.35), transparent 70%),
     radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255, 251, 243, 0.9), transparent 70%),
@@ -145,18 +145,41 @@ h3 { font-size: 1.35rem; font-weight: 600; }
 .section-light { background: var(--bg-deep); }
 @media (min-width: 820px) { .section { padding: 110px 40px; } }
 
-/* Collections */
-.collections { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
-.collection { border: 1px solid var(--line); border-radius: 22px; overflow: hidden; background: var(--card); display: grid; grid-template-rows: auto 1fr; box-shadow: 0 14px 34px rgba(90, 64, 20, 0.08); transition: transform 0.25s ease, box-shadow 0.25s ease; }
-.collection:hover { transform: translateY(-4px); box-shadow: 0 22px 44px rgba(90, 64, 20, 0.14); }
-.collection-media { aspect-ratio: 4 / 3; background: var(--img) center / cover no-repeat; display: grid; place-items: center; position: relative; }
-.collection-seal { width: 30%; filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.45)); }
-.collection.is-soon .collection-media { filter: saturate(0.9); }
-.collection-body { padding: 20px 22px 24px; display: grid; gap: 8px; align-content: start; }
-.collection-body p { color: var(--ink-soft); font-size: 1.08rem; }
-.soon { font-family: var(--caps); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dark); border: 1px solid var(--gold); padding: 2px 9px; border-radius: 99px; vertical-align: middle; margin-left: 6px; }
-.link { font-family: var(--caps); font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-dark); text-decoration: none; margin-top: 6px; }
-.link:hover { text-decoration: underline; }
+/* Modèles (accueil et page /collections) */
+.models { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 24px; }
+.model { background: var(--card); border: 1px solid var(--line); border-radius: 24px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; box-shadow: 0 18px 44px rgba(90, 64, 20, 0.1); min-width: 0; }
+.model-media { position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; background: #1c1a3a; }
+.model-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(.2, .8, .2, 1); }
+.model-media:hover img, .model-media:focus-visible img { transform: scale(1.04); }
+.model-play {
+  position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%);
+  font-family: var(--caps); font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; white-space: nowrap;
+  color: var(--gold-light); background: rgba(42, 32, 25, 0.72); border: 1px solid rgba(230, 204, 146, 0.45);
+  padding: 8px 16px; border-radius: 99px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  animation: model-hint 2.6s ease-in-out infinite;
+}
+@keyframes model-hint { 0%, 100% { opacity: 0.75; } 50% { opacity: 1; } }
+.model-body { padding: 24px 24px 26px; display: grid; gap: 8px; align-content: start; }
+.model-body h3 { font-size: 1.75rem; font-weight: 500; }
+.model-tags { font-family: var(--caps); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+.model-desc { color: var(--ink-soft); font-size: 1.08rem; }
+.model-price { color: var(--ink-soft); margin-top: 4px; }
+.model-price b { font-family: var(--caps); font-weight: 400; font-size: 1.6rem; color: var(--gold-dark); margin-left: 4px; }
+.model-cta { margin-top: 8px; justify-self: stretch; }
+/* Un seul modèle mis en avant : grande carte, visuel à gauche sur grand écran */
+.models[data-count="1"] { max-width: 940px; grid-template-columns: 1fr; }
+@media (min-width: 760px) {
+  .models[data-count="1"] .model { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr); grid-template-rows: none; }
+  .models[data-count="1"] .model-body { align-content: center; padding: 40px 44px; gap: 12px; }
+  .models[data-count="1"] .model-body h3 { font-size: 2.3rem; }
+  .models[data-count="1"] .model-cta { justify-self: start; }
+}
+.models-more { text-align: center; margin-top: 34px; }
+.models-fallback { text-align: center; }
+/* Page /collections : galerie de tous les modèles */
+.page-collections { padding-top: 130px; }
+.page-collections h1 { font-size: clamp(2.2rem, 6.5vw, 3.4rem); }
+@media (min-width: 820px) { .page-collections { padding-top: 160px; } }
 
 /* Ce que reçoivent les invités */
 .section-guests { overflow: hidden; background: var(--bg-deep); }

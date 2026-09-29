@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Webatir//Mariage Ines et Anas//FR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:mariage-ines-anas-20261219@webatir.com
+DTSTAMP:20260928T120000Z
+DTSTART:20261219T130000Z
+DTEND:20261219T230000Z
+SUMMARY:Mariage d'Ines & Anas
+LOCATION:Hôtel de Ville de Montpellier\, 1 place Georges-Frêche\, 34267 Montpellier
+DESCRIPTION:Accueil des invités à 14h00 sur le parvis de l'Hôtel de Ville.
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Mariage d'Ines & Anas demain !
+END:VALARM
+END:VEVENT
+END:VCALENDAR

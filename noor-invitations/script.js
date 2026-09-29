@@ -1,5 +1,8 @@
 /* ============ Noor Invitations — interactions ============ */
 
+// --- Modèles (catalogue centralisé dans collections.js) ---
+if (typeof noorRenderModels === 'function') noorRenderModels();
+
 // --- Navigation : fond au défilement ---
 const nav = document.getElementById('nav');
 const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 30);
@@ -8,6 +11,7 @@ onScroll();
 
 // --- Paillettes dorées dans le ciel de l'ouverture ---
 const canvas = document.getElementById('sparkles');
+if (canvas) {
 const ctx = canvas.getContext('2d');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let sparks = [];
@@ -47,3 +51,4 @@ new IntersectionObserver(([entry]) => {
 resize();
 window.addEventListener('resize', resize);
 requestAnimationFrame(draw);
+}

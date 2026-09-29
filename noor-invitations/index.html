@@ -21,7 +21,7 @@
       <span class="brand-name">Noor <em>Invitations</em></span>
     </a>
     <nav class="nav-links" aria-label="Navigation principale">
-      <a href="#collections">Collections</a>
+      <a href="#collections">Modèles</a>
       <a href="#formules">Formules</a>
       <a href="#questions">Questions</a>
     </nav>
@@ -42,7 +42,7 @@
           <p class="hero-sub">Ils ouvrent l'enveloppe, découvrent toutes les informations de votre journée et confirment leur présence en quelques secondes.</p>
           <p class="hero-note">Vous, vous n'avez qu'un lien à envoyer.</p>
           <div class="hero-actions">
-            <a class="btn btn-gold" href="#collections">Voir les collections</a>
+            <a class="btn btn-gold" href="#collections">Découvrir les modèles</a>
             <a class="btn btn-ghost" href="https://wa.me/33633475373?text=Bonjour%20!%20Je%20souhaite%20un%20faire-part%20de%20mariage%20virtuel." target="_blank" rel="noopener">Parler de notre mariage</a>
           </div>
           <ul class="hero-proof">
@@ -54,46 +54,17 @@
       </div>
     </section>
 
-    <!-- ===== COLLECTIONS ===== -->
-    <section class="section" id="collections">
+    <!-- ===== MODÈLES (données : collections.js, filtre available + featured) ===== -->
+    <section class="section section-models" id="collections">
       <div class="section-head">
-        <p class="eyebrow">Collections</p>
-        <h2>Un décor pour chaque mariage</h2>
-        <p class="section-sub">Chaque collection a son enveloppe, son cachet et son ambiance. Nous l'adaptons à vos prénoms, vos couleurs et votre programme.</p>
+        <p class="eyebrow">Nos modèles</p>
+        <h2>Choisissez celui qui vous ressemble</h2>
+        <p class="section-sub">Découvrez nos collections et ouvrez chaque invitation comme si vous étiez l'un de vos invités.</p>
       </div>
-      <div class="collections">
-        <article class="collection">
-          <div class="collection-media" style="--img: url('img/fond.webp')">
-            <img class="collection-seal" src="img/cachet.webp" alt="" width="500" height="500">
-          </div>
-          <div class="collection-body">
-            <h3>Nuit orientale</h3>
-            <p>Palais andalou, lanternes et ciel étoilé. Indigo, or et rose poudré.</p>
-            <a class="link" href="https://wa.me/33633475373?text=Bonjour%20!%20J'aimerais%20voir%20la%20d%C3%A9mo%20Nuit%20orientale." target="_blank" rel="noopener">Demander la démo →</a>
-          </div>
-        </article>
-        <article class="collection is-soon">
-          <div class="collection-media" style="--img: url('img/collection-henne.webp')" aria-hidden="true"></div>
-          <div class="collection-body">
-            <h3>Henné <span class="soon">Bientôt</span></h3>
-            <p>Motifs au henné, terracotta et vert, pour la soirée du henné.</p>
-          </div>
-        </article>
-        <article class="collection is-soon">
-          <div class="collection-media" style="--img: url('img/collection-wax.webp')" aria-hidden="true"></div>
-          <div class="collection-body">
-            <h3>Wax &amp; or <span class="soon">Bientôt</span></h3>
-            <p>Motifs wax, couleurs vives et dorures, pour les mariages africains et mixtes.</p>
-          </div>
-        </article>
-        <article class="collection is-soon">
-          <div class="collection-media" style="--img: url('img/collection-jardin.webp')" aria-hidden="true"></div>
-          <div class="collection-body">
-            <h3>Jardin blanc <span class="soon">Bientôt</span></h3>
-            <p>Roses blanches, ivoire et vert sauge, pour un mariage sobre et lumineux.</p>
-          </div>
-        </article>
+      <div class="models" data-models="featured" data-tags="tags">
+        <noscript><p class="models-fallback"><a class="btn btn-gold" href="demo/nuit-orientale/">Ouvrir l'invitation Nuit orientale →</a></p></noscript>
       </div>
+      <p class="models-more"><a class="btn btn-ghost" href="collections/">Voir toutes les collections →</a></p>
     </section>
 
     <!-- ===== CE QUE REÇOIVENT LES INVITÉS ===== -->
@@ -297,6 +268,7 @@
     <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.2.6 2.5.9 3.8.9 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 22.5c-1.2 0-2.4-.3-3.5-.8l-.5-.3-4.9 1 1-4.7-.3-.5c-1-1.6-1.5-3.4-1.5-5.2 0-5.4 4.4-9.8 9.8-9.8s9.8 4.4 9.8 9.8-4.5 10.5-9.9 10.5zm5.4-7.3c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-1-2.2c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg>
   </a>
 
+  <script src="collections.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
