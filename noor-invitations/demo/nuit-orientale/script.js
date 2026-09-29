@@ -157,13 +157,12 @@ form.addEventListener('submit', async (e) => {
   status.hidden = false;
 });
 
-// --- Démo : boutons « Je veux ce modèle — prix » (catalogue collections.js) ---
+// --- Démo : boutons « Je veux ce modèle » (catalogue collections.js) ---
 const demoModel = typeof NOOR_COLLECTIONS !== 'undefined'
   && NOOR_COLLECTIONS.find((m) => m.slug === body.dataset.model);
 if (demoModel) {
   document.querySelectorAll('[data-order-link]').forEach((a) => {
-    a.href = noorOrderUrl(demoModel);
-    a.textContent = `Je veux ce modèle — ${demoModel.price} €`;
+    a.href = noorCardOrderUrl(demoModel);
   });
 }
 // La barre de commande se cache quand le bloc final « Vous aimez ce modèle ? » est à l'écran

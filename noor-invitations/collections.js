@@ -61,13 +61,7 @@ const NOOR_COLLECTIONS = [
   },
 ];
 
-/* Lien de commande WhatsApp pour un modèle (système de contact actuel du site) */
-function noorOrderUrl(model) {
-  const text = `Bonjour ! Je veux le modèle ${model.name} (${model.price} €) pour mon mariage.`;
-  return `https://wa.me/${NOOR_WHATSAPP}?text=${encodeURIComponent(text)}`;
-}
-
-/* Lien « Commander » d'une carte : sans prix */
+/* Lien « Commander » / « Je veux ce modèle » : message WhatsApp, sans prix */
 function noorCardOrderUrl(model) {
   const text = `Bonjour ! Je souhaite commander le modèle ${model.name} pour mon mariage.`;
   return `https://wa.me/${NOOR_WHATSAPP}?text=${encodeURIComponent(text)}`;
