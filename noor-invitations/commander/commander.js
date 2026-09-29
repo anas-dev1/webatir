@@ -45,8 +45,8 @@
   $('optionChoices').innerHTML = NOOR_OPTIONS.map((o) => `
     <label class="order-option">
       <input type="checkbox" name="options" value="${o.id}">
-      <span>${o.name}</span>
-      <b>+ ${noorEuros(o.price)}</b>
+      <span class="order-option-body"><span>${o.name}</span>${o.desc ? `<small>${o.desc}</small>` : ''}</span>
+      <b>${o.was ? `<s>${noorEuros(o.was)}</s> ` : ''}+ ${noorEuros(o.price)}</b>
     </label>`).join('');
 
   $('sectionChoices').innerHTML = NOOR_SECTIONS.map((sec) => `
@@ -77,6 +77,7 @@
     ].join('');
     $('orderTotal').textContent = noorEuros(total);
     $('orderPrestigeNote').hidden = f.id !== 'prestige';
+    $('rsvpPreview').hidden = f.id !== 'signature';
     $('payButton').textContent = `Payer ${noorEuros(total)}`;
   }
   form.addEventListener('change', update);

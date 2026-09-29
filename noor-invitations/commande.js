@@ -7,7 +7,7 @@
    https://webatir.com/noor-invitations/commander/merci/
    - clé « formule » seule : la formule sans option (ex. signature → 190 €)
    - clé « formule+option+option » (options dans l'ordre de NOOR_OPTIONS) pour une combinaison précise
-     (ex. 'signature+save-the-date' → 229 €)
+     (ex. 'signature+langue' → 210 €)
    Si aucun lien ne correspond à la commande, le bouton de paiement ouvre WhatsApp avec le récapitulatif. */
 
 const NOOR_PAYMENT_LINKS = {
@@ -21,15 +21,17 @@ const NOOR_ORDER_EMAIL = 'contact@webatir.com';
 
 const NOOR_FORMULAS = [
   { id: 'essentielle', name: 'Essentielle', price: 99, summary: "« Je veux celui-là » : le modèle tel quel, avec vos informations" },
-  { id: 'signature', name: 'Signature', price: 190, summary: "« À notre image » : le modèle adapté à vos couleurs et à votre ambiance" },
+  { id: 'signature', name: 'Signature', price: 190, summary: "« À notre image » : sceau à vos initiales, vos couleurs, et un tableau de suivi de vos invités" },
   { id: 'prestige', name: 'Prestige', price: 390, summary: "« Quelque chose d'unique » : une création sur mesure, à partir de vos inspirations" },
 ];
 
 const NOOR_OPTIONS = [
-  { id: 'save-the-date', name: 'Save the date', price: 39 },
-  { id: 'evenement', name: 'Événement supplémentaire', price: 60 },
-  { id: 'langue', name: 'Deuxième langue', price: 40 },
-  { id: 'express', name: 'Livraison express en 48 h', price: 40 },
+  { id: 'second-faire-part', name: 'Un 2ᵉ faire-part pour un autre événement', price: 69, was: 99,
+    desc: 'Henné, nikah, mariage coutumier… : son propre lien, sa date, son lieu et ses invités.' },
+  { id: 'langue', name: 'Deuxième langue', price: 20,
+    desc: 'Tout le faire-part aussi en arabe, anglais, lingala…' },
+  { id: 'express', name: 'Livraison express en 48 h', price: 40,
+    desc: 'Votre première version en 2 jours au lieu de 5.' },
 ];
 
 

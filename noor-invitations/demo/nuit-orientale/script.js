@@ -151,7 +151,7 @@ form.addEventListener('submit', async (e) => {
   if (String(data.get('presence')).startsWith('Non')) data.set('personnes', '0');
   // Démo : on simule la réponse, sans rien envoyer.
   await new Promise((r) => setTimeout(r, 500));
-  status.textContent = "C'est une démo : dans votre faire-part, cette réponse arriverait directement chez vous ✦";
+  status.textContent = "C'est une démo : dans votre faire-part, cette réponse arriverait directement chez vous. Avec la formule Signature, elle se rangerait aussi dans votre tableau de suivi des invités ✦";
   status.className = 'form-status ok';
   form.querySelectorAll('input, select, textarea').forEach((el) => { el.disabled = true; });
   status.hidden = false;

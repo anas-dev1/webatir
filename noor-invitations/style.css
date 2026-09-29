@@ -233,6 +233,7 @@ h3 { font-size: 1.35rem; font-weight: 600; }
 .tier-featured h3 { color: var(--gold-light); }
 .tier-featured .tier-for, .tier-featured li { color: var(--espresso-soft); }
 .tier-featured li::before { color: var(--gold-light); }
+.tier-featured li strong { color: var(--gold-light); font-weight: 600; }
 .badge { position: absolute; top: -13px; left: 26px; font-family: var(--caps); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; background: var(--gold-gradient); color: var(--espresso); padding: 5px 14px; border-radius: 99px; }
 
 /* Papier ou virtuel */
@@ -326,10 +327,30 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
 .order-choice:has(input:checked), .order-option:has(input:checked) { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(180, 140, 69, 0.2); }
 .order-choice input, .order-option input { accent-color: var(--gold-dark); width: 18px; height: 18px; }
 .order-choice-body { display: grid; gap: 2px; min-width: 0; }
+.order-option-body { display: grid; gap: 2px; min-width: 0; }
+.order-option b { text-align: right; }
+.order-option b s { display: block; color: var(--ink-soft); font-size: 0.85em; text-decoration-color: var(--gold); }
+.rsvp-row span.no { color: #a0584c; }
+.order-option-body small { font-size: 0.95rem; color: var(--ink-soft); font-style: italic; }
 .order-choice-name { font-weight: 600; font-size: 1.15rem; }
 .order-choice-name em { font-family: var(--caps); font-style: normal; font-weight: 400; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--espresso); background: var(--gold-gradient); padding: 3px 8px; border-radius: 99px; margin-left: 6px; vertical-align: middle; white-space: nowrap; }
 .order-choice-text { font-size: 0.98rem; color: var(--ink-soft); }
 .order-choice-price, .order-option b { font-family: var(--caps); font-weight: 400; color: var(--gold-dark); white-space: nowrap; }
+/* Aperçu du tableau de suivi (formule Signature) */
+.rsvp-preview { margin-top: 14px; border: 1px solid var(--gold); border-radius: 16px; background: #fffdf9; padding: 16px 16px 14px; display: grid; gap: 10px; }
+.rsvp-preview[hidden] { display: none; }
+.rsvp-preview-title { font-weight: 600; font-size: 1.1rem; color: var(--gold-dark); }
+.rsvp-preview-text { font-size: 1rem; color: var(--ink-soft); }
+.rsvp-preview-totals { display: flex; flex-wrap: wrap; gap: 8px; }
+.rsvp-preview-totals span { background: var(--bg); border: 1px solid var(--line); border-radius: 99px; padding: 4px 12px; font-size: 0.95rem; }
+.rsvp-preview-totals b { font-family: var(--caps); font-weight: 400; color: var(--gold-dark); }
+.rsvp-preview-table { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; font-size: 0.95rem; }
+.rsvp-row { display: grid; grid-template-columns: 1.6fr 1fr 0.6fr; gap: 8px; padding: 7px 12px; border-top: 1px solid var(--line); }
+.rsvp-row:first-child { border-top: 0; }
+.rsvp-head { background: var(--bg-deep); font-family: var(--caps); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
+.rsvp-row .yes { color: #3d7a4f; font-weight: 600; }
+.rsvp-row .no { color: #a0584c; font-weight: 600; }
+.rsvp-preview-note { font-size: 0.85rem; font-style: italic; color: var(--ink-soft); }
 .order-help { font-size: 0.98rem; color: var(--ink-soft); font-style: italic; margin: 4px 0 10px; }
 .order-sections { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 8px; }
 .order-section { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; background: #fffdf9; cursor: pointer; font-size: 1.05rem; transition: border-color 0.2s ease, opacity 0.2s ease; }
