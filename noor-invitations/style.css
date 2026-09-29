@@ -234,10 +234,6 @@ h3 { font-size: 1.35rem; font-weight: 600; }
 .tier-featured .tier-for, .tier-featured li { color: var(--espresso-soft); }
 .tier-featured li::before { color: var(--gold-light); }
 .badge { position: absolute; top: -13px; left: 26px; font-family: var(--caps); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; background: var(--gold-gradient); color: var(--espresso); padding: 5px 14px; border-radius: 99px; }
-.options { margin-top: 30px; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 24px 26px; display: grid; gap: 12px; }
-.options ul { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px 28px; }
-.options li { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px dashed var(--line); padding-bottom: 6px; }
-.options b { font-family: var(--caps); font-weight: 400; color: var(--gold-dark); white-space: nowrap; }
 
 /* Papier ou virtuel */
 .section-compare { padding-top: 0; }
