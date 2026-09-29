@@ -159,22 +159,16 @@ h3 { font-size: 1.35rem; font-weight: 600; }
   animation: model-hint 2.6s ease-in-out infinite;
 }
 @keyframes model-hint { 0%, 100% { opacity: 0.75; } 50% { opacity: 1; } }
-.model-body { padding: 24px 24px 26px; display: grid; gap: 8px; align-content: start; }
-.model-body h3 { font-size: 1.75rem; font-weight: 500; }
+.model-body { padding: 22px 24px 26px; display: grid; gap: 6px; justify-items: center; text-align: center; }
+.model-body h3 { font-size: 1.85rem; font-weight: 500; }
 .model-tags { font-family: var(--caps); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
-.model-desc { color: var(--ink-soft); font-size: 1.08rem; }
-.model-price { color: var(--ink-soft); margin-top: 4px; }
-.model-price b { font-family: var(--caps); font-weight: 400; font-size: 1.6rem; color: var(--gold-dark); margin-left: 4px; }
-.model-cta { margin-top: 8px; justify-self: stretch; }
-/* Un seul modèle mis en avant : grande carte, visuel à gauche sur grand écran */
-.models[data-count="1"] { max-width: 940px; grid-template-columns: 1fr; }
-@media (min-width: 760px) {
-  .models[data-count="1"] .model { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr); grid-template-rows: none; }
-  .models[data-count="1"] .model-body { align-content: center; padding: 40px 44px; gap: 12px; }
-  .models[data-count="1"] .model-body h3 { font-size: 2.3rem; }
-  .models[data-count="1"] .model-cta { justify-self: start; }
-}
-.models-more { text-align: center; margin-top: 34px; }
+.model-cta { margin-top: 12px; }
+/* Un seul modèle mis en avant : grande carte verticale, centrée */
+.models[data-count="1"] { max-width: 460px; grid-template-columns: 1fr; }
+.models-more { margin-top: 34px; display: grid; justify-items: center; gap: 18px; text-align: center; }
+.models-price { font-size: 1.02rem; color: var(--ink-soft); }
+.models-price a { color: var(--gold-dark); text-decoration: none; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.models-price a:hover { border-bottom-color: var(--gold); }
 .models-fallback { text-align: center; }
 /* Page /collections : galerie de tous les modèles */
 .page-collections { padding-top: 130px; }

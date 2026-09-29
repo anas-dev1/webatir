@@ -80,8 +80,6 @@ function noorModelCard(model, base, tagsKey) {
       <div class="model-body">
         <h3>${esc(model.name)}</h3>
         <p class="model-tags">${esc(tags)}</p>
-        <p class="model-desc">${esc(model.description)}</p>
-        <p class="model-price">À partir de <b>${model.price} €</b></p>
         <a class="btn btn-gold model-cta" href="${base}${model.previewUrl}">Ouvrir l'invitation →</a>
       </div>
     </article>`;
