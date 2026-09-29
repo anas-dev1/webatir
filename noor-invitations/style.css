@@ -223,6 +223,9 @@ h3 { font-size: 1.35rem; font-weight: 600; }
   background: var(--gold-gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
 .tier-for { font-style: italic; color: var(--ink-soft); }
+.tier-promise { font-family: var(--serif); font-style: italic; font-size: 1.25rem; line-height: 1.35; color: var(--gold-dark); margin-top: -6px; }
+.tier-featured .tier-promise { color: var(--gold-light); }
+.tier-example { font-size: 1rem; font-style: italic; color: var(--espresso-soft); border-left: 2px solid var(--gold); padding-left: 12px; }
 .tier ul { list-style: none; display: grid; gap: 7px; font-size: 1.08rem; }
 .tier li::before { content: "✦"; color: var(--gold); margin-right: 8px; font-size: 0.8em; }
 .tier .btn { margin-top: 6px; }

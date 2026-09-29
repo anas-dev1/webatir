@@ -76,6 +76,7 @@
       ...opts.map((o) => `<li><span>${o.name}</span><b>+ ${noorEuros(o.price)}</b></li>`),
     ].join('');
     $('orderTotal').textContent = noorEuros(total);
+    $('orderPrestigeNote').hidden = f.id !== 'prestige';
     $('payButton').textContent = `Payer ${noorEuros(total)}`;
   }
   form.addEventListener('change', update);

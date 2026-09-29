@@ -13,16 +13,16 @@
 const NOOR_PAYMENT_LINKS = {
   essentielle: '', // 99 €
   signature: '',   // 190 €
-  prestige: '',    // 350 €
+  prestige: '',    // 390 €
 };
 
 /* Adresse qui reçoit le récapitulatif de chaque commande (via FormSubmit) */
 const NOOR_ORDER_EMAIL = 'contact@webatir.com';
 
 const NOOR_FORMULAS = [
-  { id: 'essentielle', name: 'Essentielle', price: 99, summary: 'Une collection, à vos couleurs' },
-  { id: 'signature', name: 'Signature', price: 190, summary: 'Cachet à vos initiales, vidéo d\'ouverture, votre portrait' },
-  { id: 'prestige', name: 'Prestige', price: 350, summary: 'Entièrement sur mesure, plusieurs événements' },
+  { id: 'essentielle', name: 'Essentielle', price: 99, summary: "« Je veux celui-là » : le modèle tel quel, avec vos informations" },
+  { id: 'signature', name: 'Signature', price: 190, summary: "« À notre image » : le modèle adapté à vos couleurs et à votre ambiance" },
+  { id: 'prestige', name: 'Prestige', price: 390, summary: "« Quelque chose d'unique » : une création sur mesure, à partir de vos inspirations" },
 ];
 
 const NOOR_OPTIONS = [
