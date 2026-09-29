@@ -162,7 +162,30 @@ h3 { font-size: 1.35rem; font-weight: 600; }
 .model-body { padding: 22px 24px 26px; display: grid; gap: 6px; justify-items: center; text-align: center; }
 .model-body h3 { font-size: 1.85rem; font-weight: 500; }
 .model-tags { font-family: var(--caps); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
-.model-cta { margin-top: 12px; }
+.model-actions { display: grid; gap: 10px; width: 100%; margin-top: 12px; }
+.model-actions .btn { width: 100%; white-space: nowrap; padding: 13px 14px; font-size: 0.76rem; letter-spacing: 0.12em; }
+/* Plusieurs modèles : 2 colonnes sur tablette, 4 sur ordinateur */
+@media (min-width: 700px) { .section-models .models:not([data-count="1"]) { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .section-models .models:not([data-count="1"]) { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; } .section-models .model-body h3 { font-size: 1.6rem; } }
+.model-cta.is-disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; filter: grayscale(0.3); }
+.model-cta.is-disabled:hover { transform: none; }
+.model-soon {
+  position: absolute; top: 14px; left: 14px;
+  font-family: var(--caps); font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--espresso); background: var(--gold-gradient); padding: 5px 12px; border-radius: 99px;
+}
+.model.is-soon .model-media img { filter: saturate(0.85); }
+/* Téléphone : carrousel horizontal à faire glisser (le défilement reste dans le carrousel) */
+@media (max-width: 699px) {
+  .section-models .models:not([data-count="1"]) {
+    display: flex; gap: 14px;
+    overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    margin-inline: -20px; padding: 4px 20px 18px; scroll-padding-inline: 20px;
+    scrollbar-width: none;
+  }
+  .section-models .models:not([data-count="1"])::-webkit-scrollbar { display: none; }
+  .section-models .models:not([data-count="1"]) .model { flex: 0 0 82%; scroll-snap-align: start; }
+}
 /* Un seul modèle mis en avant : grande carte verticale, centrée */
 .models[data-count="1"] { max-width: 460px; grid-template-columns: 1fr; }
 .models-more { margin-top: 34px; display: grid; justify-items: center; gap: 18px; text-align: center; }

@@ -1,6 +1,6 @@
 /* ============ Noor Invitations — catalogue des modèles ============
    Source unique des modèles : la page d'accueil, la page /collections et les démos lisent cette liste.
-   - Accueil : modèles available && featured
+   - Accueil : modèles featured (les modèles pas encore disponibles s'affichent avec « Bientôt »)
    - /collections : modèles available
    Pour ajouter un modèle : ajouter une entrée ici (et sa démo dans demo/<slug>/). */
 
@@ -31,7 +31,7 @@ const NOOR_COLLECTIONS = [
     thumbnail: 'img/collection-henne.webp',
     previewUrl: 'demo/henne/',
     available: false,
-    featured: false,
+    featured: true,
   },
   {
     id: 'wax-et-or',
@@ -44,7 +44,7 @@ const NOOR_COLLECTIONS = [
     thumbnail: 'img/collection-wax.webp',
     previewUrl: 'demo/wax-et-or/',
     available: false,
-    featured: false,
+    featured: true,
   },
   {
     id: 'jardin-blanc',
@@ -57,7 +57,7 @@ const NOOR_COLLECTIONS = [
     thumbnail: 'img/collection-jardin.webp',
     previewUrl: 'demo/jardin-blanc/',
     available: false,
-    featured: false,
+    featured: true,
   },
 ];
 
@@ -67,20 +67,34 @@ function noorOrderUrl(model) {
   return `https://wa.me/${NOOR_WHATSAPP}?text=${encodeURIComponent(text)}`;
 }
 
+/* Lien « Commander » d'une carte : sans prix */
+function noorCardOrderUrl(model) {
+  const text = `Bonjour ! Je souhaite commander le modèle ${model.name} pour mon mariage.`;
+  return `https://wa.me/${NOOR_WHATSAPP}?text=${encodeURIComponent(text)}`;
+}
+
 /* Carte d'un modèle. base = chemin vers la racine du site depuis la page courante ('' ou '../'). */
 function noorModelCard(model, base, tagsKey) {
   const tags = (tagsKey === 'palette' ? model.palette : model.tags).join(' · ');
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const name = esc(model.name);
+  const img = `<img src="${base}${model.thumbnail}" alt="Aperçu du faire-part ${name}" width="600" height="750" loading="lazy" decoding="async">`;
+  const media = model.available
+    ? `<a class="model-media" href="${base}${model.previewUrl}" aria-label="Ouvrir l'invitation ${name}">${img}<span class="model-play" aria-hidden="true">Touchez pour ouvrir</span></a>`
+    : `<div class="model-media">${img}<span class="model-soon">Bientôt</span></div>`;
+  const open = model.available
+    ? `<a class="btn btn-gold model-cta" href="${base}${model.previewUrl}">Ouvrir l'invitation →</a>`
+    : `<span class="btn btn-gold model-cta is-disabled" aria-disabled="true" title="Démo bientôt disponible">Ouvrir l'invitation</span>`;
   return `
-    <article class="model">
-      <a class="model-media" href="${base}${model.previewUrl}" aria-label="Ouvrir l'invitation ${esc(model.name)}">
-        <img src="${base}${model.thumbnail}" alt="Aperçu du faire-part ${esc(model.name)}" width="600" height="750" loading="lazy" decoding="async">
-        <span class="model-play" aria-hidden="true">Touchez pour ouvrir</span>
-      </a>
+    <article class="model${model.available ? '' : ' is-soon'}">
+      ${media}
       <div class="model-body">
-        <h3>${esc(model.name)}</h3>
+        <h3>${name}</h3>
         <p class="model-tags">${esc(tags)}</p>
-        <a class="btn btn-gold model-cta" href="${base}${model.previewUrl}">Ouvrir l'invitation →</a>
+        <div class="model-actions">
+          ${open}
+          <a class="btn btn-outline model-order" href="${noorCardOrderUrl(model)}" target="_blank" rel="noopener">Commander</a>
+        </div>
       </div>
     </article>`;
 }
@@ -90,7 +104,7 @@ function noorRenderModels() {
   document.querySelectorAll('[data-models]').forEach((el) => {
     const filter = el.dataset.models;
     const base = el.dataset.base || '';
-    const models = NOOR_COLLECTIONS.filter((m) => m.available && (filter !== 'featured' || m.featured));
+    const models = NOOR_COLLECTIONS.filter((m) => (filter === 'featured' ? m.featured : m.available));
     el.dataset.count = models.length;
     el.innerHTML = models.map((m) => noorModelCard(m, base, el.dataset.tags)).join('');
   });
