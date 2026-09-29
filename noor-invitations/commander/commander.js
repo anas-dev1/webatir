@@ -1,8 +1,8 @@
 /* ============ Noor Invitations — page de commande ============
    1. Le modèle vient de l'adresse (?modele=slug), la formule éventuellement de ?formule=id.
    2. Le récapitulatif se calcule en direct.
-   3. À la validation : le récapitulatif part par e-mail (FormSubmit), puis le client paie l'acompte
-      sur le lien Stripe de sa formule. Sans lien Stripe configuré, on bascule sur WhatsApp. */
+   3. À la validation : le récapitulatif part par e-mail (FormSubmit), puis le client paie le total en une fois
+      sur le lien Stripe correspondant. Sans lien Stripe configuré, on bascule sur WhatsApp. */
 
 (function () {
   const params = new URLSearchParams(location.search);
@@ -57,21 +57,18 @@
     const f = currentFormula();
     const opts = currentOptions();
     const total = f.price + opts.reduce((s, o) => s + o.price, 0);
-    const deposit = Math.round(f.price * NOOR_DEPOSIT_RATE * 100) / 100;
-    return { f, opts, total, deposit, rest: total - deposit };
+    return { f, opts, total };
   }
 
   function update() {
-    const { f, opts, total, deposit, rest } = totals();
+    const { f, opts, total } = totals();
     $('orderLines').innerHTML = [
       `<li><span>Modèle ${currentModel().name}</span><b>inclus</b></li>`,
       `<li><span>Formule ${f.name}</span><b>${noorEuros(f.price)}</b></li>`,
       ...opts.map((o) => `<li><span>${o.name}</span><b>+ ${noorEuros(o.price)}</b></li>`),
     ].join('');
     $('orderTotal').textContent = noorEuros(total);
-    $('orderDeposit').textContent = noorEuros(deposit);
-    $('orderRest').textContent = `Le solde de ${noorEuros(rest)} est à régler à la mise en ligne de votre faire-part.`;
-    $('payButton').textContent = `Payer l'acompte de ${noorEuros(deposit)}`;
+    $('payButton').textContent = `Payer ${noorEuros(total)}`;
   }
   form.addEventListener('change', update);
   showModel();
@@ -85,13 +82,13 @@
   };
 
   function recap(id) {
-    const { f, opts, total, deposit, rest } = totals();
+    const { f, opts, total } = totals();
     return [
       `Commande ${id}`,
       `Modèle : ${currentModel().name}`,
       `Formule : ${f.name} (${noorEuros(f.price)})`,
       `Options : ${opts.length ? opts.map((o) => `${o.name} (+ ${noorEuros(o.price)})`).join(', ') : 'aucune'}`,
-      `Total : ${noorEuros(total)} — acompte ${noorEuros(deposit)}, solde ${noorEuros(rest)}`,
+      `Total payé à la commande : ${noorEuros(total)}`,
       `Prénoms : ${$('couple').value.trim()}`,
       `Date du mariage : ${$('weddingDate').value}`,
       `E-mail : ${$('email').value.trim()}`,
@@ -119,8 +116,8 @@
 
     const id = orderId();
     const text = recap(id);
-    const { f, deposit } = totals();
-    try { sessionStorage.setItem('noorOrder', JSON.stringify({ id, model: currentModel().name, formula: f.name, deposit })); } catch (err) { /* stockage indisponible */ }
+    const { f, opts, total } = totals();
+    try { sessionStorage.setItem('noorOrder', JSON.stringify({ id, model: currentModel().name, formula: f.name, total })); } catch (err) { /* stockage indisponible */ }
 
     // Récapitulatif par e-mail (on n'empêche pas le paiement si l'envoi échoue)
     try {
@@ -132,7 +129,7 @@
       await fetch(`https://formsubmit.co/ajax/${NOOR_ORDER_EMAIL}`, { method: 'POST', headers: { Accept: 'application/json' }, body: data });
     } catch (err) { /* on continue vers le paiement */ }
 
-    const link = NOOR_PAYMENT_LINKS[f.id];
+    const link = NOOR_PAYMENT_LINKS[[f.id, ...opts.map((o) => o.id)].join('+')];
     if (link) {
       const url = new URL(link);
       url.searchParams.set('prefilled_email', $('email').value.trim());

@@ -1,16 +1,19 @@
 /* ============ Noor Invitations — commande en ligne ============
    Formules, options et liens de paiement Stripe.
-   L'acompte payé à la commande = 50 % de la formule ; les options et le solde sont réglés à la mise en ligne.
+   Paiement en une fois, à la commande : le client règle le total (formule + options).
 
-   À CONFIGURER : créer dans Stripe un « lien de paiement » par acompte (Produits → Liens de paiement),
-   avec comme page de confirmation : https://webatir.com/noor-invitations/commander/merci/
-   puis coller chaque lien ci-dessous. Tant qu'un lien est vide, le bouton de paiement ouvre WhatsApp
-   avec le récapitulatif de la commande. */
+   À CONFIGURER : créer dans Stripe un « lien de paiement » par montant à encaisser
+   (Produits → Liens de paiement), avec comme page de confirmation :
+   https://webatir.com/noor-invitations/commander/merci/
+   - clé « formule » seule : la formule sans option (ex. signature → 190 €)
+   - clé « formule+option+option » (options dans l'ordre de NOOR_OPTIONS) pour une combinaison précise
+     (ex. 'signature+save-the-date' → 229 €)
+   Si aucun lien ne correspond à la commande, le bouton de paiement ouvre WhatsApp avec le récapitulatif. */
 
 const NOOR_PAYMENT_LINKS = {
-  essentielle: '', // acompte 49,50 €
-  signature: '',   // acompte 95 €
-  prestige: '',    // acompte 175 €
+  essentielle: '', // 99 €
+  signature: '',   // 190 €
+  prestige: '',    // 350 €
 };
 
 /* Adresse qui reçoit le récapitulatif de chaque commande (via FormSubmit) */
@@ -29,7 +32,6 @@ const NOOR_OPTIONS = [
   { id: 'express', name: 'Livraison express en 48 h', price: 40 },
 ];
 
-const NOOR_DEPOSIT_RATE = 0.5;
 
 function noorEuros(n) {
   return n.toLocaleString('fr-FR', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 }) + ' €';

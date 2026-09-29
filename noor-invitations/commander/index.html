@@ -31,7 +31,7 @@
     <div class="section-head">
       <p class="eyebrow">Commande</p>
       <h1>Votre faire-part</h1>
-      <p class="section-sub">Choisissez votre formule, dites-nous l'essentiel, et réglez l'acompte en ligne. Nous vous envoyons une première version sous 5 jours.</p>
+      <p class="section-sub">Choisissez votre formule, dites-nous l'essentiel, et réglez votre commande en ligne. Nous vous envoyons une première version sous 5 jours.</p>
     </div>
 
     <form class="order" id="orderForm" novalidate>
@@ -91,14 +91,12 @@
       <aside class="order-summary" aria-label="Récapitulatif">
         <h2>Récapitulatif</h2>
         <ul class="order-lines" id="orderLines"></ul>
-        <p class="order-total"><span>Total</span><b id="orderTotal">—</b></p>
-        <p class="order-deposit"><span>À régler aujourd'hui <em>(acompte de 50 % de la formule)</em></span><b id="orderDeposit">—</b></p>
-        <p class="order-rest" id="orderRest"></p>
+        <p class="order-total order-deposit"><span>Total à régler <em>Paiement en une fois, à la commande</em></span><b id="orderTotal">—</b></p>
         <label class="order-cgv">
           <input type="checkbox" id="cgv" name="cgv" required>
           <span>J'accepte les <a href="../cgv/" target="_blank" rel="noopener">conditions générales de vente</a>.</span>
         </label>
-        <button type="submit" class="btn btn-gold order-pay" id="payButton">Payer l'acompte</button>
+        <button type="submit" class="btn btn-gold order-pay" id="payButton">Payer</button>
         <p class="order-error" id="orderError" role="alert" hidden></p>
         <p class="order-secure">Paiement sécurisé par Stripe · carte, Apple Pay, Google Pay</p>
       </aside>
