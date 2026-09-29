@@ -64,9 +64,20 @@
           <div class="order-options" id="optionChoices"></div>
         </fieldset>
 
-        <!-- 4. Informations -->
+        <!-- 4. Sections -->
         <fieldset class="order-step">
-          <legend><span>4</span> Vos informations</legend>
+          <legend><span>4</span> Les sections de votre faire-part</legend>
+          <p class="order-help">Toutes les sections sont incluses. Décochez celles dont vous n'avez pas besoin.</p>
+          <div class="order-sections" id="sectionChoices"></div>
+          <label class="order-field order-add">Une section à ajouter ?
+            <textarea id="additions" name="ajouts" rows="2" placeholder="Ex. : dress code, liste de cadeaux, hébergement, musique, un mot en arabe…"></textarea>
+          </label>
+          <p class="order-help">Si votre demande nécessite un supplément, nous vous le confirmons sur WhatsApp avant de commencer.</p>
+        </fieldset>
+
+        <!-- 5. Informations -->
+        <fieldset class="order-step">
+          <legend><span>5</span> Vos informations</legend>
           <div class="order-fields">
             <label class="order-field">Vos deux prénoms
               <input type="text" id="couple" name="prenoms" placeholder="Ex. : Ines & Anas" required autocomplete="off">
@@ -99,6 +110,7 @@
         <button type="submit" class="btn btn-gold order-pay" id="payButton">Payer</button>
         <p class="order-error" id="orderError" role="alert" hidden></p>
         <p class="order-secure">Paiement sécurisé par Stripe · carte, Apple Pay, Google Pay</p>
+        <p class="order-question">Une question avant de commander ? <a href="https://wa.me/33633475373?text=Bonjour%20!%20J'ai%20une%20question%20avant%20de%20commander%20mon%20faire-part." target="_blank" rel="noopener">Écrivez-nous sur WhatsApp</a></p>
       </aside>
 
       <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">

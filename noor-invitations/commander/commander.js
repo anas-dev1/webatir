@@ -49,6 +49,14 @@
       <b>+ ${noorEuros(o.price)}</b>
     </label>`).join('');
 
+  $('sectionChoices').innerHTML = NOOR_SECTIONS.map((sec) => `
+    <label class="order-section">
+      <input type="checkbox" name="sections" value="${sec.id}" checked>
+      <span>${sec.name}</span>
+    </label>`).join('');
+  const removedSections = () => [...form.querySelectorAll('input[name="sections"]:not(:checked)')]
+    .map((c) => NOOR_SECTIONS.find((sec) => sec.id === c.value).name);
+
   const currentFormula = () => NOOR_FORMULAS.find((f) => f.id === form.querySelector('input[name="formule"]:checked').value);
   const currentOptions = () => [...form.querySelectorAll('input[name="options"]:checked')]
     .map((c) => NOOR_OPTIONS.find((o) => o.id === c.value));
@@ -89,6 +97,8 @@
       `Formule : ${f.name} (${noorEuros(f.price)})`,
       `Options : ${opts.length ? opts.map((o) => `${o.name} (+ ${noorEuros(o.price)})`).join(', ') : 'aucune'}`,
       `Total payé à la commande : ${noorEuros(total)}`,
+      `Sections retirées : ${removedSections().join(', ') || 'aucune'}`,
+      `Sections à ajouter : ${$('additions').value.trim() || '—'}`,
       `Prénoms : ${$('couple').value.trim()}`,
       `Date du mariage : ${$('weddingDate').value}`,
       `E-mail : ${$('email').value.trim()}`,

@@ -33,6 +33,18 @@ const NOOR_OPTIONS = [
 ];
 
 
+/* Sections du faire-part : toutes incluses par défaut, le client peut en retirer à la commande */
+const NOOR_SECTIONS = [
+  { id: 'enveloppe', name: 'Enveloppe et cachet' },
+  { id: 'accueil', name: "Mot d'accueil" },
+  { id: 'portrait', name: 'Portrait du couple' },
+  { id: 'compte-a-rebours', name: 'Compte à rebours' },
+  { id: 'programme', name: 'Programme' },
+  { id: 'lieu', name: 'Lieu et itinéraire' },
+  { id: 'temoins', name: 'Contacts des témoins' },
+  { id: 'rsvp', name: 'Réponses des invités' },
+];
+
 function noorEuros(n) {
   return n.toLocaleString('fr-FR', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 }) + ' €';
 }

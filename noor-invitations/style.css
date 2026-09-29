@@ -331,6 +331,14 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
 .order-choice-name em { font-family: var(--caps); font-style: normal; font-weight: 400; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--espresso); background: var(--gold-gradient); padding: 3px 8px; border-radius: 99px; margin-left: 6px; vertical-align: middle; white-space: nowrap; }
 .order-choice-text { font-size: 0.98rem; color: var(--ink-soft); }
 .order-choice-price, .order-option b { font-family: var(--caps); font-weight: 400; color: var(--gold-dark); white-space: nowrap; }
+.order-help { font-size: 0.98rem; color: var(--ink-soft); font-style: italic; margin: 4px 0 10px; }
+.order-sections { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 8px; }
+.order-section { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; background: #fffdf9; cursor: pointer; font-size: 1.05rem; transition: border-color 0.2s ease, opacity 0.2s ease; }
+.order-section input { accent-color: var(--gold-dark); width: 18px; height: 18px; flex: none; }
+.order-section:has(input:not(:checked)) { opacity: 0.55; text-decoration: line-through; text-decoration-color: var(--gold); }
+.order-add { margin-top: 16px; }
+.order-question { font-size: 0.95rem; text-align: center; }
+.order-question a { color: var(--gold-light); white-space: nowrap; }
 .order-fields { display: grid; gap: 14px; margin-top: 6px; }
 @media (min-width: 620px) { .order-fields { grid-template-columns: 1fr 1fr; } .order-field-wide { grid-column: 1 / -1; } }
 .order-field { display: grid; gap: 6px; font-size: 1rem; color: var(--ink-soft); min-width: 0; }
