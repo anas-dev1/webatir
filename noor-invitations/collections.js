@@ -56,7 +56,7 @@ const NOOR_COLLECTIONS = [
     price: 99,
     thumbnail: 'img/collection-jardin.webp',
     previewUrl: 'demo/jardin-blanc/',
-    available: false,
+    available: true,
     featured: true,
   },
 ];
