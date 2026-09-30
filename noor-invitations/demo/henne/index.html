@@ -3,34 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Démo Wax &amp; or — Noor Invitations</title>
-  <meta name="description" content="Démonstration du faire-part de mariage virtuel Wax &amp; or : ouvrez l'invitation comme si vous étiez invité.">
+  <title>Démo Henné — Noor Invitations</title>
+  <meta name="description" content="Démonstration du faire-part virtuel Henné, pour une soirée du henné : ouvrez l'invitation comme si vous étiez invité.">
   <meta name="robots" content="noindex">
-  <meta name="theme-color" content="#f3e6cf">
-  <meta property="og:title" content="Wax &amp; or — démo Noor Invitations">
+  <meta name="theme-color" content="#8e3b22">
+  <meta property="og:title" content="Henné — démo Noor Invitations">
   <meta property="og:description" content="Ouvrez l'invitation comme si vous étiez invité.">
-  <meta property="og:image" content="https://webatir.com/noor-invitations/img/collection-wax.webp">
+  <meta property="og:image" content="https://webatir.com/noor-invitations/img/collection-henne.webp">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Marcellus&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="img/enveloppe-fermee.jpg">
-  <link rel="stylesheet" href="style.css?v=20260930b">
+  <link rel="stylesheet" href="style.css?v=20261001">
 </head>
-<body class="is-locked" data-model="wax-et-or">
+<body class="is-locked" data-model="henne">
 
   <!-- ===== ENVELOPPE ===== -->
   <div class="envelope-screen" id="envelope" role="button" tabindex="0" aria-label="Ouvrir l'invitation">
     <div class="envelope-stage">
       <video class="envelope-video" id="envelopeVideo" src="img/ouverture.mp4" poster="img/enveloppe-fermee.jpg" muted playsinline preload="auto" aria-hidden="true"></video>
-      <!-- Lumière au toucher : le cachet s'illumine puis la lumière court sur les dorures du wax -->
+      <!-- Lumière au toucher : la lumière part du cachet et court sur les motifs au henné de l'enveloppe -->
       <div class="pattern-light pattern-light-trail" aria-hidden="true"></div>
       <div class="pattern-light pattern-light-front" aria-hidden="true"></div>
-      <div class="seal-light" aria-hidden="true">
-        <span class="seal-glow"></span>
-        <span class="seal-star">✦</span>
-        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-      </div>
     </div>
     <p class="envelope-hint"><span aria-hidden="true">✦</span> Touchez pour ouvrir <span aria-hidden="true">✦</span></p>
   </div>
@@ -42,15 +37,13 @@
       <div class="hero-bg" aria-hidden="true"></div>
       <canvas class="sparkles" id="sparkles" aria-hidden="true"></canvas>
       <div class="hero-content">
-        <p class="eyebrow">Nous nous marions</p>
+        <p class="eyebrow">Le henné de</p>
         <h1 class="names">
-          <span class="name">Irlande</span>
-          <span class="amp">&amp;</span>
-          <span class="name">Noé</span>
+          <span class="name">Ines</span>
         </h1>
         <div class="divider" aria-hidden="true"><span></span>✦<span></span></div>
-        <p class="hero-date">Vendredi 23 octobre 2026</p>
-        <p class="hero-place">Beauchamp</p>
+        <p class="hero-date">Vendredi 18 juin 2027</p>
+        <p class="hero-place">Marseille</p>
       </div>
       <a href="#bienvenue" class="scroll-hint" aria-label="Découvrir l'invitation">
         <span>Découvrir</span>
@@ -62,15 +55,15 @@
     <section class="section welcome" id="bienvenue">
       <div class="card reveal">
         <p class="script-title">Chère famille, chers amis,</p>
-        <p class="lead">Deux familles, deux histoires,<br>un seul grand jour.</p>
-        <p>C'est avec une immense joie que nous vous invitons à célébrer notre union. Venez danser, rire et partager ce moment avec nous, dans nos plus belles couleurs.</p>
-        <p class="signature">Irlande &amp; Noé</p>
+        <p class="lead">Avant le grand jour,<br>place aux chants, aux youyous<br>et aux mains dessinées.</p>
+        <p>C'est avec beaucoup de joie que je vous invite à ma soirée du henné. Venez partager avec moi ce moment de tradition, de musique et de douceur, entourée de celles et ceux que j'aime.</p>
+        <p class="signature">Ines</p>
       </div>
     </section>
 
     <!-- ===== COMPTE À REBOURS ===== -->
     <section class="section countdown-section">
-      <p class="eyebrow reveal">La fête commence dans</p>
+      <p class="eyebrow reveal">La soirée commence dans</p>
       <div class="countdown reveal" id="countdown">
         <div><strong data-unit="days">--</strong><span>Jours</span></div>
         <div><strong data-unit="hours">--</strong><span>Heures</span></div>
@@ -86,15 +79,14 @@
       <div class="timeline-wrap" id="timeline">
       <div class="timeline-track" aria-hidden="true">
         <span class="timeline-fill"></span>
-        <img class="timeline-rose" src="img/hibiscus.webp" alt="" width="300" height="300">
+        <img class="timeline-rose" src="img/cachet.webp" alt="" width="300" height="300">
       </div>
       <ol class="timeline">
-        <li class="reveal"><time>14h45</time><div><h3>Accueil des invités</h3><p>Installez-vous, la fête va commencer</p></div></li>
-        <li class="reveal"><time>15h15</time><div><h3>Cérémonie</h3><p>Le « oui » d'Irlande et Noé</p></div></li>
-        <li class="reveal"><time>16h30</time><div><h3>Photos &amp; vin d'honneur</h3><p>Avec toute la famille et les amis</p></div></li>
-        <li class="reveal"><time>19h30</time><div><h3>Entrée des mariés</h3><p>En musique et en couleurs</p></div></li>
-        <li class="reveal"><time>20h00</time><div><h3>Dîner</h3><p>Saveurs d'Afrique et d'ailleurs</p></div></li>
-        <li class="reveal"><time>22h00</time><div><h3>Soirée dansante</h3><p>Coupé-décalé, afrobeat… jusqu'au bout de la nuit</p></div></li>
+        <li class="reveal"><time>19h30</time><div><h3>Accueil des invités</h3><p>Thé à la menthe et pâtisseries</p></div></li>
+        <li class="reveal"><time>20h30</time><div><h3>Entrée de la mariée</h3><p>En tenue traditionnelle, sous les youyous</p></div></li>
+        <li class="reveal"><time>21h00</time><div><h3>Pose du henné</h3><p>Pour la mariée et toutes celles qui le souhaitent</p></div></li>
+        <li class="reveal"><time>22h00</time><div><h3>Dîner</h3><p>Saveurs d'ici et de là-bas</p></div></li>
+        <li class="reveal"><time>23h00</time><div><h3>Soirée dansante</h3><p>Jusqu'au bout de la nuit</p></div></li>
       </ol>
       </div>
     </section>
@@ -103,14 +95,14 @@
     <section class="section place-section">
       <h2 class="script-title reveal">Le lieu</h2>
       <div class="card place-card reveal">
-        <h3>Beauchamp</h3>
-        <p>271 chaussée Jules César<br>95250 Beauchamp</p>
+        <h3>Château de la Buzine</h3>
+        <p>56 traverse de la Buzine<br>13011 Marseille</p>
         <div class="map">
-          <iframe title="Carte : 271 chaussée Jules César, Beauchamp" src="https://www.google.com/maps?q=271+chauss%C3%A9e+Jules+C%C3%A9sar,+95250+Beauchamp&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe title="Carte : Château de la Buzine, Marseille" src="https://www.google.com/maps?q=Ch%C3%A2teau+de+la+Buzine,+56+traverse+de+la+Buzine,+13011+Marseille&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <div class="place-actions">
-          <a class="btn btn-gold" href="https://www.google.com/maps/dir/?api=1&destination=271+chauss%C3%A9e+Jules+C%C3%A9sar,+95250+Beauchamp" target="_blank" rel="noopener">Itinéraire</a>
-          <a class="btn btn-ghost" href="https://waze.com/ul?q=271%20chauss%C3%A9e%20Jules%20C%C3%A9sar%2095250%20Beauchamp&navigate=yes" target="_blank" rel="noopener">Waze</a>
+          <a class="btn btn-gold" href="https://www.google.com/maps/dir/?api=1&destination=Ch%C3%A2teau+de+la+Buzine,+13011+Marseille" target="_blank" rel="noopener">Itinéraire</a>
+          <a class="btn btn-ghost" href="https://waze.com/ul?q=Ch%C3%A2teau%20de%20la%20Buzine%2013011%20Marseille&navigate=yes" target="_blank" rel="noopener">Waze</a>
         </div>
       </div>
     </section>
@@ -118,17 +110,17 @@
     <!-- ===== CONTACTS ===== -->
     <section class="section contacts-section">
       <h2 class="script-title reveal">Une question&nbsp;?</h2>
-      <p class="reveal">Nos témoins sont là pour vous répondre.</p>
+      <p class="reveal">Mes proches sont là pour vous répondre.</p>
       <div class="contacts">
-        <a class="card contact reveal" href="tel:+33639980003">
-          <span class="contact-role">Témoin d'Irlande</span>
-          <strong>Grâce</strong>
-          <span>06 39 98 00 03</span>
+        <a class="card contact reveal" href="tel:+33639980007">
+          <span class="contact-role">Sœur d'Ines</span>
+          <strong>Sarah</strong>
+          <span>06 39 98 00 07</span>
         </a>
-        <a class="card contact reveal" href="tel:+33639980004">
-          <span class="contact-role">Témoin de Noé</span>
-          <strong>Samuel</strong>
-          <span>06 39 98 00 04</span>
+        <a class="card contact reveal" href="tel:+33639980008">
+          <span class="contact-role">Cousine d'Ines</span>
+          <strong>Leïla</strong>
+          <span>06 39 98 00 08</span>
         </a>
       </div>
     </section>
@@ -136,7 +128,7 @@
     <!-- ===== RSVP ===== -->
     <section class="section rsvp-section" id="rsvp">
       <h2 class="script-title reveal">Serez-vous des nôtres&nbsp;?</h2>
-      <p class="reveal">Merci de nous répondre avant le <strong>9 octobre 2026</strong>.</p>
+      <p class="reveal">Merci de me répondre avant le <strong>1er juin 2027</strong>.</p>
       <form class="card rsvp reveal" id="rsvpForm">
         <label>Votre nom et prénom
           <input type="text" name="nom" required autocomplete="name">
@@ -151,7 +143,7 @@
             <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
           </select>
         </label>
-        <label>Un petit mot pour les mariés <span class="optional">(facultatif)</span>
+        <label>Un petit mot pour Ines <span class="optional">(facultatif)</span>
           <textarea name="message" rows="3"></textarea>
         </label>
         <button type="submit" class="btn btn-gold btn-full">Envoyer ma réponse</button>
@@ -161,12 +153,9 @@
 
     <!-- ===== FIN ===== -->
     <footer class="finale">
-      <figure class="finale-photo reveal">
-        <img src="img/photo-couple.webp" alt="Irlande et Noé" loading="lazy" width="900" height="1350">
-      </figure>
-      <p class="script-title">Nous avons hâte de vous voir</p>
-      <p class="signature">Irlande &amp; Noé</p>
-      <p class="small">23 · 10 · 2026</p>
+      <p class="script-title">J'ai hâte de vous voir</p>
+      <p class="signature">Ines</p>
+      <p class="small">18 · 06 · 2027</p>
     </footer>
 
     <!-- ===== DÉMO : passer à l'action ===== -->
@@ -174,16 +163,16 @@
       <p class="demo-order-eyebrow">Démo Noor Invitations</p>
       <h2 class="script-title">Vous aimez ce modèle ?</h2>
       <p>Nous le personnalisons avec vos prénoms, votre date, vos lieux et votre programme.</p>
-      <a class="btn btn-gold demo-order-btn" data-order-link href="../../commander/?modele=wax-et-or">Je veux ce modèle</a>
+      <a class="btn btn-gold demo-order-btn" data-order-link href="../../commander/?modele=henne">Je veux ce modèle</a>
       <a class="demo-order-back" href="../../collections/">← Voir les autres modèles</a>
     </section>
   </main>
 
   <!-- Barre de démo : retour et commande, visibles après l'ouverture de l'enveloppe -->
   <a class="demo-back" href="../../collections/" aria-label="Retour aux modèles">← Modèles</a>
-  <a class="demo-sticky" data-order-link href="../../commander/?modele=wax-et-or">Je veux ce modèle</a>
+  <a class="demo-sticky" data-order-link href="../../commander/?modele=henne">Je veux ce modèle</a>
 
   <script src="../../collections.js?v=20261001"></script>
-  <script src="script.js?v=20260930b"></script>
+  <script src="script.js?v=20261001"></script>
 </body>
 </html>

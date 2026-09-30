@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Noor Invitations//Demo Henne//FR
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:henne-ines-20270618@webatir.com
+DTSTAMP:20261001T000000Z
+DTSTART:20270618T173000Z
+DTEND:20270618T223000Z
+SUMMARY:Le henné d'Ines
+LOCATION:Château de la Buzine, 56 traverse de la Buzine, 13011 Marseille
+DESCRIPTION:Accueil à 19h30. Merci de répondre avant le 1er juin 2027.
+END:VEVENT
+END:VCALENDAR
