@@ -342,7 +342,7 @@ p + p { margin-top: 12px; }
 /* ---------- Lieu ---------- */
 .place-card h3 { font-family: var(--caps); font-weight: 400; font-size: 1.2rem; letter-spacing: 0.06em; color: var(--ivory); margin-bottom: 6px; }
 /* Dessin du lieu, entre l'adresse et la carte */
-.place-drawing { margin: 22px -6px 4px; }
+.place-drawing { margin: 22px -6px 44px; }
 .place-drawing img { display: block; width: 100%; height: auto; filter: drop-shadow(0 0 6px rgba(224, 194, 131, 0.18)); }
 .map { margin: 22px -8px 20px; border-radius: 16px; overflow: hidden; border: 1px solid var(--card-line); aspect-ratio: 4 / 3; }
 .map iframe { width: 100%; height: 100%; border: 0; filter: saturate(0.75) contrast(0.95); }
