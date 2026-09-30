@@ -76,13 +76,8 @@ h3 { font-size: 1.35rem; font-weight: 600; }
 }
 .nav.is-scrolled { background: rgba(245, 238, 227, 0.94); box-shadow: 0 1px 0 var(--line); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; white-space: nowrap; }
-.brand-seal {
-  width: 34px; height: 34px; border-radius: 50%;
-  display: grid; place-items: center;
-  background: radial-gradient(circle at 35% 30%, #f0d99f, #c49a4e 60%, #8a6628);
-  color: #fff8e6; font-family: var(--serif); font-style: italic; font-weight: 600; font-size: 1.1rem;
-  box-shadow: inset 0 0 0 2px rgba(255, 244, 214, 0.55), 0 3px 8px rgba(90, 64, 20, 0.3);
-}
+.brand-logo { width: 42px; height: 42px; filter: drop-shadow(0 3px 6px rgba(60, 20, 20, 0.25)); }
+.footer-logo { width: 64px; height: 64px; margin: 0 auto 6px; }
 .brand-name { font-family: var(--caps); font-size: 1.05rem; letter-spacing: 0.06em; color: var(--ink); }
 .brand-name em {
   font-family: var(--script); font-style: normal; font-size: 1.4rem; letter-spacing: 0; margin-left: 2px; padding-right: 0.1em;
@@ -350,7 +345,6 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
 .rsvp-head { background: var(--bg-deep); font-family: var(--caps); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
 .rsvp-row .yes { color: #3d7a4f; font-weight: 600; }
 .rsvp-row .no { color: #a0584c; font-weight: 600; }
-.rsvp-preview-note { font-size: 0.85rem; font-style: italic; color: var(--ink-soft); }
 .order-help { font-size: 0.98rem; color: var(--ink-soft); font-style: italic; margin: 4px 0 10px; }
 .order-sections { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 8px; }
 .order-section { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; background: #fffdf9; cursor: pointer; font-size: 1.05rem; transition: border-color 0.2s ease, opacity 0.2s ease; }
