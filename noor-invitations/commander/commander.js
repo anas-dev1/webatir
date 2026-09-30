@@ -35,9 +35,9 @@
   const formulaFromUrl = NOOR_FORMULAS.find((f) => f.id === params.get('formule'));
   $('formulaChoices').innerHTML = NOOR_FORMULAS.map((f) => `
     <label class="order-choice">
-      <input type="radio" name="formule" value="${f.id}" ${f.id === (formulaFromUrl ? formulaFromUrl.id : 'signature') ? 'checked' : ''}>
+      <input type="radio" name="formule" value="${f.id}" ${f.id === (formulaFromUrl ? formulaFromUrl.id : 'essentielle') ? 'checked' : ''}>
       <span class="order-choice-body">
-        <span class="order-choice-name">${f.name}${f.id === 'signature' ? ' <em>Le plus choisi</em>' : ''}</span>
+        <span class="order-choice-name">${f.name}${f.id === 'essentielle' ? ' <em>Le plus choisi</em>' : ''}</span>
         <span class="order-choice-text">${f.summary}</span>
       </span>
       <b class="order-choice-price">${noorEuros(f.price)}</b>
