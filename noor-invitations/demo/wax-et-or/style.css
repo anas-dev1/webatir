@@ -541,3 +541,7 @@ html { overflow-x: hidden; }
 /* Photo du couple en fin de faire-part */
 .finale-photo { width: min(100%, 340px); margin: 0 auto 30px; padding: 8px; border: 1px solid rgba(232, 182, 74, 0.45); border-radius: 22px; background: rgba(255, 250, 242, 0.04); box-shadow: 0 24px 50px rgba(3, 16, 11, 0.45); }
 .finale-photo img { width: 100%; border-radius: 16px; }
+
+/* Image de l'enveloppe fermée derrière la vidéo : jamais de flash blanc si une image manque */
+.envelope-stage { background: url("img/enveloppe-fermee.jpg") center / 100% 100% no-repeat; }
+.envelope-video { background: transparent; }

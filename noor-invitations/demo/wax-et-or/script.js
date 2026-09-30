@@ -22,13 +22,25 @@ const revealInvitation = () => {
 };
 const LIGHT_DURATION = reduceMotionPref() ? 0 : 2300; // le cachet s'illumine avant l'ouverture
 function reduceMotionPref() { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+// La vidéo est téléchargée en entier dès l'arrivée sur la page : sur téléphone, cela évite
+// qu'elle s'interrompe (écran blanc) le temps de charger la suite pendant l'ouverture.
+const videoReady = fetch(envelopeVideo.currentSrc || envelopeVideo.src)
+  .then((res) => (res.ok ? res.blob() : Promise.reject()))
+  .then((blob) => new Promise((resolve) => {
+    envelopeVideo.addEventListener('canplaythrough', resolve, { once: true });
+    envelopeVideo.src = URL.createObjectURL(blob);
+    envelopeVideo.load();
+  }))
+  .catch(() => {}); // en cas d'échec, la vidéo se lit normalement depuis le serveur
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const openEnvelope = () => {
   if (opened) return;
   opened = true;
   envelope.classList.add('is-playing', 'is-lighting');
-  setTimeout(() => {
+  // Lumière sur le cachet, puis ouverture dès que la vidéo est prête (8 s maximum d'attente)
+  Promise.all([wait(LIGHT_DURATION), Promise.race([videoReady, wait(8000)])]).then(() => {
     envelopeVideo.play().catch(revealInvitation); // si la vidéo ne peut pas démarrer, on ouvre directement
-  }, LIGHT_DURATION);
+  });
 };
 // Le fondu commence un peu avant la dernière image, pour enchaîner en douceur
 envelopeVideo.addEventListener('timeupdate', () => {
