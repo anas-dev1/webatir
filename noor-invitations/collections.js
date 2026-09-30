@@ -41,7 +41,7 @@ const NOOR_COLLECTIONS = [
     tags: ['Africain', 'Coloré'],
     palette: ['Moutarde', 'Émeraude', 'Or'],
     price: 99,
-    thumbnail: 'img/modele-wax-et-or.webp',
+    thumbnail: 'img/collection-wax.webp',
     previewUrl: 'demo/wax-et-or/',
     available: true,
     featured: true,

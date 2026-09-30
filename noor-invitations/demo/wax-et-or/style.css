@@ -541,12 +541,3 @@ html { overflow-x: hidden; }
 /* Photo du couple en fin de faire-part */
 .finale-photo { width: min(100%, 340px); margin: 0 auto 30px; padding: 8px; border: 1px solid rgba(232, 182, 74, 0.45); border-radius: 22px; background: rgba(255, 250, 242, 0.04); box-shadow: 0 24px 50px rgba(3, 16, 11, 0.45); }
 .finale-photo img { width: 100%; border-radius: 16px; }
-
-/* Fleurs tropicales colorées sur les côtés du premier écran */
-.hero-flowers { position: absolute; z-index: 1; width: clamp(150px, 44vw, 300px); height: auto; pointer-events: none; filter: drop-shadow(0 10px 18px rgba(5, 22, 16, 0.45)); }
-.hero-flowers-tl { top: -10px; left: -28px; transform-origin: 0 0; animation: sway-flowers 7s ease-in-out infinite; }
-.hero-flowers-br { bottom: -10px; right: -28px; transform: rotate(180deg); transform-origin: 50% 50%; animation: sway-flowers-br 8s ease-in-out infinite; }
-@keyframes sway-flowers { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(1.6deg); } }
-@keyframes sway-flowers-br { 0%, 100% { transform: rotate(180deg); } 50% { transform: rotate(181.6deg); } }
-.invitation.is-visible .hero-flowers { animation-delay: 0s; }
-@media (min-width: 700px) { .hero-flowers { width: 320px; } }
