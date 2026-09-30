@@ -20,7 +20,7 @@ const revealInvitation = () => {
   body.classList.add('demo-open');
   setTimeout(() => envelope.remove(), 1800);
 };
-const LIGHT_DURATION = reduceMotionPref() ? 0 : 2300; // le cachet s'illumine avant l'ouverture
+const LIGHT_DURATION = reduceMotionPref() ? 0 : 3500; // le cachet s'illumine avant l'ouverture
 function reduceMotionPref() { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
 // La vidéo est téléchargée en entier dès l'arrivée sur la page : sur téléphone, cela évite
 // qu'elle s'interrompe (écran blanc) le temps de charger la suite pendant l'ouverture.
@@ -46,6 +46,7 @@ const openEnvelope = () => {
 envelopeVideo.addEventListener('timeupdate', () => {
   if (envelopeVideo.duration && envelopeVideo.currentTime >= envelopeVideo.duration - 1.2) revealInvitation();
 });
+envelopeVideo.addEventListener('playing', () => envelope.classList.add('is-opening'));
 envelopeVideo.addEventListener('ended', revealInvitation);
 envelopeVideo.addEventListener('error', () => { if (opened) revealInvitation(); });
 envelope.addEventListener('click', openEnvelope);
