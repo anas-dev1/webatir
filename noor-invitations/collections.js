@@ -43,7 +43,7 @@ const NOOR_COLLECTIONS = [
     price: 99,
     thumbnail: 'img/collection-wax.webp',
     previewUrl: 'demo/wax-et-or/',
-    available: false,
+    available: true,
     featured: true,
   },
   {
