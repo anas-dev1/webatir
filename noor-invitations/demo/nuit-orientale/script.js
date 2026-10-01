@@ -42,12 +42,11 @@ const openEnvelope = () => {
     envelopeVideo.play().catch(revealInvitation); // si la vidéo ne peut pas démarrer, on ouvre directement
   });
 };
-// Les portes s'entrouvrent : la lumière de la cour envahit l'écran, puis le faire-part apparaît derrière
+// Les portes s'ouvrent et la lumière de la cour remplit l'embrasure (vidéo) ;
+// le faire-part apparaît en fondu quand la lumière a tout envahi
 envelopeVideo.addEventListener('playing', () => envelope.classList.add('is-opening'));
 envelopeVideo.addEventListener('timeupdate', () => {
-  const t = envelopeVideo.currentTime;
-  if (t >= 2.0) envelope.classList.add('is-glowing');
-  if (t >= 3.2) revealInvitation();
+  if (envelopeVideo.duration && envelopeVideo.currentTime >= envelopeVideo.duration - 1.6) revealInvitation();
 });
 envelopeVideo.addEventListener('ended', revealInvitation);
 envelopeVideo.addEventListener('error', () => { if (opened) revealInvitation(); });

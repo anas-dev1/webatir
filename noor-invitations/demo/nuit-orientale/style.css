@@ -99,16 +99,6 @@ img { display: block; max-width: 100%; height: auto; }
 /* Dès que les portes bougent dans la vidéo, plus de lumière sur les dorures */
 .envelope-screen.is-opening .pattern-light { display: none; }
 
-/* 2. La lumière de la cour : elle jaillit entre les portes et recouvre tout l'écran */
-.door-glow {
-  position: absolute; inset: -10%;
-  pointer-events: none;
-  background: radial-gradient(ellipse 34% 52% at 50% 54%, #fff8e6 0%, #ffe6b0 30%, rgba(255, 214, 150, 0.85) 55%, rgba(255, 205, 140, 0.5) 75%, rgba(255, 200, 130, 0) 100%);
-  opacity: 0;
-  transform: scaleX(0.25);
-  transition: opacity 1s ease, transform 1.3s cubic-bezier(.3, .6, .2, 1);
-}
-.envelope-screen.is-glowing .door-glow { opacity: 1; transform: scale(1.6); }
 
 @keyframes pattern-reach { from { --reach: 0%; } to { --reach: 115%; } }
 @keyframes pattern-trail {
