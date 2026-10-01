@@ -30,7 +30,7 @@ const NOOR_COLLECTIONS = [
     price: 99,
     thumbnail: 'img/collection-henne.webp',
     previewUrl: 'demo/henne/',
-    available: false,
+    available: true,
     featured: true,
   },
   {
