@@ -20,19 +20,34 @@ const revealInvitation = () => {
   body.classList.add('demo-open');
   setTimeout(() => envelope.remove(), 1800);
 };
-const LIGHT_DURATION = reduceMotionPref() ? 0 : 2300; // le cachet s'illumine avant l'ouverture
+const LIGHT_DURATION = reduceMotionPref() ? 0 : 3300; // la lumière court sur les portes avant l'ouverture
 function reduceMotionPref() { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+// La vidéo est téléchargée en entier dès l'arrivée sur la page : sur téléphone, cela évite
+// qu'elle s'interrompe (écran blanc) le temps de charger la suite pendant l'ouverture.
+const videoReady = fetch(envelopeVideo.currentSrc || envelopeVideo.src)
+  .then((res) => (res.ok ? res.blob() : Promise.reject()))
+  .then((blob) => new Promise((resolve) => {
+    envelopeVideo.addEventListener('canplaythrough', resolve, { once: true });
+    envelopeVideo.src = URL.createObjectURL(blob);
+    envelopeVideo.load();
+  }))
+  .catch(() => {}); // en cas d'échec, la vidéo se lit normalement depuis le serveur
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const openEnvelope = () => {
   if (opened) return;
   opened = true;
   envelope.classList.add('is-playing', 'is-lighting');
-  setTimeout(() => {
+  // Lumière sur les portes, puis ouverture dès que la vidéo est prête (8 s maximum d'attente)
+  Promise.all([wait(LIGHT_DURATION), Promise.race([videoReady, wait(8000)])]).then(() => {
     envelopeVideo.play().catch(revealInvitation); // si la vidéo ne peut pas démarrer, on ouvre directement
-  }, LIGHT_DURATION);
+  });
 };
-// Le fondu commence un peu avant la dernière image, pour enchaîner en douceur
+// Les portes s'entrouvrent : la lumière de la cour envahit l'écran, puis le faire-part apparaît derrière
+envelopeVideo.addEventListener('playing', () => envelope.classList.add('is-opening'));
 envelopeVideo.addEventListener('timeupdate', () => {
-  if (envelopeVideo.duration && envelopeVideo.currentTime >= envelopeVideo.duration - 1.2) revealInvitation();
+  const t = envelopeVideo.currentTime;
+  if (t >= 2.0) envelope.classList.add('is-glowing');
+  if (t >= 3.2) revealInvitation();
 });
 envelopeVideo.addEventListener('ended', revealInvitation);
 envelopeVideo.addEventListener('error', () => { if (opened) revealInvitation(); });

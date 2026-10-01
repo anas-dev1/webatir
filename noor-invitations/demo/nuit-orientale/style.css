@@ -56,8 +56,8 @@ img { display: block; max-width: 100%; height: auto; }
   max-height: 100%;
   animation: fade-in 1.2s ease both;
   /* Repères mesurés sur la vidéo */
-  --seal-x: 49.6%;
-  --seal-y: 46%;
+  --seal-x: 50%;
+  --seal-y: 52.4%;
 }
 .envelope-video { display: block; width: 100%; height: 100%; object-fit: contain; }
 /* Écran plus large que la vidéo (ordinateur, tablette) : bords fondus dans le fond */
@@ -69,48 +69,9 @@ img { display: block; max-width: 100%; height: auto; }
   }
 }
 
-/* 1. Halo et étoile sur le cachet */
-.seal-light {
-  position: absolute; left: var(--seal-x); top: var(--seal-y);
-  width: 24%; aspect-ratio: 1;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-.seal-glow {
-  position: absolute; inset: -25%;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 246, 214, 0.95) 0%, rgba(255, 222, 150, 0.65) 18%, rgba(243, 196, 120, 0.25) 42%, transparent 68%);
-  mix-blend-mode: screen;
-  opacity: 0; transform: scale(0.2);
-}
-.seal-star {
-  position: absolute; inset: 0;
-  display: grid; place-items: center;
-  font-size: clamp(1.8rem, 9vw, 3.2rem);
-  color: #fffaf0;
-  text-shadow: 0 0 12px #fff3d0, 0 0 26px #f3dca6, 0 0 44px #e0c283;
-  opacity: 0; transform: scale(0) rotate(-45deg);
-}
-.seal-light i {
-  position: absolute; left: 50%; top: 50%;
-  width: 6px; height: 6px; margin: -3px;
-  border-radius: 50%;
-  background: #fff6dc;
-  box-shadow: 0 0 8px 2px rgba(243, 220, 166, 0.9);
-  opacity: 0;
-}
-.seal-light i:nth-of-type(1) { --dx: 0%; --dy: -110%; }
-.seal-light i:nth-of-type(2) { --dx: 80%; --dy: -80%; }
-.seal-light i:nth-of-type(3) { --dx: 115%; --dy: 0%; }
-.seal-light i:nth-of-type(4) { --dx: 80%; --dy: 80%; }
-.seal-light i:nth-of-type(5) { --dx: 0%; --dy: 110%; }
-.seal-light i:nth-of-type(6) { --dx: -80%; --dy: 80%; }
-.seal-light i:nth-of-type(7) { --dx: -115%; --dy: 0%; }
-.seal-light i:nth-of-type(8) { --dx: -80%; --dy: -80%; }
-
-/* 2. La lumière part du « & » et court le long des motifs dorés de l'enveloppe.
-   motifs-lumiere.webp ne contient que les dorures (fleurs, tiges, étoiles, bordures, lettres du cachet),
-   révélées par un masque circulaire qui s'agrandit depuis le « & ». */
+/* 1. Au toucher, la lumière part du centre des portes et court sur les sculptures dorées.
+   motifs-lumiere.webp ne contient que les dorures des portes (étoiles, clous, heurtoirs),
+   révélées par un masque circulaire qui s'agrandit depuis le centre. */
 @property --reach { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
 .pattern-light {
   position: absolute; inset: 0;
@@ -133,31 +94,22 @@ img { display: block; max-width: 100%; height: auto; }
 }
 
 /* Déroulé au toucher */
-.is-lighting .seal-glow { animation: glow-on 1.6s ease-out forwards; }
-.is-lighting .seal-star { animation: star-on 1.5s cubic-bezier(.2, .8, .2, 1) forwards; }
-.is-lighting .seal-light i { animation: spark 1.2s ease-out 0.35s forwards; }
-.is-lighting .seal-light i:nth-of-type(odd) { animation-delay: 0.45s; }
-.is-lighting .pattern-light-trail { animation: pattern-reach 2.2s cubic-bezier(.4, 0, .5, 1) 0.45s forwards, pattern-trail 3.2s ease 0.45s forwards; }
-.is-lighting .pattern-light-front { animation: pattern-reach 2.2s cubic-bezier(.4, 0, .5, 1) 0.45s forwards, pattern-front 2.2s ease 0.45s forwards; }
+.is-lighting .pattern-light-trail { animation: pattern-reach 3s cubic-bezier(.4, 0, .5, 1) 0.3s forwards, pattern-trail 3s ease 0.3s forwards; }
+.is-lighting .pattern-light-front { animation: pattern-reach 3s cubic-bezier(.4, 0, .5, 1) 0.3s forwards, pattern-front 3s ease 0.3s forwards; }
+/* Dès que les portes bougent dans la vidéo, plus de lumière sur les dorures */
+.envelope-screen.is-opening .pattern-light { display: none; }
 
-@keyframes glow-on {
-  0% { opacity: 0; transform: scale(0.2); }
-  30% { opacity: 1; transform: scale(1); }
-  45% { opacity: 0.8; transform: scale(0.94); }
-  60% { opacity: 1; transform: scale(1.08); }
-  100% { opacity: 0; transform: scale(1.5); }
+/* 2. La lumière de la cour : elle jaillit entre les portes et recouvre tout l'écran */
+.door-glow {
+  position: absolute; inset: -10%;
+  pointer-events: none;
+  background: radial-gradient(ellipse 34% 52% at 50% 54%, #fff8e6 0%, #ffe6b0 30%, rgba(255, 214, 150, 0.85) 55%, rgba(255, 205, 140, 0.5) 75%, rgba(255, 200, 130, 0) 100%);
+  opacity: 0;
+  transform: scaleX(0.25);
+  transition: opacity 1s ease, transform 1.3s cubic-bezier(.3, .6, .2, 1);
 }
-@keyframes star-on {
-  0% { opacity: 0; transform: scale(0) rotate(-45deg); }
-  35% { opacity: 1; transform: scale(1.15) rotate(0deg); }
-  60% { opacity: 1; transform: scale(0.95) rotate(8deg); }
-  100% { opacity: 0; transform: scale(0.4) rotate(45deg); }
-}
-@keyframes spark {
-  0% { opacity: 0; left: 50%; top: 50%; transform: scale(1.2); }
-  20% { opacity: 1; }
-  100% { opacity: 0; left: calc(50% + var(--dx)); top: calc(50% + var(--dy)); transform: scale(0.3); }
-}
+.envelope-screen.is-glowing .door-glow { opacity: 1; transform: scale(1.6); }
+
 @keyframes pattern-reach { from { --reach: 0%; } to { --reach: 115%; } }
 @keyframes pattern-trail {
   0% { opacity: 0; }
