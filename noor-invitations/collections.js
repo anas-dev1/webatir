@@ -11,7 +11,7 @@ const NOOR_COLLECTIONS = [
     id: 'nuit-orientale',
     slug: 'nuit-orientale',
     name: 'Nuit orientale',
-    description: "Palais andalou, lanternes et ciel étoilé. Le cachet s'illumine, puis l'enveloppe s'ouvre.",
+    description: "Palais andalou, lanternes et ciel étoilé. La lumière court sur les portes du palais, puis elles s'ouvrent.",
     tags: ['Oriental', 'Élégant'],
     palette: ['Indigo', 'Or', 'Rose poudré'],
     price: 99,
