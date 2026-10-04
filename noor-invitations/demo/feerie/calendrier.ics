@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Noor Invitations//Demo Feerie//FR
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:mariage-lucie-maxime-20270626@webatir.com
+DTSTAMP:20261001T000000Z
+DTSTART:20270626T123000Z
+DTEND:20270626T220000Z
+SUMMARY:Mariage de Lucie et Maxime
+LOCATION:Château de Chantilly, 60500 Chantilly
+DESCRIPTION:Accueil des invités à 14h30. Merci de répondre avant le 29 mai 2027.
+END:VEVENT
+END:VCALENDAR

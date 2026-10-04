@@ -59,6 +59,19 @@ const NOOR_COLLECTIONS = [
     available: true,
     featured: true,
   },
+  {
+    id: 'feerie',
+    slug: 'feerie',
+    name: 'Féerie',
+    description: "Pivoines, rose poudré et deux petites fées qui ouvrent l'enveloppe et apportent les alliances.",
+    tags: ['Romantique', 'Féerique'],
+    palette: ['Rose poudré', 'Pivoine', 'Or'],
+    price: 99,
+    thumbnail: 'img/modele-feerie.webp',
+    previewUrl: 'demo/feerie/',
+    available: true,
+    featured: true,
+  },
 ];
 
 /* Page de commande d'un modèle. base = chemin vers la racine du site depuis la page courante. */
