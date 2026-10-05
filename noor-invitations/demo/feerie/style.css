@@ -464,17 +464,18 @@ html { overflow-x: hidden; }
 .name { color: #fff8ec; text-shadow: 0 0 26px rgba(233, 215, 201, 0.45), 0 4px 18px rgba(30, 14, 22, 0.7); }
 .timeline-rose { width: 48px; }
 
-/* Enveloppe : fond sable assorti à la vidéo.
-   Sur téléphone (écran plus haut que la vidéo), la vidéo couvre tout l'écran, sans bandes ;
-   la scène garde le ratio de la vidéo pour que la lumière reste calée sur le cachet. */
+/* Enveloppe : la vidéo (format 3:4, plus large que les autres) reste entière et centrée ;
+   le haut et le bas de l'écran sont remplis par la même scène, floutée. */
 .envelope-screen { background: #ece6e4; overflow: hidden; }
-@media (max-aspect-ratio: 720/1276) {
-  .envelope-stage {
-    width: max(100vw, calc(100vh * 720 / 1276)); height: max(100vh, calc(100vw * 1276 / 720));
-    width: max(100vw, calc(100dvh * 720 / 1276)); height: max(100dvh, calc(100vw * 1276 / 720));
-    max-height: none; aspect-ratio: auto;
-    position: absolute; left: 50%; top: 50%; translate: -50% -50%;
-  }
+.envelope-screen::before {
+  content: ""; position: absolute; inset: -40px;
+  background: url("img/enveloppe-fermee.jpg") center / cover no-repeat;
+  filter: blur(22px) saturate(1.05);
+  opacity: 0.9;
+}
+.envelope-stage { z-index: 1; box-shadow: 0 0 40px rgba(61, 31, 46, 0.18); }
+@media (max-aspect-ratio: 834/1112) {
+  .envelope-stage { width: 100%; height: auto; max-height: none; }
 }
 .envelope-hint {
   position: absolute; inset: auto 0 max(5%, 24px) 0; margin-inline: auto; width: fit-content; z-index: 5;
