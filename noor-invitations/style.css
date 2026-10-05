@@ -87,6 +87,12 @@ h3 { font-size: 1.35rem; font-weight: 600; }
 .nav-links a { font-family: var(--caps); font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none; color: var(--ink-soft); }
 .nav-links a:hover { color: var(--gold-dark); }
 @media (min-width: 820px) { .nav { padding-inline: 40px; } .nav-links { display: flex; } }
+/* Téléphone : les liens passent sur une fine ligne sous le logo (accueil et collections) */
+@media (max-width: 819px) {
+  .nav:has(.nav-links-mobile) { flex-wrap: wrap; row-gap: 6px; padding-bottom: 10px; }
+  .nav-links-mobile { display: flex; order: 3; width: 100%; justify-content: center; gap: 26px; }
+  .nav-links-mobile a { font-size: 0.72rem; letter-spacing: 0.14em; padding: 4px 0; }
+}
 @media (max-width: 520px) {
   .brand-name { font-size: 0.95rem; }
   .brand-name em { font-size: 1.25rem; }
@@ -180,6 +186,17 @@ h3 { font-size: 1.35rem; font-weight: 600; }
   }
   .section-models .models:not([data-count="1"])::-webkit-scrollbar { display: none; }
   .section-models .models:not([data-count="1"]) .model { flex: 0 0 82%; scroll-snap-align: start; }
+}
+/* Dernière carte du carrousel (téléphone seulement) : vers toutes les collections */
+.model-all { display: none; }
+@media (max-width: 699px) {
+  .section-models .models .model-all {
+    display: flex; flex: 0 0 56%; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    scroll-snap-align: start; text-decoration: none; text-align: center; padding: 24px;
+    font-family: var(--caps); font-size: 0.82rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-dark);
+    background: var(--card); border: 1px dashed var(--gold);
+  }
+  .model-all i { font-style: normal; font-size: 1.6rem; letter-spacing: 0; }
 }
 /* Un seul modèle mis en avant : grande carte verticale, centrée */
 .models[data-count="1"] { max-width: 460px; grid-template-columns: 1fr; }
