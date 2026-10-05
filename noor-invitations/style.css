@@ -442,3 +442,18 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
 /* Le « à retenir » de chaque formule doit rester bien lisible */
 .tier .tier-example { color: var(--ink-soft); opacity: 1; }
 .tier-featured .tier-example { color: var(--espresso-soft); }
+/* Bouton « Comparer les formules » bien visible : pastille dorée */
+.tiers-compare summary {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: fit-content; margin: 0 auto;
+  padding: 14px 26px;
+  border: 1.5px solid var(--gold); border-radius: 99px;
+  background: var(--card);
+  color: var(--gold-dark); font-size: 0.86rem;
+  box-shadow: 0 8px 22px rgba(180, 140, 69, 0.18);
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.tiers-compare summary:hover { background: #fffaf0; box-shadow: 0 10px 26px rgba(180, 140, 69, 0.28); transform: translateY(-1px); }
+.tiers-compare summary::after { content: "\25BE"; font-size: 1rem; transition: transform 0.25s ease; }
+.tiers-compare[open] summary::after { content: "\25BE"; transform: rotate(180deg); }
+.tiers-compare[open] summary { margin-bottom: 18px; }
