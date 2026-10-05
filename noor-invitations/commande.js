@@ -20,9 +20,9 @@ const NOOR_PAYMENT_LINKS = {
 const NOOR_ORDER_EMAIL = 'contact@webatir.com';
 
 const NOOR_FORMULAS = [
-  { id: 'essentielle', name: 'Essentielle', price: 99, summary: "« Je veux celui-là » : le modèle tel quel, avec vos prénoms et vos informations" },
-  { id: 'signature', name: 'Signature', price: 190, summary: "« À notre image » : le modèle à vos couleurs, avec un tableau de suivi de vos invités" },
-  { id: 'prestige', name: 'Prestige', price: 390, summary: "« Quelque chose d'unique » : enveloppe, ouverture animée et décor créés pour vous, à partir d'un modèle ou de zéro" },
+  { id: 'essentielle', name: 'Essentielle', price: 99, summary: "« Je veux celui-là » : le modèle tel quel, avec vos prénoms et vos informations. Première version en 5 jours" },
+  { id: 'signature', name: 'Signature', price: 190, summary: "« À notre image » : le modèle à vos couleurs, avec un tableau de suivi de vos invités. Première version en 5 jours" },
+  { id: 'prestige', name: 'Prestige', price: 390, summary: "« Quelque chose d'unique » : enveloppe, ouverture animée et décor créés pour vous, à partir d'un modèle ou de zéro. Première version en 10 à 14 jours" },
 ];
 
 const NOOR_OPTIONS = [
@@ -31,7 +31,7 @@ const NOOR_OPTIONS = [
   { id: 'langue', name: 'Deuxième langue', price: 30,
     desc: 'Tout le faire-part aussi en arabe, anglais, lingala…' },
   { id: 'express', name: 'Livraison express en 48 h', price: 40,
-    desc: 'Votre première version en 2 jours au lieu de 5.' },
+    desc: 'Votre première version en 2 jours au lieu de 5. Essentielle et Signature uniquement.' },
 ];
 
 

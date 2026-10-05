@@ -77,6 +77,14 @@
   }
 
   function update() {
+    // Express 48 h impossible en Prestige (création sur mesure) : option décochée et désactivée
+    const express = form.querySelector('input[name="options"][value="express"]');
+    if (express) {
+      const off = currentFormula().id === 'prestige';
+      express.disabled = off;
+      if (off) express.checked = false;
+      express.closest('.order-option').classList.toggle('is-disabled', off);
+    }
     const { f, opts, total } = totals();
     $('orderLines').innerHTML = [
       isCustom() ? '<li><span>Création sur mesure</span><b>incluse</b></li>' : `<li><span>Modèle ${currentModel().name}</span><b>inclus</b></li>`,
