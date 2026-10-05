@@ -241,7 +241,7 @@ p + p { margin-top: 12px; }
   content: ""; position: absolute; inset: 0;
   background:
     radial-gradient(ellipse 75% 50% at 50% 50%, rgba(61, 31, 46, 0.6), transparent 82%),
-    linear-gradient(180deg, rgba(61, 31, 46, 0.12) 0%, rgba(61, 31, 46, 0) 35%, rgba(61, 31, 46, 0.25) 75%, var(--night) 100%);
+    linear-gradient(180deg, rgba(61, 31, 46, 0.12) 0%, rgba(61, 31, 46, 0) 35%, rgba(61, 31, 46, 0.18) 72%, #fbf1f2 100%);
 }
 @keyframes slow-zoom { to { transform: scale(1.08); } }
 .sparkles { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
@@ -501,3 +501,61 @@ html { overflow-x: hidden; }
 /* Féerie : texte du premier écran lisible sur le lin rosé */
 .hero .eyebrow { color: #f3e3b8; text-shadow: 0 1px 10px rgba(30, 14, 22, 0.85); }
 .hero-place { color: #f1e6da; text-shadow: 0 1px 10px rgba(30, 14, 22, 0.85); }
+
+/* ---------- Féerie : partie claire sous le paysage ----------
+   Le premier écran garde ses couleurs (texte clair sur le paysage) ;
+   tout ce qui suit passe sur un rose poudré très clair, texte prune. */
+body {
+  background: #fbf1f2;
+  background-image:
+    radial-gradient(ellipse at 50% 20%, #fff9f8, transparent 65%),
+    linear-gradient(180deg, #fbf1f2 0%, #f8e6eb 50%, #fbf1f2 100%);
+}
+.invitation > :not(.hero) {
+  --night: #fbf1f2;
+  --night-2: #fbf1f2;
+  --indigo: #f3dde4;
+  --ivory: #4a2638;
+  --ink: #5c3647;
+  --ink-soft: #8a6475;
+  --gold: #b07d4a;
+  --gold-deep: #8e5f33;
+  --rose: #c0607f;
+  --rose-deep: #e3a9bb;
+  --card: rgba(255, 255, 255, 0.75);
+  --card-line: rgba(192, 96, 127, 0.22);
+  color: var(--ink);
+}
+.invitation > :not(.hero) .script-title {
+  background: linear-gradient(100deg, #c99a63 0%, #a8743f 40%, #d4a06b 55%, #8e5f33 100%);
+  -webkit-background-clip: text; background-clip: text;
+}
+.invitation > :not(.hero) .card { border-color: rgba(192, 96, 127, 0.22); box-shadow: 0 18px 40px rgba(160, 90, 115, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.6); }
+.invitation > :not(.hero) .btn-gold { color: #fff; background: linear-gradient(135deg, #d9a874, #b07d4a 50%, #8e5f33); box-shadow: 0 10px 24px rgba(142, 95, 51, 0.25); }
+.invitation > :not(.hero) .btn-ghost:hover { background: rgba(176, 125, 74, 0.08); }
+.invitation > :not(.hero) .rsvp input[type="text"],
+.invitation > :not(.hero) .rsvp select,
+.invitation > :not(.hero) .rsvp textarea { background: rgba(255, 255, 255, 0.9); }
+.invitation > :not(.hero) .timeline-track { background: linear-gradient(transparent, rgba(176, 125, 74, 0.3) 6%, rgba(176, 125, 74, 0.3) 94%, transparent); }
+.invitation > :not(.hero) .timeline li::before { color: rgba(176, 125, 74, 0.4); }
+.invitation > :not(.hero) .timeline li.is-reached::before { color: var(--gold); text-shadow: 0 0 8px rgba(217, 168, 116, 0.6); }
+.invitation > :not(.hero) .timeline li:not(.is-reached) time { color: rgba(176, 125, 74, 0.6); }
+.invitation > :not(.hero) .timeline-rose { filter: drop-shadow(0 4px 8px rgba(120, 60, 80, 0.3)); }
+.invitation > :not(.hero) .finale-photo { border-color: rgba(192, 96, 127, 0.25); background: rgba(255, 255, 255, 0.6); box-shadow: 0 20px 44px rgba(160, 90, 115, 0.18); }
+.demo-order { background: radial-gradient(ellipse at 50% 0%, rgba(217, 168, 116, 0.14), transparent 70%); }
+
+/* ---------- Féerie : sections en alternance ----------
+   Rose clair (fond de page) / rose poudré, en bandes pleine largeur
+   fondues en haut et en bas pour des transitions douces. */
+.invitation > .countdown-section,
+.invitation > .contacts-section,
+.invitation > .finale { position: relative; isolation: isolate; }
+.invitation > .countdown-section::before,
+.invitation > .contacts-section::before,
+.invitation > .finale::before {
+  content: ""; position: absolute; top: 0; bottom: 0; left: 50%; z-index: -1;
+  width: 100vw; transform: translateX(-50%);
+  pointer-events: none;
+  --band: #f2d6de;
+  background: linear-gradient(180deg, transparent 0, var(--band) 60px, var(--band) calc(100% - 60px), transparent 100%);
+}
