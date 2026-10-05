@@ -54,6 +54,14 @@
       <input type="checkbox" name="sections" value="${sec.id}" checked>
       <span>${sec.name}</span>
     </label>`).join('');
+  // --- Prestige : création sur mesure (sans modèle) ou à partir d'un modèle ---
+  // Par défaut sur mesure, sauf si le client arrive depuis la démo d'un modèle.
+  const startDefault = params.get('modele') ? 'modele' : 'sur-mesure';
+  form.querySelector(`input[name="depart"][value="${startDefault}"]`).checked = true;
+  const isPrestige = () => currentFormula().id === 'prestige';
+  const isCustom = () => isPrestige() && form.querySelector('input[name="depart"]:checked').value === 'sur-mesure';
+  const modelLabel = () => (isCustom() ? 'Création sur mesure (sans modèle)' : currentModel().name);
+
   const removedSections = () => [...form.querySelectorAll('input[name="sections"]:not(:checked)')]
     .map((c) => NOOR_SECTIONS.find((sec) => sec.id === c.value).name);
 
@@ -71,13 +79,23 @@
   function update() {
     const { f, opts, total } = totals();
     $('orderLines').innerHTML = [
-      `<li><span>Modèle ${currentModel().name}</span><b>inclus</b></li>`,
+      isCustom() ? '<li><span>Création sur mesure</span><b>incluse</b></li>' : `<li><span>Modèle ${currentModel().name}</span><b>inclus</b></li>`,
       `<li><span>Formule ${f.name}</span><b>${noorEuros(f.price)}</b></li>`,
       ...opts.map((o) => `<li><span>${o.name}</span><b>+ ${noorEuros(o.price)}</b></li>`),
     ].join('');
     $('orderTotal').textContent = noorEuros(total);
-    $('orderPrestigeNote').hidden = f.id !== 'prestige';
-    $('rsvpPreview').hidden = f.id !== 'signature';
+    // Étape 1 : « Votre point de départ » en Prestige, « Votre modèle » sinon
+    $('orderStart').hidden = !isPrestige();
+    $('step1Title').textContent = isPrestige() ? 'Votre point de départ' : 'Votre modèle';
+    $('orderModel').hidden = isCustom();
+    $('orderPrestigeNote').hidden = !isPrestige() || isCustom();
+    $('messageLabel').innerHTML = isPrestige()
+      ? 'Décrivez-nous votre univers <em>(couleurs, thème, déco, liens Pinterest…)</em>'
+      : 'Un mot sur votre mariage <em>(facultatif)</em>';
+    $('message').placeholder = isPrestige()
+      ? 'Ex. : jardin anglais au crépuscule, vert sauge et or, pivoines blanches… Vos liens Pinterest sont les bienvenus.'
+      : 'Couleurs de votre mariage, style, lieux, langues…';
+    $('rsvpPreview').hidden = !['signature', 'prestige'].includes(f.id);
     $('payButton').textContent = `Payer ${noorEuros(total)}`;
   }
   form.addEventListener('change', update);
@@ -95,7 +113,7 @@
     const { f, opts, total } = totals();
     return [
       `Commande ${id}`,
-      `Modèle : ${currentModel().name}`,
+      `Modèle : ${modelLabel()}`,
       `Formule : ${f.name} (${noorEuros(f.price)})`,
       `Options : ${opts.length ? opts.map((o) => `${o.name} (+ ${noorEuros(o.price)})`).join(', ') : 'aucune'}`,
       `Total payé à la commande : ${noorEuros(total)}`,
@@ -105,7 +123,7 @@
       `Date du mariage : ${$('weddingDate').value}`,
       `E-mail : ${$('email').value.trim()}`,
       `WhatsApp : ${$('phone').value.trim()}`,
-      `Message : ${$('message').value.trim() || '—'}`,
+      `${isPrestige() ? 'Univers / inspirations' : 'Message'} : ${$('message').value.trim() || '—'}`,
     ].join('\n');
   }
 
@@ -129,12 +147,12 @@
     const id = orderId();
     const text = recap(id);
     const { f, opts, total } = totals();
-    try { sessionStorage.setItem('noorOrder', JSON.stringify({ id, model: currentModel().name, formula: f.name, total })); } catch (err) { /* stockage indisponible */ }
+    try { sessionStorage.setItem('noorOrder', JSON.stringify({ id, model: modelLabel(), formula: f.name, total })); } catch (err) { /* stockage indisponible */ }
 
     // Récapitulatif par e-mail (on n'empêche pas le paiement si l'envoi échoue)
     try {
       const data = new FormData();
-      data.append('_subject', `Nouvelle commande ${id} — ${currentModel().name}, ${f.name}`);
+      data.append('_subject', `Nouvelle commande ${id} — ${modelLabel()}, ${f.name}`);
       data.append('_template', 'box');
       data.append('commande', text);
       data.append('email', $('email').value.trim());
