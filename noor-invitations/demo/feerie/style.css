@@ -545,12 +545,15 @@ body {
 .demo-order { background: radial-gradient(ellipse at 50% 0%, rgba(217, 168, 116, 0.14), transparent 70%); }
 
 /* ---------- Féerie : sections en alternance ----------
-   Rose clair (fond de page) / rose poudré, en bandes pleine largeur
-   fondues en haut et en bas pour des transitions douces. */
-.invitation > .countdown-section,
+   Jamais deux sections d'affilée de la même couleur, en commençant par le rose poudré :
+   poudré → clair → poudré → clair → poudré → clair → poudré → clair.
+   Bandes pleine largeur, fondues en haut et en bas pour des transitions douces. */
+.invitation > .welcome,
+.invitation > .program-section,
 .invitation > .contacts-section,
 .invitation > .finale { position: relative; isolation: isolate; }
-.invitation > .countdown-section::before,
+.invitation > .welcome::before,
+.invitation > .program-section::before,
 .invitation > .contacts-section::before,
 .invitation > .finale::before {
   content: ""; position: absolute; top: 0; bottom: 0; left: 50%; z-index: -1;
