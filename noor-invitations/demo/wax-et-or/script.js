@@ -22,12 +22,16 @@ const revealInvitation = () => {
 };
 const LIGHT_DURATION = reduceMotionPref() ? 0 : 2300; // le cachet s'illumine avant l'ouverture
 function reduceMotionPref() { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
-// La vidéo est téléchargée en entier dès l'arrivée sur la page : sur téléphone, cela évite
-// qu'elle s'interrompe (écran blanc) le temps de charger la suite pendant l'ouverture.
+// La vidéo est téléchargée en entier, une seule fois, dès l'arrivée sur la page (la balise vidéo
+// est en preload="none" pour ne pas la télécharger une deuxième fois en parallèle) : sur téléphone,
+// cela évite qu'elle s'interrompe ou saccade pendant l'ouverture.
 const videoReady = fetch(envelopeVideo.currentSrc || envelopeVideo.src)
   .then((res) => (res.ok ? res.blob() : Promise.reject()))
   .then((blob) => new Promise((resolve) => {
+    // Si la vidéo a déjà démarré depuis le serveur (connexion très lente), on ne la remplace pas en cours de route
+    if (!envelopeVideo.paused || envelopeVideo.currentTime > 0) { resolve(); return; }
     envelopeVideo.addEventListener('canplaythrough', resolve, { once: true });
+    envelopeVideo.preload = 'auto';
     envelopeVideo.src = URL.createObjectURL(blob);
     envelopeVideo.load();
   }))
