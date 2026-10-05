@@ -33,6 +33,18 @@ const videoReady = fetch(envelopeVideo.currentSrc || envelopeVideo.src)
   }))
   .catch(() => {}); // en cas d'échec, la vidéo se lit normalement depuis le serveur
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+// Paysage du premier écran : chargé après la vidéo d'ouverture, puis joué en boucle (sauf mouvement réduit)
+const heroVideo = document.getElementById('heroVideo');
+if (heroVideo && !reduceMotionPref()) {
+  Promise.race([videoReady, wait(4000)]).then(() => {
+    heroVideo.addEventListener('canplay', () => {
+      heroVideo.classList.add('is-ready');
+      heroVideo.play().catch(() => heroVideo.classList.remove('is-ready'));
+    }, { once: true });
+    heroVideo.src = heroVideo.dataset.src;
+    heroVideo.load();
+  });
+}
 const openEnvelope = () => {
   if (opened) return;
   opened = true;

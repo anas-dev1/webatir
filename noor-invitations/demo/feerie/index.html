@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Marcellus&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="img/enveloppe-fermee.jpg">
-  <link rel="stylesheet" href="style.css?v=20261004">
+  <link rel="stylesheet" href="style.css?v=20261005">
 </head>
 <body class="is-locked" data-model="feerie">
 
@@ -34,7 +34,10 @@
 
     <!-- ===== HERO ===== -->
     <section class="hero">
-      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-bg" aria-hidden="true">
+        <!-- Paysage féerique : image fixe tout de suite, puis la vidéo en boucle prend le relais -->
+        <video class="hero-video" id="heroVideo" muted playsinline loop preload="none" data-src="img/paysage.mp4"></video>
+      </div>
       <canvas class="sparkles" id="sparkles" aria-hidden="true"></canvas>
       <div class="hero-content">
         <p class="eyebrow">Nous nous marions</p>
@@ -176,6 +179,6 @@
   <a class="demo-sticky" data-order-link href="../../commander/?modele=feerie">Je veux ce modèle</a>
 
   <script src="../../collections.js?v=20261003"></script>
-  <script src="script.js?v=20261002"></script>
+  <script src="script.js?v=20261005"></script>
 </body>
 </html>
