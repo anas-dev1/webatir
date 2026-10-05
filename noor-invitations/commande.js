@@ -20,8 +20,8 @@ const NOOR_PAYMENT_LINKS = {
 const NOOR_ORDER_EMAIL = 'contact@webatir.com';
 
 const NOOR_FORMULAS = [
-  { id: 'essentielle', name: 'Essentielle', price: 99, summary: "« Je veux celui-là » : le modèle tel quel, avec vos informations" },
-  { id: 'signature', name: 'Signature', price: 190, summary: "« À notre image » : le modèle à vos couleurs et à vos initiales, avec un tableau de suivi de vos invités" },
+  { id: 'essentielle', name: 'Essentielle', price: 99, summary: "« Je veux celui-là » : le modèle tel quel, avec vos prénoms et vos informations" },
+  { id: 'signature', name: 'Signature', price: 190, summary: "« À notre image » : le modèle à vos couleurs, avec un tableau de suivi de vos invités" },
   { id: 'prestige', name: 'Prestige', price: 390, summary: "« Quelque chose d'unique » : enveloppe, ouverture animée et décor créés pour vous, à partir d'un modèle ou de zéro" },
 ];
 
