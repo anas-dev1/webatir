@@ -670,3 +670,15 @@ body {
 .invitation .countdown div { padding: 20px 2px 16px; }
 .invitation .countdown strong { font-size: clamp(1.45rem, 6.6vw, 2.1rem); }
 .invitation .countdown span { font-size: 0.56rem; letter-spacing: 0.04em; }
+
+/* ---------- Féerie : page entièrement rose poudré (plus de sections blanches) ---------- */
+body { background: #f2d6de; background-image: none; }
+.invitation > .welcome::before,
+.invitation > .program-section::before,
+.invitation > .dresscode-section::before,
+.invitation > .rsvp-section::before { display: none; }
+.hero-bg::after {
+  background:
+    radial-gradient(ellipse 72% 40% at 50% 47%, rgba(255, 250, 248, 0.62), rgba(255, 250, 248, 0.25) 60%, transparent 82%),
+    linear-gradient(180deg, rgba(242, 214, 222, 0) 0%, rgba(242, 214, 222, 0) 72%, #f2d6de 100%);
+}
