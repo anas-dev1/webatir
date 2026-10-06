@@ -457,3 +457,12 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
 .tiers-compare summary::after { content: "\25BE"; font-size: 1rem; transition: transform 0.25s ease; }
 .tiers-compare[open] summary::after { content: "\25BE"; transform: rotate(180deg); }
 .tiers-compare[open] summary { margin-bottom: 18px; }
+
+/* Bouton « Comparer les formules » : fond foncé pour bien ressortir sur le clair */
+.tiers-compare summary { background: var(--espresso); color: var(--gold-light); border-color: var(--espresso); box-shadow: 0 10px 24px rgba(42, 32, 25, 0.28); }
+.tiers-compare summary:hover { background: #3a2c22; color: #f6e2b3; }
+
+/* Formules : « Inclus : » au-dessus de la liste */
+.tier-included { font-family: var(--caps); font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-top: 6px; }
+.tier-featured .tier-included { color: var(--gold-light); }
+.tier .price + .tier-promise { margin-top: 2px; font-style: normal; font-weight: 600; font-size: 1.22rem; }
