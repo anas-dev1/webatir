@@ -633,21 +633,6 @@ body {
   mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 78%, transparent 100%);
 }
 
-/* ---------- Féerie : bandes roses en papier déchiré (bord irrégulier, liseré fibreux, ombre légère) ---------- */
-.invitation > .welcome::before,
-.invitation > .program-section::before,
-.invitation > .dresscode-section::before,
-.invitation > .rsvp-section::before {
-  top: -22px; bottom: -22px;
-  background:
-    url("img/bord-haut.svg") 0 0 / 600px 44px repeat-x,
-    url("img/bord-bas.svg") 0 100% / 600px 44px repeat-x,
-    linear-gradient(var(--band), var(--band)) 0 44px / 100% calc(100% - 88px) no-repeat;
-}
-.invitation > .program-section::before { background-position: -230px 0, -410px 100%, 0 44px; }
-.invitation > .dresscode-section::before { background-position: -120px 0, -60px 100%, 0 44px; }
-.invitation > .rsvp-section::before { background-position: -340px 0, -270px 100%, 0 44px; }
-
 /* ---------- Féerie : premier écran clair (paysage pastel) ----------
    Texte prune et doré sur un voile lumineux, au lieu du texte clair sur fond sombre. */
 .hero-bg::after {
