@@ -53,6 +53,8 @@ if (heroVideo && !reduceMotionPref()) {
 const music = document.getElementById('bgMusic');
 const musicToggle = document.getElementById('musicToggle');
 const MUSIC_VOLUME = 0.55;
+const MUSIC_HIT = 13.35;     // instant de la musique où le site doit apparaître
+const REVEAL_POINT = 8.84;   // instant de la vidéo où le fondu commence (durée 10,04 s - 1,2 s)
 let musicWanted = true;
 let fadeTimer = null;
 const fadeMusic = (to, ms, done) => {
@@ -95,6 +97,8 @@ const openEnvelope = () => {
   envelope.classList.add('is-playing', 'is-lighting');
   if (music && musicToggle) {
     music.preload = 'auto';
+    // on démarre la musique un peu après son début pour que la montée tombe sur l'ouverture
+    music.currentTime = Math.max(0, MUSIC_HIT - REVEAL_POINT - LIGHT_DURATION / 1000);
     playMusic();
     musicToggle.hidden = false;
     showMusicState();
@@ -109,6 +113,17 @@ envelopeVideo.addEventListener('timeupdate', () => {
   if (envelopeVideo.duration && envelopeVideo.currentTime >= envelopeVideo.duration - 1.2) revealInvitation();
 });
 envelopeVideo.addEventListener('playing', () => envelope.classList.add('is-opening'));
+// --- Musique calée sur la vidéo : l'invitation apparaît au moment fort de la musique ---
+// (montée à 13,1 s, entrée des basses à 13,95 s : le fondu de l'enveloppe démarre juste avant)
+function syncMusic() {
+  if (revealed || !music || !musicWanted || music.paused || envelopeVideo.paused) return;
+  const revealPoint = envelopeVideo.duration ? envelopeVideo.duration - 1.2 : REVEAL_POINT;
+  const target = MUSIC_HIT - revealPoint + envelopeVideo.currentTime;
+  // si la vidéo a mis du temps à charger, on recale la musique (encore dans son introduction douce)
+  if (target >= 0 && Math.abs(music.currentTime - target) > 0.3) music.currentTime = target;
+}
+envelopeVideo.addEventListener('playing', syncMusic);
+if (music) music.addEventListener('playing', syncMusic);
 envelopeVideo.addEventListener('ended', revealInvitation);
 envelopeVideo.addEventListener('error', () => { if (opened) revealInvitation(); });
 envelope.addEventListener('click', openEnvelope);
