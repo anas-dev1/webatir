@@ -49,10 +49,56 @@ if (heroVideo && !reduceMotionPref()) {
     heroVideo.load();
   });
 }
+// --- Musique : lancée par le toucher sur l'enveloppe, en fondu, avec un bouton pour la couper ---
+const music = document.getElementById('bgMusic');
+const musicToggle = document.getElementById('musicToggle');
+const MUSIC_VOLUME = 0.55;
+let musicWanted = true;
+let fadeTimer = null;
+const fadeMusic = (to, ms, done) => {
+  clearInterval(fadeTimer);
+  const from = music.volume;
+  const steps = Math.max(1, Math.round(ms / 50));
+  let i = 0;
+  fadeTimer = setInterval(() => {
+    i += 1;
+    music.volume = Math.min(1, Math.max(0, from + (to - from) * (i / steps)));
+    if (i >= steps) { clearInterval(fadeTimer); if (done) done(); }
+  }, 50);
+};
+const playMusic = () => {
+  music.volume = 0;
+  music.play().then(() => fadeMusic(MUSIC_VOLUME, 2500)).catch(() => {});
+};
+const pauseMusic = () => fadeMusic(0, 400, () => music.pause());
+const showMusicState = () => {
+  musicToggle.classList.toggle('is-off', !musicWanted);
+  musicToggle.setAttribute('aria-pressed', String(musicWanted));
+  musicToggle.setAttribute('aria-label', musicWanted ? 'Couper la musique' : 'Remettre la musique');
+};
+if (music && musicToggle) {
+  musicToggle.addEventListener('click', () => {
+    musicWanted = !musicWanted;
+    if (musicWanted) playMusic(); else pauseMusic();
+    showMusicState();
+  });
+  // Téléphone verrouillé ou autre application : pause, puis reprise au retour
+  document.addEventListener('visibilitychange', () => {
+    if (!opened || !musicWanted) return;
+    if (document.hidden) music.pause(); else playMusic();
+  });
+}
+
 const openEnvelope = () => {
   if (opened) return;
   opened = true;
   envelope.classList.add('is-playing', 'is-lighting');
+  if (music && musicToggle) {
+    music.preload = 'auto';
+    playMusic();
+    musicToggle.hidden = false;
+    showMusicState();
+  }
   // Lumière sur le cachet, puis ouverture dès que la vidéo est prête (8 s maximum d'attente)
   Promise.all([wait(LIGHT_DURATION), Promise.race([videoReady, wait(8000)])]).then(() => {
     envelopeVideo.play().catch(revealInvitation); // si la vidéo ne peut pas démarrer, on ouvre directement
@@ -199,3 +245,14 @@ const orderSection = document.getElementById('commander');
 new IntersectionObserver(([entry]) => {
   body.classList.toggle('demo-order-visible', entry.isIntersecting);
 }).observe(orderSection);
+
+// --- Dress code : petite animation chargée seulement à l'approche de la section ---
+const dresscodeVideo = document.getElementById('dresscodeVideo');
+if (dresscodeVideo && !reduceMotionPref()) {
+  new IntersectionObserver(([entry], obs) => {
+    if (!entry.isIntersecting) return;
+    obs.disconnect();
+    dresscodeVideo.src = dresscodeVideo.dataset.src;
+    dresscodeVideo.play().catch(() => {});
+  }, { rootMargin: '300px 0px' }).observe(dresscodeVideo);
+}
