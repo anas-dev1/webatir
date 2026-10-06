@@ -53,6 +53,14 @@ if (heroVideo && !reduceMotionPref()) {
 const music = document.getElementById('bgMusic');
 const musicToggle = document.getElementById('musicToggle');
 const MUSIC_VOLUME = 0.55;
+// La musique est téléchargée en entier dès l'arrivée sur la page (comme la vidéo) : une fois
+// lancée, elle ne peut plus s'interrompre pour charger, même avec une connexion lente.
+if (music) {
+  fetch(music.getAttribute('src'))
+    .then((r) => (r.ok ? r.blob() : Promise.reject()))
+    .then((blob) => { if (music.paused && !opened) music.src = URL.createObjectURL(blob); })
+    .catch(() => {});
+}
 const MUSIC_HIT = 13.35;     // instant de la musique où le site doit apparaître
 const REVEAL_POINT = 8.84;   // instant de la vidéo où le fondu commence (durée 10,04 s - 1,2 s)
 let musicWanted = true;
@@ -91,20 +99,35 @@ if (music && musicToggle) {
   });
 }
 
+// --- Ouverture calée sur la musique : la musique n'est jamais déplacée (sinon elle se coupe),
+// c'est la vidéo qui démarre au bon moment pour que l'invitation apparaisse sur la montée
+// (13,1 s) juste avant l'entrée des basses (13,95 s). La lumière du cachet dure donc ~4,5 s.
+// Si la musique ne joue pas (coupée, bloquée ou trop lente à charger), on garde la durée habituelle.
+const waitMusicCue = () => new Promise((resolve) => {
+  const cue = MUSIC_HIT - REVEAL_POINT;
+  const start = performance.now();
+  const check = () => {
+    const elapsed = (performance.now() - start) / 1000;
+    const playing = music && musicWanted && !music.paused && music.currentTime > 0;
+    if (playing ? music.currentTime >= cue - 0.04 || elapsed > cue + 4
+                : elapsed >= (musicWanted && music ? 6 : LIGHT_DURATION / 1000)) resolve();
+    else requestAnimationFrame(check);
+  };
+  check();
+});
+
 const openEnvelope = () => {
   if (opened) return;
   opened = true;
   envelope.classList.add('is-playing', 'is-lighting');
   if (music && musicToggle) {
     music.preload = 'auto';
-    // on démarre la musique un peu après son début pour que la montée tombe sur l'ouverture
-    music.currentTime = Math.max(0, MUSIC_HIT - REVEAL_POINT - LIGHT_DURATION / 1000);
     playMusic();
     musicToggle.hidden = false;
     showMusicState();
   }
   // Lumière sur le cachet, puis ouverture dès que la vidéo est prête (8 s maximum d'attente)
-  Promise.all([wait(LIGHT_DURATION), Promise.race([videoReady, wait(8000)])]).then(() => {
+  Promise.all([waitMusicCue(), Promise.race([videoReady, wait(8000)])]).then(() => {
     envelopeVideo.play().catch(revealInvitation); // si la vidéo ne peut pas démarrer, on ouvre directement
   });
 };
@@ -113,17 +136,6 @@ envelopeVideo.addEventListener('timeupdate', () => {
   if (envelopeVideo.duration && envelopeVideo.currentTime >= envelopeVideo.duration - 1.2) revealInvitation();
 });
 envelopeVideo.addEventListener('playing', () => envelope.classList.add('is-opening'));
-// --- Musique calée sur la vidéo : l'invitation apparaît au moment fort de la musique ---
-// (montée à 13,1 s, entrée des basses à 13,95 s : le fondu de l'enveloppe démarre juste avant)
-function syncMusic() {
-  if (revealed || !music || !musicWanted || music.paused || envelopeVideo.paused) return;
-  const revealPoint = envelopeVideo.duration ? envelopeVideo.duration - 1.2 : REVEAL_POINT;
-  const target = MUSIC_HIT - revealPoint + envelopeVideo.currentTime;
-  // si la vidéo a mis du temps à charger, on recale la musique (encore dans son introduction douce)
-  if (target >= 0 && Math.abs(music.currentTime - target) > 0.3) music.currentTime = target;
-}
-envelopeVideo.addEventListener('playing', syncMusic);
-if (music) music.addEventListener('playing', syncMusic);
 envelopeVideo.addEventListener('ended', revealInvitation);
 envelopeVideo.addEventListener('error', () => { if (opened) revealInvitation(); });
 envelope.addEventListener('click', openEnvelope);
