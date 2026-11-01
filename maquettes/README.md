@@ -53,6 +53,30 @@ Pour un restaurant qui vit des groupes (repas d'entreprise, anniversaires, grand
 (vide = appel téléphonique), `image` facultative. Exemple dans `_templates/restaurant/exemple.site.json`
 (`groupes_exemple`) et dans `maquettes/bordeaux-boeuf-gourmand/`.
 
+## Plats vedettes en photo
+
+Sur l'accueil (quand `carte_page` est `true`), les plats marqués `"vedette": true` s'affichent en cartes
+photo dès qu'au moins un d'eux a une clé `photo` (`"photo": "photos/entrecote.jpg"`). Sans photo, c'est
+une simple liste. Quatre à six vedettes, une photo chacune : c'est la section la plus appétissante de la page.
+
+## Distinctions & presse
+
+`distinctions` (liste) affiche sous l'accueil les guides, prix et citations : chaîne simple ou
+`{ "texte", "source", "lien" }`. Trois maximum, uniquement ce qui est vérifiable (Michelin, Gault&Millau,
+Tripadvisor, article de presse). `distinctions_titre` est facultatif.
+
+## Carte cadeau
+
+`carte_cadeau: { "lien", "texte", "note" }` ajoute un lien « Carte cadeau » dans la navigation et un bloc
+dans les infos pratiques. `lien` vide = appel téléphonique ; sinon le lien de vente en ligne existant.
+
+## Menus de fêtes
+
+`saison` ajoute un bloc daté entre l'événement et la carte : `surtitre`, `titre`, `periode`, `intro`,
+`menus` (même format que `formules`), `note`, `cta_texte`, `cta_lien` (vide = réservation habituelle),
+`image` facultative, `nav_texte` pour le libellé du menu (« Fêtes » par défaut). À retirer une fois la
+période passée. Exemple complet sur la démo Casa Nómada et dans `exemple.site.json` (`saison_exemple`).
+
 ## Ambiance animée
 
 Par défaut le gabarit est sobre et rapide. Pour un prospect à concept (bar, cantina, rooftop),

@@ -5,45 +5,85 @@
   "demo": true,
   "demo_credit": "photos Unsplash",
   "url": "",
-
   "nom": "Casa Nómada",
   "nom_court": "Casa Nómada",
   "slogan": "Cantina latino, feu de bois et cocktails maison.",
   "description": "Cantina latino aux Chartrons, Bordeaux : tacos au feu de bois, ceviche du jour, cocktails maison et soirées salsa. Démonstration Webatir, établissement fictif.",
   "cuisine": "Latino-américaine",
-
-  "adresse": { "rue": "12 rue Notre-Dame", "code_postal": "33000", "ville": "Bordeaux" },
+  "adresse": {
+    "rue": "12 rue Notre-Dame",
+    "code_postal": "33000",
+    "ville": "Bordeaux"
+  },
   "telephone": "05 56 00 00 00",
   "whatsapp": "06 00 00 00 00",
   "maps": "https://www.google.com/maps/search/?api=1&query=rue+Notre-Dame+33000+Bordeaux",
-  "reservation": { "type": "tel", "valeur": "05 56 00 00 00", "note": "Groupes à partir de 8 personnes : appelez-nous, on vous garde la grande table." },
-  "reseaux": { "instagram": "casanomada.demo" },
-
+  "reservation": {
+    "type": "tel",
+    "valeur": "05 56 00 00 00",
+    "note": "Groupes à partir de 8 personnes : appelez-nous, on vous garde la grande table."
+  },
+  "reseaux": {
+    "instagram": "casanomada.demo"
+  },
   "horaires": {
     "a_confirmer": false,
     "note": "Happy hour de 18h à 20h, du mardi au vendredi.",
     "jours": {
       "lundi": [],
-      "mardi": [{ "de": "12:00", "a": "14:30" }, { "de": "18:00", "a": "23:30" }],
-      "mercredi": [{ "de": "12:00", "a": "14:30" }, { "de": "18:00", "a": "23:30" }],
-      "jeudi": [{ "de": "12:00", "a": "14:30" }, { "de": "18:00", "a": "00:30" }],
-      "vendredi": [{ "de": "12:00", "a": "14:30" }, { "de": "18:00", "a": "01:30" }],
-      "samedi": [{ "de": "18:00", "a": "01:30" }],
-      "dimanche": [{ "de": "11:30", "a": "16:00", "note": "brunch" }]
+      "mardi": [
+        { "de": "12:00", "a": "14:30" },
+        { "de": "18:00", "a": "23:30" }
+      ],
+      "mercredi": [
+        { "de": "12:00", "a": "14:30" },
+        { "de": "18:00", "a": "23:30" }
+      ],
+      "jeudi": [
+        { "de": "12:00", "a": "14:30" },
+        { "de": "18:00", "a": "00:30" }
+      ],
+      "vendredi": [
+        { "de": "12:00", "a": "14:30" },
+        { "de": "18:00", "a": "01:30" }
+      ],
+      "samedi": [
+        { "de": "18:00", "a": "01:30" }
+      ],
+      "dimanche": [
+        { "de": "11:30", "a": "16:00", "note": "brunch" }
+      ]
     }
   },
-
   "style": {
-    "couleurs": { "principale": "#f6eee2", "fond": "#171210", "accent": "#f2a93b" },
-    "polices": { "titres": "Oswald", "texte": "Work Sans" },
+    "couleurs": {
+      "principale": "#f6eee2",
+      "fond": "#171210",
+      "accent": "#f2a93b"
+    },
+    "polices": {
+      "titres": "Oswald",
+      "texte": "Work Sans"
+    },
     "ambiance": "sombre",
     "forme_photos": "arche"
   },
   "animations": true,
-  "bandeau": ["Tacos al pastor", "Ceviche du jour", "Pisco sour", "Feu de bois", "Noche de salsa le vendredi", "Brunch le dimanche"],
-
-  "mentions": ["Feu de bois", "Produits frais", "Cocktails maison", "Options végé", "Terrasse"],
-
+  "bandeau": [
+    "Tacos al pastor",
+    "Ceviche du jour",
+    "Pisco sour",
+    "Feu de bois",
+    "Noche de salsa le vendredi",
+    "Brunch le dimanche"
+  ],
+  "mentions": [
+    "Feu de bois",
+    "Produits frais",
+    "Cocktails maison",
+    "Options végé",
+    "Terrasse"
+  ],
   "logo": "",
   "photos": {
     "hero": { "src": "photos/hero.jpg", "alt": "Le bar de Casa Nómada, bouteilles et lumières chaudes" },
@@ -61,7 +101,6 @@
       { "src": "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=1200&q=75", "alt": "Tres leches aux framboises" }
     ]
   },
-
   "a_propos": {
     "titre": "La casa",
     "paragraphes": [
@@ -70,7 +109,25 @@
     ],
     "signature": "— Lucía et Tomás"
   },
-
+  "distinctions": [
+    {
+      "texte": "« Les tacos al pastor les plus addictifs de la rive gauche »",
+      "source": "La presse bordelaise"
+    },
+    {
+      "texte": "Top 10 des cantines mexicaines de France",
+      "source": "Guide 2025"
+    },
+    {
+      "texte": "4,8/5 sur plus de 600 avis",
+      "source": "Google"
+    }
+  ],
+  "carte_cadeau": {
+    "lien": "",
+    "texte": "Offrir une carte cadeau",
+    "note": "En vente sur place, du montant de votre choix."
+  },
   "evenement": {
     "surtitre": "Chaque vendredi",
     "titre": "Noche de salsa",
@@ -79,13 +136,52 @@
     "lien": "",
     "image": { "src": "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=1000&q=75", "alt": "Cocktails de la noche de salsa" }
   },
-
+  "saison": {
+    "surtitre": "Fêtes de fin d'année",
+    "nav_texte": "Réveillons",
+    "titre": "Réveillons à la cantina",
+    "periode": "24 et 31 décembre, à partir de 20h",
+    "intro": "Deux soirées de fête : grande tablée, mezcal et DJ set jusqu'au bout de la nuit le 31.",
+    "image": { "src": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1000&q=75", "alt": "Grande tablée de fête" },
+    "menus": [
+      {
+        "nom": "Nochebuena · 24 décembre",
+        "prix": "49,00",
+        "details": [
+          "Ceviche de dorade",
+          "Cochinita pibil 12 h",
+          "Churros, chocolat épicé"
+        ]
+      },
+      {
+        "nom": "Nochevieja · 31 décembre",
+        "prix": "69,00",
+        "description": "Coupe de bienvenue et DJ set inclus.",
+        "details": [
+          "Tostadas de thon",
+          "Birria de bœuf",
+          "Tres leches",
+          "Douze raisins à minuit"
+        ]
+      }
+    ],
+    "note": "Sur réservation uniquement, acompte de 20 € par personne.",
+    "cta_texte": "Réserver ma soirée",
+    "cta_lien": ""
+  },
   "formules_titre": "Le midi",
   "formules": [
-    { "nom": "Almuerzo", "prix": "16,50", "description": "Plat + boisson, du mardi au vendredi midi.", "details": ["Plat du jour ou 3 tacos au choix", "Agua fresca ou soda"] },
+    {
+      "nom": "Almuerzo",
+      "prix": "16,50",
+      "description": "Plat + boisson, du mardi au vendredi midi.",
+      "details": [
+        "Plat du jour ou 3 tacos au choix",
+        "Agua fresca ou soda"
+      ]
+    },
     { "nom": "Almuerzo completo", "prix": "21,00", "description": "Entrée + plat + dessert, du mardi au vendredi midi." }
   ],
-
   "carte_titre": "La carte",
   "carte_intro": "Assiettes à partager, tacos au feu de bois et cocktails maison. Tout est fait ici.",
   "carte_page": false,

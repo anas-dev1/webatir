@@ -57,6 +57,16 @@
     "signature": ""
   },
 
+  "distinctions": [],
+  "distinctions_exemple": [
+    { "texte": "Bib Gourmand 2025", "source": "Guide Michelin", "lien": "" },
+    { "texte": "« La meilleure entrecôte du quartier »", "source": "Sud Ouest" },
+    "Travellers' Choice 2024 – Tripadvisor"
+  ],
+
+  "carte_cadeau": null,
+  "carte_cadeau_exemple": { "lien": "", "texte": "Offrir une carte cadeau", "note": "En vente sur place, du montant de votre choix." },
+
   "groupes": null,
   "groupes_exemple": {
     "titre": "Groupes & privatisation",
@@ -89,7 +99,7 @@
       "titre": "Plats",
       "note": "Accompagnement au choix : frites maison, légumes ou salade.",
       "items": [
-        { "nom": "Nom du plat", "prix": "18,90", "description": "", "tag": "", "vedette": false }
+        { "nom": "Nom du plat", "prix": "18,90", "description": "", "tag": "", "vedette": false, "photo": "" }
       ]
     },
     {
@@ -105,5 +115,22 @@
     }
   ],
 
-  "evenement": null
+  "evenement": null,
+
+  "saison": null,
+  "saison_exemple": {
+    "surtitre": "Fêtes de fin d'année",
+    "nav_texte": "Fêtes",
+    "titre": "Menus de Noël et du réveillon",
+    "periode": "Du 20 au 31 décembre",
+    "intro": "Deux menus de fête, servis midi et soir.",
+    "image": "",
+    "menus": [
+      { "nom": "Menu de Noël", "prix": "45,00", "details": ["Foie gras mi-cuit", "Chapon fermier", "Bûche maison"] },
+      { "nom": "Réveillon du 31", "prix": "75,00", "description": "Coupe de champagne offerte.", "details": ["Saint-Jacques snackées", "Filet de bœuf Rossini", "Dessert du chef"] }
+    ],
+    "note": "Sur réservation uniquement, avant le 18 décembre.",
+    "cta_texte": "Réserver",
+    "cta_lien": ""
+  }
 }

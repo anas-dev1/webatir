@@ -156,7 +156,7 @@
         { "nom": "Mini salade César", "prix": "8,00" },
         { "nom": "Salade César", "prix": "14,50", "description": "Poulet croustillant, parmesan, tomate, concombre, croûtons" },
         { "nom": "Salade Féta", "prix": "14,50", "description": "Feta, tomate, concombre, oignons rouges, toasts, herbes de Provence", "tag": "Végé" },
-        { "nom": "Salade Landaise", "prix": "16,90", "description": "Foie gras, magret fumé, gésiers de canard, tomate, concombre, oignons rouges, croûtons", "vedette": true }
+        { "nom": "Salade Landaise", "prix": "16,90", "description": "Foie gras, magret fumé, gésiers de canard, tomate, concombre, oignons rouges, croûtons" }
       ]
     },
     {
@@ -168,8 +168,8 @@
       "items": [
         { "nom": "Côte de bœuf 1 personne", "prix": "34,00", "description": "450 à 500 g", "vedette": true },
         { "nom": "Côte de bœuf 2 personnes", "prix": "66,00", "description": "1,1 à 1,2 kg, à partager" },
-        { "nom": "Entrecôte", "prix": "22,00", "description": "250 à 280 g" },
-        { "nom": "Faux-filet", "prix": "19,00", "description": "220 à 250 g" },
+        { "nom": "Entrecôte", "prix": "22,00", "description": "250 à 280 g", "photo": "photos/entrecote-beurre.jpg", "vedette": true },
+        { "nom": "Faux-filet", "prix": "19,00", "description": "220 à 250 g", "photo": "photos/faux-filet.jpg", "vedette": true },
         { "nom": "Bavette", "prix": "17,00", "description": "200 à 250 g" },
         { "nom": "Magret de canard", "prix": "23,00", "description": "350 à 400 g" },
         { "nom": "Tartare de bœuf", "prix": "15,90", "description": "100 g" },
@@ -177,7 +177,7 @@
         { "nom": "Côtelettes d'agneau", "prix": "19,90" },
         { "nom": "Brochette de poulet", "prix": "15,90" },
         { "nom": "Kofté", "prix": "17,50" },
-        { "nom": "Burger gourmand", "prix": "17,50", "description": "Frites maison", "vedette": true }
+        { "nom": "Burger gourmand", "prix": "17,50", "description": "Frites maison", "photo": "photos/burger.jpg", "vedette": true }
       ]
     },
     {
@@ -197,7 +197,7 @@
         { "nom": "Panna cotta", "prix": "6,50", "description": "Coulis fruits rouges ou mangue" },
         { "nom": "Mousse au chocolat", "prix": "7,00" },
         { "nom": "Tiramisu café", "prix": "7,50", "description": "Éclats de spéculoos" },
-        { "nom": "Moelleux au chocolat", "prix": "8,00", "vedette": true },
+        { "nom": "Moelleux au chocolat", "prix": "8,00" },
         { "nom": "Trio de fromages", "prix": "7,50", "description": "Bleu d'Auvergne, brie, chèvre" }
       ]
     },
@@ -206,7 +206,7 @@
       "titre": "Cocktails",
       "prix_unique": "11,00",
       "items": [
-        { "nom": "Mojito", "description": "Rhum Havana ambré, citron vert, menthe fraîche, sucre de canne, eau gazeuse", "vedette": true },
+        { "nom": "Mojito", "description": "Rhum Havana ambré, citron vert, menthe fraîche, sucre de canne, eau gazeuse", "photo": "photos/cocktails.jpg", "vedette": true },
         { "nom": "Caipirinha", "description": "Cachaça, citron vert, sucre de canne" },
         { "nom": "Whisky sour", "description": "Whisky, jus de citron, sucre de canne" },
         { "nom": "Cosmopolitan", "description": "Vodka, triple sec, citron vert, cranberry" },

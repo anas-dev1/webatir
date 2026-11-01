@@ -37,6 +37,14 @@ function lienWhatsapp(site) {
   return `https://wa.me/${num}?text=${txt}`;
 }
 
+/** Carte cadeau (carte_cadeau: { lien, texte, note }) : lien vide = appel téléphonique. */
+function lienCadeau(site) {
+  const k = site.carte_cadeau;
+  if (!k) return null;
+  const href = k.lien || `tel:${telInternational(site.telephone)}`;
+  return { href, externe: /^https?:/.test(href), texte: k.texte || 'Offrir une carte cadeau', note: k.note || '' };
+}
+
 function adresseTexte(a) {
   if (!a) return '';
   if (typeof a === 'string') return a;
@@ -193,12 +201,78 @@ function rendreMenuComplet(site) {
 function rendreMenuApercu(site) {
   const cats = site.menu || [];
   const enEntier = cats.filter((c) => c.apercu);
-  const vedettes = cats.flatMap((c) => (c.items || []).filter((p) => p.vedette).map((p) => ({ ...p, categorie: c.titre })));
-  const blocVedettes = vedettes.length
-    ? rendreCategorie({ id: 'vedettes', titre: site.vedettes_titre || 'Les incontournables', items: vedettes.map((p) => ({ ...p, tag: p.tag || p.categorie })) })
-    : '';
+  const vedettes = cats.flatMap((c) => (c.items || []).filter((p) => p.vedette).map((p) => ({ ...p, categorie: c.titre, prix: p.prix ?? c.prix_unique })));
+  const blocVedettes = vedettes.length ? rendreVedettes(site, vedettes) : '';
   return `${rendreFormules(site)}\n${enEntier.map(rendreCategorie).join('\n')}\n${blocVedettes}
 <p class="carte__tout"><a class="btn btn--plein btn--grand" href="carte/">Voir toute la carte</a>${site.menu_pdf ? ` <a class="btn btn--fantome btn--grand" href="${esc(site.menu_pdf)}" target="_blank" rel="noopener">Carte en PDF</a>` : ''}</p>`;
+}
+
+/** Plats vedettes de l'accueil : en cartes photo dès qu'un plat a une `photo`, sinon en liste. */
+function rendreVedettes(site, vedettes) {
+  const titre = site.vedettes_titre || 'Les incontournables';
+  if (!vedettes.some((p) => p.photo)) {
+    return rendreCategorie({ id: 'vedettes', titre, items: vedettes.map((p) => ({ ...p, tag: p.tag || p.categorie })) });
+  }
+  const aPrix = (p) => p.prix !== undefined && p.prix !== null && p.prix !== '';
+  return `<div class="categorie categorie--vedettes" id="cat-vedettes">
+  <h3 class="categorie__titre">${esc(titre)}</h3>
+  ${site.vedettes_intro ? `<p class="categorie__intro">${esc(site.vedettes_intro)}</p>` : ''}
+  <ul class="vedettes">${vedettes
+    .map((p) => {
+      const ph = p.photo ? photo(p.photo, p.nom) : null;
+      return `<li class="vedette${ph ? '' : ' vedette--sans-photo'}">
+      ${ph ? `<img class="vedette__photo" src="${esc(ph.src)}" alt="${esc(ph.alt)}" loading="lazy" width="600" height="450">` : ''}
+      <div class="vedette__corps">
+        <p class="vedette__cat">${esc(p.tag || p.categorie)}</p>
+        <h4 class="vedette__nom">${esc(p.nom)}</h4>
+        ${p.description ? `<p class="vedette__desc">${esc(p.description)}</p>` : ''}
+        ${aPrix(p) ? `<p class="vedette__prix">${esc(prix(p.prix))}</p>` : ''}
+      </div>
+    </li>`;
+    })
+    .join('\n')}</ul>
+</div>`;
+}
+
+/** Distinctions & presse (distinctions: [...]) : guides, prix, citations. Chaîne ou { texte, source, lien }. */
+function rendreDistinctions(site) {
+  const liste = (site.distinctions || []).map((d) => (typeof d === 'string' ? { texte: d } : d)).filter((d) => d && d.texte);
+  if (!liste.length) return '';
+  return `<section class="distinctions" id="distinctions" aria-label="${esc(site.distinctions_titre || 'Distinctions et presse')}">
+  <div class="conteneur">
+    ${site.distinctions_titre ? `<h2 class="distinctions__titre">${esc(site.distinctions_titre)}</h2>` : ''}
+    <ul class="distinctions__liste">${liste
+      .map((d) => {
+        const corps = `<span class="distinction__texte">${esc(d.texte)}</span>${d.source ? `<span class="distinction__source">${esc(d.source)}</span>` : ''}`;
+        return `<li class="distinction">${d.lien ? `<a href="${esc(d.lien)}" target="_blank" rel="noopener">${corps}</a>` : corps}</li>`;
+      })
+      .join('')}</ul>
+  </div>
+</section>`;
+}
+
+/** Menus de saison ou de fêtes (saison: {...}) : bloc daté avec ses menus, au-dessus de la carte. */
+function rendreSaison(site, c) {
+  const s = site.saison;
+  if (!s || !s.titre) return '';
+  const lien = s.cta_lien || c.resa.href;
+  const externe = /^https?:/.test(lien);
+  return `<section class="saison" id="saison" aria-labelledby="saison-titre">
+  <div class="conteneur saison__int">
+    <div class="saison__tete">
+      <p class="saison__sur">${esc(s.surtitre || 'En ce moment')}</p>
+      <h2 class="saison__titre" id="saison-titre">${esc(s.titre)}</h2>
+      ${s.periode ? `<p class="saison__periode">${esc(s.periode)}</p>` : ''}
+      ${s.intro ? `<p class="saison__intro">${esc(s.intro)}</p>` : ''}
+    </div>
+    ${s.image ? `<img class="saison__image" src="${esc(photo(s.image).src)}" alt="${esc(photo(s.image, s.titre).alt)}" loading="lazy">` : ''}
+    ${s.menus?.length ? `<div class="formules saison__menus">${s.menus.map(rendreFormule).join('\n')}</div>` : ''}
+    <div class="saison__pied">
+      ${s.note ? `<p class="saison__note">${esc(s.note)}</p>` : ''}
+      <a class="btn btn--plein" href="${esc(lien)}"${externe ? ' target="_blank" rel="noopener"' : ''}>${esc(s.cta_texte || 'Réserver')}</a>
+    </div>
+  </div>
+</section>`;
 }
 
 function rendreGalerie(site) {
@@ -226,6 +300,7 @@ const ICONES = {
   instagram: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm5 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM17.5 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>',
   facebook: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.4c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.2v2.3H7.4V14h2.8v8z"/></svg>',
   whatsapp: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 12 12 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2l-.5-.3z"/></svg>',
+  cadeau: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 8h-3.2A3 3 0 0 0 12 4.6 3 3 0 0 0 7.2 8H4v4h1v8h14v-8h1zm-5.5-2a1 1 0 0 1 0 2H13v-.5A1.5 1.5 0 0 1 14.5 6zm-5 0A1.5 1.5 0 0 1 11 7.5V8H9.5a1 1 0 0 1 0-2zM6 10h5v2H6zm1 4h4v4H7zm6 4v-4h4v4zm5-6h-5v-2h5z"/></svg>',
 };
 
 // ---------------------------------------------------------------------------
@@ -245,6 +320,7 @@ function contexte(site, ctx) {
     resa,
     resaAttr: resa.externe ? ' target="_blank" rel="noopener"' : '',
     wa: lienWhatsapp(site),
+    cadeau: lienCadeau(site),
     adresse: adresseTexte(site.adresse),
     ville: typeof site.adresse === 'object' ? site.adresse.ville : site.ville,
     hero: site.photos?.hero ? photo(site.photos.hero, `Salle de ${site.nom}`) : null,
@@ -284,8 +360,10 @@ function rendreEntete(site, c, { p, page }) {
     <nav class="entete__nav" aria-label="Sections">
       ${accueil ? '' : `<a href="${p}">Accueil</a>`}
       <a href="${lienCarte}"${accueil ? '' : ' aria-current="page"'}>La carte</a>
+      ${site.saison?.titre ? `<a href="${p}#saison">${esc(site.saison.nav_texte || 'Fêtes')}</a>` : ''}
       ${site.groupes ? `<a href="${p}#groupes">Groupes</a>` : ''}
       ${(site.photos?.salle?.length || 0) + (site.photos?.plats?.length || 0) > 0 ? `<a href="${p}#galerie">Photos</a>` : ''}
+      ${c.cadeau ? `<a href="${p}#cadeau">Carte cadeau</a>` : ''}
       <a href="${p}#infos">Infos &amp; horaires</a>
     </nav>
     <div class="entete__actions">
@@ -370,6 +448,8 @@ ${site.bandeau?.length ? `<div class="bandeau" aria-hidden="true"><div class="ba
 
 ${site.mentions?.length ? `<ul class="mentions conteneur" aria-label="Bon à savoir">${site.mentions.map((m) => `<li class="mention">${esc(m)}</li>`).join('')}</ul>` : ''}
 
+${rendreDistinctions(site)}
+
 ${site.a_propos ? `<section class="apropos" id="apropos">
   <div class="conteneur apropos__int">
     ${site.a_propos.titre ? `<h2 class="section__titre">${esc(site.a_propos.titre)}</h2>` : ''}
@@ -390,6 +470,8 @@ ${ev ? `<section class="evenement" id="evenement" aria-labelledby="evenement-tit
     </div>
   </div>
 </section>` : ''}
+
+${rendreSaison(site, c)}
 
 ${site.groupes ? `<section class="groupes" id="groupes" aria-labelledby="groupes-titre">
   <div class="conteneur groupes__int">
@@ -432,6 +514,9 @@ ${rendreGalerie(site)}
         ${site.reservation?.note ? `<p class="infos__note">${esc(site.reservation.note)}</p>` : ''}
         ${c.resa.externe ? `<p><a class="btn btn--plein" href="${esc(c.resa.href)}" target="_blank" rel="noopener">Réserver en ligne</a></p>` : ''}
         ${c.wa ? `<p><a class="btn btn--fantome btn--icone" href="${esc(c.wa)}" target="_blank" rel="noopener">${ICONES.whatsapp}<span>Écrire sur WhatsApp</span></a></p>` : ''}
+        ${c.cadeau ? `<h3 id="cadeau">Carte cadeau</h3>
+        <p><a class="btn btn--fantome btn--icone" href="${esc(c.cadeau.href)}"${c.cadeau.externe ? ' target="_blank" rel="noopener"' : ''}>${ICONES.cadeau}<span>${esc(c.cadeau.texte)}</span></a></p>
+        ${c.cadeau.note ? `<p class="infos__note">${esc(c.cadeau.note)}</p>` : ''}` : ''}
         ${insta || r.facebook || r.snapchat || r.tiktok ? `<h3>Suivez-nous</h3>
         <ul class="reseaux">
           ${insta ? `<li><a href="${esc(insta)}" target="_blank" rel="noopener">${ICONES.instagram}<span>${esc(instaNom)}</span></a></li>` : ''}

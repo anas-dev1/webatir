@@ -143,8 +143,10 @@
     <nav class="entete__nav" aria-label="Sections">
       
       <a href="carte/">La carte</a>
+      
       <a href="#groupes">Groupes</a>
       <a href="#galerie">Photos</a>
+      
       <a href="#infos">Infos &amp; horaires</a>
     </nav>
     <div class="entete__actions">
@@ -176,6 +178,8 @@
 
 <ul class="mentions conteneur" aria-label="Bon à savoir"><li class="mention">Grillades au feu de bois</li><li class="mention">Terrasse</li><li class="mention">Groupes jusqu'à 150 personnes</li><li class="mention">Près de la gare Saint-Jean</li><li class="mention">Menu enfant 10 €</li></ul>
 
+
+
 <section class="apropos" id="apropos">
   <div class="conteneur apropos__int">
     <h2 class="section__titre">La maison</h2>
@@ -183,6 +187,8 @@
     
   </div>
 </section>
+
+
 
 
 
@@ -266,34 +272,63 @@
     </li></ul>
   <p class="categorie__note">Accompagnement supplémentaire 3 € · sauce supplémentaire 0,50 € · tranche de foie gras poêlé 4 €.</p>
 </div>
-<div class="categorie" id="cat-vedettes">
+<div class="categorie categorie--vedettes" id="cat-vedettes">
   <h3 class="categorie__titre">Les incontournables</h3>
   
-  <ul class="plats"><li class="plat">
-      <div class="plat__texte"><span class="plat__nom">Assiette de foie gras mi-cuit <span class="plat__tag">Entrées</span></span></div>
-      <span class="plat__prix">15,00 €</span>
-    </li>
-<li class="plat">
-      <div class="plat__texte"><span class="plat__nom">Salade Landaise <span class="plat__tag">Salades</span></span><span class="plat__desc">Foie gras, magret fumé, gésiers de canard, tomate, concombre, oignons rouges, croûtons</span></div>
-      <span class="plat__prix">16,90 €</span>
-    </li>
-<li class="plat">
-      <div class="plat__texte"><span class="plat__nom">Côte de bœuf 1 personne <span class="plat__tag">Viandes</span></span><span class="plat__desc">450 à 500 g</span></div>
-      <span class="plat__prix">34,00 €</span>
-    </li>
-<li class="plat">
-      <div class="plat__texte"><span class="plat__nom">Burger gourmand <span class="plat__tag">Viandes</span></span><span class="plat__desc">Frites maison</span></div>
-      <span class="plat__prix">17,50 €</span>
-    </li>
-<li class="plat">
-      <div class="plat__texte"><span class="plat__nom">Moelleux au chocolat <span class="plat__tag">Desserts</span></span></div>
-      <span class="plat__prix">8,00 €</span>
-    </li>
-<li class="plat">
-      <div class="plat__texte"><span class="plat__nom">Mojito <span class="plat__tag">Cocktails</span></span><span class="plat__desc">Rhum Havana ambré, citron vert, menthe fraîche, sucre de canne, eau gazeuse</span></div>
+  <ul class="vedettes"><li class="vedette vedette--sans-photo">
       
+      <div class="vedette__corps">
+        <p class="vedette__cat">Entrées</p>
+        <h4 class="vedette__nom">Assiette de foie gras mi-cuit</h4>
+        
+        <p class="vedette__prix">15,00 €</p>
+      </div>
+    </li>
+<li class="vedette vedette--sans-photo">
+      
+      <div class="vedette__corps">
+        <p class="vedette__cat">Viandes</p>
+        <h4 class="vedette__nom">Côte de bœuf 1 personne</h4>
+        <p class="vedette__desc">450 à 500 g</p>
+        <p class="vedette__prix">34,00 €</p>
+      </div>
+    </li>
+<li class="vedette">
+      <img class="vedette__photo" src="photos/entrecote-beurre.jpg" alt="Entrecôte" loading="lazy" width="600" height="450">
+      <div class="vedette__corps">
+        <p class="vedette__cat">Viandes</p>
+        <h4 class="vedette__nom">Entrecôte</h4>
+        <p class="vedette__desc">250 à 280 g</p>
+        <p class="vedette__prix">22,00 €</p>
+      </div>
+    </li>
+<li class="vedette">
+      <img class="vedette__photo" src="photos/faux-filet.jpg" alt="Faux-filet" loading="lazy" width="600" height="450">
+      <div class="vedette__corps">
+        <p class="vedette__cat">Viandes</p>
+        <h4 class="vedette__nom">Faux-filet</h4>
+        <p class="vedette__desc">220 à 250 g</p>
+        <p class="vedette__prix">19,00 €</p>
+      </div>
+    </li>
+<li class="vedette">
+      <img class="vedette__photo" src="photos/burger.jpg" alt="Burger gourmand" loading="lazy" width="600" height="450">
+      <div class="vedette__corps">
+        <p class="vedette__cat">Viandes</p>
+        <h4 class="vedette__nom">Burger gourmand</h4>
+        <p class="vedette__desc">Frites maison</p>
+        <p class="vedette__prix">17,50 €</p>
+      </div>
+    </li>
+<li class="vedette">
+      <img class="vedette__photo" src="photos/cocktails.jpg" alt="Mojito" loading="lazy" width="600" height="450">
+      <div class="vedette__corps">
+        <p class="vedette__cat">Cocktails</p>
+        <h4 class="vedette__nom">Mojito</h4>
+        <p class="vedette__desc">Rhum Havana ambré, citron vert, menthe fraîche, sucre de canne, eau gazeuse</p>
+        <p class="vedette__prix">11,00 €</p>
+      </div>
     </li></ul>
-  
 </div>
 <p class="carte__tout"><a class="btn btn--plein btn--grand" href="carte/">Voir toute la carte</a></p>
   </div>
@@ -330,6 +365,7 @@
         <p class="infos__tel"><a href="tel:+33614699789">06 14 69 97 89</a></p>
         <p class="infos__note">Réservation en ligne jusqu'à 11h45 pour le midi, sinon par téléphone. Groupes : appelez-nous.</p>
         <p><a class="btn btn--plein" href="https://wiicmenu-qrcode.com/app/reservation_client.php?resto=1621" target="_blank" rel="noopener">Réserver en ligne</a></p>
+        
         
         <h3>Suivez-nous</h3>
         <ul class="reseaux">
