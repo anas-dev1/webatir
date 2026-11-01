@@ -235,6 +235,10 @@ function contexte(site, ctx) {
   const resa = lienReservation(site);
   return {
     t,
+    anime: site.animations === true,
+    // attributs de <html> : ambiance, animations, forme des photos
+    attrsHtml: `data-ambiance="${t.clair ? 'clair' : 'sombre'}"${site.animations === true ? ' data-anime="1"' : ''}${site.style?.forme_photos === 'arche' ? ' data-forme="arche"' : ''}`,
+    video: site.photos?.video ? photo(site.photos.video) : null,
     publie: site.publie === true,
     nomCourt: site.nom_court || site.nom,
     tel: telInternational(site.telephone),
@@ -299,6 +303,7 @@ function rendrePied(site, c) {
     <p>${esc(c.adresse)} · <a href="tel:${esc(c.tel)}">${esc(site.telephone)}</a></p>
     ${site.mentions?.length ? `<p class="pied__mentions">${site.mentions.map(esc).join(' · ')}</p>` : ''}
     <p class="pied__credit">© ${new Date().getFullYear()} ${esc(site.nom)} · Site réalisé par <a href="https://webatir.com" rel="noopener">Webatir</a></p>
+    ${site.demo ? `<p class="pied__credit">Site de démonstration · établissement fictif${site.demo_credit ? `, ${esc(site.demo_credit)}` : ''}</p>` : ''}
   </div>
 </footer>`;
 }
@@ -325,8 +330,16 @@ function rendreAccueil(site, ctx, c) {
     : `<!-- JSON-LD Restaurant : désactivé tant que c'est une maquette (passer "publie": true dans site.json pour l'activer) -->\n<script type="text/plain" data-jsonld-desactive>\n${ld}\n</script>`;
   const titre = site.titre_page || `${site.nom} – ${site.slogan ? site.slogan.replace(/\.$/, '') : 'Restaurant'}${c.ville ? ` à ${c.ville}` : ''}`;
 
+  // Titre animé mot à mot quand les animations sont activées.
+  const titreHero = c.anime
+    ? site.nom.split(/\s+/).map((m, i) => `<span class="mot" style="--i:${i}">${esc(m)}</span>`).join(' ')
+    : esc(site.nom);
+  const media = c.video
+    ? `<video class="hero__photo" autoplay muted loop playsinline preload="metadata"${c.hero ? ` poster="${esc(c.hero.src)}"` : ''} aria-label="${esc(c.video.alt || (c.hero && c.hero.alt) || site.nom)}"><source src="${esc(c.video.src)}" type="video/mp4"></video>`
+    : c.hero ? `<img class="hero__photo" src="${esc(c.hero.src)}" alt="${esc(c.hero.alt)}" fetchpriority="high" width="1600" height="1000">` : '';
+
   return `<!doctype html>
-<html lang="fr" data-ambiance="${c.t.clair ? 'clair' : 'sombre'}">
+<html lang="fr" ${c.attrsHtml}>
 <head>
 ${rendreHead(site, c, { titre, description: c.description, p: '', chemin: '', ld: blocLd })}
 </head>
@@ -337,11 +350,11 @@ ${rendreEntete(site, c, { p: '', page: 'accueil' })}
 
 <main>
 <section class="hero" id="accueil">
-  ${c.hero ? `<img class="hero__photo" src="${esc(c.hero.src)}" alt="${esc(c.hero.alt)}" fetchpriority="high" width="1600" height="1000">` : ''}
+  <div class="hero__media">${media}</div>
   <div class="hero__voile"></div>
   <div class="hero__contenu conteneur">
     ${c.ville ? `<p class="hero__sur">Restaurant · ${esc(c.ville)}</p>` : ''}
-    <h1 class="hero__titre">${esc(site.nom)}</h1>
+    <h1 class="hero__titre">${titreHero}</h1>
     ${site.slogan ? `<p class="hero__slogan">${esc(site.slogan)}</p>` : ''}
     <p class="statut" id="statut" hidden><span class="statut__point"></span><span class="statut__texte"></span> <a class="statut__lien" href="#infos">Horaires</a></p>
     <div class="hero__cta">
@@ -351,6 +364,8 @@ ${rendreEntete(site, c, { p: '', page: 'accueil' })}
     ${site.avis?.note ? `<p class="hero__avis"><span class="etoiles" aria-hidden="true">★★★★★</span> <strong>${esc(site.avis.note)}</strong>/5 · ${esc(site.avis.nombre)} avis ${esc(site.avis.source || 'Google')}</p>` : ''}
   </div>
 </section>
+
+${site.bandeau?.length ? `<div class="bandeau" aria-hidden="true"><div class="bandeau__piste">${(Array.isArray(site.bandeau) ? site.bandeau : [site.bandeau]).map((m) => `<span>${esc(m)}</span>`).join('<span class="bandeau__sep">✦</span>')}<span class="bandeau__sep">✦</span></div></div>` : ''}
 
 ${site.mentions?.length ? `<ul class="mentions conteneur" aria-label="Bon à savoir">${site.mentions.map((m) => `<li class="mention">${esc(m)}</li>`).join('')}</ul>` : ''}
 
@@ -443,7 +458,7 @@ function rendrePageCarte(site, ctx, c) {
   const titre = `${site.carte_titre || 'La carte'} – ${site.nom}${c.ville ? ` à ${c.ville}` : ''}`;
   const description = site.carte_intro || `La carte complète de ${site.nom} : ${(site.menu || []).map((m) => m.titre.toLowerCase()).join(', ')}.`;
   return `<!doctype html>
-<html lang="fr" data-ambiance="${c.t.clair ? 'clair' : 'sombre'}">
+<html lang="fr" ${c.attrsHtml}>
 <head>
 ${rendreHead(site, c, { titre, description, p, chemin: 'carte/' })}
 </head>

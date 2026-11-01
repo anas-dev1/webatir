@@ -1,0 +1,150 @@
+{
+  "slug": "demo-casa-nomada",
+  "niche": "restaurant",
+  "publie": false,
+  "demo": true,
+  "demo_credit": "photos Unsplash",
+  "url": "",
+
+  "nom": "Casa Nómada",
+  "nom_court": "Casa Nómada",
+  "slogan": "Cantina latino, feu de bois et cocktails maison.",
+  "description": "Cantina latino aux Chartrons, Bordeaux : tacos au feu de bois, ceviche du jour, cocktails maison et soirées salsa. Démonstration Webatir, établissement fictif.",
+  "cuisine": "Latino-américaine",
+
+  "adresse": { "rue": "12 rue Notre-Dame", "code_postal": "33000", "ville": "Bordeaux" },
+  "telephone": "05 56 00 00 00",
+  "whatsapp": "06 00 00 00 00",
+  "maps": "https://www.google.com/maps/search/?api=1&query=rue+Notre-Dame+33000+Bordeaux",
+  "reservation": { "type": "tel", "valeur": "05 56 00 00 00", "note": "Groupes à partir de 8 personnes : appelez-nous, on vous garde la grande table." },
+  "reseaux": { "instagram": "casanomada.demo" },
+
+  "horaires": {
+    "a_confirmer": false,
+    "note": "Happy hour de 18h à 20h, du mardi au vendredi.",
+    "jours": {
+      "lundi": [],
+      "mardi": [{ "de": "12:00", "a": "14:30" }, { "de": "18:00", "a": "23:30" }],
+      "mercredi": [{ "de": "12:00", "a": "14:30" }, { "de": "18:00", "a": "23:30" }],
+      "jeudi": [{ "de": "12:00", "a": "14:30" }, { "de": "18:00", "a": "00:30" }],
+      "vendredi": [{ "de": "12:00", "a": "14:30" }, { "de": "18:00", "a": "01:30" }],
+      "samedi": [{ "de": "18:00", "a": "01:30" }],
+      "dimanche": [{ "de": "11:30", "a": "16:00", "note": "brunch" }]
+    }
+  },
+
+  "style": {
+    "couleurs": { "principale": "#f6eee2", "fond": "#171210", "accent": "#f2a93b" },
+    "polices": { "titres": "Oswald", "texte": "Work Sans" },
+    "ambiance": "sombre",
+    "forme_photos": "arche"
+  },
+  "animations": true,
+  "bandeau": ["Tacos al pastor", "Ceviche du jour", "Pisco sour", "Feu de bois", "Noche de salsa le vendredi", "Brunch le dimanche"],
+
+  "mentions": ["Feu de bois", "Produits frais", "Cocktails maison", "Options végé", "Terrasse"],
+
+  "logo": "",
+  "photos": {
+    "hero": { "src": "photos/hero.jpg", "alt": "Le bar de Casa Nómada, bouteilles et lumières chaudes" },
+    "video": { "src": "photos/hero.mp4", "alt": "Le bar de Casa Nómada" },
+    "salle": [
+      { "src": "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=75", "alt": "La grande salle" },
+      { "src": "https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?auto=format&fit=crop&w=1200&q=75", "alt": "La terrasse et ses plantes" }
+    ],
+    "plats": [
+      { "src": "https://images.unsplash.com/photo-1613514785940-daed07799d9b?auto=format&fit=crop&w=1200&q=75", "alt": "Tacos al pastor" },
+      { "src": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=1200&q=75", "alt": "Cocktails maison" },
+      { "src": "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=1200&q=75", "alt": "Tacos de poisson" },
+      { "src": "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=1200&q=75", "alt": "Table à partager" },
+      { "src": "https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&w=1200&q=75", "alt": "Pisco sour aux mûres" },
+      { "src": "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=1200&q=75", "alt": "Tres leches aux framboises" }
+    ]
+  },
+
+  "a_propos": {
+    "titre": "La casa",
+    "paragraphes": [
+      "Une cantina comme à Lima ou Mexico : un comptoir, un feu de bois, des assiettes à partager et une playlist qui monte à mesure que la soirée avance.",
+      "Tout est fait ici, de la tortilla au sirop des cocktails. Les poissons arrivent du marché des Capucins chaque matin, les viandes viennent du Sud-Ouest."
+    ],
+    "signature": "— Lucía et Tomás"
+  },
+
+  "evenement": {
+    "surtitre": "Chaque vendredi",
+    "titre": "Noche de salsa",
+    "date": "Vendredi dès 22h · entrée libre",
+    "description": "DJ set latino, piste de danse improvisée entre les tables et cocktails à 8 € jusqu'à minuit.",
+    "lien": "",
+    "image": { "src": "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=1000&q=75", "alt": "Cocktails de la noche de salsa" }
+  },
+
+  "formules_titre": "Le midi",
+  "formules": [
+    { "nom": "Almuerzo", "prix": "16,50", "description": "Plat + boisson, du mardi au vendredi midi.", "details": ["Plat du jour ou 3 tacos au choix", "Agua fresca ou soda"] },
+    { "nom": "Almuerzo completo", "prix": "21,00", "description": "Entrée + plat + dessert, du mardi au vendredi midi." }
+  ],
+
+  "carte_titre": "La carte",
+  "carte_intro": "Assiettes à partager, tacos au feu de bois et cocktails maison. Tout est fait ici.",
+  "carte_page": false,
+  "menu": [
+    {
+      "id": "partager",
+      "titre": "Para compartir",
+      "items": [
+        { "nom": "Guacamole au feu de bois", "prix": "9,50", "description": "Avocat écrasé minute, tortillas maison", "tag": "Végé" },
+        { "nom": "Ceviche du jour", "prix": "14,00", "description": "Poisson du marché, leche de tigre, patate douce, maïs grillé" },
+        { "nom": "Elote", "prix": "7,50", "description": "Maïs grillé, crème, fromage frais, piment", "tag": "Végé" },
+        { "nom": "Empanadas de bœuf", "prix": "10,00", "description": "Trois pièces, chimichurri" },
+        { "nom": "Tostada de thon", "prix": "12,50", "description": "Thon mariné, avocat, sésame, mayo chipotle" }
+      ]
+    },
+    {
+      "id": "tacos",
+      "titre": "Tacos",
+      "intro": "Trois pièces, tortillas de maïs faites maison, cuisson au feu de bois.",
+      "items": [
+        { "nom": "Al pastor", "prix": "13,50", "description": "Porc mariné, ananas rôti, coriandre, oignon" },
+        { "nom": "Baja fish", "prix": "14,00", "description": "Poisson croustillant, chou, crème citron vert" },
+        { "nom": "Birria", "prix": "14,50", "description": "Bœuf confit, fromage, consommé à tremper" },
+        { "nom": "Hongos", "prix": "12,50", "description": "Champignons grillés, épazote, salsa verde", "tag": "Végé" },
+        { "nom": "Pollo asado", "prix": "13,00", "description": "Poulet mariné achiote, pico de gallo" }
+      ]
+    },
+    {
+      "id": "plats",
+      "titre": "Platos",
+      "items": [
+        { "nom": "Lomo saltado", "prix": "22,00", "description": "Bœuf sauté, oignons, tomates, frites, riz" },
+        { "nom": "Pollo a la brasa", "prix": "19,50", "description": "Demi-poulet au feu de bois, sauce aji amarillo, patates" },
+        { "nom": "Arroz con mariscos", "prix": "23,00", "description": "Riz crémeux aux fruits de mer, coriandre" },
+        { "nom": "Enchiladas verdes", "prix": "18,00", "description": "Courgettes, maïs, fromage, salsa verde", "tag": "Végé" }
+      ]
+    },
+    {
+      "id": "desserts",
+      "titre": "Postres",
+      "items": [
+        { "nom": "Tres leches", "prix": "8,00", "description": "Gâteau imbibé, framboises" },
+        { "nom": "Churros", "prix": "7,50", "description": "Dulce de leche, chocolat chaud" },
+        { "nom": "Flan de coco", "prix": "7,00" }
+      ]
+    },
+    {
+      "id": "cocktails",
+      "titre": "Cócteles",
+      "compact": true,
+      "note": "Happy hour de 18h à 20h du mardi au vendredi : cocktails à 8 €.",
+      "items": [
+        { "nom": "Pisco sour", "prix": "11,00" },
+        { "nom": "Margarita tommy's", "prix": "11,00" },
+        { "nom": "Paloma", "prix": "10,50" },
+        { "nom": "Mezcal negroni", "prix": "12,00" },
+        { "nom": "Agua fresca du jour", "prix": "5,00", "description": "Sans alcool" },
+        { "nom": "Virgin mojito", "prix": "7,50", "description": "Sans alcool" }
+      ]
+    }
+  ]
+}

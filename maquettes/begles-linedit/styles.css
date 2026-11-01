@@ -79,7 +79,8 @@ svg { width: 1.1em; height: 1.1em; fill: currentColor; flex: none; }
   min-height: 82svh; display: flex; align-items: flex-end;
   background: #1a1a1a;
 }
-.hero__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 60%; z-index: -2; }
+.hero__media { position: absolute; inset: 0; z-index: -2; overflow: hidden; will-change: transform; }
+.hero__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 60%; }
 .hero__voile {
   position: absolute; inset: 0; z-index: -1;
   background: linear-gradient(180deg, rgba(0, 0, 0, .25) 0%, rgba(0, 0, 0, .15) 35%, rgba(0, 0, 0, .78) 100%);
@@ -287,3 +288,46 @@ section { padding: 3rem 0; }
 .carte__retour a:hover { color: var(--texte); }
 .carte__fin { display: flex; flex-wrap: wrap; gap: .6rem; padding-top: 1rem; border-top: 1px solid var(--bordure); margin-top: 1rem; }
 @media (min-width: 48rem) { .page-carte .carte { padding-top: 2.5rem; } }
+
+/* ---------- bandeau défilant (bandeau: [...]) ---------- */
+.bandeau { overflow: hidden; background: var(--accent); color: var(--sur-accent); font-family: var(--police-titres); text-transform: uppercase; letter-spacing: .08em; font-size: .95rem; padding: .55rem 0; white-space: nowrap; }
+.bandeau__piste { display: inline-flex; align-items: center; gap: 1.5rem; padding-right: 1.5rem; }
+.bandeau__sep { opacity: .6; font-size: .7em; }
+[data-anime] .bandeau__piste { animation: defile 30s linear infinite; }
+@keyframes defile { to { transform: translateX(-50%); } }
+
+/* ---------- photos en arche (style.forme_photos: "arche") ---------- */
+[data-forme="arche"] .galerie__item:first-child,
+[data-forme="arche"] .evenement__image { border-radius: 999px 999px .6rem .6rem; }
+[data-forme="arche"] .galerie__item:first-child img { border-radius: inherit; }
+
+/* ---------- ambiance animée (animations: true) ---------- */
+[data-anime] .entete { transition: transform .35s ease, border-color .2s, box-shadow .2s; }
+[data-anime] .entete--cachee { transform: translateY(-100%); }
+[data-anime] .hero__photo { animation: kenburns 24s ease-out both; }
+@keyframes kenburns { from { transform: scale(1.12); } to { transform: scale(1); } }
+[data-anime] .hero__titre .mot { display: inline-block; opacity: 0; transform: translateY(.6em) rotate(1.5deg); animation: montee .9s cubic-bezier(.2, .7, .2, 1) forwards; animation-delay: calc(.2s + var(--i, 0) * .09s); }
+[data-anime] .hero__sur, [data-anime] .hero__slogan, [data-anime] .statut, [data-anime] .hero__cta, [data-anime] .hero__avis { opacity: 0; animation: montee .9s cubic-bezier(.2, .7, .2, 1) forwards; }
+[data-anime] .hero__sur { animation-delay: .1s; }
+[data-anime] .hero__slogan { animation-delay: .7s; }
+[data-anime] .statut { animation-delay: .85s; }
+[data-anime] .hero__cta { animation-delay: 1s; }
+[data-anime] .hero__avis { animation-delay: 1.15s; }
+@keyframes montee { from { opacity: 0; transform: translateY(1.2rem); } to { opacity: 1; transform: none; } }
+[data-anime] [data-rvl] { opacity: 0; transform: translateY(1.5rem); transition: opacity .7s ease, transform .8s cubic-bezier(.2, .7, .2, 1); transition-delay: calc(var(--i, 0) * 70ms); }
+[data-anime] [data-rvl].is-visible { opacity: 1; transform: none; }
+[data-anime] .section__titre::after { transform: scaleX(0); transform-origin: left; transition: transform .9s cubic-bezier(.2, .7, .2, 1) .25s; }
+[data-anime] .section__titre.is-visible::after { transform: scaleX(1); }
+[data-anime] .galerie__item img { transition: transform .9s cubic-bezier(.2, .7, .2, 1), filter .5s; }
+[data-anime] .galerie__item:hover img { transform: scale(1.07); }
+[data-anime] .btn { transition: background .15s, color .15s, border-color .15s, transform .25s cubic-bezier(.2, .7, .2, 1), box-shadow .25s; }
+[data-anime] .btn--plein:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -12px var(--accent); }
+[data-anime] .formule { transition: transform .4s cubic-bezier(.2, .7, .2, 1), box-shadow .4s; }
+[data-anime] .formule:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -24px rgba(0, 0, 0, .5); }
+[data-anime] .statut--ouvert .statut__point { animation: pulsation 2s ease-in-out infinite; }
+@keyframes pulsation { 0%, 100% { box-shadow: 0 0 0 3px rgba(60, 207, 106, .25); } 50% { box-shadow: 0 0 0 7px rgba(60, 207, 106, 0); } }
+@media (prefers-reduced-motion: reduce) {
+  [data-anime] *, [data-anime] *::after { animation: none !important; transition: none !important; }
+  [data-anime] [data-rvl], [data-anime] .hero__titre .mot, [data-anime] .hero__sur, [data-anime] .hero__slogan, [data-anime] .statut, [data-anime] .hero__cta, [data-anime] .hero__avis { opacity: 1; transform: none; }
+  [data-anime] .section__titre::after { transform: none; }
+}

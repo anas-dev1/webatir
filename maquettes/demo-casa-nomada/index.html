@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="fr" data-ambiance="sombre" data-anime="1" data-forme="arche">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casa Nómada – Cantina latino, feu de bois et cocktails maison à Bordeaux</title>
+<meta name="description" content="Cantina latino aux Chartrons, Bordeaux : tacos au feu de bois, ceviche du jour, cocktails maison et soirées salsa. Démonstration Webatir, établissement fictif.">
+<meta name="robots" content="noindex,nofollow">
+<meta property="og:title" content="Casa Nómada – Cantina latino, feu de bois et cocktails maison à Bordeaux">
+<meta property="og:description" content="Cantina latino aux Chartrons, Bordeaux : tacos au feu de bois, ceviche du jour, cocktails maison et soirées salsa. Démonstration Webatir, établissement fictif.">
+<meta property="og:image" content="photos/hero.jpg">
+<meta name="theme-color" content="#171210">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;family=Work+Sans:wght@400;700&amp;display=swap">
+<style>:root{
+  --principale:#f6eee2;
+  --fond:#171210;
+  --accent:#f2a93b;
+  --accent-fonce:#f2a93b;
+  --accent-clair:#3e2d18;
+  --texte:#f6eee2;
+  --texte-doux:#a19a92;
+  --surface:#241f1d;
+  --surface-2:#302a27;
+  --bordure:#36312d;
+  --sur-accent:#111111;
+  --police-titres:'Oswald', Georgia, serif;
+  --police-texte:'Work Sans', system-ui, sans-serif;
+}</style>
+<link rel="stylesheet" href="styles.css">
+<!-- JSON-LD Restaurant : désactivé tant que c'est une maquette (passer "publie": true dans site.json pour l'activer) -->
+<script type="text/plain" data-jsonld-desactive>
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Casa Nómada",
+  "description": "Cantina latino aux Chartrons, Bordeaux : tacos au feu de bois, ceviche du jour, cocktails maison et soirées salsa. Démonstration Webatir, établissement fictif.",
+  "url": "https://webatir.com/maquettes/demo-casa-nomada/",
+  "telephone": "+33556000000",
+  "image": "https://webatir.com/maquettes/demo-casa-nomada/photos/hero.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "12 rue Notre-Dame",
+    "postalCode": "33000",
+    "addressLocality": "Bordeaux",
+    "addressCountry": "FR"
+  },
+  "hasMap": "https://www.google.com/maps/search/?api=1&query=rue+Notre-Dame+33000+Bordeaux",
+  "servesCuisine": "Latino-américaine",
+  "acceptsReservations": true,
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Tuesday",
+      "opens": "12:00",
+      "closes": "14:30"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Tuesday",
+      "opens": "18:00",
+      "closes": "23:30"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Wednesday",
+      "opens": "12:00",
+      "closes": "14:30"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Wednesday",
+      "opens": "18:00",
+      "closes": "23:30"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Thursday",
+      "opens": "12:00",
+      "closes": "14:30"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Thursday",
+      "opens": "18:00",
+      "closes": "00:30"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Friday",
+      "opens": "12:00",
+      "closes": "14:30"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Friday",
+      "opens": "18:00",
+      "closes": "01:30"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "18:00",
+      "closes": "01:30"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Sunday",
+      "opens": "11:30",
+      "closes": "16:00"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="evitement" href="#carte">Aller à la carte</a>
+
+<header class="entete" id="haut">
+  <div class="entete__int conteneur">
+    <a class="entete__logo" href="#haut" aria-label="Casa Nómada – accueil">
+      <span class="entete__nom">Casa Nómada</span>
+    </a>
+    <nav class="entete__nav" aria-label="Sections">
+      
+      <a href="#carte">La carte</a>
+      <a href="#galerie">Photos</a>
+      <a href="#infos">Infos &amp; horaires</a>
+    </nav>
+    <div class="entete__actions">
+      <a class="btn btn--fantome btn--icone" href="tel:+33556000000"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span>Appeler</span></a>
+      <a class="btn btn--fantome btn--icone" href="https://www.google.com/maps/search/?api=1&amp;query=rue+Notre-Dame+33000+Bordeaux" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg><span>Itinéraire</span></a>
+      <a class="btn btn--plein" href="tel:+33556000000">Réserver</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="accueil">
+  <div class="hero__media"><video class="hero__photo" autoplay muted loop playsinline preload="metadata" poster="photos/hero.jpg" aria-label="Le bar de Casa Nómada"><source src="photos/hero.mp4" type="video/mp4"></video></div>
+  <div class="hero__voile"></div>
+  <div class="hero__contenu conteneur">
+    <p class="hero__sur">Restaurant · Bordeaux</p>
+    <h1 class="hero__titre"><span class="mot" style="--i:0">Casa</span> <span class="mot" style="--i:1">Nómada</span></h1>
+    <p class="hero__slogan">Cantina latino, feu de bois et cocktails maison.</p>
+    <p class="statut" id="statut" hidden><span class="statut__point"></span><span class="statut__texte"></span> <a class="statut__lien" href="#infos">Horaires</a></p>
+    <div class="hero__cta">
+      <a class="btn btn--plein btn--grand" href="tel:+33556000000">Réserver une table</a>
+      <a class="btn btn--contour btn--grand" href="#carte">Voir la carte</a>
+    </div>
+    
+  </div>
+</section>
+
+<div class="bandeau" aria-hidden="true"><div class="bandeau__piste"><span>Tacos al pastor</span><span class="bandeau__sep">✦</span><span>Ceviche du jour</span><span class="bandeau__sep">✦</span><span>Pisco sour</span><span class="bandeau__sep">✦</span><span>Feu de bois</span><span class="bandeau__sep">✦</span><span>Noche de salsa le vendredi</span><span class="bandeau__sep">✦</span><span>Brunch le dimanche</span><span class="bandeau__sep">✦</span></div></div>
+
+<ul class="mentions conteneur" aria-label="Bon à savoir"><li class="mention">Feu de bois</li><li class="mention">Produits frais</li><li class="mention">Cocktails maison</li><li class="mention">Options végé</li><li class="mention">Terrasse</li></ul>
+
+<section class="apropos" id="apropos">
+  <div class="conteneur apropos__int">
+    <h2 class="section__titre">La casa</h2>
+    <p>Une cantina comme à Lima ou Mexico : un comptoir, un feu de bois, des assiettes à partager et une playlist qui monte à mesure que la soirée avance.</p><p>Tout est fait ici, de la tortilla au sirop des cocktails. Les poissons arrivent du marché des Capucins chaque matin, les viandes viennent du Sud-Ouest.</p>
+    <p class="apropos__signature">— Lucía et Tomás</p>
+  </div>
+</section>
+
+<section class="evenement" id="evenement" aria-labelledby="evenement-titre">
+  <div class="conteneur evenement__int">
+    <img class="evenement__image" src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&amp;fit=crop&amp;w=1000&amp;q=75" alt="Cocktails de la noche de salsa" loading="lazy">
+    <div class="evenement__texte">
+      <p class="evenement__sur">Chaque vendredi</p>
+      <h2 class="evenement__titre" id="evenement-titre">Noche de salsa</h2>
+      <p class="evenement__date">Vendredi dès 22h · entrée libre</p>
+      <p class="evenement__desc">DJ set latino, piste de danse improvisée entre les tables et cocktails à 8 € jusqu'à minuit.</p>
+      
+    </div>
+  </div>
+</section>
+
+<section class="carte" id="carte" aria-labelledby="carte-titre">
+  <div class="conteneur">
+    <h2 class="section__titre" id="carte-titre">La carte</h2>
+    <p class="section__intro">Assiettes à partager, tacos au feu de bois et cocktails maison. Tout est fait ici.</p>
+  </div>
+  <div class="conteneur carte__int">
+    <nav class="onglets" aria-label="Catégories de la carte"><div class="onglets__piste"><a class="onglet" href="#cat-formules">Le midi</a><a class="onglet" href="#cat-partager">Para compartir</a><a class="onglet" href="#cat-tacos">Tacos</a><a class="onglet" href="#cat-plats">Platos</a><a class="onglet" href="#cat-desserts">Postres</a><a class="onglet" href="#cat-cocktails">Cócteles</a></div></nav>
+<div class="categorie categorie--formules" id="cat-formules">
+  <h3 class="categorie__titre">Le midi</h3>
+  <div class="formules"><article class="formule">
+    <div class="formule__tete"><h4 class="formule__nom">Almuerzo</h4><span class="formule__prix">16,50 €</span></div>
+    <p class="formule__desc">Plat + boisson, du mardi au vendredi midi.</p>
+    <ul class="formule__details"><li>Plat du jour ou 3 tacos au choix</li><li>Agua fresca ou soda</li></ul>
+    
+  </article>
+<article class="formule">
+    <div class="formule__tete"><h4 class="formule__nom">Almuerzo completo</h4><span class="formule__prix">21,00 €</span></div>
+    <p class="formule__desc">Entrée + plat + dessert, du mardi au vendredi midi.</p>
+    
+    
+  </article></div>
+</div>
+<div class="categorie" id="cat-partager">
+  <h3 class="categorie__titre">Para compartir</h3>
+  
+  <ul class="plats"><li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Guacamole au feu de bois <span class="plat__tag">Végé</span></span><span class="plat__desc">Avocat écrasé minute, tortillas maison</span></div>
+      <span class="plat__prix">9,50 €</span>
+    </li>
+<li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Ceviche du jour</span><span class="plat__desc">Poisson du marché, leche de tigre, patate douce, maïs grillé</span></div>
+      <span class="plat__prix">14,00 €</span>
+    </li>
+<li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Elote <span class="plat__tag">Végé</span></span><span class="plat__desc">Maïs grillé, crème, fromage frais, piment</span></div>
+      <span class="plat__prix">7,50 €</span>
+    </li>
+<li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Empanadas de bœuf</span><span class="plat__desc">Trois pièces, chimichurri</span></div>
+      <span class="plat__prix">10,00 €</span>
+    </li>
+<li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Tostada de thon</span><span class="plat__desc">Thon mariné, avocat, sésame, mayo chipotle</span></div>
+      <span class="plat__prix">12,50 €</span>
+    </li></ul>
+  
+</div>
+<div class="categorie" id="cat-tacos">
+  <h3 class="categorie__titre">Tacos</h3>
+  <p class="categorie__intro">Trois pièces, tortillas de maïs faites maison, cuisson au feu de bois.</p>
+  <ul class="plats"><li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Al pastor</span><span class="plat__desc">Porc mariné, ananas rôti, coriandre, oignon</span></div>
+      <span class="plat__prix">13,50 €</span>
+    </li>
+<li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Baja fish</span><span class="plat__desc">Poisson croustillant, chou, crème citron vert</span></div>
+      <span class="plat__prix">14,00 €</span>
+    </li>
+<li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Birria</span><span class="plat__desc">Bœuf confit, fromage, consommé à tremper</span></div>
+      <span class="plat__prix">14,50 €</span>
+    </li>
+<li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Hongos <span class="plat__tag">Végé</span></span><span class="plat__desc">Champignons grillés, épazote, salsa verde</span></div>
+      <span class="plat__prix">12,50 €</span>
+    </li>
+<li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Pollo asado</span><span class="plat__desc">Poulet mariné achiote, pico de gallo</span></div>
+      <span class="plat__prix">13,00 €</span>
+    </li></ul>
+  
+</div>
+<div class="categorie" id="cat-plats">
+  <h3 class="categorie__titre">Platos</h3>
+  
+  <ul class="plats"><li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Lomo saltado</span><span class="plat__desc">Bœuf sauté, oignons, tomates, frites, riz</span></div>
+      <span class="plat__prix">22,00 €</span>
+    </li>
+<li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Pollo a la brasa</span><span class="plat__desc">Demi-poulet au feu de bois, sauce aji amarillo, patates</span></div>
+      <span class="plat__prix">19,50 €</span>
+    </li>
+<li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Arroz con mariscos</span><span class="plat__desc">Riz crémeux aux fruits de mer, coriandre</span></div>
+      <span class="plat__prix">23,00 €</span>
+    </li>
+<li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Enchiladas verdes <span class="plat__tag">Végé</span></span><span class="plat__desc">Courgettes, maïs, fromage, salsa verde</span></div>
+      <span class="plat__prix">18,00 €</span>
+    </li></ul>
+  
+</div>
+<div class="categorie" id="cat-desserts">
+  <h3 class="categorie__titre">Postres</h3>
+  
+  <ul class="plats"><li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Tres leches</span><span class="plat__desc">Gâteau imbibé, framboises</span></div>
+      <span class="plat__prix">8,00 €</span>
+    </li>
+<li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Churros</span><span class="plat__desc">Dulce de leche, chocolat chaud</span></div>
+      <span class="plat__prix">7,50 €</span>
+    </li>
+<li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Flan de coco</span></div>
+      <span class="plat__prix">7,00 €</span>
+    </li></ul>
+  
+</div>
+<div class="categorie" id="cat-cocktails">
+  <h3 class="categorie__titre">Cócteles</h3>
+  
+  <ul class="plats plats--compact"><li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Pisco sour</span></div>
+      <span class="plat__prix">11,00 €</span>
+    </li>
+<li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Margarita tommy's</span></div>
+      <span class="plat__prix">11,00 €</span>
+    </li>
+<li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Paloma</span></div>
+      <span class="plat__prix">10,50 €</span>
+    </li>
+<li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Mezcal negroni</span></div>
+      <span class="plat__prix">12,00 €</span>
+    </li>
+<li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Agua fresca du jour</span><span class="plat__desc">Sans alcool</span></div>
+      <span class="plat__prix">5,00 €</span>
+    </li>
+<li class="plat">
+      <div class="plat__texte"><span class="plat__nom">Virgin mojito</span><span class="plat__desc">Sans alcool</span></div>
+      <span class="plat__prix">7,50 €</span>
+    </li></ul>
+  <p class="categorie__note">Happy hour de 18h à 20h du mardi au vendredi : cocktails à 8 €.</p>
+</div>
+  </div>
+</section>
+
+<section class="galerie" id="galerie" aria-labelledby="galerie-titre">
+  <div class="conteneur">
+    <h2 class="section__titre" id="galerie-titre">En images</h2>
+    <div class="galerie__grille"><button class="galerie__item" type="button" data-index="0" aria-label="Agrandir : La grande salle"><img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&amp;fit=crop&amp;w=1200&amp;q=75" alt="La grande salle" loading="lazy" width="800" height="800"></button><button class="galerie__item" type="button" data-index="1" aria-label="Agrandir : La terrasse et ses plantes"><img src="https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?auto=format&amp;fit=crop&amp;w=1200&amp;q=75" alt="La terrasse et ses plantes" loading="lazy" width="800" height="800"></button><button class="galerie__item" type="button" data-index="2" aria-label="Agrandir : Tacos al pastor"><img src="https://images.unsplash.com/photo-1613514785940-daed07799d9b?auto=format&amp;fit=crop&amp;w=1200&amp;q=75" alt="Tacos al pastor" loading="lazy" width="800" height="800"></button><button class="galerie__item" type="button" data-index="3" aria-label="Agrandir : Cocktails maison"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&amp;fit=crop&amp;w=1200&amp;q=75" alt="Cocktails maison" loading="lazy" width="800" height="800"></button><button class="galerie__item" type="button" data-index="4" aria-label="Agrandir : Tacos de poisson"><img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&amp;fit=crop&amp;w=1200&amp;q=75" alt="Tacos de poisson" loading="lazy" width="800" height="800"></button><button class="galerie__item" type="button" data-index="5" aria-label="Agrandir : Table à partager"><img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&amp;fit=crop&amp;w=1200&amp;q=75" alt="Table à partager" loading="lazy" width="800" height="800"></button><button class="galerie__item" type="button" data-index="6" aria-label="Agrandir : Pisco sour aux mûres"><img src="https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&amp;fit=crop&amp;w=1200&amp;q=75" alt="Pisco sour aux mûres" loading="lazy" width="800" height="800"></button><button class="galerie__item" type="button" data-index="7" aria-label="Agrandir : Tres leches aux framboises"><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&amp;fit=crop&amp;w=1200&amp;q=75" alt="Tres leches aux framboises" loading="lazy" width="800" height="800"></button></div>
+  </div>
+</section>
+
+<section class="infos" id="infos" aria-labelledby="infos-titre">
+  <div class="conteneur">
+    <h2 class="section__titre" id="infos-titre">Infos pratiques</h2>
+    <div class="infos__grille">
+      <div class="infos__bloc">
+        <h3>Horaires</h3>
+        <table class="horaires"><tr data-jour="lundi"><th scope="row">Lundi</th><td><span class="ferme">Fermé</span></td></tr>
+<tr data-jour="mardi"><th scope="row">Mardi</th><td>12h – 14h30<br>18h – 23h30</td></tr>
+<tr data-jour="mercredi"><th scope="row">Mercredi</th><td>12h – 14h30<br>18h – 23h30</td></tr>
+<tr data-jour="jeudi"><th scope="row">Jeudi</th><td>12h – 14h30<br>18h – 0h30</td></tr>
+<tr data-jour="vendredi"><th scope="row">Vendredi</th><td>12h – 14h30<br>18h – 1h30</td></tr>
+<tr data-jour="samedi"><th scope="row">Samedi</th><td>18h – 1h30</td></tr>
+<tr data-jour="dimanche"><th scope="row">Dimanche</th><td>11h30 – 16h <small>(brunch)</small></td></tr></table>
+
+<p class="horaires__note">Happy hour de 18h à 20h, du mardi au vendredi.</p>
+      </div>
+      <div class="infos__bloc">
+        <h3>Nous trouver</h3>
+        <address class="infos__adresse">12 rue Notre-Dame, 33000 Bordeaux</address>
+        <p><a class="btn btn--fantome btn--icone" href="https://www.google.com/maps/search/?api=1&amp;query=rue+Notre-Dame+33000+Bordeaux" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg><span>Itinéraire Google Maps</span></a></p>
+        <h3>Réserver</h3>
+        <p class="infos__tel"><a href="tel:+33556000000">05 56 00 00 00</a></p>
+        <p class="infos__note">Groupes à partir de 8 personnes : appelez-nous, on vous garde la grande table.</p>
+        
+        <p><a class="btn btn--fantome btn--icone" href="https://wa.me/33600000000?text=Bonjour%20Casa%20N%C3%B3mada%2C%20je%20souhaite%20r%C3%A9server%20une%20table." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 12 12 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2l-.5-.3z"/></svg><span>Écrire sur WhatsApp</span></a></p>
+        <h3>Suivez-nous</h3>
+        <ul class="reseaux">
+          <li><a href="https://www.instagram.com/casanomada.demo/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm5 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM17.5 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg><span>@casanomada.demo</span></a></li>
+          
+          
+          
+        </ul>
+      </div>
+      <div class="infos__carte"><iframe title="Plan d’accès – Casa Nómada" src="https://www.google.com/maps?q=Casa%20N%C3%B3mada%2C%2012%20rue%20Notre-Dame%2C%2033000%20Bordeaux&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="pied">
+  <div class="conteneur pied__int">
+    <p class="pied__nom">Casa Nómada</p>
+    <p>12 rue Notre-Dame, 33000 Bordeaux · <a href="tel:+33556000000">05 56 00 00 00</a></p>
+    <p class="pied__mentions">Feu de bois · Produits frais · Cocktails maison · Options végé · Terrasse</p>
+    <p class="pied__credit">© 2026 Casa Nómada · Site réalisé par <a href="https://webatir.com" rel="noopener">Webatir</a></p>
+    <p class="pied__credit">Site de démonstration · établissement fictif, photos Unsplash</p>
+  </div>
+</footer>
+
+<nav class="barre-mobile" aria-label="Actions rapides">
+  <a href="tel:+33556000000"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span>Appeler</span></a>
+  <a class="barre-mobile__principal" href="tel:+33556000000"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V9h14z"/></svg><span>Réserver</span></a>
+  <a href="https://www.google.com/maps/search/?api=1&amp;query=rue+Notre-Dame+33000+Bordeaux" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg><span>Itinéraire</span></a>
+</nav>
+
+<dialog class="lightbox" id="lightbox" aria-label="Photo agrandie">
+  <button class="lightbox__fermer" type="button" aria-label="Fermer">×</button>
+  <button class="lightbox__prec" type="button" aria-label="Photo précédente">‹</button>
+  <img alt="">
+  <button class="lightbox__suiv" type="button" aria-label="Photo suivante">›</button>
+  <p class="lightbox__legende"></p>
+</dialog>
+
+<script type="application/json" id="donnees-horaires">{"jours":{"lundi":[],"mardi":[{"de":"12:00","a":"14:30"},{"de":"18:00","a":"23:30"}],"mercredi":[{"de":"12:00","a":"14:30"},{"de":"18:00","a":"23:30"}],"jeudi":[{"de":"12:00","a":"14:30"},{"de":"18:00","a":"00:30"}],"vendredi":[{"de":"12:00","a":"14:30"},{"de":"18:00","a":"01:30"}],"samedi":[{"de":"18:00","a":"01:30"}],"dimanche":[{"de":"11:30","a":"16:00","note":"brunch"}]},"a_confirmer":false}</script>
+<script src="script.js" defer></script>
+</body>
+</html>

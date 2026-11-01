@@ -45,6 +45,20 @@ n'affiche qu'un aperçu : les formules, les catégories marquées `"apercu": tru
 `"vedette": true` (regroupés sous `vedettes_titre`, « Les incontournables » par défaut), suivi d'un
 bouton « Voir toute la carte ». Sans `carte_page`, tout reste sur l'accueil.
 
+## Ambiance animée
+
+Par défaut le gabarit est sobre et rapide. Pour un prospect à concept (bar, cantina, rooftop),
+`"animations": true` dans `site.json` active : vidéo de fond dans le hero (`photos.video`, MP4 muet
+≤ 2 Mo, la photo `hero` sert d'affiche et de repli), titre qui apparaît mot à mot, apparitions au
+défilement, parallaxe léger, en-tête qui se cache en descendant, bandeau défilant (`bandeau: [...]`),
+survols animés. Tout est en CSS et JavaScript maison, sans bibliothèque, et se désactive de lui-même
+si le visiteur a demandé moins d'animations ou économise ses données. `"style": { "forme_photos": "arche" }`
+arrondit la grande photo de la galerie et celle de l'événement.
+
+Démo : `maquettes/demo-casa-nomada/` (établissement fictif, photos Unsplash hébergées chez eux),
+en ligne sur https://webatir.com/maquettes/demo-casa-nomada/. À montrer aux prospects qui veulent
+« un site qui bouge », à côté de la version sobre.
+
 ## Régénérer
 
 Après toute modification d'un `site.json` ou du gabarit :

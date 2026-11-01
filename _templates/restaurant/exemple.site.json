@@ -35,14 +35,18 @@
   "style": {
     "couleurs": { "principale": "#1b1b1b", "fond": "#ffffff", "accent": "#b9974e" },
     "polices": { "titres": "Playfair Display", "texte": "Lato" },
-    "ambiance": "clair"
+    "ambiance": "clair",
+    "forme_photos": ""
   },
+  "animations": false,
+  "bandeau": [],
 
   "mentions": ["Fait maison", "Produits frais"],
 
   "logo": "",
   "photos": {
     "hero": { "src": "photos/salle.jpg", "alt": "La salle du restaurant" },
+    "video": null,
     "salle": [{ "src": "photos/salle.jpg", "alt": "La salle" }],
     "plats": [{ "src": "photos/plat-1.jpg", "alt": "Un plat signature" }]
   },

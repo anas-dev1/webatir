@@ -13,6 +13,7 @@ const RACINE = resolve(ICI, '..');
 const DOSSIER_MAQUETTES = join(RACINE, 'maquettes');
 const URL_BASE = 'https://webatir.com/maquettes/';
 const TAILLE_PHOTO_MAX = 200 * 1024;
+const TAILLE_VIDEO_MAX = 2 * 1024 * 1024;
 // Pages que le gabarit peut produire : celles qu'il ne produit plus sont supprimées.
 const PAGES_CONNUES = ['index.html', 'carte/index.html'];
 
@@ -65,8 +66,9 @@ for (const slug of slugs) {
   const refs = Object.values(pages).flatMap((html) => [...html.matchAll(/(?:src|href)="(?:\.\.\/)?(photos\/[^"]+)"/g)].map((m) => m[1]));
   for (const ref of new Set(refs)) {
     const chemin = join(dossier, decodeURIComponent(ref));
-    if (!existsSync(chemin)) console.warn(`  ! ${slug} : photo introuvable ${ref}`);
-    else if (statSync(chemin).size > TAILLE_PHOTO_MAX) console.warn(`  ! ${slug} : ${ref} fait ${Math.round(statSync(chemin).size / 1024)} Ko (> 200 Ko), à compresser`);
+    const max = /\.(mp4|webm)$/i.test(ref) ? TAILLE_VIDEO_MAX : TAILLE_PHOTO_MAX;
+    if (!existsSync(chemin)) console.warn(`  ! ${slug} : fichier introuvable ${ref}`);
+    else if (statSync(chemin).size > max) console.warn(`  ! ${slug} : ${ref} fait ${Math.round(statSync(chemin).size / 1024)} Ko (> ${max / 1024} Ko), à compresser`);
   }
   const noindex = /name="robots" content="noindex/.test(pages['index.html']);
   const liste = Object.keys(pages).map((p) => `maquettes/${slug}/${p}`).join(', ');

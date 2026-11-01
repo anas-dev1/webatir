@@ -116,6 +116,66 @@
     });
   }
 
+  /* --- Ambiance animée (html[data-anime]) : apparitions, parallaxe, en-tête, bandeau, vidéo --- */
+  var racine = document.documentElement;
+  if (racine.hasAttribute('data-anime')) {
+    var reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var connexion = navigator.connection || {};
+
+    /* Vidéo du hero : on la retire si l'utilisateur veut moins d'animations ou économise les données. */
+    var video = document.querySelector('video.hero__photo');
+    if (video && (reduit || connexion.saveData)) {
+      var affiche = document.createElement('img');
+      affiche.className = 'hero__photo'; affiche.src = video.poster; affiche.alt = video.getAttribute('aria-label') || '';
+      video.parentNode.replaceChild(affiche, video);
+    }
+
+    /* Apparitions au défilement : chaque élément reçoit data-rvl et un rang parmi ses frères. */
+    var cibles = '.section__titre, .section__intro, .mention, .apropos__int p, .evenement__int, .formule, .categorie__titre, .categorie__intro, .plat, .categorie__note, .carte__tout, .galerie__item, .infos__bloc, .infos__carte, .carte__fin';
+    var elements = Array.prototype.slice.call(document.querySelectorAll(cibles));
+    elements.forEach(function (el) {
+      var rang = 0, frere = el;
+      while ((frere = frere.previousElementSibling) && rang < 8) if (frere.hasAttribute('data-rvl')) rang++;
+      el.setAttribute('data-rvl', ''); el.style.setProperty('--i', rang);
+    });
+    if (reduit || !('IntersectionObserver' in window)) {
+      elements.forEach(function (el) { el.classList.add('is-visible'); });
+    } else {
+      var obsRvl = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('is-visible'); obsRvl.unobserve(en.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      elements.forEach(function (el) { obsRvl.observe(el); });
+      /* Ce qui est déjà à l'écran au chargement apparaît tout de suite. */
+      elements.forEach(function (el) { if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('is-visible'); });
+    }
+
+    /* Parallaxe du hero (desktop uniquement) et en-tête qui se cache en descendant. */
+    var media = document.querySelector('.hero__media');
+    var hero = document.querySelector('.hero');
+    var dernierY = window.scrollY, enAttente = false;
+    function cadre() {
+      enAttente = false;
+      var y = window.scrollY;
+      if (media && hero && !reduit && window.matchMedia('(min-width: 48rem)').matches && y < hero.offsetHeight) {
+        media.style.transform = 'translate3d(0,' + Math.round(y * 0.25) + 'px,0)';
+      }
+      if (entete) {
+        if (y > 320 && y > dernierY + 4) entete.classList.add('entete--cachee');
+        else if (y < dernierY - 4 || y < 120) entete.classList.remove('entete--cachee');
+      }
+      dernierY = y;
+    }
+    window.addEventListener('scroll', function () {
+      if (!enAttente) { enAttente = true; window.requestAnimationFrame(cadre); }
+    }, { passive: true });
+
+    /* Bandeau défilant : on double le contenu pour une boucle sans couture. */
+    var piste = document.querySelector('.bandeau__piste');
+    if (piste && !reduit) piste.innerHTML += piste.innerHTML;
+  }
+
   /* --- Galerie : lightbox avec <dialog> --- */
   var lb = document.getElementById('lightbox');
   var vignettes = Array.prototype.slice.call(document.querySelectorAll('.galerie__item'));
