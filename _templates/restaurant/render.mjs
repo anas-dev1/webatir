@@ -284,6 +284,7 @@ function rendreEntete(site, c, { p, page }) {
     <nav class="entete__nav" aria-label="Sections">
       ${accueil ? '' : `<a href="${p}">Accueil</a>`}
       <a href="${lienCarte}"${accueil ? '' : ' aria-current="page"'}>La carte</a>
+      ${site.groupes ? `<a href="${p}#groupes">Groupes</a>` : ''}
       ${(site.photos?.salle?.length || 0) + (site.photos?.plats?.length || 0) > 0 ? `<a href="${p}#galerie">Photos</a>` : ''}
       <a href="${p}#infos">Infos &amp; horaires</a>
     </nav>
@@ -387,6 +388,18 @@ ${ev ? `<section class="evenement" id="evenement" aria-labelledby="evenement-tit
       ${ev.description ? `<p class="evenement__desc">${esc(ev.description)}</p>` : ''}
       ${ev.lien ? `<a class="btn btn--plein" href="${esc(ev.lien)}" target="_blank" rel="noopener">${esc(ev.lien_texte || 'Réserver ma place')}</a>` : ''}
     </div>
+  </div>
+</section>` : ''}
+
+${site.groupes ? `<section class="groupes" id="groupes" aria-labelledby="groupes-titre">
+  <div class="conteneur groupes__int">
+    <div class="groupes__texte">
+      <h2 class="section__titre" id="groupes-titre">${esc(site.groupes.titre || 'Groupes & privatisation')}</h2>
+      ${(site.groupes.paragraphes || [site.groupes.texte]).filter(Boolean).map((p) => `<p>${esc(p)}</p>`).join('')}
+      ${site.groupes.details?.length ? `<ul class="groupes__details">${site.groupes.details.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>` : ''}
+      <p class="groupes__cta"><a class="btn btn--plein" href="${esc(site.groupes.cta_lien || `tel:${c.tel}`)}"${/^https?:/.test(site.groupes.cta_lien || '') ? ' target="_blank" rel="noopener"' : ''}>${esc(site.groupes.cta_texte || 'Demander un devis')}</a>${c.wa ? ` <a class="btn btn--fantome btn--icone" href="${esc(c.wa)}" target="_blank" rel="noopener">${ICONES.whatsapp}<span>WhatsApp</span></a>` : ''}</p>
+    </div>
+    ${site.groupes.image ? `<img class="groupes__image" src="${esc(photo(site.groupes.image).src)}" alt="${esc(photo(site.groupes.image, site.groupes.titre || '').alt)}" loading="lazy">` : ''}
   </div>
 </section>` : ''}
 

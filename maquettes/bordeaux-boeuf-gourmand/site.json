@@ -1,0 +1,259 @@
+{
+  "slug": "bordeaux-boeuf-gourmand",
+  "niche": "restaurant",
+  "publie": false,
+  "url": "",
+  "nom": "Bœuf Gourmand",
+  "nom_court": "Bœuf Gourmand",
+  "slogan": "Viandes d'exception grillées au feu de bois, à deux pas de la gare Saint-Jean.",
+  "description": "Steakhouse à Bordeaux Belcier, près de la gare Saint-Jean : côte de bœuf, entrecôte et burger gourmand grillés au feu de bois, grande salle, terrasse et groupes jusqu'à 150 personnes. Réservation en ligne.",
+  "cuisine": "Grillades, steakhouse",
+  "adresse": {
+    "rue": "10 Promenade des Forges",
+    "code_postal": "33800",
+    "ville": "Bordeaux"
+  },
+  "telephone": "06 14 69 97 89",
+  "whatsapp": null,
+  "maps": "https://www.google.com/maps/search/?api=1&query=B%C5%93uf+Gourmand+10+Promenade+des+Forges+33800+Bordeaux",
+  "reservation": {
+    "type": "url",
+    "valeur": "https://wiicmenu-qrcode.com/app/reservation_client.php?resto=1621",
+    "note": "Réservation en ligne jusqu'à 11h45 pour le midi, sinon par téléphone. Groupes : appelez-nous."
+  },
+  "reseaux": {
+    "instagram": "boeufgourmand"
+  },
+  "avis": {
+    "note": "4,6",
+    "nombre": 455,
+    "source": "Google"
+  },
+  "horaires": {
+    "a_confirmer": false,
+    "note": "Tram C et D, arrêt Belcier. Fermé le dimanche.",
+    "jours": {
+      "lundi": [
+        { "de": "12:00", "a": "14:30" },
+        { "de": "19:00", "a": "23:00" }
+      ],
+      "mardi": [
+        { "de": "12:00", "a": "14:30" },
+        { "de": "19:00", "a": "23:00" }
+      ],
+      "mercredi": [
+        { "de": "12:00", "a": "14:30" },
+        { "de": "19:00", "a": "23:00" }
+      ],
+      "jeudi": [
+        { "de": "12:00", "a": "14:30" },
+        { "de": "19:00", "a": "23:30" }
+      ],
+      "vendredi": [
+        { "de": "12:00", "a": "14:30" },
+        { "de": "19:00", "a": "23:30" }
+      ],
+      "samedi": [
+        { "de": "12:00", "a": "14:30" },
+        { "de": "19:00", "a": "23:30" }
+      ],
+      "dimanche": []
+    }
+  },
+  "style": {
+    "couleurs": {
+      "principale": "#f4ede3",
+      "fond": "#161311",
+      "accent": "#c9372c"
+    },
+    "polices": {
+      "titres": "Playfair Display",
+      "texte": "Lato"
+    },
+    "ambiance": "sombre"
+  },
+  "animations": true,
+  "mentions": [
+    "Grillades au feu de bois",
+    "Terrasse",
+    "Groupes jusqu'à 150 personnes",
+    "Près de la gare Saint-Jean",
+    "Menu enfant 10 €"
+  ],
+  "logo": "",
+  "photos": {
+    "hero": { "src": "photos/hero.jpg", "alt": "La salle du Bœuf Gourmand : briques, fauteuils en velours vert et plantes" },
+    "salle": [
+      { "src": "photos/salle.jpg", "alt": "La grande salle" },
+      { "src": "photos/terrasse.jpg", "alt": "La terrasse" },
+      { "src": "photos/salle-2.jpg", "alt": "Tables dressées près des baies vitrées" },
+      { "src": "photos/bar.jpg", "alt": "Cocktails au bar" }
+    ],
+    "plats": [
+      { "src": "photos/piece-du-boucher.jpg", "alt": "Pièce de bœuf grillée, cuisson saignante" },
+      { "src": "photos/entrecote-frites.jpg", "alt": "Entrecôte, frites maison et salade" },
+      { "src": "photos/burger.jpg", "alt": "Burger gourmand et frites maison" },
+      { "src": "photos/entrecote-beurre.jpg", "alt": "Entrecôte, riz et beurre maître d'hôtel" },
+      { "src": "photos/faux-filet.jpg", "alt": "Faux-filet et frites maison" },
+      { "src": "photos/cocktails.jpg", "alt": "Cocktails maison" }
+    ]
+  },
+  "a_propos": {
+    "titre": "La maison",
+    "paragraphes": [
+      "Un steakhouse de quartier à Belcier, entre la gare Saint-Jean et l'église du Sacré-Cœur. Les viandes sont grillées au feu de bois, avec des produits frais et une carte des vins pour les accompagner.",
+      "Grande salle, terrasse chaleureuse et une équipe qui vous accueille pour un déjeuner rapide comme pour une soirée entre amis ou en famille. Accessible en tram, lignes C et D, arrêt Belcier."
+    ],
+    "signature": ""
+  },
+  "groupes": {
+    "titre": "Groupes & privatisation",
+    "paragraphes": [
+      "Repas d'entreprise, anniversaires, soirées festives : la grande salle et la terrasse accueillent les groupes, jusqu'à la privatisation complète."
+    ],
+    "details": [
+      "Jusqu'à 150 personnes",
+      "Grande terrasse privatisable",
+      "Menus groupe sur mesure, carte des vins",
+      "À 5 minutes à pied de la gare Saint-Jean"
+    ],
+    "cta_texte": "Organiser mon événement",
+    "cta_lien": "",
+    "image": { "src": "photos/terrasse.jpg", "alt": "La terrasse du Bœuf Gourmand" }
+  },
+  "formules_titre": "Menu enfant",
+  "formules": [
+    {
+      "nom": "Menu enfant",
+      "prix": "10,00",
+      "details": [
+        "Nuggets ou steak haché, frites",
+        "Diabolo, jus de fruits ou sirop à l'eau",
+        "Une boule de glace : vanille, chocolat, fraise ou citron"
+      ]
+    }
+  ],
+  "carte_titre": "La carte",
+  "carte_intro": "Viandes grillées au feu de bois, accompagnement et sauce au choix. Carte des vins sur place.",
+  "carte_page": true,
+  "vedettes_titre": "Les incontournables",
+  "menu": [
+    {
+      "id": "entrees",
+      "titre": "Entrées",
+      "items": [
+        { "nom": "Œuf mimosa", "prix": "6,00" },
+        { "nom": "Œuf cocotte au foie gras", "prix": "14,00" },
+        { "nom": "Carpaccio de saumon ou de bœuf", "prix": "13,00" },
+        { "nom": "Assiette de foie gras mi-cuit", "prix": "15,00", "vedette": true },
+        { "nom": "Burrata di bufala", "prix": "14,50" }
+      ]
+    },
+    {
+      "id": "salades",
+      "titre": "Salades",
+      "items": [
+        { "nom": "Mini salade César", "prix": "8,00" },
+        { "nom": "Salade César", "prix": "14,50", "description": "Poulet croustillant, parmesan, tomate, concombre, croûtons" },
+        { "nom": "Salade Féta", "prix": "14,50", "description": "Feta, tomate, concombre, oignons rouges, toasts, herbes de Provence", "tag": "Végé" },
+        { "nom": "Salade Landaise", "prix": "16,90", "description": "Foie gras, magret fumé, gésiers de canard, tomate, concombre, oignons rouges, croûtons", "vedette": true }
+      ]
+    },
+    {
+      "id": "viandes",
+      "titre": "Viandes",
+      "apercu": true,
+      "intro": "Grillées au feu de bois. Un accompagnement au choix : frites maison, riz, écrasé de pommes de terre, légumes du soleil ou salade verte. Sauce au choix : bleu d'Auvergne, crème ciboulette, échalotes confites ou poivre.",
+      "note": "Accompagnement supplémentaire 3 € · sauce supplémentaire 0,50 € · tranche de foie gras poêlé 4 €.",
+      "items": [
+        { "nom": "Côte de bœuf 1 personne", "prix": "34,00", "description": "450 à 500 g", "vedette": true },
+        { "nom": "Côte de bœuf 2 personnes", "prix": "66,00", "description": "1,1 à 1,2 kg, à partager" },
+        { "nom": "Entrecôte", "prix": "22,00", "description": "250 à 280 g" },
+        { "nom": "Faux-filet", "prix": "19,00", "description": "220 à 250 g" },
+        { "nom": "Bavette", "prix": "17,00", "description": "200 à 250 g" },
+        { "nom": "Magret de canard", "prix": "23,00", "description": "350 à 400 g" },
+        { "nom": "Tartare de bœuf", "prix": "15,90", "description": "100 g" },
+        { "nom": "Souris d'agneau", "prix": "25,00" },
+        { "nom": "Côtelettes d'agneau", "prix": "19,90" },
+        { "nom": "Brochette de poulet", "prix": "15,90" },
+        { "nom": "Kofté", "prix": "17,50" },
+        { "nom": "Burger gourmand", "prix": "17,50", "description": "Frites maison", "vedette": true }
+      ]
+    },
+    {
+      "id": "poissons",
+      "titre": "Poissons",
+      "items": [
+        { "nom": "Tartare de saumon", "prix": "18,00" },
+        { "nom": "Pavé de saumon", "prix": "19,00" },
+        { "nom": "Poisson du jour", "prix": "21,90", "description": "Selon arrivage" }
+      ]
+    },
+    {
+      "id": "desserts",
+      "titre": "Desserts",
+      "items": [
+        { "nom": "Crème brûlée", "prix": "7,00" },
+        { "nom": "Panna cotta", "prix": "6,50", "description": "Coulis fruits rouges ou mangue" },
+        { "nom": "Mousse au chocolat", "prix": "7,00" },
+        { "nom": "Tiramisu café", "prix": "7,50", "description": "Éclats de spéculoos" },
+        { "nom": "Moelleux au chocolat", "prix": "8,00", "vedette": true },
+        { "nom": "Trio de fromages", "prix": "7,50", "description": "Bleu d'Auvergne, brie, chèvre" }
+      ]
+    },
+    {
+      "id": "cocktails",
+      "titre": "Cocktails",
+      "prix_unique": "11,00",
+      "items": [
+        { "nom": "Mojito", "description": "Rhum Havana ambré, citron vert, menthe fraîche, sucre de canne, eau gazeuse", "vedette": true },
+        { "nom": "Caipirinha", "description": "Cachaça, citron vert, sucre de canne" },
+        { "nom": "Whisky sour", "description": "Whisky, jus de citron, sucre de canne" },
+        { "nom": "Cosmopolitan", "description": "Vodka, triple sec, citron vert, cranberry" },
+        { "nom": "Americano", "description": "Martini rouge et blanc, Campari, eau gazeuse" },
+        { "nom": "Captain Ginger", "description": "Rhum Captain Morgan, ginger ou coco" }
+      ]
+    },
+    {
+      "id": "mocktails",
+      "titre": "Mocktails sans alcool",
+      "prix_unique": "9,00",
+      "items": [
+        { "nom": "Virgin Mojito", "description": "Menthe fraîche, citron vert, sucre de canne, eau gazeuse" },
+        { "nom": "Lady in Pink", "description": "Sirop de fraise, fraises Tagada, ananas, citron" },
+        { "nom": "Lady in Red", "description": "Grenadine, fraise, cranberry, eau gazeuse, baies rouges" },
+        { "nom": "Sinderella", "description": "Menthe fraîche, pêche, pomme, citron vert, eau gazeuse" },
+        { "nom": "Green Cooler", "description": "Menthe fraîche, concombre, orange, citron vert, tonic" },
+        { "nom": "Serena", "description": "Violette, citron vert, pomme, limonade" }
+      ]
+    },
+    {
+      "id": "bieres",
+      "titre": "Bières",
+      "compact": true,
+      "items": [
+        { "nom": "Pression blonde La Goudale", "prix": "4,50", "description": "25 cl · 50 cl 7,50 €" },
+        { "nom": "Pression ambrée Saint-Omer", "prix": "5,00", "description": "25 cl · 50 cl 7,50 €" },
+        { "nom": "Pression blanche Hoegaarden", "prix": "5,00", "description": "25 cl · 50 cl 7,50 €" },
+        { "nom": "Desperados", "prix": "7,50" },
+        { "nom": "Peroni sans alcool", "prix": "6,00" }
+      ]
+    },
+    {
+      "id": "boissons",
+      "titre": "Boissons",
+      "compact": true,
+      "note": "Carte des vins et alcools disponibles sur place.",
+      "items": [
+        { "nom": "Coca-Cola, Coca-Cola zéro, Orangina, Fuze Tea, limonade, Perrier, tonic", "prix": "4,00" },
+        { "nom": "Jus Pago", "prix": "3,50", "description": "Abricot, ACE, fraise, orange, pomme, tomate" },
+        { "nom": "Sirop à l'eau", "prix": "2,50", "description": "Citron, fraise, grenadine, menthe, orgeat, pêche" },
+        { "nom": "Eau Abatilles plate ou pétillante", "prix": "3,50", "description": "33 cl · 75 cl 4,90 €" },
+        { "nom": "Expresso", "prix": "2,00" },
+        { "nom": "Café allongé", "prix": "2,50" },
+        { "nom": "Double expresso", "prix": "3,60" },
+        { "nom": "Chocolat chaud, thé ou infusion", "prix": "3,60" }
+      ]
+    }
+  ]
+}

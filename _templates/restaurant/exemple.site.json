@@ -57,6 +57,16 @@
     "signature": ""
   },
 
+  "groupes": null,
+  "groupes_exemple": {
+    "titre": "Groupes & privatisation",
+    "paragraphes": ["Repas d'entreprise, anniversaires, privatisation de la salle : on s'occupe de tout."],
+    "details": ["Jusqu'à 60 personnes", "Menus groupe à partir de 29 €", "Terrasse privatisable"],
+    "cta_texte": "Demander un devis",
+    "cta_lien": "",
+    "image": ""
+  },
+
   "formules_titre": "Formules",
   "formules": [
     { "nom": "Entrée + Plat + Dessert", "prix": "29,90", "description": "Au choix dans la carte." }

@@ -45,6 +45,14 @@ n'affiche qu'un aperçu : les formules, les catégories marquées `"apercu": tru
 `"vedette": true` (regroupés sous `vedettes_titre`, « Les incontournables » par défaut), suivi d'un
 bouton « Voir toute la carte ». Sans `carte_page`, tout reste sur l'accueil.
 
+## Groupes & privatisation
+
+Pour un restaurant qui vit des groupes (repas d'entreprise, anniversaires, grande terrasse), le bloc
+`groupes` de `site.json` ajoute une section dédiée après « La maison » : `titre`, `paragraphes`,
+`details` (liste courte : capacité, menus groupe, privatisation), `cta_texte` et `cta_lien`
+(vide = appel téléphonique), `image` facultative. Exemple dans `_templates/restaurant/exemple.site.json`
+(`groupes_exemple`) et dans `maquettes/bordeaux-boeuf-gourmand/`.
+
 ## Ambiance animée
 
 Par défaut le gabarit est sobre et rapide. Pour un prospect à concept (bar, cantina, rooftop),

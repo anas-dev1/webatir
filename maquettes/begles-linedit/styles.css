@@ -132,6 +132,20 @@ section { padding: 3rem 0; }
 .evenement__date { color: var(--accent); font-weight: 700; margin: .4rem 0 .6rem; }
 .evenement__desc { opacity: .85; }
 
+/* ---------- groupes & privatisation (groupes: {...}) ---------- */
+.groupes { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.groupes__int { display: grid; gap: 1.5rem; padding: 1.75rem; border-radius: 1rem; background: var(--accent-clair); border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); }
+.groupes__texte p { max-width: 40rem; }
+.groupes__details { display: grid; gap: .35rem; margin: 0 0 1rem; color: var(--texte-doux); }
+.groupes__details li::before { content: '— '; color: var(--accent-fonce); }
+.groupes__cta { display: flex; flex-wrap: wrap; gap: .6rem; margin: 0; }
+.groupes__image { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: .6rem; }
+[data-forme="arche"] .groupes__image { border-radius: 999px 999px .6rem .6rem; }
+@media (min-width: 48rem) {
+  .groupes__int { grid-template-columns: 1.4fr 1fr; align-items: center; padding: 2.5rem; }
+  .groupes__int:not(:has(.groupes__image)) { grid-template-columns: 1fr; }
+}
+
 /* ---------- carte ---------- */
 .carte { background: var(--surface); }
 .onglets {
