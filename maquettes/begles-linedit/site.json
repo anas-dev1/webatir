@@ -1,0 +1,231 @@
+{
+  "slug": "begles-linedit",
+  "niche": "restaurant",
+  "publie": false,
+  "url": "",
+
+  "nom": "L'inédit Restaurant",
+  "nom_court": "L'inédit",
+  "slogan": "Halal, fait maison, simplement exceptionnel.",
+  "description": "Restaurant halal à Bègles, aux portes de Bordeaux : viandes françaises cuites à la pierre de lave, plats faits maison, cocktails sans alcool et brunch le dimanche. Salle de prière à disposition.",
+  "cuisine": "Française, halal",
+
+  "adresse": { "rue": "320 Route de Toulouse", "code_postal": "33130", "ville": "Bègles" },
+  "telephone": "06 26 07 69 40",
+  "whatsapp": null,
+  "maps": "https://goo.gl/maps/99VqEdujbL939hxx8",
+  "reservation": { "type": "tel", "valeur": "06 26 07 69 40", "note": "Le brunch du dimanche est uniquement sur réservation." },
+  "reseaux": {
+    "instagram": "lineditbdx",
+    "facebook": "https://www.facebook.com/profile.php?id=100063702032195",
+    "snapchat": "https://t.snapchat.com/RnKAHKuK"
+  },
+  "avis": { "note": "4,6", "nombre": 804, "source": "Google" },
+
+  "horaires": {
+    "a_confirmer": false,
+    "note": "Brunch le dimanche de 10h30 à 15h, sur réservation uniquement.",
+    "jours": {
+      "lundi": [{ "de": "19:30", "a": "00:00" }],
+      "mardi": [],
+      "mercredi": [{ "de": "19:30", "a": "00:00" }],
+      "jeudi": [{ "de": "19:30", "a": "00:00" }],
+      "vendredi": [{ "de": "19:30", "a": "00:00" }],
+      "samedi": [{ "de": "19:30", "a": "00:00" }],
+      "dimanche": [{ "de": "10:30", "a": "15:00", "note": "brunch, sur réservation" }, { "de": "19:30", "a": "00:00" }]
+    }
+  },
+
+  "style": {
+    "couleurs": { "principale": "#1c1c1c", "fond": "#ffffff", "accent": "#beb88a" },
+    "polices": { "titres": "Prata", "texte": "Lato" },
+    "ambiance": "clair"
+  },
+
+  "mentions": ["Halal", "Fait maison", "Viandes françaises", "Salle de prière", "Brunch le dimanche"],
+
+  "logo": "photos/logo.png",
+  "photos": {
+    "hero": { "src": "photos/hero.jpg", "alt": "La salle de L'inédit : fauteuils en velours moutarde et plafond lumineux" },
+    "salle": [
+      { "src": "photos/salle.jpg", "alt": "La salle de L'inédit" },
+      { "src": "photos/facade.jpg", "alt": "La façade de L'inédit, route de Toulouse à Bègles" }
+    ],
+    "plats": [
+      { "src": "photos/entrecote.jpg", "alt": "Entrecôte cuite à la pierre de lave" },
+      { "src": "photos/foie-gras.jpg", "alt": "Foie gras de canard mi-cuit et sa confiture de figues" },
+      { "src": "photos/carpaccio.jpg", "alt": "Carpaccio de bœuf, pesto et parmesan" },
+      { "src": "photos/fondant.jpg", "alt": "Fondant au chocolat et sa boule de vanille" },
+      { "src": "photos/cocktail-pina.jpg", "alt": "Piña colada sans alcool" },
+      { "src": "photos/cocktail-mojito.jpg", "alt": "Virgin mojito" },
+      { "src": "photos/trompe-loeil.jpg", "alt": "Trompe-l'œil pistache, le dessert signature" },
+      { "src": "photos/brunch.jpg", "alt": "Le brunch du dimanche" }
+    ]
+  },
+
+  "a_propos": {
+    "titre": "La maison",
+    "paragraphes": [
+      "À L'inédit, tout est fait maison, des sauces aux desserts. Les viandes sont toutes d'origine française, certaines charolaises, et se dégustent cuites à la pierre de lave, devant vous.",
+      "Le chef Omar conseille la cuisson saignante, voire bleue, pour les pièces d'exception. Merci de signaler toute allergie à notre équipe. Une salle de prière est à votre disposition."
+    ],
+    "signature": ""
+  },
+
+  "evenement": {
+    "surtitre": "À l'affiche",
+    "titre": "Soirée stand-up",
+    "date": "Jeudi 5 novembre · accueil dès 19h, spectacle à 20h",
+    "description": "Quatre humoristes sur scène et un dîner sur place. Places limitées, billetterie en ligne.",
+    "lien": "https://www.helloasso.com/associations/stand-up-bordeaux/evenements/l-inedit-jeudi-05-novembre",
+    "lien_texte": "Prendre mes places sur HelloAsso"
+  },
+
+  "formules_titre": "Formules",
+  "formules": [
+    {
+      "nom": "Entrée + Plat + Dessert",
+      "prix": "40,90",
+      "description": "Au choix dans la carte, hors pièces d'exception.",
+      "note": "Suppléments : +3 € (assiette L'inédit, foie gras mi-cuit, tigre qui pleure, magret de canard, poisson au four à l'orientale, risotto) · +5 € (carpaccio de bœuf et sa burrata)."
+    },
+    {
+      "nom": "Menu enfant",
+      "prix": "16,90",
+      "description": "Jusqu'à 12 ans.",
+      "details": ["Nuggets, steak haché ou poisson pané", "Frites maison", "Glace 2 boules", "Sirop au choix"]
+    }
+  ],
+
+  "carte_titre": "La carte",
+  "carte_intro": "Viandes françaises cuites à la pierre de lave, plats faits maison et desserts signature. Tout est halal.",
+  "menu": [
+    {
+      "id": "pieces",
+      "titre": "Pièces d'exception",
+      "note": "Conseil du chef Omar : cuisson saignante, voire bleue. Pièces servies hors formule.",
+      "items": [
+        { "nom": "Côte de bœuf", "prix": "39,90", "description": "Environ 700 g, cuite à la pierre de lave, accompagnement au choix", "tag": "Hors formule" },
+        { "nom": "T-bone de bœuf", "prix": "39,90", "description": "Environ 700 g, cuit à la pierre de lave, accompagnement au choix", "tag": "Hors formule" },
+        { "nom": "Filet de bœuf Rossini", "prix": "32,90", "description": "250 g, foie gras poêlé, poire", "tag": "Hors formule" },
+        { "nom": "Noix d'entrecôte de Wagyu australien A5", "prix": "79,90", "description": "Environ 230 g", "tag": "Hors formule" }
+      ]
+    },
+    {
+      "id": "entrees",
+      "titre": "Entrées",
+      "items": [
+        { "nom": "Assiette L'inédit", "prix": "13,90", "description": "2 brochettes de bœuf cheese, poulet pané, brie" },
+        { "nom": "Foie gras de canard du Sud-Ouest mi-cuit", "prix": "14,90", "description": "Confiture de figues" },
+        { "nom": "Camembert pané", "prix": "13,50", "description": "Fondant et croustillant, toasts, grenailles, salade verte" },
+        { "nom": "Camembert rôti au miel", "prix": "13,50", "description": "Toasts, grenailles, salade verte" },
+        { "nom": "Carpaccio de bœuf", "prix": "13,50", "description": "Pesto, parmesan" },
+        { "nom": "Carpaccio de bœuf et sa burrata", "prix": "18,50", "description": "Pesto, parmesan, burrata" },
+        { "nom": "Carpaccio de saumon fumé", "prix": "12,50" },
+        { "nom": "Duo de saumon avocat", "prix": "13,90" },
+        { "nom": "Cocktail de thon", "prix": "12,50" },
+        { "nom": "Burrata 125 g", "prix": "12,50", "description": "Italie, pesto vert, légumes de saison" },
+        { "nom": "Tomates mozzarella", "prix": "11,50" },
+        { "nom": "Pesto de tomates grillées", "prix": "11,50" },
+        { "nom": "Salade L'inédit", "prix": "13,50", "description": "Poulet pané, chèvre chaud · burrata +5 €" },
+        { "nom": "Salade de chèvre", "prix": "12,90" },
+        { "nom": "Salade de chèvre frais aux figues fraîches", "prix": "11,50", "description": "Roquette, chèvre, figue, noix" }
+      ]
+    },
+    {
+      "id": "plats",
+      "titre": "Plats",
+      "note": "Accompagnement au choix : légumes sautés, écrasé de pommes de terre, frites maison, riz pilaf, haricots verts ou salade verte. Accompagnement supplémentaire 3,50 € · gratin dauphinois, grenailles, purée de patate douce ou tagliatelles hors formule.",
+      "items": [
+        { "nom": "Tigre qui pleure cuit à la pierre de lave", "prix": "26,90", "description": "Filet de bœuf 250 g, oignons, coriandre · sauce roquefort, poivre ou champignons" },
+        { "nom": "Magret de canard cuit à la pierre de lave", "prix": "26,90", "description": "Sauce roquefort, poivre ou champignons" },
+        { "nom": "Entrecôte 300 g cuite à la pierre de lave", "prix": "24,90", "description": "Sauce au choix" },
+        { "nom": "Faux-filet 300 g cuit à la pierre de lave", "prix": "23,90", "description": "Sauce au choix" },
+        { "nom": "Émincé de filet de bœuf", "prix": "24,90", "description": "Écrasé de pommes de terre, champignons, cornichons" },
+        { "nom": "Souris d'agneau aux pruneaux et abricots", "prix": "24,90" },
+        { "nom": "Souris d'agneau braisée", "prix": "24,90" },
+        { "nom": "Confit de canard", "prix": "24,90", "description": "Gratin dauphinois" },
+        { "nom": "Boulettes de viande hachée à l'orientale", "prix": "23,90" },
+        { "nom": "Escalope de poulet à la crème", "prix": "23,90", "description": "Champignons, oignons" },
+        { "nom": "Poulet aux olives", "prix": "23,90" },
+        { "nom": "Burger foie gras", "prix": "25,90", "description": "Roquette, cheddar, oignons caramélisés" },
+        { "nom": "Burger burrata", "prix": "25,90", "description": "Roquette, cheddar, oignons caramélisés" },
+        { "nom": "Burger poulet", "prix": "23,90", "description": "Sauce L'inédit légèrement épicée, oignons" },
+        { "nom": "Risotto gambas et Saint-Jacques", "prix": "24,90" },
+        { "nom": "Poisson au four à l'orientale", "prix": "25,90", "description": "Poisson frais" },
+        { "nom": "Saumon laqué sauce L'inédit", "prix": "24,90", "description": "Poisson frais" },
+        { "nom": "Tagliatelles al pomodoro", "prix": "22,90", "description": "Tomates cerises, basilic", "tag": "Végétarien" },
+        { "nom": "Tagliatelles aux tomates séchées", "prix": "22,90", "description": "Mozzarella, parmesan, tomates séchées maison, basilic", "tag": "Végétarien" },
+        { "nom": "Tagliatelles burrata sauce pesto", "prix": "24,90", "tag": "Végétarien" },
+        { "nom": "Tagliatelles au saumon fumé", "prix": "23,90", "description": "Crème fraîche, champignons" },
+        { "nom": "Tagliatelles au poulet", "prix": "23,90", "description": "Crème fraîche, champignons" },
+        { "nom": "Légumes grillés", "prix": "18,90", "tag": "Végétarien" }
+      ]
+    },
+    {
+      "id": "desserts",
+      "titre": "Desserts",
+      "items": [
+        { "nom": "Trompe-l'œil", "prix": "9,90", "description": "7 parfums : cacahuète, pistache, tablette Bueno, Snickers, passion, mangue, vanille", "tag": "Signature" },
+        { "nom": "Riz au lait", "prix": "8,90", "description": "Pistaches caramélisées, caramel beurre salé" },
+        { "nom": "Tiramisu classique", "prix": "8,90", "description": "Café, boudoirs" },
+        { "nom": "Tiramisu pistache", "prix": "8,90" },
+        { "nom": "Tiramisu Oreo Nutella", "prix": "8,90" },
+        { "nom": "Tiramisu spéculoos caramel beurre salé", "prix": "8,90" },
+        { "nom": "Fondant au chocolat", "prix": "8,90" },
+        { "nom": "Mousse au chocolat", "prix": "8,90" },
+        { "nom": "Pain perdu Nutella", "prix": "8,90", "description": "Brioche vendéenne, boule de vanille" },
+        { "nom": "Pain perdu caramel beurre salé", "prix": "8,90", "description": "Brioche vendéenne, boule de vanille" },
+        { "nom": "Crème brûlée pistache", "prix": "8,90" },
+        { "nom": "Entremets vanille framboise", "prix": "8,90" },
+        { "nom": "Entremets vanille chocolat", "prix": "8,90" },
+        { "nom": "Entremets vanille mangue", "prix": "8,90" },
+        { "nom": "Salade de fruits", "prix": "8,90" },
+        { "nom": "Glace 3 boules", "prix": "6,90", "description": "Vanille, fraise, mangue, chocolat, pistache, café, nougat, caramel" }
+      ]
+    },
+    {
+      "id": "cocktails",
+      "titre": "Cocktails sans alcool",
+      "prix_unique": "8,50",
+      "compact": true,
+      "items": [
+        { "nom": "Virgin Mojito", "description": "Parfum au choix +1 € : mangue, passion, framboise, fraise, pêche blanche" },
+        { "nom": "L'inédit Pink" },
+        { "nom": "Tango Mango" },
+        { "nom": "Piña Colada" },
+        { "nom": "Pink Colada" },
+        { "nom": "Cosmopolitan" },
+        { "nom": "White Lady" }
+      ]
+    },
+    {
+      "id": "boissons",
+      "titre": "Boissons",
+      "compact": true,
+      "items": [
+        { "nom": "Soda", "prix": "4,50", "description": "Coca, Coca zéro, Coca cherry, Schweppes agrumes, Orangina, Fanta, Oasis, diabolo" },
+        { "nom": "Evian 50 cl", "prix": "4,50" },
+        { "nom": "San Pellegrino 50 cl", "prix": "4,50" },
+        { "nom": "Jus de fruits Pago", "prix": "3,50", "description": "Ananas, fraise, multifruits" },
+        { "nom": "Sirop à l'eau", "prix": "2,50", "description": "Fraise, grenadine, pêche, citron, banane-kiwi, violette, rose, menthe" },
+        { "nom": "Café Nespresso", "prix": "2,50" },
+        { "nom": "Café Nespresso aromatisé", "prix": "2,80", "description": "Noisette, vanille, caramel" },
+        { "nom": "Petite théière à la menthe", "prix": "3,50" },
+        { "nom": "Grande théière", "prix": "6,00" },
+        { "nom": "Infusion", "prix": "3,00" },
+        { "nom": "Chocolat chaud", "prix": "3,50" }
+      ]
+    },
+    {
+      "id": "brunch",
+      "titre": "Brunch du dimanche",
+      "intro": "Le dimanche de 10h30 à 15h, sur réservation au 06 26 07 69 40. Boisson chaude au choix : café, café au lait, cappuccino, chocolat chaud ou petite théière à la menthe. Entrées, desserts et cocktails de la carte disponibles en supplément.",
+      "note": "Suppléments : œufs au plat +3,50 € · msemen +4 € · toast avocat saumon +5 € · pancakes ou gaufres +3,50 € · salade burrata +11,50 € · assiette L'inédit +12,50 € · brioche perdue maison caramel beurre salé ou Nutella +8,90 €.",
+      "items": [
+        { "nom": "Formule Gourmande", "prix": "20,00", "description": "Boisson chaude, toast avocat saumon, charcuterie, pancakes, gaufres, salade de fruits, jus d'orange, confiture, beurre, miel, Nutella, sirop d'érable, olives" },
+        { "nom": "Formule Beldi", "prix": "20,00", "description": "Boisson chaude, msemen, baghrir, œufs au plat à l'huile d'olive et cumin, charcuterie, gaufres, salade de fruits, jus d'orange, confiture, beurre, miel, Nutella, sirop d'érable, olives" }
+      ]
+    }
+  ]
+}

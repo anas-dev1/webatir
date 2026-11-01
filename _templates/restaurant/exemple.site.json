@@ -1,0 +1,93 @@
+{
+  "slug": "ville-nom",
+  "niche": "restaurant",
+  "publie": false,
+  "url": "",
+
+  "nom": "Nom du restaurant",
+  "nom_court": "Nom",
+  "slogan": "Une phrase courte qui donne envie.",
+  "description": "Deux phrases pour Google et les réseaux : type de cuisine, quartier, ce qui rend l'adresse unique.",
+  "cuisine": "Française",
+
+  "adresse": { "rue": "12 rue Exemple", "code_postal": "33000", "ville": "Bordeaux" },
+  "telephone": "05 00 00 00 00",
+  "whatsapp": null,
+  "maps": "https://maps.app.goo.gl/xxxx",
+  "reservation": { "type": "tel", "valeur": "05 00 00 00 00", "note": "Groupes et privatisation : appelez-nous." },
+  "reseaux": { "instagram": "compte_instagram", "facebook": "" },
+  "avis": { "note": "4,7", "nombre": 120, "source": "Google" },
+
+  "horaires": {
+    "a_confirmer": true,
+    "note": "",
+    "jours": {
+      "lundi": [{ "de": "12:00", "a": "14:30" }, { "de": "19:00", "a": "22:30" }],
+      "mardi": [{ "de": "12:00", "a": "14:30" }, { "de": "19:00", "a": "22:30" }],
+      "mercredi": [{ "de": "12:00", "a": "14:30" }, { "de": "19:00", "a": "22:30" }],
+      "jeudi": [{ "de": "12:00", "a": "14:30" }, { "de": "19:00", "a": "22:30" }],
+      "vendredi": [{ "de": "12:00", "a": "14:30" }, { "de": "19:00", "a": "23:00" }],
+      "samedi": [{ "de": "19:00", "a": "23:00" }],
+      "dimanche": []
+    }
+  },
+
+  "style": {
+    "couleurs": { "principale": "#1b1b1b", "fond": "#ffffff", "accent": "#b9974e" },
+    "polices": { "titres": "Playfair Display", "texte": "Lato" },
+    "ambiance": "clair"
+  },
+
+  "mentions": ["Fait maison", "Produits frais"],
+
+  "logo": "",
+  "photos": {
+    "hero": { "src": "photos/salle.jpg", "alt": "La salle du restaurant" },
+    "salle": [{ "src": "photos/salle.jpg", "alt": "La salle" }],
+    "plats": [{ "src": "photos/plat-1.jpg", "alt": "Un plat signature" }]
+  },
+
+  "a_propos": {
+    "titre": "La maison",
+    "paragraphes": ["Un paragraphe sur l'histoire, le chef, la façon de cuisiner."],
+    "signature": ""
+  },
+
+  "formules_titre": "Formules",
+  "formules": [
+    { "nom": "Entrée + Plat + Dessert", "prix": "29,90", "description": "Au choix dans la carte." }
+  ],
+
+  "carte_titre": "La carte",
+  "carte_intro": "",
+  "menu": [
+    {
+      "id": "entrees",
+      "titre": "Entrées",
+      "items": [
+        { "nom": "Nom de l'entrée", "prix": "9,50", "description": "Deux ou trois ingrédients." }
+      ]
+    },
+    {
+      "id": "plats",
+      "titre": "Plats",
+      "note": "Accompagnement au choix : frites maison, légumes ou salade.",
+      "items": [
+        { "nom": "Nom du plat", "prix": "18,90", "description": "", "tag": "" }
+      ]
+    },
+    {
+      "id": "desserts",
+      "titre": "Desserts",
+      "items": [{ "nom": "Nom du dessert", "prix": "7,50" }]
+    },
+    {
+      "id": "boissons",
+      "titre": "Boissons",
+      "compact": true,
+      "items": [{ "nom": "Soda", "prix": "3,50" }, { "nom": "Café", "prix": "2,00" }]
+    }
+  ],
+
+  "evenement": null
+}
