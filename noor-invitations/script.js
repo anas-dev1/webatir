@@ -1,4 +1,4 @@
-/* ============ Noor Invitations — interactions ============ */
+/* ============ Aleyna Invitations — interactions ============ */
 
 // --- Modèles (catalogue centralisé dans collections.js) ---
 if (typeof noorRenderModels === 'function') noorRenderModels();

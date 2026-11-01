@@ -1,4 +1,4 @@
-/* ============ Noor Invitations — catalogue des modèles ============
+/* ============ Aleyna Invitations — catalogue des modèles ============
    Source unique des modèles : la page d'accueil, la page /collections et les démos lisent cette liste.
    - Accueil : modèles featured (les modèles pas encore disponibles s'affichent avec « Bientôt »)
    - /collections : modèles available

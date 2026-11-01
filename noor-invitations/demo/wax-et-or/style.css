@@ -463,7 +463,7 @@ p + p { margin-top: 12px; }
   .reveal { opacity: 1; transform: none; }
 }
 
-/* ---------- Démo Noor Invitations : retour aux modèles et commande ---------- */
+/* ---------- Démo Aleyna Invitations : retour aux modèles et commande ---------- */
 .demo-order {
   text-align: center;
   padding: 70px 24px calc(120px + env(safe-area-inset-bottom, 0px));

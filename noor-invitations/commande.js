@@ -1,4 +1,4 @@
-/* ============ Noor Invitations — commande en ligne ============
+/* ============ Aleyna Invitations — commande en ligne ============
    Formules, options et liens de paiement Stripe.
    Paiement en une fois, à la commande : le client règle le total (formule + options).
 

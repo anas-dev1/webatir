@@ -245,6 +245,7 @@ form.querySelectorAll('input[name="presence"]').forEach((radio) => {
   radio.addEventListener('change', () => { guestsField.hidden = radio.value.startsWith('Non') && radio.checked; });
 });
 form.addEventListener('submit', async (e) => {
+  if (form.dataset.rsvpSite) return; // vrai faire-part : l'envoi est géré par rsvp.js
   e.preventDefault();
   const button = form.querySelector('button[type="submit"]');
   button.disabled = true;

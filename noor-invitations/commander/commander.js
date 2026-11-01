@@ -1,4 +1,4 @@
-/* ============ Noor Invitations — page de commande ============
+/* ============ Aleyna Invitations — page de commande ============
    1. Le modèle vient de l'adresse (?modele=slug), la formule éventuellement de ?formule=id.
    2. Le récapitulatif se calcule en direct.
    3. À la validation : le récapitulatif part par e-mail (FormSubmit), puis le client paie le total en une fois
@@ -114,7 +114,7 @@
   const orderId = () => {
     const d = new Date();
     const ymd = `${d.getFullYear() % 100}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
-    return `NOOR-${ymd}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+    return `ALEYNA-${ymd}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
   };
 
   function recap(id) {
