@@ -60,6 +60,8 @@
 
   "carte_titre": "La carte",
   "carte_intro": "",
+  "carte_page": false,
+  "vedettes_titre": "Les incontournables",
   "menu": [
     {
       "id": "entrees",
@@ -73,7 +75,7 @@
       "titre": "Plats",
       "note": "Accompagnement au choix : frites maison, légumes ou salade.",
       "items": [
-        { "nom": "Nom du plat", "prix": "18,90", "description": "", "tag": "" }
+        { "nom": "Nom du plat", "prix": "18,90", "description": "", "tag": "", "vedette": false }
       ]
     },
     {

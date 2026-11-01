@@ -1,6 +1,12 @@
-// Gabarit « restaurant » : transforme un site.json en HTML statique (une page).
+// Gabarit « restaurant » : transforme un site.json en HTML statique.
 // Rendu au build, aucun fetch côté client. Les photos sont référencées telles
 // quelles (chemins relatifs au dossier de la maquette, ex. photos/salle.jpg).
+//
+// Pages produites :
+//   index.html         accueil (tout le site en une page)
+//   carte/index.html   la carte complète, seulement si "carte_page": true ;
+//                      l'accueil n'affiche alors qu'un aperçu (formules,
+//                      catégories "apercu": true, plats "vedette": true).
 import { esc, prix, telInternational, melanger, estClair } from '../lib.mjs';
 
 export const JOURS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
@@ -85,6 +91,7 @@ export function jsonLd(site, ctx) {
     }
   }
   const base = site.url || ctx.url || 'https://exemple.fr/';
+  const racine = base.endsWith('/') ? base : base + '/';
   const d = {
     '@context': 'https://schema.org',
     '@type': 'Restaurant',
@@ -92,7 +99,8 @@ export function jsonLd(site, ctx) {
     description: site.description || site.slogan,
     url: site.url || ctx.url,
     telephone: telInternational(site.telephone),
-    image: site.photos?.hero ? new URL(photo(site.photos.hero).src, base.endsWith('/') ? base : base + '/').href : undefined,
+    image: site.photos?.hero ? new URL(photo(site.photos.hero).src, racine).href : undefined,
+    hasMenu: site.carte_page ? new URL('carte/', racine).href : undefined,
     address: {
       '@type': 'PostalAddress',
       streetAddress: a.rue,
@@ -148,12 +156,29 @@ function rendrePlat(p) {
     </li>`;
 }
 
-function rendreMenu(site) {
-  const cats = site.menu || [];
+function rendreCategorie(c) {
+  return `<div class="categorie" id="cat-${esc(c.id)}">
+  <h3 class="categorie__titre">${esc(c.titre)}${c.prix_unique ? ` <span class="categorie__prix">${esc(prix(c.prix_unique))}</span>` : ''}</h3>
+  ${c.intro ? `<p class="categorie__intro">${esc(c.intro)}</p>` : ''}
+  <ul class="plats${c.compact ? ' plats--compact' : ''}">${(c.items || []).map(rendrePlat).join('\n')}</ul>
+  ${c.note ? `<p class="categorie__note">${esc(c.note)}</p>` : ''}
+</div>`;
+}
+
+function rendreFormules(site) {
   const formules = site.formules || [];
-  const titreFormules = site.formules_titre || 'Formules';
+  if (!formules.length) return '';
+  return `<div class="categorie categorie--formules" id="cat-formules">
+  <h3 class="categorie__titre">${esc(site.formules_titre || 'Formules')}</h3>
+  <div class="formules">${formules.map(rendreFormule).join('\n')}</div>
+</div>`;
+}
+
+/** Carte complète : onglets + formules + toutes les catégories. */
+function rendreMenuComplet(site) {
+  const cats = site.menu || [];
   const onglets = [
-    ...(formules.length ? [{ id: 'formules', titre: titreFormules }] : []),
+    ...(site.formules?.length ? [{ id: 'formules', titre: site.formules_titre || 'Formules' }] : []),
     ...cats.map((c) => ({ id: c.id, titre: c.titre })),
   ];
   const nav = onglets.length > 1
@@ -161,23 +186,19 @@ function rendreMenu(site) {
         .map((o) => `<a class="onglet" href="#cat-${esc(o.id)}">${esc(o.titre)}</a>`)
         .join('')}</div></nav>`
     : '';
-  const blocFormules = formules.length
-    ? `<div class="categorie categorie--formules" id="cat-formules">
-  <h3 class="categorie__titre">${esc(titreFormules)}</h3>
-  <div class="formules">${formules.map(rendreFormule).join('\n')}</div>
-</div>`
+  return `${nav}\n${rendreFormules(site)}\n${cats.map(rendreCategorie).join('\n')}`;
+}
+
+/** Aperçu sur l'accueil quand la carte a sa propre page. */
+function rendreMenuApercu(site) {
+  const cats = site.menu || [];
+  const enEntier = cats.filter((c) => c.apercu);
+  const vedettes = cats.flatMap((c) => (c.items || []).filter((p) => p.vedette).map((p) => ({ ...p, categorie: c.titre })));
+  const blocVedettes = vedettes.length
+    ? rendreCategorie({ id: 'vedettes', titre: site.vedettes_titre || 'Les incontournables', items: vedettes.map((p) => ({ ...p, tag: p.tag || p.categorie })) })
     : '';
-  const blocs = cats
-    .map(
-      (c) => `<div class="categorie" id="cat-${esc(c.id)}">
-  <h3 class="categorie__titre">${esc(c.titre)}${c.prix_unique ? ` <span class="categorie__prix">${esc(prix(c.prix_unique))}</span>` : ''}</h3>
-  ${c.intro ? `<p class="categorie__intro">${esc(c.intro)}</p>` : ''}
-  <ul class="plats${c.compact ? ' plats--compact' : ''}">${(c.items || []).map(rendrePlat).join('\n')}</ul>
-  ${c.note ? `<p class="categorie__note">${esc(c.note)}</p>` : ''}
-</div>`
-    )
-    .join('\n');
-  return `${nav}\n${blocFormules}\n${blocs}`;
+  return `${rendreFormules(site)}\n${enEntier.map(rendreCategorie).join('\n')}\n${blocVedettes}
+<p class="carte__tout"><a class="btn btn--plein btn--grand" href="carte/">Voir toute la carte</a>${site.menu_pdf ? ` <a class="btn btn--fantome btn--grand" href="${esc(site.menu_pdf)}" target="_blank" rel="noopener">Carte en PDF</a>` : ''}</p>`;
 }
 
 function rendreGalerie(site) {
@@ -208,83 +229,124 @@ const ICONES = {
 };
 
 // ---------------------------------------------------------------------------
-export function render(site, ctx = {}) {
+// Données communes aux pages.
+function contexte(site, ctx) {
   const t = theme(site);
-  const publie = site.publie === true;
-  const nomCourt = site.nom_court || site.nom;
-  const tel = telInternational(site.telephone);
   const resa = lienReservation(site);
-  const resaAttr = resa.externe ? ' target="_blank" rel="noopener"' : '';
-  const wa = lienWhatsapp(site);
-  const adresse = adresseTexte(site.adresse);
-  const ville = typeof site.adresse === 'object' ? site.adresse.ville : site.ville;
-  const hero = site.photos?.hero ? photo(site.photos.hero, `Salle de ${site.nom}`) : null;
-  const titre = site.titre_page || `${site.nom} – ${site.slogan ? site.slogan.replace(/\.$/, '') : 'Restaurant'}${ville ? ` à ${ville}` : ''}`;
-  const description = site.description || site.slogan || '';
+  return {
+    t,
+    publie: site.publie === true,
+    nomCourt: site.nom_court || site.nom,
+    tel: telInternational(site.telephone),
+    resa,
+    resaAttr: resa.externe ? ' target="_blank" rel="noopener"' : '',
+    wa: lienWhatsapp(site),
+    adresse: adresseTexte(site.adresse),
+    ville: typeof site.adresse === 'object' ? site.adresse.ville : site.ville,
+    hero: site.photos?.hero ? photo(site.photos.hero, `Salle de ${site.nom}`) : null,
+    description: site.description || site.slogan || '',
+    url: site.url || ctx.url || '',
+  };
+}
+
+/** <head> commun. `p` = préfixe relatif vers la racine de la maquette ('' ou '../'). */
+function rendreHead(site, c, { titre, description, p, chemin, ld }) {
+  const canon = c.url ? new URL(chemin, c.url.endsWith('/') ? c.url : c.url + '/').href : '';
+  return `<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(titre)}</title>
+<meta name="description" content="${esc(description)}">
+${c.publie ? (canon ? `<link rel="canonical" href="${esc(canon)}">` : '') : '<meta name="robots" content="noindex,nofollow">'}
+<meta property="og:title" content="${esc(titre)}">
+<meta property="og:description" content="${esc(description)}">
+${c.hero ? `<meta property="og:image" content="${esc(p + c.hero.src)}">` : ''}
+<meta name="theme-color" content="${esc(site.style?.couleurs?.fond || '#ffffff')}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="${esc(lienPolices(c.t))}">
+<style>${c.t.css}</style>
+<link rel="stylesheet" href="${p}styles.css">
+${ld || ''}`;
+}
+
+function rendreEntete(site, c, { p, page }) {
+  const accueil = page === 'accueil';
+  const lienCarte = site.carte_page ? (accueil ? 'carte/' : './') : '#carte';
+  return `<header class="entete" id="haut">
+  <div class="entete__int conteneur">
+    <a class="entete__logo" href="${accueil ? '#haut' : p}" aria-label="${esc(site.nom)} – accueil">
+      ${site.logo ? `<img src="${esc(p + site.logo)}" alt="${esc(site.nom)}" width="160" height="68">` : `<span class="entete__nom">${esc(c.nomCourt)}</span>`}
+    </a>
+    <nav class="entete__nav" aria-label="Sections">
+      ${accueil ? '' : `<a href="${p}">Accueil</a>`}
+      <a href="${lienCarte}"${accueil ? '' : ' aria-current="page"'}>La carte</a>
+      ${(site.photos?.salle?.length || 0) + (site.photos?.plats?.length || 0) > 0 ? `<a href="${p}#galerie">Photos</a>` : ''}
+      <a href="${p}#infos">Infos &amp; horaires</a>
+    </nav>
+    <div class="entete__actions">
+      <a class="btn btn--fantome btn--icone" href="tel:${esc(c.tel)}">${ICONES.tel}<span>Appeler</span></a>
+      <a class="btn btn--fantome btn--icone" href="${esc(site.maps)}" target="_blank" rel="noopener">${ICONES.pin}<span>Itinéraire</span></a>
+      <a class="btn btn--plein" href="${esc(c.resa.href)}"${c.resaAttr}>Réserver</a>
+    </div>
+  </div>
+</header>`;
+}
+
+function rendrePied(site, c) {
+  return `<footer class="pied">
+  <div class="conteneur pied__int">
+    <p class="pied__nom">${esc(site.nom)}</p>
+    <p>${esc(c.adresse)} · <a href="tel:${esc(c.tel)}">${esc(site.telephone)}</a></p>
+    ${site.mentions?.length ? `<p class="pied__mentions">${site.mentions.map(esc).join(' · ')}</p>` : ''}
+    <p class="pied__credit">© ${new Date().getFullYear()} ${esc(site.nom)} · Site réalisé par <a href="https://webatir.com" rel="noopener">Webatir</a></p>
+  </div>
+</footer>`;
+}
+
+function rendreBarreMobile(site, c) {
+  return `<nav class="barre-mobile" aria-label="Actions rapides">
+  <a href="tel:${esc(c.tel)}">${ICONES.tel}<span>Appeler</span></a>
+  <a class="barre-mobile__principal" href="${esc(c.resa.href)}"${c.resaAttr}>${ICONES.calendrier}<span>Réserver</span></a>
+  <a href="${esc(site.maps)}" target="_blank" rel="noopener">${ICONES.pin}<span>Itinéraire</span></a>
+</nav>`;
+}
+
+// ---------------------------------------------------------------------------
+function rendreAccueil(site, ctx, c) {
   const r = site.reseaux || {};
   const insta = r.instagram ? (r.instagram.startsWith('http') ? r.instagram : `https://www.instagram.com/${r.instagram.replace(/^@/, '')}/`) : null;
   const instaNom = r.instagram ? '@' + r.instagram.replace(/^https?:\/\/(www\.)?instagram\.com\//, '').replace(/\/$/, '').replace(/^@/, '') : null;
   const ev = site.evenement;
-  const aGalerie = (site.photos?.salle?.length || 0) + (site.photos?.plats?.length || 0) > 0;
-  const mapsEmbed = site.maps_embed || (adresse ? `https://www.google.com/maps?q=${encodeURIComponent(`${site.nom}, ${adresse}`)}&output=embed` : null);
+  const mapsEmbed = site.maps_embed || (c.adresse ? `https://www.google.com/maps?q=${encodeURIComponent(`${site.nom}, ${c.adresse}`)}&output=embed` : null);
   const donneesHoraires = JSON.stringify({ jours: site.horaires?.jours || {}, a_confirmer: !!site.horaires?.a_confirmer });
   const ld = jsonLd(site, ctx);
-  const blocLd = publie
+  const blocLd = c.publie
     ? `<script type="application/ld+json">\n${ld}\n</script>`
     : `<!-- JSON-LD Restaurant : désactivé tant que c'est une maquette (passer "publie": true dans site.json pour l'activer) -->\n<script type="text/plain" data-jsonld-desactive>\n${ld}\n</script>`;
+  const titre = site.titre_page || `${site.nom} – ${site.slogan ? site.slogan.replace(/\.$/, '') : 'Restaurant'}${c.ville ? ` à ${c.ville}` : ''}`;
 
   return `<!doctype html>
-<html lang="fr" data-ambiance="${t.clair ? 'clair' : 'sombre'}">
+<html lang="fr" data-ambiance="${c.t.clair ? 'clair' : 'sombre'}">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(titre)}</title>
-<meta name="description" content="${esc(description)}">
-${publie ? (site.url ? `<link rel="canonical" href="${esc(site.url)}">` : '') : '<meta name="robots" content="noindex,nofollow">'}
-<meta property="og:title" content="${esc(site.nom)}">
-<meta property="og:description" content="${esc(description)}">
-${hero ? `<meta property="og:image" content="${esc(hero.src)}">` : ''}
-<meta name="theme-color" content="${esc(site.style?.couleurs?.fond || '#ffffff')}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="${esc(lienPolices(t))}">
-<style>${t.css}</style>
-<link rel="stylesheet" href="styles.css">
-${blocLd}
+${rendreHead(site, c, { titre, description: c.description, p: '', chemin: '', ld: blocLd })}
 </head>
 <body>
 <a class="evitement" href="#carte">Aller à la carte</a>
 
-<header class="entete" id="haut">
-  <div class="entete__int conteneur">
-    <a class="entete__logo" href="#haut" aria-label="${esc(site.nom)} – accueil">
-      ${site.logo ? `<img src="${esc(site.logo)}" alt="${esc(site.nom)}" width="160" height="68">` : `<span class="entete__nom">${esc(nomCourt)}</span>`}
-    </a>
-    <nav class="entete__nav" aria-label="Sections">
-      <a href="#carte">La carte</a>
-      ${aGalerie ? '<a href="#galerie">Photos</a>' : ''}
-      <a href="#infos">Infos &amp; horaires</a>
-    </nav>
-    <div class="entete__actions">
-      <a class="btn btn--fantome btn--icone" href="tel:${esc(tel)}">${ICONES.tel}<span>Appeler</span></a>
-      <a class="btn btn--fantome btn--icone" href="${esc(site.maps)}" target="_blank" rel="noopener">${ICONES.pin}<span>Itinéraire</span></a>
-      <a class="btn btn--plein" href="${esc(resa.href)}"${resaAttr}>Réserver</a>
-    </div>
-  </div>
-</header>
+${rendreEntete(site, c, { p: '', page: 'accueil' })}
 
 <main>
 <section class="hero" id="accueil">
-  ${hero ? `<img class="hero__photo" src="${esc(hero.src)}" alt="${esc(hero.alt)}" fetchpriority="high" width="1600" height="1000">` : ''}
+  ${c.hero ? `<img class="hero__photo" src="${esc(c.hero.src)}" alt="${esc(c.hero.alt)}" fetchpriority="high" width="1600" height="1000">` : ''}
   <div class="hero__voile"></div>
   <div class="hero__contenu conteneur">
-    ${ville ? `<p class="hero__sur">Restaurant · ${esc(ville)}</p>` : ''}
+    ${c.ville ? `<p class="hero__sur">Restaurant · ${esc(c.ville)}</p>` : ''}
     <h1 class="hero__titre">${esc(site.nom)}</h1>
     ${site.slogan ? `<p class="hero__slogan">${esc(site.slogan)}</p>` : ''}
     <p class="statut" id="statut" hidden><span class="statut__point"></span><span class="statut__texte"></span> <a class="statut__lien" href="#infos">Horaires</a></p>
     <div class="hero__cta">
-      <a class="btn btn--plein btn--grand" href="${esc(resa.href)}"${resaAttr}>Réserver une table</a>
-      <a class="btn btn--contour btn--grand" href="#carte">Voir la carte</a>
+      <a class="btn btn--plein btn--grand" href="${esc(c.resa.href)}"${c.resaAttr}>Réserver une table</a>
+      <a class="btn btn--contour btn--grand" href="${site.carte_page ? 'carte/' : '#carte'}">Voir la carte</a>
     </div>
     ${site.avis?.note ? `<p class="hero__avis"><span class="etoiles" aria-hidden="true">★★★★★</span> <strong>${esc(site.avis.note)}</strong>/5 · ${esc(site.avis.nombre)} avis ${esc(site.avis.source || 'Google')}</p>` : ''}
   </div>
@@ -313,13 +375,13 @@ ${ev ? `<section class="evenement" id="evenement" aria-labelledby="evenement-tit
   </div>
 </section>` : ''}
 
-<section class="carte" id="carte" aria-labelledby="carte-titre">
+<section class="carte${site.carte_page ? ' carte--apercu' : ''}" id="carte" aria-labelledby="carte-titre">
   <div class="conteneur">
     <h2 class="section__titre" id="carte-titre">${esc(site.carte_titre || 'La carte')}</h2>
     ${site.carte_intro ? `<p class="section__intro">${esc(site.carte_intro)}</p>` : ''}
   </div>
   <div class="conteneur carte__int">
-    ${rendreMenu(site)}
+    ${site.carte_page ? rendreMenuApercu(site) : rendreMenuComplet(site)}
   </div>
 </section>
 
@@ -335,13 +397,13 @@ ${rendreGalerie(site)}
       </div>
       <div class="infos__bloc">
         <h3>Nous trouver</h3>
-        <address class="infos__adresse">${esc(adresse)}</address>
+        <address class="infos__adresse">${esc(c.adresse)}</address>
         <p><a class="btn btn--fantome btn--icone" href="${esc(site.maps)}" target="_blank" rel="noopener">${ICONES.pin}<span>Itinéraire Google Maps</span></a></p>
         <h3>Réserver</h3>
-        <p class="infos__tel"><a href="tel:${esc(tel)}">${esc(site.telephone)}</a></p>
+        <p class="infos__tel"><a href="tel:${esc(c.tel)}">${esc(site.telephone)}</a></p>
         ${site.reservation?.note ? `<p class="infos__note">${esc(site.reservation.note)}</p>` : ''}
-        ${resa.externe ? `<p><a class="btn btn--plein" href="${esc(resa.href)}" target="_blank" rel="noopener">Réserver en ligne</a></p>` : ''}
-        ${wa ? `<p><a class="btn btn--fantome btn--icone" href="${esc(wa)}" target="_blank" rel="noopener">${ICONES.whatsapp}<span>Écrire sur WhatsApp</span></a></p>` : ''}
+        ${c.resa.externe ? `<p><a class="btn btn--plein" href="${esc(c.resa.href)}" target="_blank" rel="noopener">Réserver en ligne</a></p>` : ''}
+        ${c.wa ? `<p><a class="btn btn--fantome btn--icone" href="${esc(c.wa)}" target="_blank" rel="noopener">${ICONES.whatsapp}<span>Écrire sur WhatsApp</span></a></p>` : ''}
         ${insta || r.facebook || r.snapchat || r.tiktok ? `<h3>Suivez-nous</h3>
         <ul class="reseaux">
           ${insta ? `<li><a href="${esc(insta)}" target="_blank" rel="noopener">${ICONES.instagram}<span>${esc(instaNom)}</span></a></li>` : ''}
@@ -356,20 +418,9 @@ ${rendreGalerie(site)}
 </section>
 </main>
 
-<footer class="pied">
-  <div class="conteneur pied__int">
-    <p class="pied__nom">${esc(site.nom)}</p>
-    <p>${esc(adresse)} · <a href="tel:${esc(tel)}">${esc(site.telephone)}</a></p>
-    ${site.mentions?.length ? `<p class="pied__mentions">${site.mentions.map(esc).join(' · ')}</p>` : ''}
-    <p class="pied__credit">© ${new Date().getFullYear()} ${esc(site.nom)} · Site réalisé par <a href="https://webatir.com" rel="noopener">Webatir</a></p>
-  </div>
-</footer>
+${rendrePied(site, c)}
 
-<nav class="barre-mobile" aria-label="Actions rapides">
-  <a href="tel:${esc(tel)}">${ICONES.tel}<span>Appeler</span></a>
-  <a class="barre-mobile__principal" href="${esc(resa.href)}"${resaAttr}>${ICONES.calendrier}<span>Réserver</span></a>
-  <a href="${esc(site.maps)}" target="_blank" rel="noopener">${ICONES.pin}<span>Itinéraire</span></a>
-</nav>
+${rendreBarreMobile(site, c)}
 
 <dialog class="lightbox" id="lightbox" aria-label="Photo agrandie">
   <button class="lightbox__fermer" type="button" aria-label="Fermer">×</button>
@@ -384,4 +435,56 @@ ${rendreGalerie(site)}
 </body>
 </html>
 `;
+}
+
+// ---------------------------------------------------------------------------
+function rendrePageCarte(site, ctx, c) {
+  const p = '../';
+  const titre = `${site.carte_titre || 'La carte'} – ${site.nom}${c.ville ? ` à ${c.ville}` : ''}`;
+  const description = site.carte_intro || `La carte complète de ${site.nom} : ${(site.menu || []).map((m) => m.titre.toLowerCase()).join(', ')}.`;
+  return `<!doctype html>
+<html lang="fr" data-ambiance="${c.t.clair ? 'clair' : 'sombre'}">
+<head>
+${rendreHead(site, c, { titre, description, p, chemin: 'carte/' })}
+</head>
+<body class="page-carte">
+<a class="evitement" href="#carte">Aller à la carte</a>
+
+${rendreEntete(site, c, { p, page: 'carte' })}
+
+<main>
+<section class="carte" id="carte" aria-labelledby="carte-titre">
+  <div class="conteneur">
+    <p class="carte__retour"><a href="${p}">← ${esc(c.nomCourt)}</a></p>
+    <h1 class="section__titre" id="carte-titre">${esc(site.carte_titre || 'La carte')}</h1>
+    ${site.carte_intro ? `<p class="section__intro">${esc(site.carte_intro)}</p>` : ''}
+    ${site.menu_pdf ? `<p><a class="btn btn--fantome" href="${esc(p + site.menu_pdf)}" target="_blank" rel="noopener">Carte en PDF</a></p>` : ''}
+  </div>
+  <div class="conteneur carte__int">
+    ${rendreMenuComplet(site)}
+  </div>
+  <div class="conteneur carte__fin">
+    <a class="btn btn--plein btn--grand" href="${esc(c.resa.href)}"${c.resaAttr}>Réserver une table</a>
+    <a class="btn btn--fantome btn--grand" href="${p}#infos">Horaires et accès</a>
+  </div>
+</section>
+</main>
+
+${rendrePied(site, c)}
+
+${rendreBarreMobile(site, c)}
+
+<script src="${p}script.js" defer></script>
+</body>
+</html>
+`;
+}
+
+// ---------------------------------------------------------------------------
+/** Retourne { "index.html": html, ["carte/index.html"]: html }. */
+export function render(site, ctx = {}) {
+  const c = contexte(site, ctx);
+  const pages = { 'index.html': rendreAccueil(site, ctx, c) };
+  if (site.carte_page) pages['carte/index.html'] = rendrePageCarte(site, ctx, c);
+  return pages;
 }

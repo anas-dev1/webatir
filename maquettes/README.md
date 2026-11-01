@@ -36,6 +36,15 @@ node _templates/build.mjs begles-linedit
 4. Vérifier `maquettes/<slug>/index.html` en local (mobile 375 px et desktop), puis commit + push sur `main`.
    Le site est en ligne 1 à 3 minutes plus tard.
 
+## Carte longue : une page à part
+
+Au-delà d'environ 25 plats, mettre `"carte_page": true` dans `site.json`. Le build produit alors
+`maquettes/<slug>/carte/index.html` (carte complète avec onglets par catégorie, URL à coller dans le
+champ « lien vers le menu » de la fiche Google Business, ou en QR code sur les tables) et l'accueil
+n'affiche qu'un aperçu : les formules, les catégories marquées `"apercu": true` et les plats marqués
+`"vedette": true` (regroupés sous `vedettes_titre`, « Les incontournables » par défaut), suivi d'un
+bouton « Voir toute la carte ». Sans `carte_page`, tout reste sur l'accueil.
+
 ## Régénérer
 
 Après toute modification d'un `site.json` ou du gabarit :

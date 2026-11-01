@@ -3,47 +3,79 @@
   "niche": "restaurant",
   "publie": false,
   "url": "",
-
   "nom": "L'inédit Restaurant",
   "nom_court": "L'inédit",
   "slogan": "Halal, fait maison, simplement exceptionnel.",
   "description": "Restaurant halal à Bègles, aux portes de Bordeaux : viandes françaises cuites à la pierre de lave, plats faits maison, cocktails sans alcool et brunch le dimanche. Salle de prière à disposition.",
   "cuisine": "Française, halal",
-
-  "adresse": { "rue": "320 Route de Toulouse", "code_postal": "33130", "ville": "Bègles" },
+  "adresse": {
+    "rue": "320 Route de Toulouse",
+    "code_postal": "33130",
+    "ville": "Bègles"
+  },
   "telephone": "06 26 07 69 40",
   "whatsapp": null,
   "maps": "https://goo.gl/maps/99VqEdujbL939hxx8",
-  "reservation": { "type": "tel", "valeur": "06 26 07 69 40", "note": "Le brunch du dimanche est uniquement sur réservation." },
+  "reservation": {
+    "type": "tel",
+    "valeur": "06 26 07 69 40",
+    "note": "Le brunch du dimanche est uniquement sur réservation."
+  },
   "reseaux": {
     "instagram": "lineditbdx",
     "facebook": "https://www.facebook.com/profile.php?id=100063702032195",
     "snapchat": "https://t.snapchat.com/RnKAHKuK"
   },
-  "avis": { "note": "4,6", "nombre": 804, "source": "Google" },
-
+  "avis": {
+    "note": "4,6",
+    "nombre": 804,
+    "source": "Google"
+  },
   "horaires": {
     "a_confirmer": false,
     "note": "Brunch le dimanche de 10h30 à 15h, sur réservation uniquement.",
     "jours": {
-      "lundi": [{ "de": "19:30", "a": "00:00" }],
+      "lundi": [
+        { "de": "19:30", "a": "00:00" }
+      ],
       "mardi": [],
-      "mercredi": [{ "de": "19:30", "a": "00:00" }],
-      "jeudi": [{ "de": "19:30", "a": "00:00" }],
-      "vendredi": [{ "de": "19:30", "a": "00:00" }],
-      "samedi": [{ "de": "19:30", "a": "00:00" }],
-      "dimanche": [{ "de": "10:30", "a": "15:00", "note": "brunch, sur réservation" }, { "de": "19:30", "a": "00:00" }]
+      "mercredi": [
+        { "de": "19:30", "a": "00:00" }
+      ],
+      "jeudi": [
+        { "de": "19:30", "a": "00:00" }
+      ],
+      "vendredi": [
+        { "de": "19:30", "a": "00:00" }
+      ],
+      "samedi": [
+        { "de": "19:30", "a": "00:00" }
+      ],
+      "dimanche": [
+        { "de": "10:30", "a": "15:00", "note": "brunch, sur réservation" },
+        { "de": "19:30", "a": "00:00" }
+      ]
     }
   },
-
   "style": {
-    "couleurs": { "principale": "#1c1c1c", "fond": "#ffffff", "accent": "#beb88a" },
-    "polices": { "titres": "Prata", "texte": "Lato" },
+    "couleurs": {
+      "principale": "#1c1c1c",
+      "fond": "#ffffff",
+      "accent": "#beb88a"
+    },
+    "polices": {
+      "titres": "Prata",
+      "texte": "Lato"
+    },
     "ambiance": "clair"
   },
-
-  "mentions": ["Halal", "Fait maison", "Viandes françaises", "Salle de prière", "Brunch le dimanche"],
-
+  "mentions": [
+    "Halal",
+    "Fait maison",
+    "Viandes françaises",
+    "Salle de prière",
+    "Brunch le dimanche"
+  ],
   "logo": "photos/logo.png",
   "photos": {
     "hero": { "src": "photos/hero.jpg", "alt": "La salle de L'inédit : fauteuils en velours moutarde et plafond lumineux" },
@@ -62,7 +94,6 @@
       { "src": "photos/brunch.jpg", "alt": "Le brunch du dimanche" }
     ]
   },
-
   "a_propos": {
     "titre": "La maison",
     "paragraphes": [
@@ -71,7 +102,6 @@
     ],
     "signature": ""
   },
-
   "evenement": {
     "surtitre": "À l'affiche",
     "titre": "Soirée stand-up",
@@ -80,7 +110,6 @@
     "lien": "https://www.helloasso.com/associations/stand-up-bordeaux/evenements/l-inedit-jeudi-05-novembre",
     "lien_texte": "Prendre mes places sur HelloAsso"
   },
-
   "formules_titre": "Formules",
   "formules": [
     {
@@ -93,12 +122,18 @@
       "nom": "Menu enfant",
       "prix": "16,90",
       "description": "Jusqu'à 12 ans.",
-      "details": ["Nuggets, steak haché ou poisson pané", "Frites maison", "Glace 2 boules", "Sirop au choix"]
+      "details": [
+        "Nuggets, steak haché ou poisson pané",
+        "Frites maison",
+        "Glace 2 boules",
+        "Sirop au choix"
+      ]
     }
   ],
-
   "carte_titre": "La carte",
   "carte_intro": "Viandes françaises cuites à la pierre de lave, plats faits maison et desserts signature. Tout est halal.",
+  "carte_page": true,
+  "vedettes_titre": "Les incontournables",
   "menu": [
     {
       "id": "pieces",
@@ -109,14 +144,15 @@
         { "nom": "T-bone de bœuf", "prix": "39,90", "description": "Environ 700 g, cuit à la pierre de lave, accompagnement au choix", "tag": "Hors formule" },
         { "nom": "Filet de bœuf Rossini", "prix": "32,90", "description": "250 g, foie gras poêlé, poire", "tag": "Hors formule" },
         { "nom": "Noix d'entrecôte de Wagyu australien A5", "prix": "79,90", "description": "Environ 230 g", "tag": "Hors formule" }
-      ]
+      ],
+      "apercu": true
     },
     {
       "id": "entrees",
       "titre": "Entrées",
       "items": [
-        { "nom": "Assiette L'inédit", "prix": "13,90", "description": "2 brochettes de bœuf cheese, poulet pané, brie" },
-        { "nom": "Foie gras de canard du Sud-Ouest mi-cuit", "prix": "14,90", "description": "Confiture de figues" },
+        { "nom": "Assiette L'inédit", "prix": "13,90", "description": "2 brochettes de bœuf cheese, poulet pané, brie", "vedette": true },
+        { "nom": "Foie gras de canard du Sud-Ouest mi-cuit", "prix": "14,90", "description": "Confiture de figues", "vedette": true },
         { "nom": "Camembert pané", "prix": "13,50", "description": "Fondant et croustillant, toasts, grenailles, salade verte" },
         { "nom": "Camembert rôti au miel", "prix": "13,50", "description": "Toasts, grenailles, salade verte" },
         { "nom": "Carpaccio de bœuf", "prix": "13,50", "description": "Pesto, parmesan" },
@@ -137,8 +173,8 @@
       "titre": "Plats",
       "note": "Accompagnement au choix : légumes sautés, écrasé de pommes de terre, frites maison, riz pilaf, haricots verts ou salade verte. Accompagnement supplémentaire 3,50 € · gratin dauphinois, grenailles, purée de patate douce ou tagliatelles hors formule.",
       "items": [
-        { "nom": "Tigre qui pleure cuit à la pierre de lave", "prix": "26,90", "description": "Filet de bœuf 250 g, oignons, coriandre · sauce roquefort, poivre ou champignons" },
-        { "nom": "Magret de canard cuit à la pierre de lave", "prix": "26,90", "description": "Sauce roquefort, poivre ou champignons" },
+        { "nom": "Tigre qui pleure cuit à la pierre de lave", "prix": "26,90", "description": "Filet de bœuf 250 g, oignons, coriandre · sauce roquefort, poivre ou champignons", "vedette": true },
+        { "nom": "Magret de canard cuit à la pierre de lave", "prix": "26,90", "description": "Sauce roquefort, poivre ou champignons", "vedette": true },
         { "nom": "Entrecôte 300 g cuite à la pierre de lave", "prix": "24,90", "description": "Sauce au choix" },
         { "nom": "Faux-filet 300 g cuit à la pierre de lave", "prix": "23,90", "description": "Sauce au choix" },
         { "nom": "Émincé de filet de bœuf", "prix": "24,90", "description": "Écrasé de pommes de terre, champignons, cornichons" },
@@ -148,7 +184,7 @@
         { "nom": "Boulettes de viande hachée à l'orientale", "prix": "23,90" },
         { "nom": "Escalope de poulet à la crème", "prix": "23,90", "description": "Champignons, oignons" },
         { "nom": "Poulet aux olives", "prix": "23,90" },
-        { "nom": "Burger foie gras", "prix": "25,90", "description": "Roquette, cheddar, oignons caramélisés" },
+        { "nom": "Burger foie gras", "prix": "25,90", "description": "Roquette, cheddar, oignons caramélisés", "vedette": true },
         { "nom": "Burger burrata", "prix": "25,90", "description": "Roquette, cheddar, oignons caramélisés" },
         { "nom": "Burger poulet", "prix": "23,90", "description": "Sauce L'inédit légèrement épicée, oignons" },
         { "nom": "Risotto gambas et Saint-Jacques", "prix": "24,90" },
@@ -166,7 +202,7 @@
       "id": "desserts",
       "titre": "Desserts",
       "items": [
-        { "nom": "Trompe-l'œil", "prix": "9,90", "description": "7 parfums : cacahuète, pistache, tablette Bueno, Snickers, passion, mangue, vanille", "tag": "Signature" },
+        { "nom": "Trompe-l'œil", "prix": "9,90", "description": "7 parfums : cacahuète, pistache, tablette Bueno, Snickers, passion, mangue, vanille", "tag": "Signature", "vedette": true },
         { "nom": "Riz au lait", "prix": "8,90", "description": "Pistaches caramélisées, caramel beurre salé" },
         { "nom": "Tiramisu classique", "prix": "8,90", "description": "Café, boudoirs" },
         { "nom": "Tiramisu pistache", "prix": "8,90" },

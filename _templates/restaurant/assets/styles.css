@@ -276,3 +276,14 @@ section { padding: 3rem 0; }
   .infos__carte { grid-column: auto; }
   .infos__carte iframe { height: 100%; min-height: 22rem; }
 }
+
+/* ---------- carte sur sa propre page (carte_page: true) ---------- */
+.carte__tout { display: flex; flex-wrap: wrap; gap: .6rem; margin: .5rem 0 0; }
+.carte--apercu .categorie { margin-bottom: 1.75rem; }
+.page-carte .carte { padding-top: 1.5rem; }
+.page-carte h1.section__titre { font-size: clamp(2.2rem, 7vw, 3.2rem); }
+.carte__retour { font-size: .9rem; margin-bottom: 1rem; }
+.carte__retour a { color: var(--texte-doux); text-decoration: none; }
+.carte__retour a:hover { color: var(--texte); }
+.carte__fin { display: flex; flex-wrap: wrap; gap: .6rem; padding-top: 1rem; border-top: 1px solid var(--bordure); margin-top: 1rem; }
+@media (min-width: 48rem) { .page-carte .carte { padding-top: 2.5rem; } }
