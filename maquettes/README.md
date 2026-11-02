@@ -77,6 +77,15 @@ dans les infos pratiques. `lien` vide = appel téléphonique ; sinon le lien de 
 `image` facultative, `nav_texte` pour le libellé du menu (« Fêtes » par défaut). À retirer une fois la
 période passée. Exemple complet sur la démo Casa Nómada et dans `exemple.site.json` (`saison_exemple`).
 
+## Variante éditoriale
+
+`style.variante: "editorial"` change la mise en page sans toucher au contenu : titres condensés géants en
+majuscules (prévoir une police condensée dans `polices.titres`, par ex. `Bebas Neue` ou `Anton`), photo
+pleine largeur sous le titre de « La maison » (`a_propos.image`), blocs sans cadre, angles vifs, petit décor
+filaire dans la couleur d'accent. Pensé pour les adresses jeunes et les sorties du soir ; à combiner avec
+`animations: true` et une ambiance sombre. Exemple : `maquettes/begles-linedit-nuit/`, variante « nuit » de
+L'inédit à montrer en second dans la vidéo, après la version sobre.
+
 ## Ambiance animée
 
 Par défaut le gabarit est sobre et rapide. Pour un prospect à concept (bar, cantina, rooftop),

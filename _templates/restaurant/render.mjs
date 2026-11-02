@@ -312,7 +312,7 @@ function contexte(site, ctx) {
     t,
     anime: site.animations === true,
     // attributs de <html> : ambiance, animations, forme des photos
-    attrsHtml: `data-ambiance="${t.clair ? 'clair' : 'sombre'}"${site.animations === true ? ' data-anime="1"' : ''}${site.style?.forme_photos === 'arche' ? ' data-forme="arche"' : ''}`,
+    attrsHtml: `data-ambiance="${t.clair ? 'clair' : 'sombre'}"${site.animations === true ? ' data-anime="1"' : ''}${site.style?.forme_photos === 'arche' ? ' data-forme="arche"' : ''}${site.style?.variante ? ` data-variante="${esc(site.style.variante)}"` : ''}`,
     video: site.photos?.video ? photo(site.photos.video) : null,
     publie: site.publie === true,
     nomCourt: site.nom_court || site.nom,
@@ -453,6 +453,7 @@ ${rendreDistinctions(site)}
 ${site.a_propos ? `<section class="apropos" id="apropos">
   <div class="conteneur apropos__int">
     ${site.a_propos.titre ? `<h2 class="section__titre">${esc(site.a_propos.titre)}</h2>` : ''}
+    ${site.a_propos.image ? `<img class="apropos__image" src="${esc(photo(site.a_propos.image).src)}" alt="${esc(photo(site.a_propos.image, site.a_propos.titre || site.nom).alt)}" loading="lazy" width="1600" height="1000">` : ''}
     ${(site.a_propos.paragraphes || [site.a_propos.texte]).filter(Boolean).map((p) => `<p>${esc(p)}</p>`).join('')}
     ${site.a_propos.signature ? `<p class="apropos__signature">${esc(site.a_propos.signature)}</p>` : ''}
   </div>

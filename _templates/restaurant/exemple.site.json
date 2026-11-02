@@ -36,7 +36,8 @@
     "couleurs": { "principale": "#1b1b1b", "fond": "#ffffff", "accent": "#b9974e" },
     "polices": { "titres": "Playfair Display", "texte": "Lato" },
     "ambiance": "clair",
-    "forme_photos": ""
+    "forme_photos": "",
+    "variante": ""
   },
   "animations": false,
   "bandeau": [],
@@ -54,6 +55,7 @@
   "a_propos": {
     "titre": "La maison",
     "paragraphes": ["Un paragraphe sur l'histoire, le chef, la façon de cuisiner."],
+    "image": "",
     "signature": ""
   },
 
