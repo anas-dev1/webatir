@@ -95,7 +95,7 @@
       { "src": "photos/trompe-loeil.jpg", "alt": "Trompe-l'œil pistache, le dessert signature" },
       { "src": "photos/brunch.jpg", "alt": "Le brunch du dimanche" }
     ],
-    "video": { "src": "photos/hero.mp4", "alt": "La salle de L'inédit : fauteuils en velours moutarde et plafond lumineux" }
+    "video": null
   },
   "a_propos": {
     "titre": "La maison",
@@ -104,7 +104,7 @@
       "Le chef Omar conseille la cuisson saignante, voire bleue, pour les pièces d'exception. Merci de signaler toute allergie à notre équipe. Une salle de prière est à votre disposition."
     ],
     "signature": "",
-    "image": { "src": "photos/salle.jpg", "alt": "La salle de L'inédit un soir de service" }
+    "image": { "src": "photos/facade.jpg", "alt": "La façade de L'inédit, route de Toulouse à Bègles" }
   },
   "evenement": {
     "surtitre": "À l'affiche",
