@@ -416,17 +416,12 @@ html { overflow-x: hidden; }
 .place-link span { width: 1px; height: 34px; background: linear-gradient(transparent, var(--gold)); }
 .place-link span:last-child { transform: scaleY(-1); }
 
-/* ---------- Menu du déjeuner ---------- */
-.menu-section .script-title { margin-top: 6px; }
-.menu-card { padding: 38px 24px 30px; }
-.menu-group + .menu-group { margin-top: 26px; padding-top: 22px; border-top: 1px solid rgba(224, 194, 131, 0.18); }
+/* ---------- Carte du déjeuner (plats à cocher dans le formulaire) ---------- */
 .menu-group h3 { font-family: var(--caps); font-weight: 400; font-size: 0.82rem; letter-spacing: 0.34em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
-.menu-group ul { list-style: none; display: grid; gap: 14px; }
 .menu-item-name { display: block; font-family: var(--caps); font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ivory); line-height: 1.4; }
 .menu-item-detail { display: block; font-style: italic; font-size: 1.02rem; color: var(--ink-soft); }
 .menu-supp { display: inline-block; vertical-align: middle; margin-left: 8px; padding: 2px 9px; border: 1px solid var(--card-line); border-radius: 99px; font-family: var(--serif); font-size: 0.82rem; letter-spacing: 0.04em; text-transform: none; color: var(--gold); white-space: nowrap; }
 .menu-welcome { font-family: var(--caps); font-size: 0.92rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ivory); }
-.menu-note { margin-top: 22px; font-style: italic; color: var(--ink-soft); }
 
 /* ---------- RSVP : un menu par convive ---------- */
 .rsvp input[type="tel"] {
@@ -462,7 +457,6 @@ html { overflow-x: hidden; }
 .rsvp .convive-child input:focus-visible { box-shadow: 0 0 0 3px rgba(224, 194, 131, 0.3); }
 .convive-menu { display: grid; gap: 12px; }
 .convive-menu[hidden] { display: none; }
-.convive-menu label { font-size: 0.72rem; }
 .convive-child-note { font-style: italic; font-size: 1rem; color: var(--ink-soft); }
 .rsvp .convive input[type="text"] { padding: 10px 12px; font-size: 1.05rem; }
 .rsvp select:invalid { color: var(--ink-soft); font-style: italic; }
@@ -470,3 +464,54 @@ html { overflow-x: hidden; }
 .form-status.ok strong { color: var(--ivory); font-style: normal; }
 .form-recap { margin-top: 14px; text-align: left; font-size: 1rem; color: var(--ink-soft); display: grid; gap: 4px; }
 .form-recap b { font-family: var(--caps); font-weight: 400; font-size: 0.8rem; letter-spacing: 0.1em; color: var(--gold); }
+
+/* ---------- Dessin de la mairie au-dessus du plan ---------- */
+.place-drawing { margin: 26px -6px 30px; }
+.place-drawing img { display: block; width: 100%; height: auto; filter: drop-shadow(0 0 6px rgba(224, 194, 131, 0.18)); }
+
+/* Le menu à cocher, par convive */
+.convive-menu { gap: 18px; }
+.convive-menu > label { font-size: 0.72rem; }
+.convive-menu .menu-welcome { font-size: 0.76rem; letter-spacing: 0.2em; text-align: center; padding: 6px 0 2px; }
+.rsvp .menu-group { display: grid; gap: 8px; padding: 0; }
+.rsvp .menu-group legend { display: block; margin-bottom: 6px; padding: 0; }
+.rsvp .menu-group h3 { margin: 0; text-align: center; font-size: 0.78rem; letter-spacing: 0.3em; }
+.rsvp .menu-pick {
+  position: relative;
+  display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start;
+  padding: 12px 14px 12px 12px;
+  border: 1px solid var(--card-line);
+  border-radius: 14px;
+  background: rgba(10, 8, 30, 0.3);
+  cursor: pointer;
+  font-family: var(--serif); letter-spacing: 0; text-transform: none;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.rsvp .menu-pick:hover { border-color: rgba(224, 194, 131, 0.6); }
+.rsvp .menu-pick input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+.menu-pick-mark {
+  width: 22px; height: 22px; margin-top: 1px;
+  border: 1px solid var(--gold); border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 0.7rem; color: transparent;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+.menu-pick-body { display: grid; gap: 2px; min-width: 0; }
+.menu-pick .menu-item-name { font-size: 0.86rem; letter-spacing: 0.1em; }
+.menu-pick .menu-item-detail { font-size: 0.98rem; }
+.rsvp .menu-pick:has(input:checked) {
+  border-color: var(--gold);
+  background: rgba(224, 194, 131, 0.12);
+  box-shadow: 0 0 0 1px rgba(224, 194, 131, 0.35), 0 8px 24px rgba(5, 3, 20, 0.35);
+}
+.rsvp .menu-pick:has(input:checked) .menu-pick-mark { background: var(--gold); color: var(--night); box-shadow: 0 0 10px rgba(243, 220, 166, 0.7); }
+.rsvp .menu-pick:has(input:focus-visible) { box-shadow: 0 0 0 3px rgba(224, 194, 131, 0.3); }
+.menu-garniture { display: grid; gap: 8px; justify-items: center; padding: 6px 0 2px; }
+.menu-garniture[hidden] { display: none; }
+.menu-garniture-label { font-family: var(--caps); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+.menu-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.rsvp .menu-pill { position: relative; cursor: pointer; font-family: var(--serif); font-size: 1rem; letter-spacing: 0; text-transform: none; }
+.rsvp .menu-pill input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+.rsvp .menu-pill span { display: inline-block; padding: 6px 14px; border: 1px solid var(--card-line); border-radius: 99px; color: var(--ivory); transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+.rsvp .menu-pill:has(input:checked) span { background: var(--gold); border-color: var(--gold); color: var(--night); }
+.rsvp .menu-group.is-missing, .rsvp .menu-garniture.is-missing { border-radius: 14px; outline: 1px solid var(--rose); outline-offset: 6px; box-shadow: none !important; }

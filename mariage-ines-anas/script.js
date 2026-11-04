@@ -6,23 +6,23 @@
 const RSVP_URL = 'A_REMPLACER_PAR_L_URL_DU_SCRIPT_GOOGLE';
 const WEDDING_DATE = new Date('2026-12-19T11:00:00+01:00');
 
-// La carte du déjeuner (Jardin Marbeuf). Même source pour la section « Le menu » et le formulaire.
-// supp : supplément en euros, affiché aux invités et compté dans le tableau de suivi.
+// La carte du déjeuner (Jardin Marbeuf), affichée dans le formulaire : chaque convive coche son menu.
+// Les suppléments du restaurant ne sont pas montrés aux invités (ils sont comptés dans le tableau de suivi).
 const MENU = {
   bienvenue: 'Cocktail de bienvenue',
   entree: [
-    { nom: 'Salade de saison', detail: 'Garniture au choix : poulet ou saumon fumé', supp: 0, garnitures: ['Poulet', 'Saumon fumé'] },
-    { nom: 'Millefeuille de saumon', detail: "Saumon frais relevé d'herbes et de citron", supp: 5 },
-    { nom: 'Noix de Saint-Jacques', detail: 'Sur un riz cuisiné façon risotto avec sa tuile croustillante', supp: 5 },
+    { nom: 'Salade de saison', detail: 'Garniture au choix : poulet ou saumon fumé', garnitures: ['Poulet', 'Saumon fumé'] },
+    { nom: 'Millefeuille de saumon', detail: "Saumon frais relevé d'herbes et de citron" },
+    { nom: 'Noix de Saint-Jacques', detail: 'Sur un riz cuisiné façon risotto avec sa tuile croustillante' },
   ],
   plat: [
-    { nom: "Confit d'agneau", detail: 'Servi avec accompagnement au choix', supp: 5 },
-    { nom: 'Pavé de saumon', detail: 'Saumon rôti, légumes de saison, sauce citronnée aux herbes fraîches', supp: 0 },
-    { nom: 'Médaillon de volaille farci', detail: 'Doré au four et accompagné de son jus de cuisson', supp: 0 },
+    { nom: "Confit d'agneau", detail: 'Servi avec accompagnement au choix' },
+    { nom: 'Pavé de saumon', detail: 'Saumon rôti, légumes de saison, sauce citronnée aux herbes fraîches' },
+    { nom: 'Médaillon de volaille farci', detail: 'Doré au four et accompagné de son jus de cuisson' },
   ],
   dessert: [
-    { nom: 'Entremet fruits rouges', detail: '', supp: 0 },
-    { nom: 'Entremet chocolat', detail: '', supp: 0 },
+    { nom: 'Entremet fruits rouges', detail: '' },
+    { nom: 'Entremet chocolat', detail: '' },
   ],
 };
 const COURSES = [
@@ -85,25 +85,6 @@ envelope.addEventListener('click', openEnvelope);
 envelope.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openEnvelope(); }
 });
-
-// --- Section « Le menu », construite à partir de MENU ---
-const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const suppBadge = (supp) => (supp ? `<span class="menu-supp">supp. +${supp}&nbsp;€</span>` : '');
-const menuCard = document.getElementById('menuCard');
-menuCard.innerHTML = `
-  <div class="menu-group"><p class="menu-welcome">${escapeHtml(MENU.bienvenue)}</p></div>
-  ${COURSES.map((course) => `
-    <div class="menu-group">
-      <h3>${course.label}</h3>
-      <ul>
-        ${MENU[course.key].map((item) => `
-          <li>
-            <span class="menu-item-name">${escapeHtml(item.nom)}${suppBadge(item.supp)}</span>
-            ${item.detail ? `<span class="menu-item-detail">${escapeHtml(item.detail)}</span>` : ''}
-          </li>`).join('')}
-      </ul>
-    </div>`).join('')}
-`;
 
 // --- Apparition au défilement ---
 const revealObserver = new IntersectionObserver(
@@ -199,7 +180,7 @@ resize();
 window.addEventListener('resize', resize);
 requestAnimationFrame(draw);
 
-// --- Réponse : présence et menu de chaque convive ---
+// --- Réponse : présence, puis le menu de chaque convive à cocher ---
 const form = document.getElementById('rsvpForm');
 const status = document.getElementById('rsvpStatus');
 const guestsBlock = document.getElementById('guestsBlock');
@@ -214,27 +195,48 @@ trap.setAttribute('aria-hidden', 'true');
 trap.style.cssText = 'position:absolute;left:-9999px;width:1px;height:1px;opacity:0;';
 form.appendChild(trap);
 
+const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
 const isComing = () => {
   const checked = form.querySelector('input[name="presence"]:checked');
   return !!checked && checked.value.startsWith('Oui');
 };
 
-const courseSelect = (i, course) => `
-  <label>${course.label}
-    <select name="c${i}_${course.key}" required>
-      <option value="" disabled selected>Choisir…</option>
-      ${MENU[course.key].map((item) => `<option value="${escapeHtml(item.nom)}">${escapeHtml(item.nom)}${item.supp ? ` (supp. +${item.supp} €)` : ''}</option>`).join('')}
-    </select>
+// Un plat = une case à cocher (bouton radio habillé), comme sur la carte du restaurant
+const menuPick = (name, item, required) => `
+  <label class="menu-pick">
+    <input type="radio" name="${name}" value="${escapeHtml(item.nom)}" ${required ? 'required' : ''}>
+    <span class="menu-pick-mark" aria-hidden="true">✦</span>
+    <span class="menu-pick-body">
+      <span class="menu-item-name">${escapeHtml(item.nom)}</span>
+      ${item.detail ? `<span class="menu-item-detail">${escapeHtml(item.detail)}</span>` : ''}
+    </span>
   </label>`;
 
-// Un bloc par convive : prénom, enfant ou non, puis entrée / plat / dessert et allergies.
-// Les valeurs déjà saisies sont conservées quand le nombre de personnes change.
+const courseGroup = (i, course) => `
+  <fieldset class="menu-group">
+    <legend><h3>${course.label}</h3></legend>
+    ${MENU[course.key].map((item) => menuPick(`c${i}_${course.key}`, item, true)).join('')}
+    ${course.key === 'entree' ? `
+    <div class="menu-garniture" hidden>
+      <p class="menu-garniture-label">Garniture de la salade</p>
+      <div class="menu-pills">
+        ${MENU.entree[0].garnitures.map((g) => `<label class="menu-pill"><input type="radio" name="c${i}_garniture" value="${escapeHtml(g)}"><span>${escapeHtml(g)}</span></label>`).join('')}
+      </div>
+    </div>` : ''}
+  </fieldset>`;
+
+// Un bloc par convive : prénom, enfant ou non, puis le menu à cocher et les allergies.
+// Les choix déjà faits sont conservés quand le nombre de personnes change.
 const renderConvives = () => {
   const count = Number(personnesSelect.value) || 1;
-  const previous = [...convivesWrap.querySelectorAll('.convive')];
-  const saved = previous.map((block) => {
+  const saved = [...convivesWrap.querySelectorAll('.convive')].map((block) => {
     const values = {};
-    block.querySelectorAll('input, select').forEach((el) => { values[el.name] = el.type === 'checkbox' ? el.checked : el.value; });
+    block.querySelectorAll('input').forEach((el) => {
+      if (el.type === 'checkbox') values[el.name] = el.checked;
+      else if (el.type === 'radio') { if (el.checked) values[el.name] = el.value; }
+      else values[el.name] = el.value;
+    });
     return values;
   });
   convivesWrap.innerHTML = '';
@@ -251,14 +253,8 @@ const renderConvives = () => {
         <input type="text" name="c${i}_prenom" required autocomplete="off">
       </label>
       <div class="convive-menu">
-        ${courseSelect(i, COURSES[0])}
-        <label class="convive-garniture" hidden>Garniture de la salade
-          <select name="c${i}_garniture">
-            <option value="" disabled selected>Choisir…</option>
-            ${MENU.entree[0].garnitures.map((g) => `<option value="${escapeHtml(g)}">${escapeHtml(g)}</option>`).join('')}
-          </select>
-        </label>
-        ${COURSES.slice(1).map((course) => courseSelect(i, course)).join('')}
+        <p class="menu-welcome">${escapeHtml(MENU.bienvenue)}</p>
+        ${COURSES.map((course) => courseGroup(i, course)).join('')}
         <label>Allergies ou régime particulier <span class="optional">(facultatif)</span>
           <input type="text" name="c${i}_allergies" autocomplete="off">
         </label>
@@ -269,9 +265,11 @@ const renderConvives = () => {
     // Valeurs précédentes
     const old = saved[i - 1];
     if (old) {
-      block.querySelectorAll('input, select').forEach((el) => {
+      block.querySelectorAll('input').forEach((el) => {
         if (!(el.name in old)) return;
-        if (el.type === 'checkbox') el.checked = old[el.name]; else el.value = old[el.name];
+        if (el.type === 'checkbox') el.checked = old[el.name];
+        else if (el.type === 'radio') el.checked = el.value === old[el.name];
+        else el.value = old[el.name];
       });
     }
     // Le premier convive, c'est la personne qui répond
@@ -281,23 +279,24 @@ const renderConvives = () => {
     const child = block.querySelector(`input[name="c${i}_enfant"]`);
     const menu = block.querySelector('.convive-menu');
     const note = block.querySelector('.convive-child-note');
-    const entree = block.querySelector(`select[name="c${i}_entree"]`);
-    const garniture = block.querySelector('.convive-garniture');
-    const garnitureSelect = garniture.querySelector('select');
+    const entrees = [...block.querySelectorAll(`input[name="c${i}_entree"]`)];
+    const garniture = block.querySelector('.menu-garniture');
+    const garnitureRadios = [...garniture.querySelectorAll('input')];
+    const syncGarniture = () => {
+      const chosen = entrees.find((r) => r.checked);
+      const needs = !!chosen && chosen.value === MENU.entree[0].nom && !child.checked;
+      garniture.hidden = !needs;
+      garnitureRadios.forEach((r) => { r.required = needs; });
+    };
     const syncChild = () => {
       menu.hidden = child.checked;
       note.hidden = !child.checked;
-      menu.querySelectorAll('select').forEach((el) => { el.required = !child.checked && !el.closest('.convive-garniture'); });
+      menu.querySelectorAll('input[type="radio"]').forEach((el) => { if (!el.name.endsWith('_garniture')) el.required = !child.checked; });
+      syncGarniture();
     };
-    const syncGarniture = () => {
-      const needs = entree.value === MENU.entree[0].nom;
-      garniture.hidden = !needs;
-      garnitureSelect.required = needs && !child.checked;
-    };
-    child.addEventListener('change', () => { syncChild(); syncGarniture(); });
-    entree.addEventListener('change', syncGarniture);
+    child.addEventListener('change', syncChild);
+    entrees.forEach((r) => r.addEventListener('change', syncGarniture));
     syncChild();
-    syncGarniture();
   }
 };
 nomInput.addEventListener('change', () => {
@@ -313,21 +312,21 @@ form.querySelectorAll('input[name="presence"]').forEach((radio) => {
 });
 
 // Lecture des convives saisis
-const findItem = (key, nom) => MENU[key].find((item) => item.nom === nom);
 const readConvives = () => [...convivesWrap.querySelectorAll('.convive')].map((block, idx) => {
   const i = block.dataset.index;
-  const get = (name) => (block.querySelector(`[name="c${i}_${name}"]`) || {}).value || '';
+  const text = (name) => (block.querySelector(`input[name="c${i}_${name}"]`) || {}).value || '';
+  const picked = (name) => (block.querySelector(`input[name="c${i}_${name}"]:checked`) || {}).value || '';
   const enfant = block.querySelector(`input[name="c${i}_enfant"]`).checked;
+  const entree = enfant ? '' : picked('entree');
   const convive = {
-    prenom: get('prenom').trim() || `Convive ${idx + 1}`,
+    prenom: text('prenom').trim() || `Convive ${idx + 1}`,
     enfant,
-    entree: enfant ? '' : get('entree'),
-    garniture: enfant ? '' : (get('entree') === MENU.entree[0].nom ? get('garniture') : ''),
-    plat: enfant ? '' : get('plat'),
-    dessert: enfant ? '' : get('dessert'),
-    allergies: get('allergies').trim(),
+    entree,
+    garniture: entree === MENU.entree[0].nom ? picked('garniture') : '',
+    plat: enfant ? '' : picked('plat'),
+    dessert: enfant ? '' : picked('dessert'),
+    allergies: text('allergies').trim(),
   };
-  convive.supplement = enfant ? 0 : COURSES.reduce((sum, c) => sum + ((findItem(c.key, convive[c.key]) || {}).supp || 0), 0);
   return convive;
 });
 
@@ -337,7 +336,7 @@ const show = (html, ok) => {
   status.hidden = false;
 };
 
-// Contrôle avant envoi : met en évidence le premier champ manquant
+// Contrôle avant envoi : met en évidence le premier champ ou le premier plat manquant
 const validate = () => {
   form.querySelectorAll('.is-missing').forEach((el) => el.classList.remove('is-missing'));
   const missing = [...form.querySelectorAll('[required]')].find((el) => {
@@ -346,11 +345,15 @@ const validate = () => {
     return !String(el.value || '').trim();
   });
   if (!missing) return true;
-  const target = missing.type === 'radio' ? missing.closest('fieldset') : missing;
+  const target = missing.type === 'radio' ? (missing.closest('.menu-garniture') || missing.closest('fieldset')) : missing;
   target.classList.add('is-missing');
   target.scrollIntoView({ behavior: 'smooth', block: 'center' });
   if (missing.type !== 'radio') missing.focus({ preventScroll: true });
-  show(missing.type === 'radio' ? 'Dites-nous si vous serez présent(e).' : 'Il manque une information, le champ est souligné en rose.', false);
+  const isPresence = missing.name === 'presence';
+  const isDish = missing.type === 'radio' && !isPresence;
+  show(isPresence ? 'Dites-nous si vous serez présent(e).'
+    : isDish ? 'Il reste un plat à choisir, il est encadré en rose.'
+      : 'Il manque une information, le champ est encadré en rose.', false);
   return false;
 };
 
@@ -358,7 +361,7 @@ const recapHtml = (convives) => convives.map((c) => {
   const menu = c.enfant
     ? 'menu enfant'
     : [c.entree + (c.garniture ? ` (${c.garniture.toLowerCase()})` : ''), c.plat, c.dessert].join(' · ');
-  return `<span><b>${escapeHtml(c.prenom)}</b> ${escapeHtml(menu)}${c.supplement ? ` (+${c.supplement} €)` : ''}</span>`;
+  return `<span><b>${escapeHtml(c.prenom)}</b> ${escapeHtml(menu)}</span>`;
 }).join('');
 
 form.addEventListener('submit', async (e) => {
@@ -391,7 +394,7 @@ form.addEventListener('submit', async (e) => {
     form.querySelectorAll('input, select, textarea, button').forEach((el) => { el.disabled = true; });
   } catch (err) {
     console.error(err);
-    show("L'envoi n'a pas fonctionné. Vérifiez votre connexion, réessayez, ou contactez nos témoins.", false);
+    show("L'envoi n'a pas fonctionné. Vérifiez votre connexion, puis réessayez.", false);
     button.disabled = false;
   }
 });

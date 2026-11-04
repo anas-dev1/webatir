@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Marcellus&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="img/enveloppe-fermee.jpg">
-  <link rel="stylesheet" href="style.css?v=20261104">
+  <link rel="stylesheet" href="style.css?v=20261104d">
 </head>
 <body class="is-locked">
 
@@ -109,11 +109,14 @@
 
     <!-- ===== LIEUX ===== -->
     <section class="section place-section">
-      <h2 class="script-title reveal">Les lieux</h2>
+      <h2 class="script-title reveal">Le lieu</h2>
       <div class="card place-card reveal">
-        <p class="place-step">1 · La cérémonie · 11h00</p>
+        <p class="place-step">La cérémonie · 11h00</p>
         <h3>Hôtel de Ville de Montpellier</h3>
         <p>1 place Georges-Frêche<br>34267 Montpellier</p>
+        <figure class="place-drawing">
+          <img src="img/mairie-montpellier.webp" alt="Dessin de l'Hôtel de Ville de Montpellier" loading="lazy" width="1000" height="630">
+        </figure>
         <div class="map">
           <iframe title="Carte : Hôtel de Ville de Montpellier" src="https://www.google.com/maps?q=H%C3%B4tel+de+Ville+de+Montpellier,+1+place+Georges-Fr%C3%AAche,+34267+Montpellier&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
@@ -123,55 +126,13 @@
         </div>
         <p class="small">Tramway lignes 1 et 3 · arrêt « Moularès – Hôtel de Ville »</p>
       </div>
-      <p class="place-link reveal" aria-hidden="true"><span></span>✦<span></span></p>
-      <div class="card place-card reveal">
-        <p class="place-step">2 · Le déjeuner · 14h00</p>
-        <h3>Restaurant Jardin Marbeuf</h3>
-        <p>275 route de Nîmes<br>34170 Castelnau-le-Lez</p>
-        <div class="map">
-          <iframe title="Carte : Restaurant Jardin Marbeuf" src="https://www.google.com/maps?q=Jardin+Marbeuf,+275+route+de+N%C3%AEmes,+34170+Castelnau-le-Lez&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-        <div class="place-actions">
-          <a class="btn btn-gold" href="https://www.google.com/maps/dir/?api=1&destination=Jardin+Marbeuf,+275+route+de+N%C3%AEmes,+34170+Castelnau-le-Lez" target="_blank" rel="noopener">Itinéraire</a>
-          <a class="btn btn-ghost" href="https://waze.com/ul?q=Jardin%20Marbeuf%20275%20route%20de%20N%C3%AEmes%20Castelnau-le-Lez&navigate=yes" target="_blank" rel="noopener">Waze</a>
-        </div>
-        <p class="small">À environ 15 minutes en voiture de l'Hôtel de Ville</p>
-      </div>
-    </section>
-
-    <!-- ===== MENU ===== -->
-    <section class="section menu-section" id="menu">
-      <p class="eyebrow reveal">Déjeuner au Jardin Marbeuf</p>
-      <h2 class="script-title reveal">Le menu</h2>
-      <div class="card menu-card reveal" id="menuCard">
-        <!-- Rempli par script.js à partir de la carte (MENU), pour que le menu affiché et le formulaire restent identiques -->
-      </div>
-      <p class="reveal menu-note">Chacun choisit son menu dans le formulaire de réponse, juste en dessous&nbsp;✦</p>
-    </section>
-
-    <!-- ===== CONTACTS ===== -->
-    <section class="section contacts-section">
-      <h2 class="script-title reveal">Une question&nbsp;?</h2>
-      <p class="reveal">Nos témoins sont là pour vous répondre.</p>
-      <div class="contacts">
-        <a class="card contact reveal" href="tel:+33639980002">
-          <span class="contact-role">Témoin d'Ines</span>
-          <strong>Sarah</strong>
-          <span>06 39 98 00 02</span>
-        </a>
-        <a class="card contact reveal" href="tel:+33639980001">
-          <span class="contact-role">Témoin d'Anas</span>
-          <strong>Yanis</strong>
-          <span>06 39 98 00 01</span>
-        </a>
-      </div>
     </section>
 
     <!-- ===== RSVP ===== -->
     <section class="section rsvp-section" id="rsvp">
       <img class="flowers flowers-tr" src="img/fleurs.webp" alt="" aria-hidden="true" loading="lazy">
       <h2 class="script-title reveal">Serez-vous des nôtres&nbsp;?</h2>
-      <p class="reveal">Merci de nous répondre avant le <strong>20 novembre 2026</strong>, en indiquant le menu de chaque convive.</p>
+      <p class="reveal">Merci de nous répondre avant le <strong>20 novembre 2026</strong>. Chaque convive coche son menu pour le déjeuner au Jardin Marbeuf.</p>
       <form class="card rsvp reveal" id="rsvpForm" novalidate>
         <label>Votre nom et prénom
           <input type="text" name="nom" required autocomplete="name">
@@ -190,7 +151,7 @@
               <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option>
             </select>
           </label>
-          <p class="guests-intro">Le menu de chaque convive <span class="optional">(les suppléments sont à votre charge)</span></p>
+          <p class="guests-intro">Le menu de chaque convive <span class="optional">(touchez les plats de votre choix)</span></p>
           <div class="convives" id="convives"></div>
         </div>
         <label>Un petit mot pour les mariés <span class="optional">(facultatif)</span>
@@ -199,6 +160,24 @@
         <button type="submit" class="btn btn-gold btn-full">Envoyer ma réponse</button>
         <p class="form-status" id="rsvpStatus" role="status" hidden></p>
       </form>
+    </section>
+
+    <!-- ===== LE DÉJEUNER (après la réponse, pour ne pas enchaîner deux cartes) ===== -->
+    <section class="section place-section" id="restaurant">
+      <h2 class="script-title reveal">Et pour le déjeuner</h2>
+      <p class="reveal">Après la mairie, nous vous attendons à <strong>14h00</strong> au restaurant.</p>
+      <div class="card place-card reveal">
+        <h3>Restaurant Jardin Marbeuf</h3>
+        <p>275 route de Nîmes<br>34170 Castelnau-le-Lez</p>
+        <div class="map">
+          <iframe title="Carte : Restaurant Jardin Marbeuf" src="https://www.google.com/maps?q=Jardin+Marbeuf,+275+route+de+N%C3%AEmes,+34170+Castelnau-le-Lez&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="place-actions">
+          <a class="btn btn-gold" href="https://www.google.com/maps/dir/?api=1&destination=Jardin+Marbeuf,+275+route+de+N%C3%AEmes,+34170+Castelnau-le-Lez" target="_blank" rel="noopener">Itinéraire</a>
+          <a class="btn btn-ghost" href="https://waze.com/ul?q=Jardin%20Marbeuf%20275%20route%20de%20N%C3%AEmes%20Castelnau-le-Lez&navigate=yes" target="_blank" rel="noopener">Waze</a>
+        </div>
+        <p class="small">À environ 15 minutes en voiture de l'Hôtel de Ville</p>
+      </div>
     </section>
 
     <!-- ===== FIN ===== -->
@@ -210,6 +189,6 @@
     </footer>
   </main>
 
-  <script src="script.js?v=20261104"></script>
+  <script src="script.js?v=20261104d"></script>
 </body>
 </html>
