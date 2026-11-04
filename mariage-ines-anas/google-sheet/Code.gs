@@ -76,7 +76,7 @@ function doPost(e) {
     ]);
     var cv = ss.getSheetByName(SHEET_CONVIVES);
     convives.forEach(function (c) {
-      cv.appendRow([now, nom, c.prenom, c.enfant ? 'Oui' : 'Non', c.entree, c.garniture, c.plat, c.dessert, c.supplement, c.allergies]);
+      cv.appendRow([now, nom, c.prenom, c.entree, c.garniture, c.plat, c.dessert, c.supplement, c.allergies]);
     });
 
     notifier_(nom, vient, convives, p);
@@ -92,14 +92,12 @@ function doPost(e) {
 
 function normaliserConvive_(c, i) {
   c = c || {};
-  var enfant = c.enfant === true || c.enfant === 'true';
-  var entree = enfant ? '' : (ENTREES.indexOf(c.entree) >= 0 ? c.entree : '');
-  var plat = enfant ? '' : (PLATS.indexOf(c.plat) >= 0 ? c.plat : '');
-  var dessert = enfant ? '' : (DESSERTS.indexOf(c.dessert) >= 0 ? c.dessert : '');
+  var entree = ENTREES.indexOf(c.entree) >= 0 ? c.entree : '';
+  var plat = PLATS.indexOf(c.plat) >= 0 ? c.plat : '';
+  var dessert = DESSERTS.indexOf(c.dessert) >= 0 ? c.dessert : '';
   var garniture = entree === 'Salade de saison' ? String(c.garniture || '').trim() : '';
   return {
     prenom: String(c.prenom || '').trim() || ('Convive ' + (i + 1)),
-    enfant: enfant,
     entree: entree,
     garniture: garniture,
     plat: plat,
@@ -110,7 +108,6 @@ function normaliserConvive_(c, i) {
 }
 
 function decrireMenu_(c) {
-  if (c.enfant) return 'menu enfant';
   var entree = c.entree + (c.garniture ? ' (' + c.garniture.toLowerCase() + ')' : '');
   var txt = [entree, c.plat, c.dessert].join(' / ');
   if (c.supplement) txt += ' (+' + c.supplement + ' €)';
@@ -163,8 +160,8 @@ function ensureSheets_(ss) {
   var cv = ss.getSheetByName(SHEET_CONVIVES);
   if (!cv) {
     cv = ss.insertSheet(SHEET_CONVIVES);
-    entete_(cv, ['Date', 'Répondant', 'Convive', 'Enfant', 'Entrée', 'Garniture salade', 'Plat', 'Dessert', 'Supplément (€)', 'Allergies / régime']);
-    cv.setColumnWidth(1, 150); cv.setColumnWidth(2, 200); cv.setColumnWidth(3, 200); cv.setColumnWidth(5, 220); cv.setColumnWidth(7, 220); cv.setColumnWidth(8, 200); cv.setColumnWidth(10, 260);
+    entete_(cv, ['Date', 'Répondant', 'Convive', 'Entrée', 'Garniture salade', 'Plat', 'Dessert', 'Supplément (€)', 'Allergies / régime']);
+    cv.setColumnWidth(1, 150); cv.setColumnWidth(2, 200); cv.setColumnWidth(3, 200); cv.setColumnWidth(4, 220); cv.setColumnWidth(6, 220); cv.setColumnWidth(7, 200); cv.setColumnWidth(9, 260);
     cv.getRange('A:A').setNumberFormat('dd/mm/yyyy hh:mm');
   }
   var recap = ss.getSheetByName(SHEET_RECAP);
@@ -199,30 +196,28 @@ function construireRecap_(sheet) {
   val('Réponses « Oui »', '=COUNTIF(' + R + 'C2:C,"Oui")');
   val('Réponses « Non »', '=COUNTIF(' + R + 'C2:C,"Non")');
   val('Nombre total de convives', '=SUM(' + R + 'D2:D)');
-  val('dont adultes', '=COUNTIF(' + C + 'D2:D,"Non")');
-  val('dont enfants (menu enfant)', '=COUNTIF(' + C + 'D2:D,"Oui")');
   vide();
   titre('Entrées');
-  val('Salade de saison — poulet', '=COUNTIFS(' + C + 'E2:E,"Salade de saison",' + C + 'F2:F,"Poulet")');
-  val('Salade de saison — saumon fumé', '=COUNTIFS(' + C + 'E2:E,"Salade de saison",' + C + 'F2:F,"Saumon fumé")');
-  val('Millefeuille de saumon (supp. +5 €)', '=COUNTIF(' + C + 'E2:E,"Millefeuille de saumon")');
-  val('Noix de Saint-Jacques (supp. +5 €)', '=COUNTIF(' + C + 'E2:E,"Noix de Saint-Jacques")');
+  val('Salade de saison — poulet', '=COUNTIFS(' + C + 'D2:D,"Salade de saison",' + C + 'E2:E,"Poulet")');
+  val('Salade de saison — saumon fumé', '=COUNTIFS(' + C + 'D2:D,"Salade de saison",' + C + 'E2:E,"Saumon fumé")');
+  val('Millefeuille de saumon (supp. +5 €)', '=COUNTIF(' + C + 'D2:D,"Millefeuille de saumon")');
+  val('Noix de Saint-Jacques (supp. +5 €)', '=COUNTIF(' + C + 'D2:D,"Noix de Saint-Jacques")');
   vide();
   titre('Plats');
-  val("Confit d'agneau (supp. +5 €)", '=COUNTIF(' + C + 'G2:G,"Confit d\'agneau")');
-  val('Pavé de saumon', '=COUNTIF(' + C + 'G2:G,"Pavé de saumon")');
-  val('Médaillon de volaille farci', '=COUNTIF(' + C + 'G2:G,"Médaillon de volaille farci")');
+  val("Confit d'agneau (supp. +5 €)", '=COUNTIF(' + C + 'F2:F,"Confit d\'agneau")');
+  val('Pavé de saumon', '=COUNTIF(' + C + 'F2:F,"Pavé de saumon")');
+  val('Médaillon de volaille farci', '=COUNTIF(' + C + 'F2:F,"Médaillon de volaille farci")');
   vide();
   titre('Desserts');
-  val('Entremet fruits rouges', '=COUNTIF(' + C + 'H2:H,"Entremet fruits rouges")');
-  val('Entremet chocolat', '=COUNTIF(' + C + 'H2:H,"Entremet chocolat")');
+  val('Entremet fruits rouges', '=COUNTIF(' + C + 'G2:G,"Entremet fruits rouges")');
+  val('Entremet chocolat', '=COUNTIF(' + C + 'G2:G,"Entremet chocolat")');
   vide();
   titre('Suppléments');
-  val('Convives avec supplément', '=COUNTIF(' + C + 'I2:I,">0")');
-  val('Total des suppléments (€)', '=SUM(' + C + 'I2:I)');
+  val('Convives avec supplément', '=COUNTIF(' + C + 'H2:H,">0")');
+  val('Total des suppléments (€)', '=SUM(' + C + 'H2:H)');
   vide();
   titre('Allergies et régimes particuliers');
-  val('', '=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER(' + C + 'C2:C&" ("&' + C + 'B2:B&") : "&' + C + 'J2:J,' + C + 'J2:J<>"")),"Aucune pour le moment")');
+  val('', '=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER(' + C + 'C2:C&" ("&' + C + 'B2:B&") : "&' + C + 'I2:I,' + C + 'I2:I<>"")),"Aucune pour le moment")');
 
   var values = lignes.map(function (l) { return [l[0], l[1]]; });
   sheet.getRange(1, 1, values.length, 2).setValues(values);

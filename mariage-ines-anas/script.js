@@ -226,7 +226,7 @@ const courseGroup = (i, course) => `
     </div>` : ''}
   </fieldset>`;
 
-// Un bloc par convive : prénom, enfant ou non, puis le menu à cocher et les allergies.
+// Un bloc par convive : prénom, puis le menu à cocher et les allergies.
 // Les choix déjà faits sont conservés quand le nombre de personnes change.
 const renderConvives = () => {
   const count = Number(personnesSelect.value) || 1;
@@ -247,7 +247,6 @@ const renderConvives = () => {
     block.innerHTML = `
       <div class="convive-head">
         <span class="convive-title">Convive ${i}</span>
-        <label class="convive-child"><input type="checkbox" name="c${i}_enfant"><span>Enfant (menu enfant)</span></label>
       </div>
       <label>Prénom et nom
         <input type="text" name="c${i}_prenom" required autocomplete="off">
@@ -258,8 +257,7 @@ const renderConvives = () => {
         <label>Allergies ou régime particulier <span class="optional">(facultatif)</span>
           <input type="text" name="c${i}_allergies" autocomplete="off">
         </label>
-      </div>
-      <p class="convive-child-note" hidden>Le restaurant prévoit un menu enfant, pas besoin de choisir.</p>`;
+      </div>`;
     convivesWrap.appendChild(block);
 
     // Valeurs précédentes
@@ -276,27 +274,17 @@ const renderConvives = () => {
     const prenom = block.querySelector(`input[name="c${i}_prenom"]`);
     if (i === 1 && !prenom.value) prenom.value = nomInput.value.trim();
 
-    const child = block.querySelector(`input[name="c${i}_enfant"]`);
-    const menu = block.querySelector('.convive-menu');
-    const note = block.querySelector('.convive-child-note');
     const entrees = [...block.querySelectorAll(`input[name="c${i}_entree"]`)];
     const garniture = block.querySelector('.menu-garniture');
     const garnitureRadios = [...garniture.querySelectorAll('input')];
     const syncGarniture = () => {
       const chosen = entrees.find((r) => r.checked);
-      const needs = !!chosen && chosen.value === MENU.entree[0].nom && !child.checked;
+      const needs = !!chosen && chosen.value === MENU.entree[0].nom;
       garniture.hidden = !needs;
       garnitureRadios.forEach((r) => { r.required = needs; });
     };
-    const syncChild = () => {
-      menu.hidden = child.checked;
-      note.hidden = !child.checked;
-      menu.querySelectorAll('input[type="radio"]').forEach((el) => { if (!el.name.endsWith('_garniture')) el.required = !child.checked; });
-      syncGarniture();
-    };
-    child.addEventListener('change', syncChild);
     entrees.forEach((r) => r.addEventListener('change', syncGarniture));
-    syncChild();
+    syncGarniture();
   }
 };
 nomInput.addEventListener('change', () => {
@@ -316,18 +304,15 @@ const readConvives = () => [...convivesWrap.querySelectorAll('.convive')].map((b
   const i = block.dataset.index;
   const text = (name) => (block.querySelector(`input[name="c${i}_${name}"]`) || {}).value || '';
   const picked = (name) => (block.querySelector(`input[name="c${i}_${name}"]:checked`) || {}).value || '';
-  const enfant = block.querySelector(`input[name="c${i}_enfant"]`).checked;
-  const entree = enfant ? '' : picked('entree');
-  const convive = {
+  const entree = picked('entree');
+  return {
     prenom: text('prenom').trim() || `Convive ${idx + 1}`,
-    enfant,
     entree,
     garniture: entree === MENU.entree[0].nom ? picked('garniture') : '',
-    plat: enfant ? '' : picked('plat'),
-    dessert: enfant ? '' : picked('dessert'),
+    plat: picked('plat'),
+    dessert: picked('dessert'),
     allergies: text('allergies').trim(),
   };
-  return convive;
 });
 
 const show = (html, ok) => {
@@ -358,9 +343,7 @@ const validate = () => {
 };
 
 const recapHtml = (convives) => convives.map((c) => {
-  const menu = c.enfant
-    ? 'menu enfant'
-    : [c.entree + (c.garniture ? ` (${c.garniture.toLowerCase()})` : ''), c.plat, c.dessert].join(' · ');
+  const menu = [c.entree + (c.garniture ? ` (${c.garniture.toLowerCase()})` : ''), c.plat, c.dessert].join(' · ');
   return `<span><b>${escapeHtml(c.prenom)}</b> ${escapeHtml(menu)}</span>`;
 }).join('');
 
