@@ -5,30 +5,18 @@
 // depuis cette page arrivent dans les mêmes onglets que celles du faire-part.
 const RSVP_URL = 'A_REMPLACER_PAR_L_URL_DU_SCRIPT_GOOGLE';
 
-// La carte du déjeuner (Jardin Marbeuf). Les suppléments ne sont pas montrés aux invités :
-// ils sont recalculés dans le tableau de suivi.
+// La carte du déjeuner (Jardin Marbeuf) : l'entrée et le dessert sont les mêmes pour tous,
+// seul le plat est au choix. Les suppléments ne sont pas montrés aux invités : ils sont
+// recalculés dans le tableau de suivi.
 const MENU = {
   bienvenue: 'Cocktail de bienvenue',
-  entree: [
-    { nom: 'Salade de saison', detail: 'Garniture au choix : poulet ou saumon fumé', garnitures: ['Poulet', 'Saumon fumé'] },
-    { nom: 'Millefeuille de saumon', detail: "Saumon frais relevé d'herbes et de citron" },
-    { nom: 'Noix de Saint-Jacques', detail: 'Sur un riz cuisiné façon risotto avec sa tuile croustillante' },
-  ],
+  entree: { nom: 'Millefeuille de saumon', detail: "Saumon frais relevé d'herbes et de citron" },
   plat: [
     { nom: "Confit d'agneau", detail: 'Servi avec accompagnement au choix' },
     { nom: 'Pavé de saumon', detail: 'Saumon rôti, légumes de saison, sauce citronnée aux herbes fraîches' },
-    { nom: 'Médaillon de volaille farci', detail: 'Doré au four et accompagné de son jus de cuisson' },
   ],
-  dessert: [
-    { nom: 'Entremet fruits rouges', detail: '' },
-    { nom: 'Entremet chocolat', detail: '' },
-  ],
+  dessert: { nom: 'Entremet chocolat', detail: '' },
 };
-const COURSES = [
-  { key: 'entree', label: 'Entrée' },
-  { key: 'plat', label: 'Plat' },
-  { key: 'dessert', label: 'Dessert' },
-];
 
 // --- Papillons : un même dessin, cloné dans chaque vol ---
 const BUTTERFLY = `
@@ -100,20 +88,22 @@ const menuPick = (name, item, required) => `
     </span>
   </label>`;
 
-const courseGroup = (i, course) => `
+// Entrée et dessert : simplement rappelés, sans rien à cocher
+const fixedCourse = (label, item) => `
+  <div class="menu-fixed">
+    <h3>${label}</h3>
+    <p class="menu-item-name">${escapeHtml(item.nom)}</p>
+    ${item.detail ? `<p class="menu-item-detail">${escapeHtml(item.detail)}</p>` : ''}
+  </div>`;
+
+// Le plat : un bouton par choix
+const platGroup = (i) => `
   <fieldset class="menu-group">
-    <legend><h3>${course.label}</h3></legend>
-    ${MENU[course.key].map((item) => menuPick(`c${i}_${course.key}`, item, true)).join('')}
-    ${course.key === 'entree' ? `
-    <div class="menu-garniture" hidden>
-      <p class="menu-garniture-label">Garniture de la salade</p>
-      <div class="menu-pills">
-        ${MENU.entree[0].garnitures.map((g) => `<label class="menu-pill"><input type="radio" name="c${i}_garniture" value="${escapeHtml(g)}"><span>${escapeHtml(g)}</span></label>`).join('')}
-      </div>
-    </div>` : ''}
+    <legend><h3>Plat <span class="menu-choice">au choix</span></h3></legend>
+    ${MENU.plat.map((item) => menuPick(`c${i}_plat`, item, true)).join('')}
   </fieldset>`;
 
-// Un bloc par convive : prénom, menu à cocher, allergies.
+// Un bloc par convive : prénom, plat à cocher, allergies.
 // Les choix déjà faits sont conservés quand le nombre de personnes change.
 const renderConvives = () => {
   const count = Number(personnesSelect.value) || 1;
@@ -137,7 +127,9 @@ const renderConvives = () => {
       </label>
       <div class="convive-menu">
         <p class="menu-welcome">${escapeHtml(MENU.bienvenue)}</p>
-        ${COURSES.map((course) => courseGroup(i, course)).join('')}
+        ${fixedCourse('Entrée', MENU.entree)}
+        ${platGroup(i)}
+        ${fixedCourse('Dessert', MENU.dessert)}
         <label>Allergies ou régime particulier <span class="optional">(facultatif)</span>
           <input type="text" name="c${i}_allergies" autocomplete="off">
         </label>
@@ -155,18 +147,6 @@ const renderConvives = () => {
     // Le premier convive, c'est la personne qui répond
     const prenom = block.querySelector(`input[name="c${i}_prenom"]`);
     if (i === 1 && !prenom.value) prenom.value = nomInput.value.trim();
-
-    const entrees = [...block.querySelectorAll(`input[name="c${i}_entree"]`)];
-    const garniture = block.querySelector('.menu-garniture');
-    const garnitureRadios = [...garniture.querySelectorAll('input')];
-    const syncGarniture = () => {
-      const chosen = entrees.find((r) => r.checked);
-      const needs = !!chosen && chosen.value === MENU.entree[0].nom;
-      garniture.hidden = !needs;
-      garnitureRadios.forEach((r) => { r.required = needs; });
-    };
-    entrees.forEach((r) => r.addEventListener('change', syncGarniture));
-    syncGarniture();
   }
 };
 nomInput.addEventListener('change', () => {
@@ -186,13 +166,14 @@ const readConvives = () => [...convivesWrap.querySelectorAll('.convive')].map((b
   const i = block.dataset.index;
   const text = (name) => (block.querySelector(`input[name="c${i}_${name}"]`) || {}).value || '';
   const picked = (name) => (block.querySelector(`input[name="c${i}_${name}"]:checked`) || {}).value || '';
-  const entree = picked('entree');
+  // Entrée et dessert sont les mêmes pour tous : on les envoie quand même, pour que le
+  // tableau de suivi reste complet (une ligne par convive avec son menu entier).
   return {
     prenom: text('prenom').trim() || `Convive ${idx + 1}`,
-    entree,
-    garniture: entree === MENU.entree[0].nom ? picked('garniture') : '',
+    entree: MENU.entree.nom,
+    garniture: '',
     plat: picked('plat'),
-    dessert: picked('dessert'),
+    dessert: MENU.dessert.nom,
     allergies: text('allergies').trim(),
   };
 });
@@ -212,7 +193,7 @@ const validate = () => {
     return !String(el.value || '').trim();
   });
   if (!missing) return true;
-  const target = missing.type === 'radio' ? (missing.closest('.menu-garniture') || missing.closest('fieldset')) : missing;
+  const target = missing.type === 'radio' ? missing.closest('fieldset') : missing;
   target.classList.add('is-missing');
   target.scrollIntoView({ behavior: 'smooth', block: 'center' });
   if (missing.type !== 'radio') missing.focus({ preventScroll: true });
@@ -225,7 +206,7 @@ const validate = () => {
 };
 
 const recapHtml = (convives) => convives.map((c) => {
-  const menu = [c.entree + (c.garniture ? ` (${c.garniture.toLowerCase()})` : ''), c.plat, c.dessert].join(' · ');
+  const menu = [c.entree, c.plat, c.dessert].join(' · ');
   return `<span><b>${escapeHtml(c.prenom)}</b>${escapeHtml(menu)}${c.allergies ? `<br><i>${escapeHtml(c.allergies)}</i>` : ''}</span>`;
 }).join('');
 
