@@ -3,7 +3,7 @@
 // Même adresse que dans ../script.js : l'application web Google Apps Script qui range les
 // réponses dans le tableau de suivi (voir ../google-sheet/README.md). Les réponses envoyées
 // depuis cette page arrivent dans les mêmes onglets que celles du faire-part.
-const RSVP_URL = 'A_REMPLACER_PAR_L_URL_DU_SCRIPT_GOOGLE';
+const RSVP_URL = 'https://script.google.com/macros/s/AKfycbzY-KEeSm9-LMol-zZS0gDGEvzIr0nRK6twi3a8ULv7bu59GSv-ZKFDTqm5qazqiaAp9w/exec';
 
 // La carte du dîner (Jardin Marbeuf) : l'entrée et le dessert sont les mêmes pour tous,
 // seul le plat est au choix. Les suppléments ne sont pas montrés aux invités : ils sont

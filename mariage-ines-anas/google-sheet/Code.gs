@@ -13,7 +13,7 @@
  */
 
 // E-mail qui reçoit une notification à chaque réponse. Laisser vide ('') pour ne rien envoyer.
-var NOTIFY_EMAIL = '';
+var NOTIFY_EMAIL = Session.getEffectiveUser().getEmail(); // le compte Google propriétaire du tableau
 // Identifiant attendu dans les envois (doit correspondre à data.set('site', …) dans script.js)
 var SITE = 'ines-anas';
 
@@ -35,7 +35,7 @@ var DESSERTS = ['Entremet fruits rouges', 'Entremet chocolat'];
 function configurer() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   ensureSheets_(ss);
-  SpreadsheetApp.getUi && SpreadsheetApp.getUi().alert('Les onglets « Réponses », « Convives » et « Récapitulatif » sont prêts.');
+  try { SpreadsheetApp.getUi().alert('Les onglets « Réponses », « Convives » et « Récapitulatif » sont prêts.'); } catch (err) { Logger.log('Onglets prêts.'); }
 }
 
 /** Permet de vérifier dans le navigateur que le script est bien publié. */
