@@ -133,6 +133,7 @@ img { display: block; max-width: 100%; height: auto; }
   text-align: center;
 }
 .hero-sub { font-family: var(--caps); font-size: 0.86rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink); line-height: 1.9; }
+.hero-date { color: var(--rose-deep); font-size: 1.02rem; text-shadow: 0 1px 10px rgba(255, 255, 255, 0.9); }
 .hero-text {
   max-width: 420px;
   padding: 18px 22px;
@@ -332,7 +333,6 @@ img { display: block; max-width: 100%; height: auto; }
 
 /* ---------- Fin ---------- */
 .finale { text-align: center; padding: 50px 0 30px; display: grid; gap: 6px; justify-items: center; }
-.back { margin-top: 14px; font-family: var(--caps); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-deep); text-decoration: none; }
 
 /* ---------- Apparition au défilement ---------- */
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.9s ease, transform 0.9s ease; }

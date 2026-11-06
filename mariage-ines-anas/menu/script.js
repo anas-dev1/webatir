@@ -5,7 +5,7 @@
 // depuis cette page arrivent dans les mêmes onglets que celles du faire-part.
 const RSVP_URL = 'A_REMPLACER_PAR_L_URL_DU_SCRIPT_GOOGLE';
 
-// La carte du déjeuner (Jardin Marbeuf) : l'entrée et le dessert sont les mêmes pour tous,
+// La carte du dîner (Jardin Marbeuf) : l'entrée et le dessert sont les mêmes pour tous,
 // seul le plat est au choix. Les suppléments ne sont pas montrés aux invités : ils sont
 // recalculés dans le tableau de suivi.
 const MENU = {
@@ -199,7 +199,7 @@ const validate = () => {
   if (missing.type !== 'radio') missing.focus({ preventScroll: true });
   const isPresence = missing.name === 'presence';
   const isDish = missing.type === 'radio' && !isPresence;
-  show(isPresence ? 'Dites-nous si vous serez présent(e) au déjeuner.'
+  show(isPresence ? 'Dites-nous si vous serez présent(e) au dîner.'
     : isDish ? 'Il reste un plat à choisir, il est encadré en rose.'
       : 'Il manque une information, le champ est encadré en rose.', false);
   return false;
@@ -236,7 +236,7 @@ form.addEventListener('submit', async (e) => {
     if (!result.ok) throw new Error(result.erreur || 'refus');
     const prenom = nomInput.value.trim().split(/\s+/)[0];
     thanksText.textContent = coming
-      ? `${prenom}, votre menu est noté. Nous avons hâte de partager ce déjeuner avec vous ✦`
+      ? `${prenom}, votre menu est noté. Nous avons hâte de partager ce dîner avec vous ✦`
       : `${prenom}, merci de nous avoir prévenus. Vous serez dans nos pensées ✦`;
     recap.innerHTML = coming ? recapHtml(convives) : '';
     recap.hidden = !coming;
