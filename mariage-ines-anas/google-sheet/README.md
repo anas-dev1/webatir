@@ -11,8 +11,9 @@ pour le restaurant. Tout est gratuit et tourne sur votre compte Google.
 2. **Ouvrir l'éditeur de script** : menu *Extensions → Apps Script*.
 3. **Coller le code** : supprimez le contenu de `Code.gs` dans l'éditeur, collez le contenu
    du fichier [`Code.gs`](Code.gs) de ce dossier, puis enregistrez (icône disquette).
-   - Pour recevoir un e-mail à chaque réponse, mettez votre adresse dans `NOTIFY_EMAIL`,
-     par exemple `var NOTIFY_EMAIL = 'vous@gmail.com';`.
+   - Un e-mail est envoyé à chaque réponse au compte Google propriétaire du tableau. Pour
+     l'envoyer ailleurs, mettez l'adresse dans `NOTIFY_EMAIL`, par exemple
+     `var NOTIFY_EMAIL = 'vous@gmail.com';` (ou `''` pour ne rien envoyer).
 4. **Créer les onglets** : dans la liste déroulante des fonctions (en haut), choisissez
    `configurer` puis cliquez sur *Exécuter*. Google demande une autorisation : acceptez
    (« Autoriser », puis si un écran « Google n'a pas validé cette application » apparaît :
@@ -38,6 +39,15 @@ pour le restaurant. Tout est gratuit et tourne sur votre compte Google.
 | Convives | Une ligne par personne : entrée, garniture de la salade, plat, dessert, supplément, allergies |
 
 Si quelqu'un répond une deuxième fois avec le même nom, son ancienne réponse est remplacée.
+
+## Outils dans l'éditeur de script
+
+- `reconstruireRecap` : refait l'onglet *Récapitulatif* (après un changement de carte, par exemple).
+- `supprimerReponse` : retire une réponse à la main (un essai, un doublon). Mettez le nom dans
+  `NOM_A_SUPPRIMER`, enregistrez, puis *Exécuter*.
+
+Les deux pages (`mariage-ines-anas/` et `mariage-ines-anas/menu/`) envoient leurs réponses au
+même script : une seule `RSVP_URL`, un seul tableau.
 
 ## Modifier le script plus tard
 
