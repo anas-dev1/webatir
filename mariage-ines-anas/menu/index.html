@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Votre menu — Ines &amp; Anas, 19 décembre 2026</title>
+  <meta name="description" content="Choisissez votre menu pour le déjeuner de mariage d'Ines et Anas au Jardin Marbeuf, le samedi 19 décembre 2026.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#f6f0e8">
+  <meta property="og:title" content="Votre menu pour le mariage d'Ines &amp; Anas ✦">
+  <meta property="og:description" content="Samedi 19 décembre 2026 · Déjeuner au Jardin Marbeuf. Dites-nous ce qui vous ferait plaisir.">
+  <meta property="og:image" content="https://webatir.com/mariage-ines-anas/menu/img/jardin.jpg">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Marcellus&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="img/jardin.webp" type="image/webp">
+  <link rel="stylesheet" href="style.css?v=20261106a">
+</head>
+<body>
+
+  <!-- ===== JARDIN D'HIVER (fond vidéo : image animée, papillons, lumière) ===== -->
+  <div class="garden" aria-hidden="true">
+    <picture class="garden-blur">
+      <source srcset="img/jardin.webp" type="image/webp">
+      <img src="img/jardin.jpg" alt="" decoding="async">
+    </picture>
+    <picture class="garden-main">
+      <source srcset="img/jardin.webp" type="image/webp">
+      <img src="img/jardin.jpg" alt="" decoding="async">
+    </picture>
+    <div class="garden-light"></div>
+    <div class="garden-veil"></div>
+
+    <!-- Les papillons sont dessinés par script.js (un même dessin, quatre vols différents) -->
+    <svg class="butterfly b1" viewBox="0 0 100 80"></svg>
+    <svg class="butterfly b2" viewBox="0 0 100 80"></svg>
+    <svg class="butterfly b3" viewBox="0 0 100 80"></svg>
+    <svg class="butterfly b4" viewBox="0 0 100 80"></svg>
+  </div>
+
+  <main class="page" id="page">
+
+    <!-- ===== EN-TÊTE ===== -->
+    <header class="hero">
+      <p class="eyebrow">Ines <span class="amp">&amp;</span> Anas</p>
+      <h1 class="script-title">Votre menu</h1>
+      <div class="divider" aria-hidden="true"><span></span>✦<span></span></div>
+      <p class="hero-sub">Déjeuner au Jardin Marbeuf<br>Samedi 19 décembre 2026 · 14h00</p>
+      <p class="hero-text">Pour que chacun soit servi selon ses envies, dites-nous ce qui vous ferait plaisir à table. Merci de répondre avant le <strong>20 novembre 2026</strong>.</p>
+      <a href="#formulaire" class="btn btn-gold">Composer mon menu</a>
+      <a href="#carte" class="hero-link">Voir la carte</a>
+    </header>
+
+    <!-- ===== LA CARTE (comme sur le menu imprimé) ===== -->
+    <section class="section" id="carte">
+      <article class="card carte reveal">
+        <p class="carte-title">Menu</p>
+        <p class="carte-welcome">Cocktail de bienvenue</p>
+
+        <h2 class="carte-course">Entrée</h2>
+        <p class="carte-dish">Salade de saison</p>
+        <p class="carte-detail">Garniture au choix : poulet ou saumon fumé</p>
+        <p class="carte-dish">Millefeuille de saumon</p>
+        <p class="carte-detail">Saumon frais relevé d'herbes et de citron</p>
+        <p class="carte-dish">Noix de Saint-Jacques</p>
+        <p class="carte-detail">Sur un riz cuisiné façon risotto avec sa tuile croustillante</p>
+
+        <h2 class="carte-course">Plat</h2>
+        <p class="carte-dish">Confit d'agneau</p>
+        <p class="carte-detail">Servi avec accompagnement au choix</p>
+        <p class="carte-dish">Pavé de saumon</p>
+        <p class="carte-detail">Saumon rôti, légumes de saison, sauce citronnée aux herbes fraîches</p>
+        <p class="carte-dish">Médaillon de volaille farci</p>
+        <p class="carte-detail">Doré au four et accompagné de son jus de cuisson</p>
+
+        <h2 class="carte-course">Dessert</h2>
+        <p class="carte-dish">Entremet fruits rouges</p>
+        <p class="carte-dish">Entremet chocolat</p>
+      </article>
+    </section>
+
+    <!-- ===== LE FORMULAIRE ===== -->
+    <section class="section" id="formulaire">
+      <h2 class="script-title reveal">Vos choix</h2>
+      <p class="intro reveal">Un menu par convive : touchez les plats de votre choix.</p>
+
+      <form class="card form reveal" id="menuForm" novalidate>
+        <label>Votre nom et prénom
+          <input type="text" name="nom" required autocomplete="name">
+        </label>
+
+        <fieldset>
+          <legend>Serez-vous des nôtres au déjeuner&nbsp;?</legend>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="presence" value="Oui, avec joie" required><span>Oui, avec joie</span></label>
+            <label class="choice"><input type="radio" name="presence" value="Non, malheureusement"><span>Malheureusement non</span></label>
+          </div>
+        </fieldset>
+
+        <label>Votre téléphone <span class="optional">(facultatif, pour vous joindre si besoin)</span>
+          <input type="tel" name="telephone" autocomplete="tel" inputmode="tel">
+        </label>
+
+        <div class="guests-block" id="guestsBlock" hidden>
+          <label class="guests-field">Nombre de personnes (vous compris)
+            <select name="personnes" id="personnes">
+              <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option>
+            </select>
+          </label>
+          <div class="convives" id="convives"></div>
+        </div>
+
+        <label>Un petit mot pour les mariés <span class="optional">(facultatif)</span>
+          <textarea name="message" rows="3"></textarea>
+        </label>
+
+        <button type="submit" class="btn btn-gold btn-full">Envoyer mes choix</button>
+        <p class="form-status" id="formStatus" role="status" hidden></p>
+      </form>
+
+      <div class="card thanks" id="thanks" hidden>
+        <div class="thanks-seal" aria-hidden="true">✦</div>
+        <p class="script-title">Merci</p>
+        <p class="thanks-text" id="thanksText"></p>
+        <div class="recap" id="recap"></div>
+        <p class="small">Vous pouvez renvoyer le formulaire si vous changez d'avis&nbsp;: votre nouvelle réponse remplacera l'ancienne.</p>
+        <a class="btn btn-ghost" href="../">Revoir le faire-part</a>
+      </div>
+    </section>
+
+    <!-- ===== FIN ===== -->
+    <footer class="finale">
+      <p class="signature">Ines &amp; Anas</p>
+      <p class="small">19 · 12 · 2026</p>
+      <a class="back" href="../">← Revenir au faire-part</a>
+    </footer>
+  </main>
+
+  <script src="script.js?v=20261106a"></script>
+</body>
+</html>
