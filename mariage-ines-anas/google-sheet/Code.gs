@@ -16,10 +16,13 @@
 var NOTIFY_EMAIL = Session.getEffectiveUser().getEmail(); // le compte Google propriétaire du tableau
 // Identifiant attendu dans les envois (doit correspondre à data.set('site', …) dans script.js)
 var SITE = 'ines-anas';
+// La soirée henné (page mariage-ines-anas/henne/) envoie ses réponses avec cet identifiant
+var SITE_HENNE = 'henne';
 
 var SHEET_REPONSES = 'Réponses';
 var SHEET_CONVIVES = 'Convives';
 var SHEET_RECAP = 'Récapitulatif';
+var SHEET_HENNE = 'Henné';
 
 // La carte, pour recalculer les suppléments côté tableau (on ne fait pas confiance au navigateur)
 var SUPPLEMENTS = {
@@ -53,6 +56,13 @@ function supprimerReponse() {
   supprimerAnciennesReponses_(SpreadsheetApp.getActiveSpreadsheet(), NOM_A_SUPPRIMER);
 }
 
+/** Même chose pour une réponse à la soirée henné. */
+function supprimerReponseHenne() {
+  if (!NOM_A_SUPPRIMER) throw new Error('Renseignez NOM_A_SUPPRIMER en haut de cette fonction.');
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_HENNE);
+  if (sheet) supprimerLignesParNom_(sheet, NOM_A_SUPPRIMER);
+}
+
 /** Permet de vérifier dans le navigateur que le script est bien publié. */
 function doGet() {
   return json_({ ok: true, site: SITE });
@@ -65,6 +75,7 @@ function doPost(e) {
   try {
     var p = (e && e.parameter) || {};
     if (p.website) return json_({ ok: true }); // robot : on fait semblant d'accepter
+    if (p.site === SITE_HENNE) return enregistrerHenne_(p);
     if (p.site !== SITE) return json_({ ok: false, erreur: 'site inconnu' });
     var nom = String(p.nom || '').trim();
     if (!nom || !p.presence) return json_({ ok: false, erreur: 'nom ou présence manquant' });
@@ -103,6 +114,30 @@ function doPost(e) {
   }
 }
 
+/** Réponse à la soirée henné : une ligne par personne qui répond, dans l'onglet Henné. */
+function enregistrerHenne_(p) {
+  var nom = String(p.nom || '').trim();
+  if (!nom || !p.presence) return json_({ ok: false, erreur: 'nom ou présence manquant' });
+  var vient = /^oui/i.test(String(p.presence));
+  var nb = vient ? Math.max(1, Math.min(20, parseInt(p.personnes, 10) || 1)) : 0;
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  ensureSheets_(ss);
+  var sheet = ss.getSheetByName(SHEET_HENNE);
+  supprimerLignesParNom_(sheet, nom);
+  sheet.appendRow([new Date(), nom, vient ? 'Oui' : 'Non', nb, String(p.telephone || '').trim(), String(p.message || '').trim()]);
+  if (NOTIFY_EMAIL) {
+    MailApp.sendEmail(NOTIFY_EMAIL, 'Soirée henné — réponse de ' + nom + ' (' + (vient ? 'Oui' : 'Non') + ')', [
+      'Nom : ' + nom,
+      'Présence : ' + (vient ? 'Oui' : 'Non'),
+      'Nombre de personnes : ' + nb,
+      'Téléphone : ' + (p.telephone || '—'),
+      'Message : ' + (p.message || '—'),
+      '', 'Tableau : ' + ss.getUrl(),
+    ].join('\n'));
+  }
+  return json_({ ok: true });
+}
+
 // ---------- Outils ----------
 
 function normaliserConvive_(c, i) {
@@ -132,16 +167,20 @@ function decrireMenu_(c) {
 
 /** Une personne qui répond une deuxième fois remplace sa réponse précédente (même nom, sans tenir compte de la casse). */
 function supprimerAnciennesReponses_(ss, nom) {
-  var cible = nom.toLowerCase();
   [SHEET_REPONSES, SHEET_CONVIVES].forEach(function (name) {
-    var sheet = ss.getSheetByName(name);
-    var last = sheet.getLastRow();
-    if (last < 2) return;
-    var noms = sheet.getRange(2, 2, last - 1, 1).getValues();
-    for (var r = noms.length - 1; r >= 0; r -= 1) {
-      if (String(noms[r][0]).trim().toLowerCase() === cible) sheet.deleteRow(r + 2);
-    }
+    supprimerLignesParNom_(ss.getSheetByName(name), nom);
   });
+}
+
+/** Supprime toutes les lignes d'un onglet dont la colonne B (nom) correspond, sans tenir compte de la casse. */
+function supprimerLignesParNom_(sheet, nom) {
+  var cible = String(nom).trim().toLowerCase();
+  var last = sheet.getLastRow();
+  if (last < 2) return;
+  var noms = sheet.getRange(2, 2, last - 1, 1).getValues();
+  for (var r = noms.length - 1; r >= 0; r -= 1) {
+    if (String(noms[r][0]).trim().toLowerCase() === cible) sheet.deleteRow(r + 2);
+  }
 }
 
 function notifier_(nom, vient, convives, p) {
@@ -179,6 +218,13 @@ function ensureSheets_(ss) {
     cv.setColumnWidth(1, 150); cv.setColumnWidth(2, 200); cv.setColumnWidth(3, 200); cv.setColumnWidth(4, 220); cv.setColumnWidth(6, 220); cv.setColumnWidth(7, 200); cv.setColumnWidth(9, 260);
     cv.getRange('A:A').setNumberFormat('dd/mm/yyyy hh:mm');
   }
+  var henne = ss.getSheetByName(SHEET_HENNE);
+  if (!henne) {
+    henne = ss.insertSheet(SHEET_HENNE);
+    entete_(henne, ['Date', 'Nom', 'Présence', 'Nb personnes', 'Téléphone', 'Message']);
+    henne.setColumnWidth(1, 150); henne.setColumnWidth(2, 220); henne.setColumnWidth(6, 360);
+    henne.getRange('A:A').setNumberFormat('dd/mm/yyyy hh:mm');
+  }
   var recap = ss.getSheetByName(SHEET_RECAP);
   if (!recap) {
     recap = ss.insertSheet(SHEET_RECAP, 0);
@@ -186,7 +232,7 @@ function ensureSheets_(ss) {
   }
   // Supprime la « Feuille 1 » vide créée par défaut
   var defaut = ss.getSheetByName('Feuille 1') || ss.getSheetByName('Sheet1');
-  if (defaut && ss.getSheets().length > 3 && defaut.getLastRow() === 0) ss.deleteSheet(defaut);
+  if (defaut && ss.getSheets().length > 4 && defaut.getLastRow() === 0) ss.deleteSheet(defaut);
 }
 
 /** Renvoie le séparateur d'arguments accepté par ce tableau : ',' (anglais) ou ';' (français, etc.). */
@@ -208,6 +254,7 @@ function entete_(sheet, titres) {
 function construireRecap_(sheet) {
   var R = "'" + SHEET_REPONSES + "'!";
   var C = "'" + SHEET_CONVIVES + "'!";
+  var H = "'" + SHEET_HENNE + "'!";
   var lignes = [];
   var titre = function (t) { lignes.push([t, '', 'titre']); };
   var val = function (label, formule) { lignes.push([label, formule, '']); };
@@ -243,6 +290,11 @@ function construireRecap_(sheet) {
   vide();
   titre('Allergies et régimes particuliers');
   val('', '=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER(' + C + 'C2:C&" ("&' + C + 'B2:B&") : "&' + C + 'I2:I,' + C + 'I2:I<>"")),"Aucune pour le moment")');
+  vide();
+  titre('Soirée henné (vendredi 18 décembre)');
+  val('Réponses « Oui »', '=COUNTIF(' + H + 'C2:C,"Oui")');
+  val('Réponses « Non »', '=COUNTIF(' + H + 'C2:C,"Non")');
+  val('Nombre de femmes attendues', '=SUM(' + H + 'D2:D)');
 
   // Les formules ci-dessus sont écrites avec des virgules ; un tableau en français attend des
   // points-virgules. On teste le tableau pour savoir lequel il accepte.
