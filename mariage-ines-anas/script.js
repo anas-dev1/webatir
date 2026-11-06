@@ -3,7 +3,7 @@
 // Adresse de l'application web Google Apps Script qui reçoit les réponses et remplit le
 // tableau de suivi (voir google-sheet/README.md). Tant qu'elle n'est pas renseignée, le
 // formulaire affiche un message d'erreur clair au lieu d'envoyer dans le vide.
-const RSVP_URL = 'A_REMPLACER_PAR_L_URL_DU_SCRIPT_GOOGLE';
+const RSVP_URL = 'https://script.google.com/macros/s/AKfycbzY-KEeSm9-LMol-zZS0gDGEvzIr0nRK6twi3a8ULv7bu59GSv-ZKFDTqm5qazqiaAp9w/exec';
 const WEDDING_DATE = new Date('2026-12-19T11:00:00+01:00');
 
 // La carte du déjeuner (Jardin Marbeuf), affichée dans le formulaire : chaque convive coche son menu.

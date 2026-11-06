@@ -13,7 +13,7 @@
  */
 
 // E-mail qui reçoit une notification à chaque réponse. Laisser vide ('') pour ne rien envoyer.
-var NOTIFY_EMAIL = '';
+var NOTIFY_EMAIL = Session.getEffectiveUser().getEmail(); // le compte Google propriétaire du tableau
 // Identifiant attendu dans les envois (doit correspondre à data.set('site', …) dans script.js)
 var SITE = 'ines-anas';
 
@@ -35,7 +35,22 @@ var DESSERTS = ['Entremet fruits rouges', 'Entremet chocolat'];
 function configurer() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   ensureSheets_(ss);
-  SpreadsheetApp.getUi && SpreadsheetApp.getUi().alert('Les onglets « Réponses », « Convives » et « Récapitulatif » sont prêts.');
+  try { SpreadsheetApp.getUi().alert('Les onglets « Réponses », « Convives » et « Récapitulatif » sont prêts.'); } catch (err) { Logger.log('Onglets prêts.'); }
+}
+
+/** Reconstruit l'onglet Récapitulatif (par ex. après un changement de carte) : Exécuter depuis l'éditeur. */
+function reconstruireRecap() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var recap = ss.getSheetByName(SHEET_RECAP);
+  if (recap) ss.deleteSheet(recap);
+  ensureSheets_(ss);
+}
+
+/** Pour retirer une réponse à la main (un essai, un doublon) : mettre le nom ci-dessous, puis Exécuter. */
+var NOM_A_SUPPRIMER = '';
+function supprimerReponse() {
+  if (!NOM_A_SUPPRIMER) throw new Error('Renseignez NOM_A_SUPPRIMER en haut de cette fonction.');
+  supprimerAnciennesReponses_(SpreadsheetApp.getActiveSpreadsheet(), NOM_A_SUPPRIMER);
 }
 
 /** Permet de vérifier dans le navigateur que le script est bien publié. */
@@ -174,6 +189,16 @@ function ensureSheets_(ss) {
   if (defaut && ss.getSheets().length > 3 && defaut.getLastRow() === 0) ss.deleteSheet(defaut);
 }
 
+/** Renvoie le séparateur d'arguments accepté par ce tableau : ',' (anglais) ou ';' (français, etc.). */
+function separateurFormule_(sheet) {
+  var cell = sheet.getRange('Z1');
+  cell.setFormula('=IF(1,1,1)');
+  SpreadsheetApp.flush();
+  var ok = cell.getValue() === 1;
+  cell.clearContent();
+  return ok ? ',' : ';';
+}
+
 function entete_(sheet, titres) {
   sheet.getRange(1, 1, 1, titres.length).setValues([titres])
     .setFontWeight('bold').setBackground('#14122e').setFontColor('#e0c283');
@@ -219,8 +244,12 @@ function construireRecap_(sheet) {
   titre('Allergies et régimes particuliers');
   val('', '=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER(' + C + 'C2:C&" ("&' + C + 'B2:B&") : "&' + C + 'I2:I,' + C + 'I2:I<>"")),"Aucune pour le moment")');
 
-  var values = lignes.map(function (l) { return [l[0], l[1]]; });
-  sheet.getRange(1, 1, values.length, 2).setValues(values);
+  // Les formules ci-dessus sont écrites avec des virgules ; un tableau en français attend des
+  // points-virgules. On teste le tableau pour savoir lequel il accepte.
+  var sep = separateurFormule_(sheet);
+  var values = lignes.map(function (l) { return [l[0]]; });
+  sheet.getRange(1, 1, values.length, 1).setValues(values);
+  sheet.getRange(1, 2, lignes.length, 1).setFormulas(lignes.map(function (l) { return [(l[1] || '').replace(/,/g, sep)]; }));
   lignes.forEach(function (l, i) {
     var row = i + 1;
     if (l[2] === 'titre') {
