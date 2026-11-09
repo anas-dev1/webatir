@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Marcellus&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="img/enveloppe-fermee.jpg">
-  <link rel="stylesheet" href="style.css?v=20261109a">
+  <link rel="stylesheet" href="style.css?v=20261109b">
 </head>
 <body class="is-locked">
 
@@ -180,17 +180,15 @@
       </div>
     </section>
 
-    <!-- ===== POUR LES MARIÉS (participation par virement) ===== -->
-    <section class="section gift-section" id="cadeau">
+    <!-- ===== POUR LES MARIÉS (cagnotte en ligne) — masqué tant que CAGNOTTE_URL est vide dans script.js ===== -->
+    <section class="section gift-section" id="cadeau" hidden>
       <h2 class="script-title reveal">Pour les mariés</h2>
       <p class="reveal">Votre présence est notre plus beau cadeau. Si vous souhaitez tout de même nous gâter, une participation à notre voyage de noces nous touchera beaucoup.</p>
       <div class="card gift-card reveal">
-        <p class="gift-label">Virement bancaire</p>
-        <p class="gift-holder" id="ibanTitulaire">Ines Flora Aicha Nzomono</p>
-        <p class="gift-iban" id="ibanTexte">FR76 1451 8292 6700 1913 1644 023</p>
-        <p class="gift-bic" id="bicTexte"></p>
-        <button type="button" class="btn btn-gold" id="copierIban">Copier l'IBAN</button>
-        <p class="small">En libellé du virement, indiquez simplement votre nom&nbsp;: nous saurons qui remercier ✦</p>
+        <p class="gift-label">Cagnotte en ligne</p>
+        <p class="gift-texte">Un geste en quelques secondes, par carte bancaire, en toute sécurité.</p>
+        <a class="btn btn-gold" id="cagnotteLien" href="#" target="_blank" rel="noopener">Participer à la cagnotte</a>
+        <p class="small">Laissez-nous un petit mot avec votre participation&nbsp;: nous saurons qui remercier ✦</p>
       </div>
     </section>
 
@@ -203,6 +201,6 @@
     </footer>
   </main>
 
-  <script src="script.js?v=20261109a"></script>
+  <script src="script.js?v=20261109b"></script>
 </body>
 </html>

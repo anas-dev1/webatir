@@ -382,20 +382,13 @@ form.addEventListener('submit', async (e) => {
   }
 });
 
-// --- Pour les mariés : copier l'IBAN ---
+// --- Pour les mariés : la cagnotte en ligne ---
+// Collez ici le lien de la cagnotte (Leetchi, Le Pot Commun, Lydia, PayPal…). Vide = section masquée.
+const CAGNOTTE_URL = '';
 (() => {
-  const bouton = document.getElementById('copierIban');
-  const iban = document.getElementById('ibanTexte');
-  if (!bouton || !iban) return;
-  bouton.addEventListener('click', async () => {
-    const texte = iban.textContent.replace(/\s+/g, '');
-    try {
-      await navigator.clipboard.writeText(texte);
-      bouton.textContent = 'IBAN copié ✦';
-      bouton.classList.add('is-copie');
-      setTimeout(() => { bouton.textContent = "Copier l'IBAN"; bouton.classList.remove('is-copie'); }, 2400);
-    } catch (err) {
-      window.prompt("Copiez l'IBAN :", texte);
-    }
-  });
+  const section = document.getElementById('cadeau');
+  const lien = document.getElementById('cagnotteLien');
+  if (!section || !lien || !/^https:\/\//.test(CAGNOTTE_URL)) return;
+  lien.href = CAGNOTTE_URL;
+  section.hidden = false;
 })();
