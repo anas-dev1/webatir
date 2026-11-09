@@ -42,6 +42,15 @@ const revealObserver = new IntersectionObserver(
   { threshold: 0.12, rootMargin: '0px 0px -30px 0px' }
 );
 
+// --- Vidéo de couverture : la photo s'anime dès que la vidéo est prête (sinon la photo reste) ---
+const video = document.getElementById('fondVideo');
+if (video && !reduced) {
+  video.hidden = false;
+  const lancer = () => video.play().then(() => video.classList.add('is-prete')).catch(() => {});
+  if (video.readyState >= 3) lancer(); else video.addEventListener('canplay', lancer, { once: true });
+  video.addEventListener('error', () => { video.hidden = true; }, { once: true });
+}
+
 let ouverte = false;
 const ouvrir = () => {
   if (ouverte) return;
@@ -49,6 +58,7 @@ const ouvrir = () => {
   couverture.classList.add('is-ouverte');
   setTimeout(() => {
     couverture.hidden = true;
+    if (video) video.pause();
     carte.hidden = false;
     document.querySelectorAll('.reveal').forEach((el, i) => {
       if (i < 2) setTimeout(() => el.classList.add('is-in'), 150 + i * 220);

@@ -14,107 +14,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Marcellus&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261109a">
+  <link rel="preload" as="image" href="img/fond-1080.jpg">
+  <link rel="stylesheet" href="style.css?v=20261109b">
 </head>
 <body>
 
-  <!-- Motifs réutilisés : damas embossé du papier, frise du cadre, fleur fuchsia -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <defs>
-      <!-- Damas : rinceaux symétriques, en relief (un trait clair, un trait ombré, légèrement décalés) -->
-      <g id="damas-trait" fill="none" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M80 8 c -14 18 -14 40 0 56 c 14 -16 14 -38 0 -56 Z"/>
-        <path d="M80 64 c -20 -6 -40 6 -46 26 c 20 6 40 -6 46 -26 Z M80 64 c 20 -6 40 6 46 26 c -20 6 -40 -6 -46 -26 Z"/>
-        <path d="M34 90 c -10 10 -22 10 -30 2 M126 90 c 10 10 22 10 30 2"/>
-        <path d="M80 64 c 0 26 -16 44 -36 52 c 22 2 36 20 36 44 c 0 -24 14 -42 36 -44 c -20 -8 -36 -26 -36 -52 Z"/>
-        <path d="M44 116 c -8 -4 -18 -2 -24 6 c 8 4 18 2 24 -6 Z M116 116 c 8 -4 18 -2 24 6 c -8 4 -18 2 -24 -6 Z"/>
-        <path d="M8 8 c 10 14 10 30 0 44 M152 8 c -10 14 -10 30 0 44 M8 152 c 10 -14 10 -30 0 -44 M152 152 c -10 -14 -10 -30 0 -44"/>
-        <circle cx="80" cy="36" r="3"/><circle cx="80" cy="124" r="3"/><circle cx="20" cy="80" r="2"/><circle cx="140" cy="80" r="2"/>
-      </g>
-      <pattern id="damas" width="160" height="160" patternUnits="userSpaceOnUse">
-        <use href="#damas-trait" x="0.9" y="0.9" stroke="rgba(120, 96, 56, 0.22)"/>
-        <use href="#damas-trait" x="-0.6" y="-0.6" stroke="rgba(255, 255, 255, 0.95)"/>
-      </pattern>
-      <!-- Frise du cadre : feuilles et perles -->
-      <g id="frise-trait" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M0 18 c 8 -12 16 -12 24 0 c 8 12 16 12 24 0"/>
-        <path d="M12 18 c 0 -6 4 -10 10 -10 c -2 6 -6 10 -10 10 Z M36 18 c 0 6 -4 10 -10 10 c 2 -6 6 -10 10 -10 Z"/>
-        <circle cx="24" cy="18" r="1.6"/><circle cx="0" cy="18" r="1.2"/><circle cx="48" cy="18" r="1.2"/>
-      </g>
-      <pattern id="frise" width="48" height="36" patternUnits="userSpaceOnUse">
-        <use href="#frise-trait" x="0.8" y="0.8" stroke="rgba(120, 96, 56, 0.3)"/>
-        <use href="#frise-trait" x="-0.5" y="-0.5" stroke="rgba(255, 255, 255, 0.95)"/>
-      </pattern>
-      <!-- Fleur : deux rangs de pétales, cœur sombre, paillettes -->
-      <radialGradient id="petale" cx="100" cy="100" r="92" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="#7a0c33"/>
-        <stop offset="0.3" stop-color="#b3144f"/>
-        <stop offset="0.72" stop-color="#cf3b7c"/>
-        <stop offset="1" stop-color="#eaa2c4"/>
-      </radialGradient>
-      <radialGradient id="petale-fond" cx="100" cy="100" r="98" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="#5e0826"/>
-        <stop offset="0.5" stop-color="#8f0f3e"/>
-        <stop offset="1" stop-color="#c2366f"/>
-      </radialGradient>
-      <radialGradient id="coeur" cx="0.4" cy="0.38" r="0.7">
-        <stop offset="0" stop-color="#8a1a3c"/>
-        <stop offset="1" stop-color="#3e0516"/>
-      </radialGradient>
-      <path id="petale-forme" d="M100 100 C 64 80, 50 42, 70 18 C 82 6, 96 10, 100 24 C 104 10, 118 6, 130 18 C 150 42, 136 80, 100 100 Z"/>
-      <symbol id="fleur" viewBox="0 0 200 200">
-        <g fill="url(#petale-fond)" stroke="#f3c1d9" stroke-width="0.8" stroke-opacity="0.6">
-          <use href="#petale-forme" transform="rotate(22.5 100 100) translate(100 100) scale(1.08) translate(-100 -100)"/>
-          <use href="#petale-forme" transform="rotate(67.5 100 100) translate(100 100) scale(1.08) translate(-100 -100)"/>
-          <use href="#petale-forme" transform="rotate(112.5 100 100) translate(100 100) scale(1.08) translate(-100 -100)"/>
-          <use href="#petale-forme" transform="rotate(157.5 100 100) translate(100 100) scale(1.08) translate(-100 -100)"/>
-          <use href="#petale-forme" transform="rotate(202.5 100 100) translate(100 100) scale(1.08) translate(-100 -100)"/>
-          <use href="#petale-forme" transform="rotate(247.5 100 100) translate(100 100) scale(1.08) translate(-100 -100)"/>
-          <use href="#petale-forme" transform="rotate(292.5 100 100) translate(100 100) scale(1.08) translate(-100 -100)"/>
-          <use href="#petale-forme" transform="rotate(337.5 100 100) translate(100 100) scale(1.08) translate(-100 -100)"/>
-        </g>
-        <g fill="url(#petale)" stroke="#f6d3e4" stroke-width="0.9" stroke-opacity="0.75">
-          <use href="#petale-forme"/>
-          <use href="#petale-forme" transform="rotate(45 100 100)"/>
-          <use href="#petale-forme" transform="rotate(90 100 100)"/>
-          <use href="#petale-forme" transform="rotate(135 100 100)"/>
-          <use href="#petale-forme" transform="rotate(180 100 100)"/>
-          <use href="#petale-forme" transform="rotate(225 100 100)"/>
-          <use href="#petale-forme" transform="rotate(270 100 100)"/>
-          <use href="#petale-forme" transform="rotate(315 100 100)"/>
-        </g>
-        <!-- nervures -->
-        <g fill="none" stroke="#f9dcea" stroke-width="0.7" stroke-opacity="0.55">
-          <path d="M100 96 L100 30 M100 96 L147 53 M100 96 L166 96 M100 96 L147 139 M100 96 L100 162 M100 96 L53 139 M100 96 L34 96 M100 96 L53 53"/>
-        </g>
-        <!-- cœur -->
-        <circle cx="100" cy="100" r="17" fill="url(#coeur)"/>
-        <g fill="#f2c56b" opacity="0.9">
-          <circle cx="100" cy="86" r="1.6"/><circle cx="110" cy="90" r="1.6"/><circle cx="114" cy="100" r="1.6"/><circle cx="110" cy="110" r="1.6"/>
-          <circle cx="100" cy="114" r="1.6"/><circle cx="90" cy="110" r="1.6"/><circle cx="86" cy="100" r="1.6"/><circle cx="90" cy="90" r="1.6"/>
-          <circle cx="100" cy="100" r="2.2" fill="#e9a6c2"/>
-        </g>
-        <!-- paillettes -->
-        <g fill="#fff" opacity="0.8">
-          <circle cx="92" cy="40" r="1"/><circle cx="118" cy="52" r="0.8"/><circle cx="150" cy="80" r="1"/><circle cx="156" cy="118" r="0.8"/>
-          <circle cx="132" cy="146" r="1"/><circle cx="96" cy="160" r="0.8"/><circle cx="60" cy="150" r="1"/><circle cx="42" cy="110" r="0.8"/>
-          <circle cx="46" cy="70" r="1"/><circle cx="70" cy="46" r="0.8"/><circle cx="124" cy="120" r="0.9"/><circle cx="78" cy="124" r="0.9"/>
-        </g>
-      </symbol>
-    </defs>
-  </svg>
-
   <!-- ===== COUVERTURE : la carte fermée, comme le modèle imprimé ===== -->
   <section class="feuille couverture" id="couverture">
-    <div class="cadre" aria-hidden="true"></div>
-    <div class="fleurs fleurs-haut" aria-hidden="true">
-      <svg class="fleur f1"><use href="#fleur"></use></svg>
-      <svg class="fleur f2"><use href="#fleur"></use></svg>
-    </div>
-    <div class="fleurs fleurs-bas" aria-hidden="true">
-      <svg class="fleur f3"><use href="#fleur"></use></svg>
-      <svg class="fleur f4"><use href="#fleur"></use></svg>
-      <svg class="fleur f5"><use href="#fleur"></use></svg>
+    <div class="fond" aria-hidden="true">
+      <picture>
+        <source media="(min-width: 700px)" srcset="img/fond.jpg">
+        <img class="fond-image" src="img/fond-1080.jpg" alt="" decoding="async" fetchpriority="high">
+      </picture>
+      <video class="fond-video" id="fondVideo" muted loop playsinline preload="auto" poster="img/fond-1080.jpg" hidden>
+        <source src="img/fond.mp4" type="video/mp4">
+      </video>
     </div>
 
     <button type="button" class="couverture-contenu" id="ouvrir" aria-label="Ouvrir l'invitation">
@@ -131,14 +45,11 @@
 
   <!-- ===== LA CARTE OUVERTE ===== -->
   <main class="feuille carte" id="carte" hidden>
-    <div class="cadre" aria-hidden="true"></div>
-    <div class="fleurs fleurs-haut" aria-hidden="true">
-      <svg class="fleur f1"><use href="#fleur"></use></svg>
-      <svg class="fleur f2"><use href="#fleur"></use></svg>
-    </div>
-    <div class="fleurs fleurs-bas" aria-hidden="true">
-      <svg class="fleur f3"><use href="#fleur"></use></svg>
-      <svg class="fleur f4"><use href="#fleur"></use></svg>
+    <div class="fond fond-fixe" aria-hidden="true">
+      <picture>
+        <source media="(min-width: 700px)" srcset="img/fond.jpg">
+        <img class="fond-image" src="img/fond-1080.jpg" alt="" decoding="async">
+      </picture>
     </div>
 
     <div class="contenu">
@@ -224,6 +135,6 @@
     </div>
   </main>
 
-  <script src="script.js?v=20261109a"></script>
+  <script src="script.js?v=20261109b"></script>
 </body>
 </html>
