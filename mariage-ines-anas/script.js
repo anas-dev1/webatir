@@ -381,3 +381,21 @@ form.addEventListener('submit', async (e) => {
     button.disabled = false;
   }
 });
+
+// --- Pour les mariés : copier l'IBAN ---
+(() => {
+  const bouton = document.getElementById('copierIban');
+  const iban = document.getElementById('ibanTexte');
+  if (!bouton || !iban) return;
+  bouton.addEventListener('click', async () => {
+    const texte = iban.textContent.replace(/\s+/g, '');
+    try {
+      await navigator.clipboard.writeText(texte);
+      bouton.textContent = 'IBAN copié ✦';
+      bouton.classList.add('is-copie');
+      setTimeout(() => { bouton.textContent = "Copier l'IBAN"; bouton.classList.remove('is-copie'); }, 2400);
+    } catch (err) {
+      window.prompt("Copiez l'IBAN :", texte);
+    }
+  });
+})();
