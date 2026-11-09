@@ -8,8 +8,8 @@ const RSVP_URL = 'https://script.google.com/macros/s/AKfycbzY-KEeSm9-LMol-zZS0gD
 // Exemple : { nom: 'Salle des Fêtes', adresse: '12 rue des Oliviers\n34000 Montpellier', recherche: 'Salle des Fêtes, 12 rue des Oliviers, 34000 Montpellier' }
 const LIEU = {
   nom: '',
-  adresse: '',
-  recherche: '',
+  adresse: '38 impasse de la Divine Comédie\n34790 Grabels',
+  recherche: '38 impasse de la Divine Comédie, 34790 Grabels',
 };
 
 const SOIREE_DATE = new Date('2026-12-18T19:00:00+01:00');

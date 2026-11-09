@@ -4,10 +4,11 @@ PRODID:-//webatir//Soiree henne Ines//FR
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
 UID:henne-ines-20261218@webatir.com
-DTSTAMP:20261109T000000Z
+DTSTAMP:20261109T210000Z
 DTSTART:20261218T180000Z
 DTEND:20261218T230000Z
 SUMMARY:Soirée henné d'Ines
+LOCATION:38 impasse de la Divine Comédie\, 34790 Grabels
 DESCRIPTION:Soirée henné d'Ines\, entre femmes. Accueil à 19h00. Merci de répondre avant le 14 novembre 2026. Invitation : https://webatir.com/mariage-ines-anas/henne/
 URL:https://webatir.com/mariage-ines-anas/henne/
 END:VEVENT
