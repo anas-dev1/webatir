@@ -133,7 +133,18 @@ img { display: block; max-width: 100%; height: auto; }
   text-align: center;
 }
 .hero-sub { font-family: var(--caps); font-size: 0.86rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink); line-height: 1.9; }
-.hero-date { color: var(--rose-deep); font-size: 1.02rem; text-shadow: 0 1px 10px rgba(255, 255, 255, 0.9); }
+.hero-date { display: grid; gap: 2px; justify-items: center; margin: 2px 0 6px; }
+.hero-jour { font-family: var(--caps); font-size: 0.9rem; letter-spacing: 0.34em; text-transform: uppercase; color: var(--ink); padding-left: 0.34em; }
+.hero-grande-date {
+  font-family: var(--caps);
+  font-size: clamp(1.9rem, 8.4vw, 2.9rem);
+  line-height: 1.15;
+  letter-spacing: 0.06em;
+  color: var(--rose-deep);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9), 0 2px 18px rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
+}
+.hero-heure { font-family: var(--caps); font-size: 0.9rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink); padding-left: 0.24em; }
 .hero-text {
   max-width: 420px;
   padding: 18px 22px;
