@@ -1,0 +1,213 @@
+/* ============ Soirée henné d'Ines — papier ivoire embossé et fleurs fuchsia ============ */
+:root {
+  --papier: #f1e8d3;
+  --papier-clair: #f8f2e3;
+  --papier-ombre: #ddd1b4;
+  --brun: #6e5236;
+  --brun-doux: #8d7256;
+  --brun-pale: rgba(110, 82, 54, 0.45);
+  --fuchsia: #a8124d;
+  --fuchsia-vif: #c42a6c;
+  --fuchsia-pale: rgba(168, 18, 77, 0.1);
+  --script: "Great Vibes", cursive;
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --caps: "Marcellus", Georgia, serif;
+  --marge: 22px; /* largeur du cadre ouvragé sur téléphone */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; background: var(--papier-ombre); }
+body {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--brun);
+  background: var(--papier-ombre);
+  min-height: 100svh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--fuchsia); color: #fff; }
+
+/* ---------- La feuille : la photo du papier embossé et des fleurs ---------- */
+.feuille {
+  position: relative;
+  width: min(100%, 560px);
+  min-height: 100svh;
+  margin: 0 auto;
+  background: var(--papier);
+  box-shadow: 0 30px 80px rgba(80, 60, 30, 0.25);
+  overflow: hidden;
+}
+.fond { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.fond picture, .fond-image, .fond-video { position: absolute; inset: 0; width: 100%; height: 100%; }
+.fond-image, .fond-video { object-fit: cover; object-position: 50% 50%; }
+.fond-video { opacity: 0; transition: opacity 1.2s ease; }
+.fond-video.is-prete { opacity: 1; }
+.fond-video[hidden] { display: none; }
+/* Sur la carte ouverte, la photo suit le défilement : fixe sur ordinateur, collée en haut sur téléphone */
+.fond-fixe { position: fixed; inset: 0; left: 50%; width: min(100%, 560px); transform: translateX(-50%); height: 100svh; }
+.fond-fixe::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(241, 232, 211, 0) 0%, rgba(241, 232, 211, 0.18) 30%, rgba(241, 232, 211, 0.18) 70%, rgba(241, 232, 211, 0) 100%);
+}
+
+/* ---------- Typographie ---------- */
+.script { font-family: var(--script); font-weight: 400; line-height: 1; color: var(--brun); }
+.nom { font-size: clamp(4.4rem, 20vw, 6.6rem); text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8), 0 0 24px rgba(255, 250, 240, 0.9); }
+.sous-titre { font-size: clamp(2.2rem, 10vw, 3.2rem); color: var(--brun-doux); }
+.grande-date {
+  display: inline-flex; align-items: baseline; justify-content: center;
+  font-family: var(--serif); font-weight: 500;
+  font-size: clamp(2rem, 9vw, 3rem); letter-spacing: 0.1em; color: var(--brun);
+  white-space: nowrap;
+}
+.grande-date i { font-style: normal; font-weight: 300; color: var(--brun-pale); margin: 0 0.3em; }
+.bloc-titre { font-family: var(--caps); font-size: 0.74rem; letter-spacing: 0.34em; text-transform: uppercase; color: var(--fuchsia); margin-bottom: 10px; padding-left: 0.34em; }
+.divider { display: flex; align-items: center; justify-content: center; gap: 14px; color: var(--fuchsia-vif); font-size: 1rem; }
+.divider span { width: 70px; height: 1px; background: linear-gradient(90deg, transparent, var(--brun-pale)); }
+.divider span:last-child { transform: scaleX(-1); }
+.optional { color: var(--brun-doux); font-style: italic; font-family: var(--serif); letter-spacing: 0; text-transform: none; font-size: 0.95rem; }
+
+/* ---------- Couverture ---------- */
+.couverture { display: grid; }
+.couverture[hidden] { display: none; }
+.couverture-contenu {
+  position: relative; z-index: 1;
+  width: 100%; min-height: 100svh;
+  display: grid; grid-template-rows: 1.15fr auto 0.55fr auto 1.5fr;
+  align-items: center; justify-items: center;
+  padding: calc(var(--marge) + 40px) 36px calc(var(--marge) + 26px);
+  background: none; border: 0; cursor: pointer; color: inherit; font: inherit; text-align: center;
+  -webkit-tap-highlight-color: transparent;
+  animation: apparait 1.6s ease both;
+}
+.titre-bloc { grid-row: 2; display: grid; gap: 10px; justify-items: center; }
+.titre-bloc .nom { font-size: clamp(4.2rem, 19vw, 6.2rem); }
+.date-bloc { grid-row: 4; display: grid; gap: 22px; justify-items: center; }
+.indice { font-family: var(--caps); font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--brun-doux); animation: clignote 2.6s ease-in-out infinite; }
+@keyframes clignote { 0%, 100% { opacity: 0.45; } 50% { opacity: 1; } }
+@keyframes apparait { from { opacity: 0; } to { opacity: 1; } }
+.couverture.is-ouverte { opacity: 0; transform: translateY(-30px) scale(0.98); transition: opacity 0.8s ease, transform 0.8s ease; pointer-events: none; }
+
+/* ---------- La carte ouverte ---------- */
+.carte[hidden] { display: none; }
+.contenu {
+  position: relative; z-index: 1;
+  padding: 18svh 11% 150px;
+  display: grid; gap: 32px;
+  text-align: center;
+}
+.entete { display: grid; gap: 6px; justify-items: center; padding: 22px 16px 18px; border-radius: 18px; background: radial-gradient(ellipse at 50% 50%, rgba(252, 248, 240, 0.85), rgba(252, 248, 240, 0) 72%); }
+.entete .sous-titre { font-size: clamp(1.8rem, 8vw, 2.4rem); }
+.invite-texte { font-style: italic; font-size: 1.2rem; color: var(--brun); line-height: 1.5; max-width: 34ch; margin-top: 8px; }
+.entete .divider { margin-top: 10px; }
+
+.bloc-date { display: grid; gap: 2px; justify-items: center; padding: 14px 20px; border-radius: 18px; background: radial-gradient(ellipse at 50% 50%, rgba(252, 248, 240, 0.85), rgba(252, 248, 240, 0) 74%); }
+.jour { font-family: var(--caps); font-size: 0.82rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--brun-doux); padding-left: 0.32em; }
+.heure { font-family: var(--caps); font-size: 0.9rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brun); }
+
+.badge-femmes {
+  display: inline-grid; justify-items: center; gap: 1px; justify-self: center;
+  padding: 14px 30px 12px;
+  border: 1px solid var(--fuchsia-vif); border-radius: 100px;
+  background: rgba(252, 248, 240, 0.9);
+  box-shadow: 0 0 0 5px var(--fuchsia-pale), 0 10px 24px rgba(120, 20, 60, 0.12);
+  font-family: var(--caps); letter-spacing: 0.26em; text-transform: uppercase; color: var(--fuchsia); font-size: 0.98rem;
+}
+.badge-fleur { color: var(--fuchsia-vif); font-size: 0.9rem; letter-spacing: 0; }
+.badge-sous { font-family: var(--serif); font-style: italic; font-size: 1.05rem; letter-spacing: 0.02em; text-transform: none; color: var(--brun); }
+
+.bloc {
+  position: relative;
+  padding: 26px 22px;
+  background: rgba(252, 248, 240, 0.86);
+  border: 1px solid rgba(120, 96, 56, 0.3);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9) inset, 0 0 0 4px rgba(252, 248, 240, 0.6), 0 0 0 5px rgba(120, 96, 56, 0.18), 0 14px 34px rgba(90, 60, 30, 0.12);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+.lieu-nom { font-family: var(--caps); font-size: 1rem; letter-spacing: 0.08em; color: var(--brun); }
+.lieu-adresse { color: var(--brun-doux); white-space: pre-line; }
+.lieu-adresse:empty { display: none; }
+.lien[hidden] { display: none; }
+.lien { display: inline-block; margin-top: 10px; font-family: var(--caps); font-size: 0.74rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fuchsia); text-decoration: none; border-bottom: 1px solid var(--fuchsia-pale); padding-bottom: 2px; }
+.programme { list-style: none; display: grid; gap: 10px; text-align: left; max-width: 340px; margin: 0 auto; }
+.programme li { display: grid; grid-template-columns: 62px 1fr; gap: 12px; align-items: baseline; }
+.programme b { font-family: var(--caps); font-weight: 400; font-size: 0.88rem; letter-spacing: 0.08em; color: var(--fuchsia); }
+
+/* Boutons */
+.actions { display: grid; gap: 12px; justify-items: center; }
+.btn {
+  display: inline-block; padding: 14px 30px; border-radius: 100px;
+  font-family: var(--caps); font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+  text-decoration: none; cursor: pointer; border: 1px solid var(--fuchsia);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-plein { background: linear-gradient(135deg, var(--fuchsia-vif), var(--fuchsia) 55%, #7a0c33); color: #fff8f3; border-color: transparent; box-shadow: 0 10px 24px rgba(120, 20, 60, 0.28); }
+.btn-ligne { background: rgba(255, 252, 246, 0.6); color: var(--fuchsia); }
+.btn-ligne:hover { background: #fff; }
+.btn-full { width: 100%; padding-left: 16px; padding-right: 16px; }
+.btn:disabled { opacity: 0.6; cursor: wait; transform: none; }
+
+/* ---------- RSVP ---------- */
+.rsvp-intro { font-style: italic; color: var(--brun-doux); margin-bottom: 20px; }
+.rsvp-intro strong { font-style: normal; color: var(--fuchsia); font-weight: 600; }
+.form { text-align: left; display: grid; gap: 18px; }
+.form label, .form legend { display: grid; gap: 8px; font-family: var(--caps); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brun-doux); }
+.form fieldset { border: 0; display: grid; gap: 10px; min-width: 0; }
+.form legend { margin-bottom: 8px; }
+.form input[type="text"], .form input[type="tel"], .form select, .form textarea {
+  width: 100%; font: 400 1.1rem var(--serif); color: var(--brun);
+  background: rgba(255, 255, 255, 0.7); border: 1px solid rgba(120, 96, 56, 0.35); border-radius: 4px; padding: 12px 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form textarea { resize: vertical; }
+.form input:focus, .form select:focus, .form textarea:focus { outline: none; border-color: var(--fuchsia); box-shadow: 0 0 0 3px var(--fuchsia-pale); }
+.choices { display: grid; gap: 10px; }
+.form .choice {
+  display: flex; align-items: center; gap: 12px; cursor: pointer;
+  padding: 12px 14px; border: 1px solid rgba(120, 96, 56, 0.35); border-radius: 4px;
+  background: rgba(255, 255, 255, 0.55);
+  font-family: var(--serif); font-size: 1.12rem; letter-spacing: 0; text-transform: none; color: var(--brun);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.form .choice input { appearance: none; -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--fuchsia); background: #fff; display: grid; place-items: center; flex: none; margin: 0; }
+.form .choice input::after { content: ""; width: 11px; height: 11px; border-radius: 50%; background: var(--fuchsia); transform: scale(0); transition: transform 0.2s ease; }
+.form .choice input:checked::after { transform: scale(1); }
+.form .choice:has(input:checked) { background: var(--fuchsia-pale); border-color: var(--fuchsia); }
+.champ-personnes[hidden] { display: none; }
+.form .is-missing { border-color: var(--fuchsia-vif) !important; box-shadow: 0 0 0 3px rgba(196, 42, 108, 0.25) !important; }
+.form fieldset.is-missing { outline: 1px solid var(--fuchsia-vif); outline-offset: 6px; box-shadow: none !important; }
+.form-status { text-align: center; font-style: italic; }
+.form-status.ok { color: var(--brun); }
+.form-status.err { color: var(--fuchsia); }
+.merci { display: grid; gap: 6px; justify-items: center; }
+.merci[hidden] { display: none; }
+.merci-script { font-size: 3.6rem; }
+.merci-texte { font-style: italic; }
+
+/* ---------- Fin ---------- */
+.fin { display: grid; gap: 4px; justify-items: center; padding: 16px 20px 10px; border-radius: 18px; background: radial-gradient(ellipse at 50% 50%, rgba(252, 248, 240, 0.85), rgba(252, 248, 240, 0) 74%); }
+.fin-texte { font-style: italic; color: var(--brun-doux); }
+.signature { font-size: 3.6rem; }
+
+/* ---------- Apparition ---------- */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.reveal.is-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .indice { animation: none !important; }
+  .fond-video { display: none !important; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+@media (max-width: 380px) { .btn { letter-spacing: 0.14em; font-size: 0.72rem; } }
+@media (min-width: 640px) {
+  :root { --marge: 28px; }
+  body { padding: 40px 0; }
+  .feuille { min-height: calc(100svh - 80px); }
+  .couverture-contenu { min-height: calc(100svh - 80px); }
+  .contenu { padding-left: 64px; padding-right: 64px; }
+  .bloc { padding: 32px 36px; }
+}

@@ -46,8 +46,10 @@ Si quelqu'un répond une deuxième fois avec le même nom, son ancienne réponse
 - `supprimerReponse` : retire une réponse à la main (un essai, un doublon). Mettez le nom dans
   `NOM_A_SUPPRIMER`, enregistrez, puis *Exécuter*.
 
-Les deux pages (`mariage-ines-anas/` et `mariage-ines-anas/menu/`) envoient leurs réponses au
-même script : une seule `RSVP_URL`, un seul tableau.
+Les trois pages (`mariage-ines-anas/`, `mariage-ines-anas/menu/` et `mariage-ines-anas/henne/`)
+envoient leurs réponses au même script : une seule `RSVP_URL`, un seul tableau. Les réponses à la
+soirée henné arrivent dans l'onglet *Henné* (nom, présence, nombre de personnes, téléphone,
+message) et dans le récapitulatif ; `supprimerReponseHenne` en retire une à la main.
 
 ## Modifier le script plus tard
 

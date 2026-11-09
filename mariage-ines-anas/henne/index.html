@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Soirée henné d'Ines — vendredi 18 décembre 2026</title>
+  <meta name="description" content="Ines vous invite à sa soirée henné, vendredi 18 décembre 2026 à 19h. Soirée réservée aux femmes.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#f1e8d3">
+  <meta property="og:title" content="Soirée henné d'Ines ✦ vendredi 18 décembre 2026">
+  <meta property="og:description" content="Entre femmes, à partir de 19h00. Ouvrez l'invitation pour tous les détails.">
+  <meta property="og:image" content="https://webatir.com/mariage-ines-anas/henne/img/og.jpg">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Marcellus&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="img/fond-1080.jpg">
+  <link rel="stylesheet" href="style.css?v=20261109b">
+</head>
+<body>
+
+  <!-- ===== COUVERTURE : la carte fermée, comme le modèle imprimé ===== -->
+  <section class="feuille couverture" id="couverture">
+    <div class="fond" aria-hidden="true">
+      <picture>
+        <source media="(min-width: 700px)" srcset="img/fond.jpg">
+        <img class="fond-image" src="img/fond-1080.jpg" alt="" decoding="async" fetchpriority="high">
+      </picture>
+      <video class="fond-video" id="fondVideo" muted loop playsinline preload="auto" poster="img/fond-1080.jpg" hidden>
+        <source src="img/fond.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <button type="button" class="couverture-contenu" id="ouvrir" aria-label="Ouvrir l'invitation">
+      <span class="titre-bloc">
+        <span class="script nom">Ines</span>
+        <span class="script sous-titre">Soirée Henné</span>
+      </span>
+      <span class="date-bloc">
+        <span class="grande-date"><span>18</span><i>|</i><span>12</span><i>|</i><span>2026</span></span>
+        <span class="indice">Toucher pour ouvrir</span>
+      </span>
+    </button>
+  </section>
+
+  <!-- ===== LA CARTE OUVERTE ===== -->
+  <main class="feuille carte" id="carte" hidden>
+    <div class="fond fond-fixe" aria-hidden="true">
+      <picture>
+        <source media="(min-width: 700px)" srcset="img/fond.jpg">
+        <img class="fond-image" src="img/fond-1080.jpg" alt="" decoding="async">
+      </picture>
+    </div>
+
+    <div class="contenu">
+      <header class="entete reveal">
+        <p class="script sous-titre">Soirée Henné</p>
+        <h1 class="script nom">Ines</h1>
+        <p class="invite-texte">a la joie de vous convier à sa soirée henné, à la veille de son mariage</p>
+        <div class="divider" aria-hidden="true"><span></span>❀<span></span></div>
+      </header>
+
+      <section class="bloc-date reveal">
+        <p class="jour">Vendredi</p>
+        <p class="grande-date"><span>18</span><i>|</i><span>12</span><i>|</i><span>2026</span></p>
+        <p class="heure">à partir de 19h00</p>
+      </section>
+
+      <p class="badge-femmes reveal">
+        <span class="badge-fleur">❀</span>
+        <span>Entre femmes</span>
+        <span class="badge-sous">Soirée réservée aux femmes</span>
+      </p>
+
+      <section class="bloc reveal" id="lieu">
+        <p class="bloc-titre">Le lieu</p>
+        <p class="lieu-nom" id="lieuNom">Adresse communiquée très prochainement</p>
+        <p class="lieu-adresse" id="lieuAdresse"></p>
+        <a class="lien" id="lieuItineraire" href="#" target="_blank" rel="noopener" hidden>Itinéraire ↗</a>
+      </section>
+
+      <section class="bloc reveal">
+        <p class="bloc-titre">Au programme</p>
+        <ul class="programme">
+          <li><b>19h00</b><span>Accueil, thé à la menthe et douceurs</span></li>
+          <li><b>20h00</b><span>Cérémonie du henné</span></li>
+          <li><b>21h00</b><span>Musique, danse et dîner</span></li>
+        </ul>
+      </section>
+
+      <div class="actions reveal">
+        <a class="btn btn-plein" id="agenda" href="#" download="soiree-henne-ines.ics">Ajouter à l'agenda</a>
+        <button type="button" class="btn btn-ligne" id="partager">Partager l'invitation</button>
+      </div>
+
+      <section class="bloc reveal" id="rsvp">
+        <p class="bloc-titre">Serez-vous là&nbsp;?</p>
+        <p class="rsvp-intro">Merci de répondre avant le <strong>14 novembre 2026</strong>.</p>
+        <form class="form" id="rsvpForm" novalidate>
+          <label>Votre nom et prénom
+            <input type="text" name="nom" required autocomplete="name">
+          </label>
+          <fieldset>
+            <legend>Votre réponse</legend>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="presence" value="Oui, avec joie" required><span>Oui, avec joie</span></label>
+              <label class="choice"><input type="radio" name="presence" value="Non, malheureusement"><span>Malheureusement non</span></label>
+            </div>
+          </fieldset>
+          <label class="champ-personnes" id="champPersonnes" hidden>Nombre de personnes (vous comprise)
+            <select name="personnes">
+              <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
+            </select>
+          </label>
+          <label>Votre téléphone <span class="optional">(facultatif)</span>
+            <input type="tel" name="telephone" autocomplete="tel" inputmode="tel">
+          </label>
+          <label>Un petit mot <span class="optional">(facultatif)</span>
+            <textarea name="message" rows="3"></textarea>
+          </label>
+          <button type="submit" class="btn btn-plein btn-full">Envoyer ma réponse</button>
+          <p class="form-status" id="formStatus" role="status" hidden></p>
+        </form>
+        <div class="merci" id="merci" hidden>
+          <p class="script merci-script">Merci</p>
+          <p class="merci-texte" id="merciTexte"></p>
+        </div>
+      </section>
+
+      <footer class="fin reveal">
+        <p class="fin-texte">J'ai hâte de partager ce moment avec vous</p>
+        <p class="script signature">Ines</p>
+      </footer>
+    </div>
+  </main>
+
+  <script src="script.js?v=20261109b"></script>
+</body>
+</html>
