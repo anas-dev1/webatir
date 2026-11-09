@@ -29,10 +29,10 @@ const EVENEMENT = {
   if (LIEU.maps) { lien.href = LIEU.maps; lien.hidden = false; }
 })();
 
-// --- Ouverture de l'invitation : le sceau se brise, la carte apparaît ---
+// --- Ouverture de l'invitation : la carte fermée s'efface, la carte ouverte apparaît ---
 const couverture = document.getElementById('couverture');
 const carte = document.getElementById('carte');
-const sceau = document.getElementById('ouvrir');
+const bouton = document.getElementById('ouvrir');
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const revealObserver = new IntersectionObserver(
@@ -42,52 +42,24 @@ const revealObserver = new IntersectionObserver(
   { threshold: 0.12, rootMargin: '0px 0px -30px 0px' }
 );
 
+let ouverte = false;
 const ouvrir = () => {
-  sceau.classList.add('is-casse');
+  if (ouverte) return;
+  ouverte = true;
+  couverture.classList.add('is-ouverte');
   setTimeout(() => {
-    couverture.classList.add('is-ouverte');
+    couverture.hidden = true;
     carte.hidden = false;
     document.querySelectorAll('.reveal').forEach((el, i) => {
       if (i < 2) setTimeout(() => el.classList.add('is-in'), 150 + i * 220);
       else revealObserver.observe(el);
     });
     window.scrollTo({ top: 0, behavior: 'auto' });
-    setTimeout(() => { couverture.style.display = 'none'; }, 900);
-  }, reduced ? 0 : 500);
+  }, reduced ? 0 : 700);
 };
-sceau.addEventListener('click', ouvrir, { once: true });
+bouton.addEventListener('click', ouvrir);
 // Un lien partagé avec #carte ouvre directement l'invitation
 if (location.hash === '#carte' || location.hash === '#rsvp') ouvrir();
-
-// --- Mandala doré derrière la date (dessiné une fois, puis il tourne) ---
-(() => {
-  const svg = document.getElementById('mandala');
-  const ns = 'http://www.w3.org/2000/svg';
-  const el = (name, attrs) => { const n = document.createElementNS(ns, name); Object.entries(attrs).forEach(([k, v]) => n.setAttribute(k, v)); return n; };
-  const g = el('g', { fill: 'none', stroke: '#d4af5a', 'stroke-width': '0.7', 'stroke-linecap': 'round' });
-  [22, 40, 58, 76, 94].forEach((r) => g.appendChild(el('circle', { r, 'stroke-opacity': r === 58 ? '0.9' : '0.5' })));
-  const petales = (n, r1, r2, largeur) => {
-    for (let i = 0; i < n; i += 1) {
-      const a = (i / n) * Math.PI * 2;
-      const b = a + (Math.PI / n) * largeur;
-      const c = a - (Math.PI / n) * largeur;
-      const x1 = Math.cos(a) * r1, y1 = Math.sin(a) * r1;
-      const x2 = Math.cos(a) * r2, y2 = Math.sin(a) * r2;
-      const cx1 = Math.cos(b) * ((r1 + r2) / 2), cy1 = Math.sin(b) * ((r1 + r2) / 2);
-      const cx2 = Math.cos(c) * ((r1 + r2) / 2), cy2 = Math.sin(c) * ((r1 + r2) / 2);
-      g.appendChild(el('path', { d: `M${x1} ${y1} Q${cx1} ${cy1} ${x2} ${y2} Q${cx2} ${cy2} ${x1} ${y1}Z` }));
-    }
-  };
-  petales(8, 22, 40, 0.9);
-  petales(16, 40, 58, 0.8);
-  petales(24, 58, 76, 0.7);
-  petales(32, 76, 94, 0.6);
-  for (let i = 0; i < 32; i += 1) {
-    const a = (i / 32) * Math.PI * 2;
-    g.appendChild(el('circle', { cx: Math.cos(a) * 97, cy: Math.sin(a) * 97, r: '1', fill: '#d4af5a', stroke: 'none' }));
-  }
-  svg.appendChild(g);
-})();
 
 // --- Ajouter à l'agenda (fichier .ics) ---
 (() => {
