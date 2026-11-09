@@ -1,0 +1,49 @@
+# Outil ponctuel : récupère des fichiers (images, vidéos) depuis des adresses publiques
+# et les dépose dans le dépôt. Les adresses sont listées dans .github/import-media.txt
+# (une ligne = « URL<espace>chemin/de/destination »). Se déclenche à chaque push qui
+# modifie cette liste, puis pousse le résultat sur la même branche.
+name: Importer des médias
+on:
+  push:
+    paths: [".github/import-media.txt"]
+permissions:
+  contents: write
+jobs:
+  importer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Télécharger les fichiers
+        run: |
+          set -e
+          while read -r url dest; do
+            [ -z "$url" ] && continue
+            case "$url" in \#*) continue;; esac
+            mkdir -p "$(dirname "$dest")"
+            echo "→ $dest"
+            curl -sSL --retry 3 -o "$dest" "$url"
+            ls -la "$dest"
+          done < .github/import-media.txt
+      - name: Convertir les PNG en JPEG web
+        run: |
+          set -e
+          sudo apt-get install -y -qq imagemagick >/dev/null 2>&1 || true
+          while read -r url dest; do
+            [ -z "$url" ] && continue
+            case "$url" in \#*) continue;; esac
+            case "$dest" in
+              *.png)
+                base="${dest%.png}"
+                convert "$dest" -quality 90 -strip "$base.jpg"
+                convert "$dest" -resize 1080x -quality 86 -strip "$base-1080.jpg"
+                rm -f "$dest"
+                ls -la "$base.jpg" "$base-1080.jpg";;
+            esac
+          done < .github/import-media.txt
+      - name: Pousser dans le dépôt
+        run: |
+          git config user.name "import-media"
+          git config user.email "noreply@github.com"
+          git add -A
+          git commit -m "Import de médias (automatique)" || echo "rien à importer"
+          git push
