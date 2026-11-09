@@ -515,3 +515,19 @@ html { overflow-x: hidden; }
 .rsvp .menu-pill span { display: inline-block; padding: 6px 14px; border: 1px solid var(--card-line); border-radius: 99px; color: var(--ivory); transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
 .rsvp .menu-pill:has(input:checked) span { background: var(--gold); border-color: var(--gold); color: var(--night); }
 .rsvp .menu-group.is-missing, .rsvp .menu-garniture.is-missing { border-radius: 14px; outline: 1px solid var(--rose); outline-offset: 6px; box-shadow: none !important; }
+
+/* ---------- Pour les mariés : participation par virement ---------- */
+.gift-card { text-align: center; display: grid; gap: 10px; justify-items: center; }
+.gift-label { font-family: var(--caps); font-size: 0.76rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold); padding-left: 0.32em; }
+.gift-holder { font-family: var(--caps); font-size: 0.95rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); }
+.gift-iban {
+  font-family: var(--caps); font-size: clamp(1rem, 4.4vw, 1.25rem); letter-spacing: 0.08em;
+  color: var(--ink); line-height: 1.5;
+  padding: 10px 16px; border: 1px solid var(--card-line); border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  word-spacing: 0.3em; overflow-wrap: anywhere;
+}
+.gift-bic { font-family: var(--caps); font-size: 0.82rem; letter-spacing: 0.16em; color: var(--ink-soft); }
+.gift-bic:empty { display: none; }
+.gift-card .btn { margin-top: 4px; }
+.gift-card .btn.is-copie { background: var(--ivory); color: var(--night); }
