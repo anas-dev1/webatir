@@ -12,7 +12,7 @@ const MENU = {
   bienvenue: 'Cocktail de bienvenue',
   entree: { nom: 'Millefeuille de saumon', detail: "Saumon frais relevé d'herbes et de citron" },
   plat: [
-    { nom: "Confit d'agneau", detail: 'Servi avec accompagnement au choix' },
+    { nom: "Confit d'agneau", detail: 'Servi avec ses pommes de terre sautées' },
     { nom: 'Pavé de saumon', detail: 'Saumon rôti, légumes de saison, sauce citronnée aux herbes fraîches' },
   ],
   dessert: { nom: 'Entremet chocolat', detail: '' },

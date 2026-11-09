@@ -16,7 +16,7 @@ const MENU = {
     { nom: 'Noix de Saint-Jacques', detail: 'Sur un riz cuisiné façon risotto avec sa tuile croustillante' },
   ],
   plat: [
-    { nom: "Confit d'agneau", detail: 'Servi avec accompagnement au choix' },
+    { nom: "Confit d'agneau", detail: 'Servi avec ses pommes de terre sautées' },
     { nom: 'Pavé de saumon', detail: 'Saumon rôti, légumes de saison, sauce citronnée aux herbes fraîches' },
     { nom: 'Médaillon de volaille farci', detail: 'Doré au four et accompagné de son jus de cuisson' },
   ],
