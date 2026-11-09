@@ -384,7 +384,7 @@ form.addEventListener('submit', async (e) => {
 
 // --- Pour les mariés : la cagnotte en ligne ---
 // Collez ici le lien de la cagnotte (Leetchi, Le Pot Commun, Lydia, PayPal…). Vide = section masquée.
-const CAGNOTTE_URL = '';
+const CAGNOTTE_URL = 'https://www.leetchi.com/fr/c/mariage-2218894474';
 (() => {
   const section = document.getElementById('cadeau');
   const lien = document.getElementById('cagnotteLien');
