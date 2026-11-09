@@ -353,6 +353,12 @@ img { display: block; max-width: 100%; height: auto; }
 .recap { display: grid; gap: 6px; width: 100%; text-align: left; font-size: 1rem; color: var(--ink-soft); padding: 14px 16px; border: 1px solid var(--gold-line); border-radius: 14px; background: rgba(255, 255, 255, 0.5); }
 .recap b { display: block; font-family: var(--caps); font-weight: 400; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-deep); }
 
+/* ---------- Pour les mariés : la cagnotte ---------- */
+.cadeau { text-align: center; display: grid; gap: 12px; justify-items: center; }
+.cadeau-label { font-family: var(--caps); font-size: 0.76rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold-deep); padding-left: 0.32em; }
+.cadeau-texte { font-style: italic; color: var(--ink); max-width: 34ch; }
+.cadeau .btn { margin-top: 4px; }
+
 /* ---------- Fin ---------- */
 .finale { text-align: center; padding: 50px 0 30px; display: grid; gap: 6px; justify-items: center; }
 
