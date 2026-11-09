@@ -7,10 +7,10 @@ BEGIN:VEVENT
 UID:mariage-ines-anas-20261219@webatir.com
 DTSTAMP:20261104T120000Z
 DTSTART:20261219T093000Z
-DTEND:20261219T170000Z
+DTEND:20261219T230000Z
 SUMMARY:Mariage d'Ines & Anas
 LOCATION:Hôtel de Ville de Montpellier\, 1 place Georges-Frêche\, 34267 Montpellier
-DESCRIPTION:Accueil des invités à 10h30 sur le parvis de l'Hôtel de Ville\, cérémonie à 11h00.\nDéjeuner à 14h00 au restaurant Jardin Marbeuf\, 275 route de Nîmes\, 34170 Castelnau-le-Lez.
+DESCRIPTION:Accueil des invités à 10h30 sur le parvis de l'Hôtel de Ville\, cérémonie à 11h00.\nDîner à 18h00 au restaurant Jardin Marbeuf\, 275 route de Nîmes\, 34170 Castelnau-le-Lez.
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
