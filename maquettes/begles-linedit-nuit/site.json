@@ -107,12 +107,13 @@
     "image": { "src": "photos/facade.jpg", "alt": "La façade de L'inédit, route de Toulouse à Bègles" }
   },
   "evenement": {
-    "surtitre": "À l'affiche",
-    "titre": "Soirée stand-up",
-    "date": "Jeudi 5 novembre · accueil dès 19h, spectacle à 20h",
-    "description": "Quatre humoristes sur scène et un dîner sur place. Places limitées, billetterie en ligne.",
-    "lien": "https://www.helloasso.com/associations/stand-up-bordeaux/evenements/l-inedit-jeudi-05-novembre",
-    "lien_texte": "Prendre mes places sur HelloAsso"
+    "surtitre": "Le brunch de L'inédit",
+    "titre": "Le dimanche prend son temps.",
+    "date": "Dimanche de 10h30 à 15h · sur réservation",
+    "description": "Un brunch généreux à partager : sucré, salé, boissons chaudes et jus frais, dans la salle ou en terrasse.",
+    "lien": "",
+    "lien_texte": "Réserver votre brunch",
+    "image": { "src": "photos/brunch.jpg", "alt": "Le brunch du dimanche à L'inédit" }
   },
   "formules_titre": "Formules",
   "formules": [

@@ -119,6 +119,7 @@ section { padding: 3rem 0; }
 .apropos { padding-top: 2.25rem; padding-bottom: 1rem; }
 .apropos__int { max-width: 46rem; font-size: 1.05rem; }
 .apropos__signature { color: var(--texte-doux); font-style: italic; }
+.apropos__sur { font-size: .78rem; letter-spacing: .25em; text-transform: uppercase; color: var(--accent-fonce); font-weight: 700; margin-bottom: .5rem; }
 .apropos__image { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: .6rem; margin: 1rem 0 1.5rem; }
 
 /* ---------- événement ---------- */
@@ -176,6 +177,21 @@ section { padding: 3rem 0; }
 }
 [data-forme="arche"] .saison__image { border-radius: 999px 999px .6rem .6rem; aspect-ratio: 4 / 3; }
 #cadeau { scroll-margin-top: 5rem; }
+
+/* ---------- citation (citation: {...}) : photo pleine largeur et une phrase ---------- */
+.citation { position: relative; isolation: isolate; min-height: 24rem; display: grid; place-items: center; color: #fff; text-align: center; padding: 4rem 0; background: #1a1a1a; }
+.citation__photo { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
+.citation__voile { position: absolute; inset: 0; z-index: -1; background: rgba(0, 0, 0, .45); }
+.citation__int { margin: 0; }
+.citation__texte { font-family: var(--police-titres); font-size: clamp(1.9rem, 5.5vw, 3.2rem); line-height: 1.15; max-width: 22ch; margin-inline: auto; }
+.citation__signature { margin-top: 1rem; font-size: .9rem; opacity: .85; }
+
+/* ---------- invitation (invitation: {...}) : bandeau d'appel à réserver ---------- */
+.invitation { background: var(--principale); color: var(--fond); text-align: center; }
+.invitation__titre { font-size: clamp(1.9rem, 5vw, 2.8rem); margin-bottom: 1rem; }
+.invitation__texte { opacity: .85; max-width: 36rem; margin: 0 auto 1.25rem; }
+.invitation .btn--plein { background: var(--fond); color: var(--principale); border-color: var(--fond); }
+.invitation .btn--plein:hover { background: var(--accent); color: var(--sur-accent); border-color: var(--accent); }
 
 /* ---------- carte ---------- */
 .carte { background: var(--surface); }
@@ -426,3 +442,56 @@ section { padding: 3rem 0; }
 [data-variante="editorial"] .evenement::before { background-position: 200px 100px; }
 [data-variante="editorial"] .galerie::before { -webkit-mask-position: 360px 0; mask-position: 360px 0; }
 [data-variante="editorial"] .infos::before { -webkit-mask-position: 120px 300px; mask-position: 120px 300px; }
+
+/* ---------- variante magazine (style.variante: "magazine") : accueil en deux colonnes, photos arrondies, bandes ---------- */
+[data-variante="magazine"] { --rayon: 1.5rem; }
+[data-variante="magazine"] .hero { display: block; min-height: 0; color: var(--texte); background: var(--fond); }
+[data-variante="magazine"] .hero__voile { display: none; }
+[data-variante="magazine"] .hero__media { position: relative; inset: auto; z-index: auto; width: min(100% - 2rem, 70rem); margin: 1rem auto 0; aspect-ratio: 4 / 3; border-radius: var(--rayon); overflow: hidden; }
+[data-variante="magazine"] .hero__contenu { padding: 1.75rem 0 2.25rem; }
+[data-variante="magazine"] .hero__sur { color: var(--accent-fonce); }
+[data-variante="magazine"] .hero__titre { font-size: clamp(2.6rem, 9vw, 4.8rem); line-height: 1.02; text-shadow: none; }
+[data-variante="magazine"] .hero__slogan, [data-variante="magazine"] .hero__avis { color: var(--texte-doux); }
+[data-variante="magazine"] .statut { background: var(--surface-2); border-color: var(--bordure); color: var(--texte); }
+[data-variante="magazine"] .btn--plein { background: var(--principale); color: var(--fond); border-color: var(--principale); }
+[data-variante="magazine"] .btn--plein:hover { background: var(--accent-fonce); border-color: var(--accent-fonce); color: #fff; }
+[data-variante="magazine"] .btn--contour { color: var(--texte); border-color: var(--texte); }
+[data-variante="magazine"] .invitation .btn--plein { background: var(--fond); color: var(--principale); border-color: var(--fond); }
+[data-variante="magazine"] .invitation .btn--plein:hover { background: var(--accent); color: var(--sur-accent); border-color: var(--accent); }
+[data-variante="magazine"] .btn--contour:hover { background: var(--texte); color: var(--fond); }
+[data-variante="magazine"] .mentions { padding-top: 0; gap: .25rem 1rem; }
+[data-variante="magazine"] .mention { background: none; border: 0; padding: 0; font-style: italic; color: var(--texte-doux); font-size: .92rem; letter-spacing: 0; }
+[data-variante="magazine"] .mention + .mention::before { content: '·'; margin-right: 1rem; color: var(--accent); font-style: normal; }
+[data-variante="magazine"] .section__titre { font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 1.05; }
+[data-variante="magazine"] .section__titre::after { display: none; }
+[data-variante="magazine"] .apropos { padding-top: 3rem; padding-bottom: 2rem; }
+[data-variante="magazine"] .apropos__int { max-width: none; display: grid; gap: .75rem; }
+[data-variante="magazine"] .apropos__int p { max-width: 40rem; margin: 0; }
+[data-variante="magazine"] .apropos__image { border-radius: var(--rayon); aspect-ratio: 4 / 5; max-height: 32rem; margin: 0 0 .75rem; }
+[data-variante="magazine"] .carte { background: var(--fond); }
+[data-variante="magazine"] .carte .section__titre { display: flex; align-items: center; justify-content: center; gap: 1rem; text-align: center; }
+[data-variante="magazine"] .carte .section__titre::before, [data-variante="magazine"] .carte .section__titre::after { content: ''; display: block; flex: 0 0 2.5rem; height: 1px; background: var(--accent); margin: 0; }
+[data-variante="magazine"] .carte .section__intro { text-align: center; margin-inline: auto; }
+[data-variante="magazine"] .vedette { border: 0; background: transparent; border-radius: 0; text-align: center; }
+[data-variante="magazine"] .vedette__photo { border-radius: var(--rayon); aspect-ratio: 1; }
+[data-variante="magazine"] .vedette__corps { padding: .9rem .5rem 0; }
+[data-variante="magazine"] .vedette__nom { font-size: 1.35rem; }
+[data-variante="magazine"] .carte__tout { justify-content: center; margin-top: 1.25rem; }
+[data-variante="magazine"] .evenement__int { background: transparent; color: inherit; padding: 0; }
+[data-variante="magazine"] .evenement__sur { color: var(--accent-fonce); }
+[data-variante="magazine"] .evenement__titre { font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 1.05; }
+[data-variante="magazine"] .evenement__date { color: var(--texte); font-weight: 400; }
+[data-variante="magazine"] .evenement__desc { color: var(--texte-doux); opacity: 1; }
+[data-variante="magazine"] .evenement__image { border-radius: var(--rayon); }
+[data-variante="magazine"] .infos__carte, [data-variante="magazine"] .galerie__item, [data-variante="magazine"] .formule { border-radius: var(--rayon); }
+[data-variante="magazine"] .formule { border-top-width: 1px; }
+@media (min-width: 48rem) {
+  [data-variante="magazine"] .hero { display: grid; grid-template-columns: 1fr 1.15fr; align-items: center; gap: 2.5rem; width: min(100% - 2rem, 70rem); margin-inline: auto; padding: 2rem 0 3rem; }
+  [data-variante="magazine"] .hero__media { order: 2; width: auto; margin: 0; aspect-ratio: 5 / 4; }
+  [data-variante="magazine"] .hero__contenu.conteneur { order: 1; width: auto; margin: 0; padding: 0; }
+  [data-variante="magazine"] .apropos__int { grid-template-columns: 1fr 1.3fr; column-gap: 3rem; row-gap: .6rem; align-items: center; }
+  [data-variante="magazine"] .apropos__int > * { grid-column: 2; }
+  [data-variante="magazine"] .apropos__image { grid-column: 1; grid-row: 1 / span 8; margin: 0; max-height: none; }
+  [data-variante="magazine"] .evenement__int { grid-template-columns: 1fr 1.2fr; gap: 3rem; }
+  [data-variante="magazine"] .evenement__image { order: 2; aspect-ratio: 4 / 3; }
+}

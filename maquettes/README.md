@@ -86,6 +86,20 @@ filaire dans la couleur d'accent. Pensé pour les adresses jeunes et les sorties
 `animations: true` et une ambiance sombre. Exemple : `maquettes/begles-linedit-nuit/`, variante « nuit » de
 L'inédit à montrer en second dans la vidéo, après la version sobre.
 
+## Variante magazine
+
+`style.variante: "magazine"` : accueil en deux colonnes (texte à gauche, photo arrondie à droite), mentions en
+italique, « La maison » avec photo à côté et un `surtitre`, vedettes en cartes centrées, blocs sans cadre.
+Prévoir `accroche` (une phrase en titre, le nom passe en surtitre), `citation` (photo pleine largeur et une
+phrase), `invitation` (bandeau « On vous garde une table ? »), `formules_accueil: false` pour garder les
+formules sur la page carte seulement, et `ordre` pour n'afficher que les sections voulues. Exemple : `maquettes/begles-linedit-chic/`.
+
+## Ordre des sections
+
+`ordre` (liste) fixe l'ordre des sections de l'accueil et permet d'en retirer. Clés : `bandeau`, `mentions`,
+`distinctions`, `apropos`, `evenement`, `saison`, `groupes`, `carte`, `citation`, `invitation`, `galerie`,
+`infos`. Sans `ordre`, tout s'affiche dans cet ordre. Le hero est toujours en premier.
+
 ## Ambiance animée
 
 Par défaut le gabarit est sobre et rapide. Pour un prospect à concept (bar, cantina, rooftop),

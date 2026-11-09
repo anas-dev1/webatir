@@ -9,7 +9,10 @@
 //                      catégories "apercu": true, plats "vedette": true).
 import { esc, prix, telInternational, melanger, estClair } from '../lib.mjs';
 
-export const JOURS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
+export // Ordre des sections de l'accueil ; surchargé par `ordre` dans site.json (les clés absentes sont ignorées).
+const ORDRE_DEFAUT = ['bandeau', 'mentions', 'distinctions', 'apropos', 'evenement', 'saison', 'groupes', 'carte', 'citation', 'invitation', 'galerie', 'infos'];
+
+const JOURS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
 const JOURS_EN = { lundi: 'Monday', mardi: 'Tuesday', mercredi: 'Wednesday', jeudi: 'Thursday', vendredi: 'Friday', samedi: 'Saturday', dimanche: 'Sunday' };
 const CAP = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
@@ -203,19 +206,19 @@ function rendreMenuApercu(site) {
   const enEntier = cats.filter((c) => c.apercu);
   const vedettes = cats.flatMap((c) => (c.items || []).filter((p) => p.vedette).map((p) => ({ ...p, categorie: c.titre, prix: p.prix ?? c.prix_unique })));
   const blocVedettes = vedettes.length ? rendreVedettes(site, vedettes) : '';
-  return `${rendreFormules(site)}\n${enEntier.map(rendreCategorie).join('\n')}\n${blocVedettes}
-<p class="carte__tout"><a class="btn btn--plein btn--grand" href="carte/">Voir toute la carte</a>${site.menu_pdf ? ` <a class="btn btn--fantome btn--grand" href="${esc(site.menu_pdf)}" target="_blank" rel="noopener">Carte en PDF</a>` : ''}</p>`;
+  return `${site.formules_accueil === false ? '' : rendreFormules(site)}\n${enEntier.map(rendreCategorie).join('\n')}\n${blocVedettes}
+<p class="carte__tout"><a class="btn btn--plein btn--grand" href="carte/">${esc(site.carte_bouton || 'Voir toute la carte')}</a>${site.menu_pdf ? ` <a class="btn btn--fantome btn--grand" href="${esc(site.menu_pdf)}" target="_blank" rel="noopener">Carte en PDF</a>` : ''}</p>`;
 }
 
 /** Plats vedettes de l'accueil : en cartes photo dès qu'un plat a une `photo`, sinon en liste. */
 function rendreVedettes(site, vedettes) {
-  const titre = site.vedettes_titre || 'Les incontournables';
+  const titre = site.vedettes_titre ?? 'Les incontournables';
   if (!vedettes.some((p) => p.photo)) {
-    return rendreCategorie({ id: 'vedettes', titre, items: vedettes.map((p) => ({ ...p, tag: p.tag || p.categorie })) });
+    return rendreCategorie({ id: 'vedettes', titre: titre || 'Les incontournables', items: vedettes.map((p) => ({ ...p, tag: p.tag || p.categorie })) });
   }
   const aPrix = (p) => p.prix !== undefined && p.prix !== null && p.prix !== '';
   return `<div class="categorie categorie--vedettes" id="cat-vedettes">
-  <h3 class="categorie__titre">${esc(titre)}</h3>
+  ${titre ? `<h3 class="categorie__titre">${esc(titre)}</h3>` : ''}
   ${site.vedettes_intro ? `<p class="categorie__intro">${esc(site.vedettes_intro)}</p>` : ''}
   <ul class="vedettes">${vedettes
     .map((p) => {
@@ -271,6 +274,32 @@ function rendreSaison(site, c) {
       ${s.note ? `<p class="saison__note">${esc(s.note)}</p>` : ''}
       <a class="btn btn--plein" href="${esc(lien)}"${externe ? ' target="_blank" rel="noopener"' : ''}>${esc(s.cta_texte || 'Réserver')}</a>
     </div>
+  </div>
+</section>`;
+}
+
+/** Bande photo pleine largeur avec une phrase (citation: { texte, image, signature }). */
+function rendreCitation(site) {
+  const q = site.citation;
+  if (!q || !q.texte) return '';
+  const ph = q.image ? photo(q.image, site.nom) : null;
+  return `<section class="citation" aria-label="Citation">
+  ${ph ? `<img class="citation__photo" src="${esc(ph.src)}" alt="${esc(ph.alt)}" loading="lazy">` : ''}
+  <div class="citation__voile"></div>
+  <blockquote class="citation__int conteneur"><p class="citation__texte">${esc(q.texte)}</p>${q.signature ? `<footer class="citation__signature">${esc(q.signature)}</footer>` : ''}</blockquote>
+</section>`;
+}
+
+/** Bandeau d'appel à réserver (invitation: { titre, texte, cta_texte, cta_lien }). */
+function rendreInvitation(site, c) {
+  const inv = site.invitation;
+  if (!inv || !inv.titre) return '';
+  const lien = inv.cta_lien || c.resa.href;
+  return `<section class="invitation" aria-labelledby="invitation-titre">
+  <div class="conteneur invitation__int">
+    <h2 class="invitation__titre" id="invitation-titre">${esc(inv.titre)}</h2>
+    ${inv.texte ? `<p class="invitation__texte">${esc(inv.texte)}</p>` : ''}
+    <a class="btn btn--plein btn--grand" href="${esc(lien)}"${/^https?:/.test(lien) ? ' target="_blank" rel="noopener"' : ''}>${esc(inv.cta_texte || 'Réserver une table')}</a>
   </div>
 </section>`;
 }
@@ -410,56 +439,28 @@ function rendreAccueil(site, ctx, c) {
   const titre = site.titre_page || `${site.nom} – ${site.slogan ? site.slogan.replace(/\.$/, '') : 'Restaurant'}${c.ville ? ` à ${c.ville}` : ''}`;
 
   // Titre animé mot à mot quand les animations sont activées.
+  const texteTitre = site.accroche || site.nom;
   const titreHero = c.anime
-    ? site.nom.split(/\s+/).map((m, i) => `<span class="mot" style="--i:${i}">${esc(m)}</span>`).join(' ')
-    : esc(site.nom);
+    ? texteTitre.split(/\s+/).map((m, i) => `<span class="mot" style="--i:${i}">${esc(m)}</span>`).join(' ')
+    : esc(texteTitre);
   const media = c.video
     ? `<video class="hero__photo" autoplay muted loop playsinline preload="metadata"${c.hero ? ` poster="${esc(c.hero.src)}"` : ''} aria-label="${esc(c.video.alt || (c.hero && c.hero.alt) || site.nom)}"><source src="${esc(c.video.src)}" type="video/mp4"></video>`
     : c.hero ? `<img class="hero__photo" src="${esc(c.hero.src)}" alt="${esc(c.hero.alt)}" fetchpriority="high" width="1600" height="1000">` : '';
 
-  return `<!doctype html>
-<html lang="fr" ${c.attrsHtml}>
-<head>
-${rendreHead(site, c, { titre, description: c.description, p: '', chemin: '', ld: blocLd })}
-</head>
-<body>
-<a class="evitement" href="#carte">Aller à la carte</a>
-
-${rendreEntete(site, c, { p: '', page: 'accueil' })}
-
-<main>
-<section class="hero" id="accueil">
-  <div class="hero__media">${media}</div>
-  <div class="hero__voile"></div>
-  <div class="hero__contenu conteneur">
-    ${c.ville ? `<p class="hero__sur">Restaurant · ${esc(c.ville)}</p>` : ''}
-    <h1 class="hero__titre">${titreHero}</h1>
-    ${site.slogan ? `<p class="hero__slogan">${esc(site.slogan)}</p>` : ''}
-    <p class="statut" id="statut" hidden><span class="statut__point"></span><span class="statut__texte"></span> <a class="statut__lien" href="#infos">Horaires</a></p>
-    <div class="hero__cta">
-      <a class="btn btn--plein btn--grand" href="${esc(c.resa.href)}"${c.resaAttr}>Réserver une table</a>
-      <a class="btn btn--contour btn--grand" href="${site.carte_page ? 'carte/' : '#carte'}">Voir la carte</a>
-    </div>
-    ${site.avis?.note ? `<p class="hero__avis"><span class="etoiles" aria-hidden="true">★★★★★</span> <strong>${esc(site.avis.note)}</strong>/5 · ${esc(site.avis.nombre)} avis ${esc(site.avis.source || 'Google')}</p>` : ''}
-  </div>
-</section>
-
-${site.bandeau?.length ? `<div class="bandeau" aria-hidden="true"><div class="bandeau__piste">${(Array.isArray(site.bandeau) ? site.bandeau : [site.bandeau]).map((m) => `<span>${esc(m)}</span>`).join('<span class="bandeau__sep">✦</span>')}<span class="bandeau__sep">✦</span></div></div>` : ''}
-
-${site.mentions?.length ? `<ul class="mentions conteneur" aria-label="Bon à savoir">${site.mentions.map((m) => `<li class="mention">${esc(m)}</li>`).join('')}</ul>` : ''}
-
-${rendreDistinctions(site)}
-
-${site.a_propos ? `<section class="apropos" id="apropos">
+  const sections = {
+    bandeau: `${site.bandeau?.length ? `<div class="bandeau" aria-hidden="true"><div class="bandeau__piste">${(Array.isArray(site.bandeau) ? site.bandeau : [site.bandeau]).map((m) => `<span>${esc(m)}</span>`).join('<span class="bandeau__sep">✦</span>')}<span class="bandeau__sep">✦</span></div></div>` : ''}`,
+    mentions: `${site.mentions?.length ? `<ul class="mentions conteneur" aria-label="Bon à savoir">${site.mentions.map((m) => `<li class="mention">${esc(m)}</li>`).join('')}</ul>` : ''}`,
+    distinctions: `${rendreDistinctions(site)}`,
+    apropos: `${site.a_propos ? `<section class="apropos" id="apropos">
   <div class="conteneur apropos__int">
+    ${site.a_propos.surtitre ? `<p class="apropos__sur">${esc(site.a_propos.surtitre)}</p>` : ''}
     ${site.a_propos.titre ? `<h2 class="section__titre">${esc(site.a_propos.titre)}</h2>` : ''}
     ${site.a_propos.image ? `<img class="apropos__image" src="${esc(photo(site.a_propos.image).src)}" alt="${esc(photo(site.a_propos.image, site.a_propos.titre || site.nom).alt)}" loading="lazy" width="1600" height="1000">` : ''}
     ${(site.a_propos.paragraphes || [site.a_propos.texte]).filter(Boolean).map((p) => `<p>${esc(p)}</p>`).join('')}
     ${site.a_propos.signature ? `<p class="apropos__signature">${esc(site.a_propos.signature)}</p>` : ''}
   </div>
-</section>` : ''}
-
-${ev ? `<section class="evenement" id="evenement" aria-labelledby="evenement-titre">
+</section>` : ''}`,
+    evenement: `${ev ? `<section class="evenement" id="evenement" aria-labelledby="evenement-titre">
   <div class="conteneur evenement__int">
     ${ev.image ? `<img class="evenement__image" src="${esc(photo(ev.image).src)}" alt="${esc(photo(ev.image, ev.titre).alt)}" loading="lazy">` : ''}
     <div class="evenement__texte">
@@ -467,14 +468,12 @@ ${ev ? `<section class="evenement" id="evenement" aria-labelledby="evenement-tit
       <h2 class="evenement__titre" id="evenement-titre">${esc(ev.titre)}</h2>
       ${ev.date ? `<p class="evenement__date">${esc(ev.date)}</p>` : ''}
       ${ev.description ? `<p class="evenement__desc">${esc(ev.description)}</p>` : ''}
-      ${ev.lien ? `<a class="btn btn--plein" href="${esc(ev.lien)}" target="_blank" rel="noopener">${esc(ev.lien_texte || 'Réserver ma place')}</a>` : ''}
+      ${ev.lien ? `<a class="btn btn--plein" href="${esc(ev.lien)}" target="_blank" rel="noopener">${esc(ev.lien_texte || 'Réserver ma place')}</a>` : ev.lien_texte ? `<a class="btn btn--plein" href="${esc(c.resa.href)}"${c.resaAttr}>${esc(ev.lien_texte)}</a>` : ''}
     </div>
   </div>
-</section>` : ''}
-
-${rendreSaison(site, c)}
-
-${site.groupes ? `<section class="groupes" id="groupes" aria-labelledby="groupes-titre">
+</section>` : ''}`,
+    saison: `${rendreSaison(site, c)}`,
+    groupes: `${site.groupes ? `<section class="groupes" id="groupes" aria-labelledby="groupes-titre">
   <div class="conteneur groupes__int">
     <div class="groupes__texte">
       <h2 class="section__titre" id="groupes-titre">${esc(site.groupes.titre || 'Groupes & privatisation')}</h2>
@@ -484,9 +483,8 @@ ${site.groupes ? `<section class="groupes" id="groupes" aria-labelledby="groupes
     </div>
     ${site.groupes.image ? `<img class="groupes__image" src="${esc(photo(site.groupes.image).src)}" alt="${esc(photo(site.groupes.image, site.groupes.titre || '').alt)}" loading="lazy">` : ''}
   </div>
-</section>` : ''}
-
-<section class="carte${site.carte_page ? ' carte--apercu' : ''}" id="carte" aria-labelledby="carte-titre">
+</section>` : ''}`,
+    carte: `<section class="carte${site.carte_page ? ' carte--apercu' : ''}" id="carte" aria-labelledby="carte-titre">
   <div class="conteneur">
     <h2 class="section__titre" id="carte-titre">${esc(site.carte_titre || 'La carte')}</h2>
     ${site.carte_intro ? `<p class="section__intro">${esc(site.carte_intro)}</p>` : ''}
@@ -494,11 +492,9 @@ ${site.groupes ? `<section class="groupes" id="groupes" aria-labelledby="groupes
   <div class="conteneur carte__int">
     ${site.carte_page ? rendreMenuApercu(site) : rendreMenuComplet(site)}
   </div>
-</section>
-
-${rendreGalerie(site)}
-
-<section class="infos" id="infos" aria-labelledby="infos-titre">
+</section>`,
+    galerie: `${rendreGalerie(site)}`,
+    infos: `<section class="infos" id="infos" aria-labelledby="infos-titre">
   <div class="conteneur">
     <h2 class="section__titre" id="infos-titre">Infos pratiques</h2>
     <div class="infos__grille">
@@ -529,7 +525,41 @@ ${rendreGalerie(site)}
       ${mapsEmbed ? `<div class="infos__carte"><iframe title="Plan d’accès – ${esc(site.nom)}" src="${esc(mapsEmbed)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>` : ''}
     </div>
   </div>
+</section>`,
+    citation: rendreCitation(site),
+    invitation: rendreInvitation(site, c),
+  };
+  const ordre = Array.isArray(site.ordre) && site.ordre.length ? site.ordre : ORDRE_DEFAUT;
+  const corps = ordre.filter((k) => k in sections).map((k) => sections[k]).join('\n\n');
+
+  return `<!doctype html>
+<html lang="fr" ${c.attrsHtml}>
+<head>
+${rendreHead(site, c, { titre, description: c.description, p: '', chemin: '', ld: blocLd })}
+</head>
+<body>
+<a class="evitement" href="#carte">Aller à la carte</a>
+
+${rendreEntete(site, c, { p: '', page: 'accueil' })}
+
+<main>
+<section class="hero" id="accueil">
+  <div class="hero__media">${media}</div>
+  <div class="hero__voile"></div>
+  <div class="hero__contenu conteneur">
+    ${c.ville ? `<p class="hero__sur">${site.accroche ? `${esc(c.nomCourt)} · ${esc(c.ville)}` : `Restaurant · ${esc(c.ville)}`}</p>` : ''}
+    <h1 class="hero__titre">${titreHero}</h1>
+    ${site.slogan ? `<p class="hero__slogan">${esc(site.slogan)}</p>` : ''}
+    <p class="statut" id="statut" hidden><span class="statut__point"></span><span class="statut__texte"></span> <a class="statut__lien" href="#infos">Horaires</a></p>
+    <div class="hero__cta">
+      <a class="btn btn--plein btn--grand" href="${esc(c.resa.href)}"${c.resaAttr}>Réserver une table</a>
+      <a class="btn btn--contour btn--grand" href="${site.carte_page ? 'carte/' : '#carte'}">Voir la carte</a>
+    </div>
+    ${site.avis?.note ? `<p class="hero__avis"><span class="etoiles" aria-hidden="true">★★★★★</span> <strong>${esc(site.avis.note)}</strong>/5 · ${esc(site.avis.nombre)} avis ${esc(site.avis.source || 'Google')}</p>` : ''}
+  </div>
 </section>
+
+${corps}
 </main>
 
 ${rendrePied(site, c)}

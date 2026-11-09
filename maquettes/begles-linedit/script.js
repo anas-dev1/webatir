@@ -131,7 +131,7 @@
     }
 
     /* Apparitions au défilement : chaque élément reçoit data-rvl et un rang parmi ses frères. */
-    var cibles = '.section__titre, .section__intro, .mention, .apropos__int p, .distinction, .evenement__int, .saison__tete, .saison__image, .saison__pied, .formule, .vedette, .categorie__titre, .categorie__intro, .plat, .categorie__note, .carte__tout, .galerie__item, .infos__bloc, .infos__carte, .carte__fin';
+    var cibles = '.section__titre, .section__intro, .mention, .apropos__sur, .apropos__int p, .apropos__image, .distinction, .citation__int, .invitation__int, .evenement__int, .saison__tete, .saison__image, .saison__pied, .formule, .vedette, .categorie__titre, .categorie__intro, .plat, .categorie__note, .carte__tout, .galerie__item, .infos__bloc, .infos__carte, .carte__fin';
     var elements = Array.prototype.slice.call(document.querySelectorAll(cibles));
     elements.forEach(function (el) {
       var rang = 0, frere = el;
@@ -153,6 +153,7 @@
 
     /* Parallaxe du hero (desktop uniquement) et en-tête qui se cache en descendant. */
     var media = document.querySelector('.hero__media');
+    if (media && getComputedStyle(media).position !== 'absolute') media = null; /* photo dans le flux (variante magazine) : pas de parallaxe */
     var hero = document.querySelector('.hero');
     var dernierY = window.scrollY, enAttente = false;
     function cadre() {

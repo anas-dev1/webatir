@@ -7,6 +7,7 @@
   "nom": "Nom du restaurant",
   "nom_court": "Nom",
   "slogan": "Une phrase courte qui donne envie.",
+  "accroche": "",
   "description": "Deux phrases pour Google et les réseaux : type de cuisine, quartier, ce qui rend l'adresse unique.",
   "cuisine": "Française",
 
@@ -53,6 +54,7 @@
   },
 
   "a_propos": {
+    "surtitre": "",
     "titre": "La maison",
     "paragraphes": ["Un paragraphe sur l'histoire, le chef, la façon de cuisiner."],
     "image": "",
@@ -87,6 +89,7 @@
   "carte_titre": "La carte",
   "carte_intro": "",
   "carte_page": false,
+  "formules_accueil": true,
   "vedettes_titre": "Les incontournables",
   "menu": [
     {
@@ -118,6 +121,9 @@
   ],
 
   "evenement": null,
+  "citation": null,
+  "invitation": null,
+  "ordre": null,
 
   "saison": null,
   "saison_exemple": {
